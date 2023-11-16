@@ -1,5 +1,6 @@
 "use client";
 import { VStackContainer } from "@/components/container";
+import { TextLine, VoiceLine } from "@/components/lines/info";
 import { Line } from "@/components/line";
 import { LinkTitle } from "@/components/link";
 import { additionInfoData } from "@/global/data";
@@ -17,39 +18,46 @@ export default function InfoPage() {
   const [page, setPage] = useState(0);
   const [type, setType] = useState<InfoTypes>(InfoTypes.text);
   const [data, setData] = useState<Info[]>([]);
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState("");
 
   const getData = async () => {
     try {
       let filtered = additionInfoData.filter((d) => d.type == type);
-      setData(
-        filtered.filter((d, i) => i >= page * 5 && i < (page + 1) * 5)
-      );
+      setData(filtered.filter((d, i) => i >= page * 5 && i < (page + 1) * 5));
     } catch (error) {}
   };
   useEffect(() => {
     if (params.get("name") != "") {
-        
       let name: any = params.get("name") as keyof typeof InfoTypes;
       setType(name ?? InfoTypes.text);
-      setValue(filterName(name, additionInfoTags))
+      setValue(filterName(name, additionInfoTags));
     }
   }, []);
   useEffect(() => {
     getData();
-    setValue(filterName(type, additionInfoTags))
+    setValue(filterName(type, additionInfoTags));
   }, [type, page]);
 
   return (
     <VStackContainer>
-      <HStack w={"full"} display={{lg:'flex', base: 'none'}}>
-        <LinkTitle
-          title={additionInfo}
-          value={value}
-        />
+      <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
+        <LinkTitle title={additionInfo} value={value} />
       </HStack>
       <Line
-        data={data}
+        child={
+          data?.map((d, i) => {
+            switch (d.type) {
+              case InfoTypes.text:
+                return <TextLine data={d} key={i} />;
+              case InfoTypes.voice:
+                return <VoiceLine data={d} key={i} />;
+              default:
+                return <TextLine data={d} key={i} />;
+            }
+          }) ?? <></>
+        }
+        filter={additionInfoTags}
+        limit={5}
         page={page}
         type={type}
         value={value}
@@ -57,7 +65,6 @@ export default function InfoPage() {
         changePage={(value) => setPage(value)}
         changeType={(value) => {
           setType(value);
-        
           setPage(0);
         }}
       />

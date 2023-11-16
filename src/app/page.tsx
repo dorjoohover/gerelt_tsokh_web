@@ -215,6 +215,7 @@ export default function Home() {
         pos={"relative"}
         px={{ gl: 10, base: 0 }}
         maxW={"1240px"}
+        mx={'auto'}
       >
         <Box
           borderRadius={{ md: 12, base: 0 }}

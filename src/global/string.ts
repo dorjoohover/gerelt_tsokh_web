@@ -11,6 +11,7 @@ export const textInfo = 'ТЕКСТ МЭДЭЭЛЛҮҮД'
 
 export const navText = 'Хүртээмжтэй хөдөлмөр эрхлэлтийн соёл';
 export const menu = 'Цэс';
+export const article = 'Нийтлэл ';
 
 export const voiceInfo = 'ДУУТ МЭДЭЭЛЛҮҮД'
 export const videoInfo = 'ДҮРСТ МЭДЭЭЛЛҮҮД'

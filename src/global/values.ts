@@ -10,11 +10,10 @@ import {
   svgVideo,
   svgVoice,
 } from "./assets";
-import { InfoTypes } from "./enum";
+import { ArticleTypes, InfoTypes } from "./enum";
 import { FilterType } from "./functions";
 import {
   accessibleEmployment,
-  additionInfo,
   additionLearningAdvice,
   consistent,
   contact,
@@ -47,6 +46,17 @@ export const additionInfoTags: FilterType[] = [
     name: "Дүрст мэдээллүүд",
     value: InfoTypes.video,
   },
+];
+export const articleTags: FilterType[] = [
+  {
+    name: "Нийтлэл",
+    value: ArticleTypes.article,
+  },
+  {
+    name: "Мэдээ",
+    value: ArticleTypes.info
+  },
+  
 ];
 
 export const additionInfoValues = [

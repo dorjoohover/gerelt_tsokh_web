@@ -128,6 +128,9 @@ const Navbar = () => {
               bg={"none"}
               mr={1.25}
               w={10}
+              _hover={{
+                bg: 'none'
+              }}
               textAlign={"center"}
               justifyContent={"center"}
               onClick={() => setSearch(!search)}
@@ -143,6 +146,9 @@ const Navbar = () => {
             p={0}
             h={"auto"}
             bg={"none"}
+            _hover={{
+                bg: 'none'
+              }}
             onClick={() => setGerelt(!gerelt)}
             display={{ md: "inline-flex", base: "none" }}
             zIndex={gerelt ? 30 : 10}
@@ -171,6 +177,9 @@ const Navbar = () => {
             p={0}
             h={"auto"}
             bg={"none"}
+            _hover={{
+                bg: 'none'
+              }}
             display={{ md: "inline-flex", base: "none" }}
             onClick={() => setTokhiruulga(!tokhiruulgaActive)}
             zIndex={tokhiruulgaActive ? 30 : 10}

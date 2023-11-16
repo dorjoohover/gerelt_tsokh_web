@@ -1,83 +1,34 @@
 import { InfoTypes } from "@/global/enum";
+import { FilterType } from "@/global/functions";
 import { additionInfoTags } from "@/global/values";
 import { Info } from "@/model/info.model";
 import { Button, HStack, Icon, Select, Text, VStack } from "@chakra-ui/react";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { FaPlay } from "react-icons/fa";
 type Types = {
   page: number;
-  data?: Info[];
-  type: InfoTypes;
+  child: ReactNode;
+  type: any;
   length: number;
   value: string;
   changePage: (value: number) => void;
-  changeType: (value: InfoTypes) => void;
-};
-type InfoType = {
-  data: Info;
+  changeType: (value: any) => void;
+  filter: FilterType[];
+  limit: number;
 };
 
-const TextLine: FC<InfoType> = ({ data }) => {
-  return (
-    <VStack w={"full"} alignItems={{ base: "start", md: "center" }}>
-      <HStack
-        w={"full"}
-        justifyContent={"space-between"}
-        mb={{ md: 8, base: 4 }}
-      >
-        <Text variant={"title"} color={"text"}>
-          {data.title}
-        </Text>
-        <Text
-          variant={"normal"}
-          display={{ md: "inline-block", base: "none" }}
-        >{`${data.date} | ${data.duration} мин`}</Text>
-      </HStack>
-      <Text mb={{ md: 0, base: 4 }}>{data.text}</Text>
-      <Text
-        variant={"normal"}
-        display={{ base: "inline-block", md: "none" }}
-      >{`${data.date} | ${data.duration} мин`}</Text>
-    </VStack>
-  );
-};
-const VoiceLine: FC<InfoType> = ({ data }) => {
-  return (
-    <HStack alignItems={"start"} w={"full"}>
-      <Button p={3} borderRadius={100} h={'auto'} bg={"transparent"} display={'flex'} justifyContent={'center'} alignItems={'center'} border={"1px solid gray"} mr={2}>
-        <Icon as={FaPlay} color={"text"} />
-      </Button>
-      <VStack w={"full"} alignItems={{ base: "start", md: "center" }}>
-        <HStack
-          w={"full"}
-          justifyContent={"space-between"}
-          mb={{ md: 8, base: 4 }}
-        >
-          <Text variant={"title"} color={"text"}>
-            {data.title}
-          </Text>
-          <Text
-            variant={"normal"}
-            display={{ md: "inline-block", base: "none" }}
-          >{`${data.date} | ${data.duration} мин`}</Text>
-        </HStack>
-        <Text mb={{ md: 0, base: 4 }}>{data.text}</Text>
-        <Text
-          variant={"normal"}
-          display={{ base: "inline-block", md: "none" }}
-        >{`${data.date} | ${data.duration} мин`}</Text>
-      </VStack>
-    </HStack>
-  );
-};
+
+
 export const Line: FC<Types> = ({
   page,
   type,
-  data,
+  child,
   length,
   value,
   changePage,
   changeType,
+  filter,
+  limit = 5,
 }) => {
   return (
     <HStack w={"full"} alignItems={"start"}>
@@ -88,7 +39,7 @@ export const Line: FC<Types> = ({
         alignItems={"start"}
         mr={94}
       >
-        {additionInfoTags.map((tags, i) => {
+        {filter.map((tags, i) => {
           return (
             <Button
               key={i}
@@ -97,8 +48,10 @@ export const Line: FC<Types> = ({
               bg={"transparent"}
               textTransform={"none"}
               onClick={() => {
-                let value: any = tags.value as keyof typeof InfoTypes;
-                changeType(value);
+                changeType(tags.value);
+              }}
+              _hover={{
+                bg: 'none'
               }}
             >
               <Text
@@ -123,14 +76,13 @@ export const Line: FC<Types> = ({
         pt={{ lg: 0, base: 8 }}
       >
         <Select
-        display={{lg: 'none', base: 'flex'}}
+          display={{ lg: "none", base: "flex" }}
           defaultValue={value}
           onChange={(e) => {
-            let v: any = e.target.value as keyof typeof InfoTypes;
-            changeType(v);
+            changeType(e.target.value);
           }}
         >
-          {additionInfoTags.map((tags, i) => {
+          {filter.map((tags, i) => {
             return (
               <option value={tags.value} key={i}>
                 {tags.name}
@@ -138,18 +90,9 @@ export const Line: FC<Types> = ({
             );
           })}
         </Select>
-        {data?.map((d, i) => {
-          switch (d.type) {
-            case InfoTypes.text:
-              return <TextLine data={d} key={i} />;
-            case InfoTypes.voice:
-              return <VoiceLine data={d} key={i} />;
-            default:
-              return <TextLine data={d} key={i} />;
-          }
-        })}
+        {child}
         <HStack justifyContent={"center"} w={"full"} gap={0}>
-          {Array.from(Array(Math.ceil(length / 5)).keys()).map((i) => {
+          {Array.from(Array(Math.ceil(length / limit)).keys()).map((i) => {
             return (
               <Text
                 key={i}
