@@ -123,6 +123,7 @@ export const Line: FC<Types> = ({
         pt={{ lg: 0, base: 8 }}
       >
         <Select
+        display={{lg: 'none', base: 'flex'}}
           defaultValue={value}
           onChange={(e) => {
             let v: any = e.target.value as keyof typeof InfoTypes;
