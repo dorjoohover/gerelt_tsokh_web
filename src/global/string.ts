@@ -5,9 +5,13 @@ export const purposeText = 'Хүртээмжтэйгээр хөдөлмөр эр
 
 export const slogan = `Шинэлэг санаа\nТууштай чанар\nМэргэжлийн хамтын ажиллагаа`
 
-export const gereltTokh = 'ГЭРЭЛТ ЦОХ БАЙШИН ТББ'
+export const gereltTokh = 'Гэрэлт Цох Байшин ТББ'
 export const additionInfo = 'НЭМЭЛТ МЭДЭЭЛЛҮҮД'
 export const textInfo = 'ТЕКСТ МЭДЭЭЛЛҮҮД'
+
+export const navText = 'Хүртээмжтэй хөдөлмөр эрхлэлтийн соёл';
+export const menu = 'Цэс';
+
 export const voiceInfo = 'ДУУТ МЭДЭЭЛЛҮҮД'
 export const videoInfo = 'ДҮРСТ МЭДЭЭЛЛҮҮД'
 export const detail = 'Дэлгэрэнгүй'

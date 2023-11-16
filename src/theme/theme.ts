@@ -10,9 +10,10 @@ export const theme = extendTheme({
             12: '#00BCA91F',
             75: '#00BCA9BF',
         },
+        waterPrime: '#35E4D2',
         darkPrime: "#0C9486",
-        text: '#575757'
-       
+        text: '#575757',
+        gray: '#707070'
     },
     fonts: {
         heading: `'Segoe UI Regular', sans-serif`,

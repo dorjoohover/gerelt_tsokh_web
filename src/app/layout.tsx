@@ -1,9 +1,10 @@
 'use client'
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ChakraProvider } from "@chakra-ui/react";
+import { Box, ChakraProvider } from "@chakra-ui/react";
 import { theme } from "@/theme/theme";
 import Fonts from "@/theme/fonts";
+import Navbar from "@/components/navbar";
 
 
 export default function RootLayout({
@@ -16,6 +17,8 @@ export default function RootLayout({
       <body >
         <ChakraProvider theme={theme}>
         <Fonts />
+        <Navbar/>
+        <Box h={20}/>
           {children}</ChakraProvider>
       </body>
     </html>

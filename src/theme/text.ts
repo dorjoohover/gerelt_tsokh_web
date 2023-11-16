@@ -3,7 +3,7 @@ const Text = defineStyleConfig({
 
   baseStyle: {
     fontWeight: "400",
-    // textTransform: "capitalize",
+    textTransform: "none",
     color:'text',
     fontSize: '20px',
     whiteSpace:'pre-line'

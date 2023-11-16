@@ -1,8 +1,7 @@
-
 import { InfoTypes } from "@/global/enum";
 import { additionInfoTags } from "@/global/values";
 import { Info } from "@/model/info.model";
-import { Button, HStack, Icon, Text, VStack } from "@chakra-ui/react";
+import { Button, HStack, Icon, Select, Text, VStack } from "@chakra-ui/react";
 import { FC } from "react";
 import { FaPlay } from "react-icons/fa";
 type Types = {
@@ -10,6 +9,7 @@ type Types = {
   data?: Info[];
   type: InfoTypes;
   length: number;
+  value: string;
   changePage: (value: number) => void;
   changeType: (value: InfoTypes) => void;
 };
@@ -19,29 +19,53 @@ type InfoType = {
 
 const TextLine: FC<InfoType> = ({ data }) => {
   return (
-    <VStack w={"full"}>
-      <HStack w={"full"} justifyContent={"space-between"} mb={8}>
+    <VStack w={"full"} alignItems={{ base: "start", md: "center" }}>
+      <HStack
+        w={"full"}
+        justifyContent={"space-between"}
+        mb={{ md: 8, base: 4 }}
+      >
         <Text variant={"title"} color={"text"}>
           {data.title}
         </Text>
-        <Text variant={"normal"}>{`${data.date} | ${data.duration}мин`}</Text>
+        <Text
+          variant={"normal"}
+          display={{ md: "inline-block", base: "none" }}
+        >{`${data.date} | ${data.duration} мин`}</Text>
       </HStack>
-      <Text>{data.text}</Text>
+      <Text mb={{ md: 0, base: 4 }}>{data.text}</Text>
+      <Text
+        variant={"normal"}
+        display={{ base: "inline-block", md: "none" }}
+      >{`${data.date} | ${data.duration} мин`}</Text>
     </VStack>
   );
 };
 const VoiceLine: FC<InfoType> = ({ data }) => {
   return (
     <HStack alignItems={"start"} w={"full"}>
-      <Icon as={FaPlay} />
-      <VStack w={"full"}>
-        <HStack w={"full"} justifyContent={"space-between"} mb={8}>
+      <Button p={3} borderRadius={100} h={'auto'} bg={"transparent"} display={'flex'} justifyContent={'center'} alignItems={'center'} border={"1px solid gray"} mr={2}>
+        <Icon as={FaPlay} color={"text"} />
+      </Button>
+      <VStack w={"full"} alignItems={{ base: "start", md: "center" }}>
+        <HStack
+          w={"full"}
+          justifyContent={"space-between"}
+          mb={{ md: 8, base: 4 }}
+        >
           <Text variant={"title"} color={"text"}>
             {data.title}
           </Text>
-          <Text variant={"normal"}>{`${data.date} | ${data.duration}мин`}</Text>
+          <Text
+            variant={"normal"}
+            display={{ md: "inline-block", base: "none" }}
+          >{`${data.date} | ${data.duration} мин`}</Text>
         </HStack>
-        <Text>{data.text}</Text>
+        <Text mb={{ md: 0, base: 4 }}>{data.text}</Text>
+        <Text
+          variant={"normal"}
+          display={{ base: "inline-block", md: "none" }}
+        >{`${data.date} | ${data.duration} мин`}</Text>
       </VStack>
     </HStack>
   );
@@ -51,12 +75,19 @@ export const Line: FC<Types> = ({
   type,
   data,
   length,
+  value,
   changePage,
   changeType,
 }) => {
   return (
     <HStack w={"full"} alignItems={"start"}>
-      <VStack w={{ md: "300px" }} gap={0} alignItems={"start"} mr={94}>
+      <VStack
+        w={{ lg: "300px" }}
+        display={{ lg: "flex", base: "none" }}
+        gap={0}
+        alignItems={"start"}
+        mr={94}
+      >
         {additionInfoTags.map((tags, i) => {
           return (
             <Button
@@ -82,13 +113,30 @@ export const Line: FC<Types> = ({
           );
         })}
       </VStack>
+
       <VStack
         w={"full"}
-        pl={10}
-        borderLeft={"1px solid aqua"}
+        pl={{ lg: 10, base: 0 }}
+        borderLeft={{ lg: "1px solid aqua", base: "" }}
         borderColor={"prime.default"}
-        gap={78}
+        gap={{ md: 78, base: 10 }}
+        pt={{ lg: 0, base: 8 }}
       >
+        <Select
+          defaultValue={value}
+          onChange={(e) => {
+            let v: any = e.target.value as keyof typeof InfoTypes;
+            changeType(v);
+          }}
+        >
+          {additionInfoTags.map((tags, i) => {
+            return (
+              <option value={tags.value} key={i}>
+                {tags.name}
+              </option>
+            );
+          })}
+        </Select>
         {data?.map((d, i) => {
           switch (d.type) {
             case InfoTypes.text:

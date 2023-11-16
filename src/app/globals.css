@@ -19,4 +19,9 @@
   background: linear-gradient(90deg, rgba(0,188,169,1) 70%, rgba(0,188,169,0.75) 100%);
 }
 
+.bg-nav {
+  background: linear-gradient(90deg, rgba(6, 74, 67, 0.9) 70% 100%, rgba(12, 148, 134, 1) 100%);
+
+}
+
 

@@ -21,8 +21,9 @@ export const HStackContainer: FC<Types> = ({
       maxW={maxW ?? "1240px"}
       margin={margin ?? 'auto'}
       gap={gap ?? {
-        md:  10,
-        base: 6,
+        lg:  10,
+        md: 6,
+        base: 6
       }}
       px={{ md: 10, base: 0}}
       flexDir={{

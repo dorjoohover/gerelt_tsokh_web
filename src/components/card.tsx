@@ -48,6 +48,7 @@ const CustomCard: FC<Types> = ({
       borderBottomColor={"prime.default"}
       borderBottomWidth={"6px"}
       borderRadius={0}
+      h={'full'}
     >
       <CardBody bg={bodyBg} padding={0}>
         {body}
@@ -58,7 +59,7 @@ const CustomCard: FC<Types> = ({
           md: "start",
           base: "center",
         }}
-        px={{ md: 12, base: 6 }}
+        px={{ lg: 12, md: 6, base: 6 }}
         pt={{ md: 8, base: 4 }}
         pb={{ md: 10, base: 6 }}
       >
@@ -178,6 +179,7 @@ export const RoundedCard: FC<RoundedType> = ({bg, title, text, py, icon }) => {
       border={"1px solid aqua "}
       borderColor={'prime.default'}
       bg={bg}
+      h={'full'}
 
     >
       {title && <Text variant={"smallTitle"} textAlign={'center'} color={"text"} mb={{md: 10}}>

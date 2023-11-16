@@ -174,14 +174,16 @@ export default function Home() {
             />
           </Link>
 
+          <Link href={'/'} >
           <CustomCard
             body={<Image src={imgTokhiruulga} />}
             footer={
               <Text variant={"title"} color={"darkPrime"}>
                 {tokhiruulgaMn}
               </Text>
-            }
-          />
+            }/>
+          </Link>
+         
         </HStack>
         <Box h={4} />
         <Text
@@ -211,7 +213,7 @@ export default function Home() {
       <VStack
         w={"full"}
         pos={"relative"}
-        px={{ md: 10, base: 0 }}
+        px={{ gl: 10, base: 0 }}
         maxW={"1240px"}
       >
         <Box
@@ -231,7 +233,7 @@ export default function Home() {
           {specialInfo}
         </Text>
         <HStackContainer
-          margin={{ md: "0 40px 0 40px", base: "0 24px 0 24px" }}
+          margin={{ lg: "0 40px 0 40px", base: "0 24px 0 24px" }}
           w="auto"
         >
           <CustomCard
@@ -296,10 +298,12 @@ export default function Home() {
         <Grid
           gridTemplateColumns={{
             md: "repeat(5, 1fr)",
+            
             base: "repeat(1, 1fr)",
           }}
           gap={{
             md: 10,
+       
           }}
           w={"full"}
           alignItems={"center"}

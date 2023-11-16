@@ -1,3 +1,4 @@
+import { NavItemsTypes } from "@/components/navbar";
 import {
   imgCCRLogo,
   imgEULogo,
@@ -14,10 +15,20 @@ import { FilterType } from "./functions";
 import {
   accessibleEmployment,
   additionInfo,
+  additionLearningAdvice,
   consistent,
+  contact,
+  copyrightNotice,
+  feedback,
+  gratitude,
+  hotTopics,
   inclusiveEducation,
   innovativeIdea,
+  legalInfo,
+  overview,
+  performance,
   professionalCooperation,
+  supplier,
   textInfo,
   videoInfo,
   voiceInfo,
@@ -105,3 +116,128 @@ export const foundationHistoryValue = {
   text1:
     "Тийнхүү Fulbright тэтгэлэгт өрсөлдөх зориг хүрч олон хүний итгэлийг хүлээн шалгарснаар Монголдоо байдаггүй мэргэжил болох Certified Rehabilitation Counseling мэргэжлээр АНУ-д магистраа хамгаалж ирээд тун удалгүй Гэрэлт Цох Байшин-г байгуулсан.\n Хөгжлийн бэрхшээлийн нөхөн сэргээх зөвлөх мэргэжлээр цогц ойлголт авч хүн төвтэй аргачлалын нууцыг тайлсан тул бүх бэрхшээлт үр өгөөжтэй байхуйц хүрээнд хувь нэмрээ оруулахыг хүссэн юм.\n Онолын хөтөлбөрөөс гадна гурван төрлийн дадлага ажил хийсний нэг нь сэтгэцийн эмгэгтэй хүмүүсийн өөрсдийнх нь бодит амьдралаас үүсэн хөгжсөн ClubHouse нийгэм – сэтгэл зүйн нөхөн сэргээх цогц загвар, нөгөө нь суралцаж байсан их сургуулийнхаа хөгжлийн бэрхшээлтэй оюутнуудад тохируулга үйлчилгээ үзүүлдэг цогц мэргэжлийн төв харин гурав дах нь хөгжлийн бэрхшээлтэй иргэдийг ажилд зуучлах онол дадлага хосолсон аргачлал юм.\n Цаг хугацаа, оюун бодлоо бүрэн зориулж суралцсан хоёр жилийнхээ үр дүнг гаргаж дээд боловсрол дах тэгш хамруулах сургалтын орчныг бий болгох, ажлын байрны тохируулгыг ICFD буюу өвчин ба үйлдлийн чадвар алдалтыг ангилах олон улсын аргачлалд суурилсан мэргэжлийн цогц цахим гарын авлага гаргаж зөвлөх үйлчилгээнийхээ ажлын зэвсгийг билгэн толилуулсан нь байгуулахынхнаа үндсэн чиглэлд нийцэж байна.\n Асуудлын орхигдсон өнцгийг мэдрэмжтэйгээр харж, эрх чөлөөтэйгөөр сэтгэн ажиллахын төлөө тэмцдэг бас хамтардаг чанар иргэний нийгмийн зүтгэлтнүүдийн гол онцлог билээ.",
 };
+
+export const gereltNavValues: NavItemsTypes[] = [
+  {
+    title: "Гэрэлт Цох Байшин ТББ",
+    link: [
+      {
+        name: "Бидний тухай",
+        value: "/about",
+      },
+    ],
+  },
+  {
+    title: "Хийгдэж буй ажил",
+    link: [
+      {
+        name: "Судалгаа",
+        value: "/about",
+      },
+      {
+        name: "Төсөл",
+        value: "/about",
+      },
+      {
+        name: "Сургалт ба зөвлөгөө үйлчилгээ",
+        value: "/about",
+      },
+      {
+        name: "Зарлагдсан тэтгэлэг ба хандив",
+        value: "/about",
+      },
+    ],
+  },
+  {
+    title: "Хийгдсэн ажил",
+    link: [
+      {
+        name: "Судалгаа",
+        value: "/about",
+      },
+      {
+        name: "Төсөл",
+        value: "/about",
+      },
+      {
+        name: "Сургалт ба зөвлөгөө үйлчилгээ",
+        value: "/about",
+      },
+      {
+        name: "Тэтгэлэг ба хандив",
+        value: "/about",
+      },
+    ],
+  },
+  {
+    title: "Холбогдох нэмэлт мэдээлэл ",
+    link: [
+      {
+        name: "Текст мэдээлэл",
+        value: "/info?name=text",
+      },
+      {
+        name: "Дуут мэдээлэл",
+        value: "/info?name=voice",
+      },
+      {
+        name: "Дүрст мэдээлэл",
+        value: "/info?name=video",
+      },
+      {
+        name: "Тэтгэлэг ба хандив",
+        value: "/about",
+      },
+    ],
+  },
+];
+
+
+export const tokhiruulgaNavValues: NavItemsTypes[] = [
+  {
+    title: "Tokhiruulga.mn",
+    link: [
+      {
+        name: gratitude,
+        value: "/about",
+      },
+      {
+        name: overview,
+        value: "/about",
+      },
+      {
+        name: copyrightNotice,
+        value: "/about",
+      },
+      {
+        name: performance,
+        value: "/about",
+      },
+      {
+        name: hotTopics,
+        value: "/about",
+      },
+      {
+        name: legalInfo,
+        value: "/about",
+      },
+      {
+        name: additionLearningAdvice,
+        value: "/about",
+      },
+      {
+        name: supplier,
+        value: "/about",
+      },
+      {
+        name: feedback,
+        value: "/about",
+      },
+      {
+        name: contact,
+        value: "/about",
+      },
+    ],
+  },
+  
+];

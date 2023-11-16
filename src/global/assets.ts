@@ -41,6 +41,7 @@ export const svgYt = `${svg}yt.svg`
 export const svgFb = `${svg}fb.svg`
 export const svgTwitter = `${svg}twitter.svg`
 export const svgMenu = `${svg}menu.svg`
+export const svgCancel = `${svg}cancel.svg`
 export const svgSearch = `${svg}search.svg`
 export const svgBg = `${svg}headerBg.svg`
 

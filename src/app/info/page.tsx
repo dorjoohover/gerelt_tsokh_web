@@ -29,10 +29,11 @@ export default function InfoPage() {
   };
   useEffect(() => {
     if (params.get("name") != "") {
+        
       let name: any = params.get("name") as keyof typeof InfoTypes;
       setType(name ?? InfoTypes.text);
+      setValue(filterName(name, additionInfoTags))
     }
-    setValue(filterName(type, additionInfoTags))
   }, []);
   useEffect(() => {
     getData();
@@ -41,7 +42,7 @@ export default function InfoPage() {
 
   return (
     <VStackContainer>
-      <HStack w={"full"}>
+      <HStack w={"full"} display={{lg:'flex', base: 'none'}}>
         <LinkTitle
           title={additionInfo}
           value={value}
@@ -51,6 +52,7 @@ export default function InfoPage() {
         data={data}
         page={page}
         type={type}
+        value={value}
         length={10}
         changePage={(value) => setPage(value)}
         changeType={(value) => {
