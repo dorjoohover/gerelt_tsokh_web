@@ -11,7 +11,6 @@ import { Info } from "@/model/info.model";
 import { HStack } from "@chakra-ui/react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-export const limit = 5;
 
 export default function InfoPage() {
   const params = useSearchParams();
@@ -24,7 +23,7 @@ export default function InfoPage() {
     try {
       let filtered = additionInfoData.filter((d) => d.type == type);
       setData(
-        filtered.filter((d, i) => i >= page * 5 && i < (page + 1) * limit)
+        filtered.filter((d, i) => i >= page * 5 && i < (page + 1) * 5)
       );
     } catch (error) {}
   };

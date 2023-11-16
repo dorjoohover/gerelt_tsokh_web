@@ -327,6 +327,7 @@ export default function Home() {
                 display={"flex"}
                 alignItems={"center"}
                 justifyContent={"center"}
+                key={index}
               >
                 <Image src={partner} key={index} mx={"auto"} />
               </GridItem>

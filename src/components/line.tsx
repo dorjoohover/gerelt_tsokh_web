@@ -1,4 +1,4 @@
-import { limit } from "@/app/info/page";
+
 import { InfoTypes } from "@/global/enum";
 import { additionInfoTags } from "@/global/values";
 import { Info } from "@/model/info.model";
@@ -100,7 +100,7 @@ export const Line: FC<Types> = ({
           }
         })}
         <HStack justifyContent={"center"} w={"full"} gap={0}>
-          {Array.from(Array(Math.ceil(length / limit)).keys()).map((i) => {
+          {Array.from(Array(Math.ceil(length / 5)).keys()).map((i) => {
             return (
               <Text
                 key={i}
