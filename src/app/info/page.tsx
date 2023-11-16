@@ -41,7 +41,7 @@ export default function InfoPage() {
   return (
     <VStackContainer>
       <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
-        <LinkTitle title={additionInfo} value={value} />
+        <LinkTitle title={additionInfo} value={value} current={1}/>
       </HStack>
       <Line
         child={

@@ -280,7 +280,7 @@ export default function Home() {
             }
           />
         </HStackContainer>
-        <Button onClick={() => {}} textTransform={"none"} mt={10}>
+        <Button onClick={() => {router.push('/article')}} textTransform={"none"} mt={10}>
           {watchOtherArticle}
         </Button>
       </VStack>

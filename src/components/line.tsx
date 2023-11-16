@@ -17,8 +17,6 @@ type Types = {
   limit: number;
 };
 
-
-
 export const Line: FC<Types> = ({
   page,
   type,
@@ -45,20 +43,23 @@ export const Line: FC<Types> = ({
               key={i}
               p={0}
               h={"auto"}
+              w={"full"}
               bg={"transparent"}
               textTransform={"none"}
               onClick={() => {
                 changeType(tags.value);
               }}
               _hover={{
-                bg: 'none'
+                bg: "none",
               }}
             >
               <Text
+                w={"full"}
                 fontWeight={tags.value == type ? "bold" : 400}
                 borderTop={i != 0 ? "1px solid aqua" : ""}
                 borderColor={"prime.default"}
                 py={4}
+                textAlign={"start"}
               >
                 {tags.name}
               </Text>
@@ -72,7 +73,7 @@ export const Line: FC<Types> = ({
         pl={{ lg: 10, base: 0 }}
         borderLeft={{ lg: "1px solid aqua", base: "" }}
         borderColor={"prime.default"}
-        gap={{ md: 78, base: 10 }}
+        gap={{ lg: 78, base: 10 }}
         pt={{ lg: 0, base: 8 }}
       >
         <Select
@@ -92,21 +93,22 @@ export const Line: FC<Types> = ({
         </Select>
         {child}
         <HStack justifyContent={"center"} w={"full"} gap={0}>
-          {Array.from(Array(Math.ceil(length / limit)).keys()).map((i) => {
-            return (
-              <Text
-                key={i}
-                cursor={"pointer"}
-                px={4}
-                fontWeight={i == page ? "bold" : 400}
-                borderLeft={i != 0 ? "1px solid black" : ""}
-                borderColor={"text"}
-                onClick={() => changePage(i)}
-              >
-                {i + 1}
-              </Text>
-            );
-          })}
+          {Math.ceil(length / limit) > 1 &&
+            Array.from(Array(Math.ceil(length / limit)).keys()).map((i) => {
+              return (
+                <Text
+                  key={i}
+                  cursor={"pointer"}
+                  px={4}
+                  fontWeight={i == page ? "bold" : 400}
+                  borderLeft={i != 0 ? "1px solid black" : ""}
+                  borderColor={"text"}
+                  onClick={() => changePage(i)}
+                >
+                  {i + 1}
+                </Text>
+              );
+            })}
         </HStack>
       </VStack>
     </HStack>

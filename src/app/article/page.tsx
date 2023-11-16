@@ -1,7 +1,7 @@
 "use client";
 import { VStackContainer } from "@/components/container";
 import { Line } from "@/components/line";
-import { LineWidget } from "@/components/lines/article";
+import { LineWidget, LineWidgetDetail } from "@/components/lines/article";
 import { LinkTitle } from "@/components/link";
 import { articleData } from "@/global/data";
 import { ArticleTypes } from "@/global/enum";
@@ -19,7 +19,7 @@ const ArticlePage = () => {
   const [type, setType] = useState<ArticleTypes>(ArticleTypes.article);
   const [data, setData] = useState<Article[]>([]);
   const [value, setValue] = useState("");
-
+  const [selected, setSelected] = useState<Article | null>(null);
   const getData = async () => {
     try {
       let filtered = articleData.filter((d) => d.type == type);
@@ -37,49 +37,74 @@ const ArticlePage = () => {
     getData();
     setValue(filterName(type, articleTags));
   }, [type, page]);
+  useEffect(() => {
+    if (params.get("id")) {
+      let filtered = articleData.filter((d) => d._id == params.get("id"));
+      if (filtered.length > 0) {
+        setSelected(filtered[0]);
+      } else {
+        setSelected(null);
+      }
+    }
+  }, [params]);
 
   return (
     <VStackContainer>
       <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
-        <LinkTitle title={article} value={value} />
+        <LinkTitle
+          title={article}
+          value={value}
+          detail={selected ? selected.title : ""}
+          current={selected == null ? 1 : 2}
+        />
       </HStack>
       <Line
         child={
-          data?.map((d, i) => {
-            switch (d.type) {
-              case ArticleTypes.info:
-                return (
-                  <LineWidget
-                    img={d.img!}
-                    id={d._id}
-                    text={d.text}
-                    title={d.title}
-                    key={i}
-                  />
-                );
-              default:
-                return (
-                  <LineWidget
-                    img={d.img!}
-                    id={d._id}
-                    text={d.text}
-                    title={d.title}
-                    key={i}
-                  />
-                );
-            }
-          }) ?? <></>
+          selected != null ? (
+            <LineWidgetDetail
+              text={selected.text}
+              title={selected.title}
+              img={selected.img}
+              id={selected._id}
+            />
+          ) : (
+            data?.map((d, i) => {
+              switch (d.type) {
+                case ArticleTypes.info:
+                  return (
+                    <LineWidget
+                      img={d.img!}
+                      id={d._id}
+                      text={d.text}
+                      title={d.title}
+                      key={i}
+                    />
+                  );
+                default:
+                  return (
+                    <LineWidget
+                      img={d.img!}
+                      id={d._id}
+                      text={d.text}
+                      title={d.title}
+                      key={i}
+                    />
+                  );
+              }
+            }) ?? <></>
+          )
         }
         filter={articleTags}
         limit={5}
         page={page}
         type={type}
         value={value}
-        length={10}
+        length={selected ? 1 : 10}
         changePage={(value) => setPage(value)}
         changeType={(value) => {
           setType(value);
           setPage(0);
+          setSelected(null)
         }}
       />
     </VStackContainer>

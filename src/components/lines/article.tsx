@@ -1,67 +1,74 @@
+import { detail, more } from "@/global/string";
 import { Info } from "@/model/info.model";
-import { Button, HStack, Icon, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  HStack,
+  Icon,
+  Image,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
+import Link from "next/link";
 import { FC } from "react";
 import { FaPlay } from "react-icons/fa";
 type LineWidgetType = {
-    img: string, 
-    title: string, 
-    text: string, 
-    id: string
+  img: string;
+  title: string;
+  text: string;
+  id: string;
+};
+type LineWidgetDetailType = {
+  img?: string;
+  title: string;
+  text: string;
+  id?: string;
 };
 export const LineWidget: FC<LineWidgetType> = ({ img, title, text, id }) => {
   return (
-    <VStack w={"full"} alignItems={{ base: "start", md: "center" }}>
-      <HStack
-        w={"full"}
-        justifyContent={"space-between"}
-        mb={{ md: 8, base: 4 }}
-      >
-        <Text variant={"title"} color={"text"}>
-          {title}
+    <HStack
+      w={"full"}
+      gap={6}
+      alignItems={"start"}
+      flexDir={{ md: "row", base: "column" }}
+    >
+      <Box flex={1}>
+        <Image src={img} alt={id} />
+      </Box>
+
+      <VStack w={"full"} alignItems={{ base: "start" }} flex={2}>
+        <HStack
+          w={"full"}
+          justifyContent={"space-between"}
+          mb={{ md: 8, base: 4 }}
+        >
+          <Text variant={"title"} color={"text"}>
+            {title}
+          </Text>
+        </HStack>
+        <Text mb={{ md: 0, base: 4 }} noOfLines={{ md: 3, base: 4 }}>
+          {text}
         </Text>
-      
-      </HStack>
-      <Text mb={{ md: 0, base: 4 }}>{text}</Text>
-   
+        <Link href={`/article?id=${id}`}>
+          <Text textDecor={"underline"}>{more}</Text>
+        </Link>
+      </VStack>
+    </HStack>
+  );
+};
+export const LineWidgetDetail: FC<LineWidgetDetailType> = ({
+  img,
+  title,
+  id,
+  text,
+}) => {
+  return (
+    <VStack alignItems={"start"} w={"full"} gap={5}>
+      <Text variant={"title"}>{title}</Text>
+      <Image src={img} w={'full'} alt={id ?? ""} />
+      <VStack w={"full"} alignItems={{ base: "start", md: "center" }}>
+        <Text>{text}</Text>
+      </VStack>
     </VStack>
   );
 };
-// export const VoiceLine: FC<InfoType> = ({ data }) => {
-//   return (
-//     <HStack alignItems={"start"} w={"full"}>
-//       <Button
-//         p={3}
-//         borderRadius={100}
-//         h={"auto"}
-//         bg={"transparent"}
-//         display={"flex"}
-//         justifyContent={"center"}
-//         alignItems={"center"}
-//         border={"1px solid gray"}
-//         mr={2}
-//       >
-//         <Icon as={FaPlay} color={"text"} />
-//       </Button>
-//       <VStack w={"full"} alignItems={{ base: "start", md: "center" }}>
-//         <HStack
-//           w={"full"}
-//           justifyContent={"space-between"}
-//           mb={{ md: 8, base: 4 }}
-//         >
-//           <Text variant={"title"} color={"text"}>
-//             {data.title}
-//           </Text>
-//           <Text
-//             variant={"normal"}
-//             display={{ md: "inline-block", base: "none" }}
-//           >{`${data.date} | ${data.duration} мин`}</Text>
-//         </HStack>
-//         <Text mb={{ md: 0, base: 4 }}>{data.text}</Text>
-//         <Text
-//           variant={"normal"}
-//           display={{ base: "inline-block", md: "none" }}
-//         >{`${data.date} | ${data.duration} мин`}</Text>
-//       </VStack>
-//     </HStack>
-//   );
-// };
