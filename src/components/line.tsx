@@ -1,10 +1,11 @@
-import { InfoTypes } from "@/global/enum";
+"use client";
+
 import { FilterType } from "@/global/functions";
-import { additionInfoTags } from "@/global/values";
-import { Info } from "@/model/info.model";
-import { Button, HStack, Icon, Select, Text, VStack } from "@chakra-ui/react";
-import { FC, ReactNode } from "react";
-import { FaPlay } from "react-icons/fa";
+
+import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
+import { Box, Button, HStack, Select, Text, VStack } from "@chakra-ui/react";
+import { FC, ReactNode, useState } from "react";
+
 type Types = {
   page: number;
   child: ReactNode;
@@ -12,9 +13,11 @@ type Types = {
   length: number;
   value: string;
   changePage: (value: number) => void;
-  changeType: (value: any) => void;
+  changeType: (value: any, sub?: boolean) => void;
+  changeSub: (value: number) => void;
   filter: FilterType[];
   limit: number;
+  sub?: any;
 };
 
 export const Line: FC<Types> = ({
@@ -23,11 +26,15 @@ export const Line: FC<Types> = ({
   child,
   length,
   value,
+  sub,
   changePage,
   changeType,
+  changeSub = () => {},
   filter,
   limit = 5,
 }) => {
+  const [active, setActive] = useState<number | null>();
+
   return (
     <HStack w={"full"} alignItems={"start"}>
       <VStack
@@ -39,31 +46,89 @@ export const Line: FC<Types> = ({
       >
         {filter.map((tags, i) => {
           return (
-            <Button
-              key={i}
-              p={0}
-              h={"auto"}
-              w={"full"}
-              bg={"transparent"}
-              textTransform={"none"}
-              onClick={() => {
-                changeType(tags.value);
-              }}
-              _hover={{
-                bg: "none",
-              }}
-            >
-              <Text
+            <VStack w="full" alignItems={"start"}>
+              <Button
+                key={i}
+                p={0}
+                h={"auto"}
                 w={"full"}
-                fontWeight={tags.value == type ? "bold" : 400}
-                borderTop={i != 0 ? "1px solid aqua" : ""}
-                borderColor={"prime.default"}
-                py={4}
-                textAlign={"start"}
+                bg={"transparent"}
+                textTransform={"none"}
+                onClick={() => {
+                  changeType(tags.value, tags.sub != undefined);
+                  if (tags.sub != undefined) {
+                    if (active == i) {
+                      setActive(null);
+                    } else {
+                      setActive(i);
+                    }
+                  }
+                }}
+                _hover={{
+                  bg: "none",
+                }}
               >
-                {tags.name}
-              </Text>
-            </Button>
+                <HStack
+                  w={"full"}
+                  justifyContent={"space-between"}
+                  borderTop={i != 0 ? "1px solid aqua" : ""}
+                  borderColor={"prime.default"}
+                >
+                  <Text
+                    w={"full"}
+                    fontWeight={tags.value == type ? "bold" : 400}
+                    py={4}
+                    textAlign={"start"}
+                  >
+                    {tags.name}
+                  </Text>
+                  {tags.sub != undefined && (
+                    <Box>
+                      {!active ? (
+                        <ChevronDownIcon color={"prime.default"} />
+                      ) : (
+                        <ChevronUpIcon color={"prime.default"} />
+                      )}
+                    </Box>
+                  )}
+                </HStack>
+              </Button>
+              {tags.sub && active && (
+                <VStack w="full" alignItems={"start"} pl={16}>
+                  {tags.sub.map((e, index) => {
+                    return (
+                      <Button
+                        key={index}
+                        p={0}
+                        h={"auto"}
+                        w={"full"}
+                        bg={"transparent"}
+                        textTransform={"none"}
+                        onClick={() => {
+                          changeSub(index);
+                        }}
+                        _hover={{
+                          bg: "none",
+                        }}
+                      >
+                        <HStack w={"full"} justifyContent={"space-between"}>
+                          <Text
+                            w={"full"}
+                            fontWeight={index == sub ? "bold" : 400}
+                            borderTop={index != 0 ? "1px solid aqua" : ""}
+                            borderColor={"prime.default"}
+                            py={4}
+                            textAlign={"start"}
+                          >
+                            {e.name}
+                          </Text>
+                        </HStack>
+                      </Button>
+                    );
+                  })}
+                </VStack>
+              )}
+            </VStack>
           );
         })}
       </VStack>

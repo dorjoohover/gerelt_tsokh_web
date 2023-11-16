@@ -17,14 +17,16 @@ type LineWidgetType = {
   title: string;
   text: string;
   id: string;
+  type: string
 };
 type LineWidgetDetailType = {
   img?: string;
   title: string;
   text: string;
   id?: string;
+  
 };
-export const LineWidget: FC<LineWidgetType> = ({ img, title, text, id }) => {
+export const LineWidget: FC<LineWidgetType> = ({ img, type, title, text, id }) => {
   return (
     <HStack
       w={"full"}
@@ -49,7 +51,7 @@ export const LineWidget: FC<LineWidgetType> = ({ img, title, text, id }) => {
         <Text mb={{ md: 0, base: 4 }} noOfLines={{ md: 3, base: 4 }}>
           {text}
         </Text>
-        <Link href={`/article?id=${id}`}>
+        <Link href={`/${type}?id=${id}`}>
           <Text textDecor={"underline"}>{more}</Text>
         </Link>
       </VStack>

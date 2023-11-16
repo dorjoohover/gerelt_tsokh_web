@@ -3,13 +3,13 @@ import { VStackContainer } from "@/components/container";
 import { TextLine, VoiceLine } from "@/components/lines/info";
 import { Line } from "@/components/line";
 import { LinkTitle } from "@/components/link";
-import { additionInfoData } from "@/global/data";
+import { additionInfoData } from "@/data/addition_info.data";
 import { InfoTypes } from "@/global/enum";
 import { filterName } from "@/global/functions";
 import { additionInfo } from "@/global/string";
 import { additionInfoTags } from "@/global/values";
 import { Info } from "@/model/info.model";
-import { HStack } from "@chakra-ui/react";
+import { HStack, SlideFade } from "@chakra-ui/react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -41,18 +41,44 @@ export default function InfoPage() {
   return (
     <VStackContainer>
       <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
-        <LinkTitle title={additionInfo} value={value} current={1}/>
+        <LinkTitle title={additionInfo} value={value} current={1} />
       </HStack>
       <Line
         child={
           data?.map((d, i) => {
             switch (d.type) {
               case InfoTypes.text:
-                return <TextLine data={d} key={i} />;
+                return (
+                  <SlideFade
+                    in={true}
+                    offsetX={"50px"}
+                    
+                    transition={{ enter: { delay: i * 0.3, duration: 0.3 } }}
+                  >
+                    <TextLine data={d} key={i} />
+                  </SlideFade>
+                );
               case InfoTypes.voice:
-                return <VoiceLine data={d} key={i} />;
+                return (
+                  <SlideFade
+                    in={true}
+                    offsetX={"50px"}
+                    transition={{ enter: { delay: i * 0.3, duration: 0.3 } }}
+                  >
+                    <VoiceLine data={d} key={i} />
+                  </SlideFade>
+                );
+
               default:
-                return <TextLine data={d} key={i} />;
+                return (
+                  <SlideFade
+                    in={true}
+                    offsetX={"50px"}
+                    transition={{ enter: { delay: i * 0.3, duration: 0.3 } }}
+                  >
+                    <TextLine data={d} key={i} />
+                  </SlideFade>
+                );
             }
           }) ?? <></>
         }
@@ -67,6 +93,7 @@ export default function InfoPage() {
           setType(value);
           setPage(0);
         }}
+        changeSub={() => {}}
       />
     </VStackContainer>
   );

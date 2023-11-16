@@ -12,6 +12,7 @@ export const textInfo = 'ТЕКСТ МЭДЭЭЛЛҮҮД'
 export const navText = 'Хүртээмжтэй хөдөлмөр эрхлэлтийн соёл';
 export const menu = 'Цэс';
 export const article = 'Нийтлэл ';
+export const work = 'Хийгдсэн ажил ';
 
 export const voiceInfo = 'ДУУТ МЭДЭЭЛЛҮҮД'
 export const videoInfo = 'ДҮРСТ МЭДЭЭЛЛҮҮД'
@@ -44,3 +45,6 @@ export const mission = 'Эрхэм зорилго'
 export const innovativeIdea = 'Шинэлэг санаа'
 export const consistent = 'Тууштай чанар '
 export const professionalCooperation = 'Мэргэжлийн хамтын ажиллагаа '
+
+
+export const send = 'Илгээх'

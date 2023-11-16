@@ -8,19 +8,34 @@ type Types = {
   value?: string;
   detail?: string;
   current?: number;
+  special?: string;
+  name?: string;
 };
-export const LinkTitle: FC<Types> = ({ title, value, detail, current }) => {
+export const LinkTitle: FC<Types> = ({
+  title,
+  value,
+  detail,
+  current,
+  special,
+  name,
+}) => {
   return (
     <HStack w={"full"} justifyContent={"space-between"} mt={8}>
-      <Text variant={"title"} color={"prime.default"}>
+      <Text variant={"title"} maxW={250} color={"prime.default"}>
         {title}
       </Text>
       <VStack alignItems={"end"} gap={0}>
-        <Text variant={"normal"}>{link}</Text>
+        <Text variant={"normal"} >{link}</Text>
         <HStack color={"text"}>
-          <Text variant={"normal"}>{`${title.substring(0, 1)}${title
-            .substring(1)
-            .toLowerCase()} > `}</Text>
+          {special ? (
+            <Text variant={"normal"}>{`${special.substring(0, 1)}${special
+              .substring(1)
+              .toLowerCase()} > `}</Text>
+          ) : (
+            <Text variant={"normal"}>{`${title.substring(0, 1)}${title
+              .substring(1)
+              .toLowerCase()} > `}</Text>
+          )}
           <Text
             textDecor={current == 1 ? "underline" : "none"}
             variant={"normal"}
@@ -35,6 +50,19 @@ export const LinkTitle: FC<Types> = ({ title, value, detail, current }) => {
                 ? detail.length > 30
                   ? `${detail.substring(0, 27)}...`
                   : detail
+                : ""
+            } `}</Text>
+          )}
+          {name && <Text variant={"normal"}>{`> `}</Text>}
+          {name && (
+            <Text
+              variant={"normal"}
+              textDecor={current == 3 ? "underline" : "none"}
+            >{`${
+              name
+                ? name.length > 30
+                  ? `${name.substring(0, 27)}...`
+                  : name
                 : ""
             } `}</Text>
           )}

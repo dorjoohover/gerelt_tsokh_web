@@ -11,10 +11,13 @@ import {
   HStack,
   Image,
   Input,
+  SlideFade,
   Stack,
   Text,
   VStack,
+  keyframes,
 } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState, FC } from "react";
 type NavItemType = {
@@ -25,7 +28,7 @@ type NavItemType = {
 export type NavItemsTypes = {
   title: string;
   link: NavItemType[];
-  onClick?: () => void
+  onClick?: () => void;
 };
 const NavItem: FC<NavItemsTypes> = ({ title, link, onClick }) => {
   return (
@@ -61,6 +64,25 @@ const NavItem: FC<NavItemsTypes> = ({ title, link, onClick }) => {
   );
 };
 
+const iconFrame = keyframes`
+  0% { transform: scale(0);  }
+  100% { transform: scale(1);  }
+`;
+const iconEndFrame = keyframes`
+  0% { transform: scale(1);  }
+  100% { transform: scale(0);  }
+`;
+const navFrame = keyframes`
+  0% { transform: scale(0);  }
+  100% { transform: scale(1);  }
+`;
+const navEndFrame = keyframes`
+  0% { transform: scale(1);  }
+  100% { transform: scale(0);  }
+`;
+const iconAnimation = `${iconFrame} 0.3s ease-in-out forwards`;
+const iconEndAnimation = `${iconEndFrame} 0.3s ease-in-out forwards`;
+
 const Navbar = () => {
   const [gerelt, setGerelt] = useState(false);
   const [tokhiruulgaActive, setTokhiruulga] = useState(false);
@@ -68,11 +90,11 @@ const Navbar = () => {
   const [active, setActive] = useState(false);
 
   const reset = () => {
-    setActive(false)
-                        setGerelt(false)
-                        setSearch(false)
-                        setTokhiruulga(false)
-  }
+    setActive(false);
+    setGerelt(false);
+    setSearch(false);
+    setTokhiruulga(false);
+  };
   return (
     <Box
       pos={"fixed"}
@@ -92,7 +114,9 @@ const Navbar = () => {
         justifyContent={"space-between"}
       >
         <Box py={4}>
-          <Link href={'/'} onClick={reset}><Image alt="logo" src={imgLogo} h={12} /></Link>
+          <Link href={"/"} onClick={reset}>
+            <Image alt="logo" src={imgLogo} h={12} />
+          </Link>
         </Box>
         <HStack w={"full"} justifyContent={"end"}>
           {/* <Text
@@ -106,13 +130,13 @@ const Navbar = () => {
           <HStack
             borderRadius={9}
             w={"auto"}
+            className="flex-animation"
             flex={search ? 1 : 0}
-            justifyContent={"center"}
+            justifyContent={"end"}
             alignItems={"center"}
             h={10}
             border={"1px solid aqua"}
             borderColor={"prime.default"}
-            px={search ? 3 : 0}
             ml={6}
           >
             {search && (
@@ -129,17 +153,27 @@ const Navbar = () => {
               mr={1.25}
               w={10}
               _hover={{
-                bg: 'none'
+                bg: "none",
               }}
               textAlign={"center"}
               justifyContent={"center"}
               onClick={() => setSearch(!search)}
             >
-              {search ? (
+              <Box
+                as={motion.div}
+                display={search ? "flex" : "none"}
+                animation={search ? iconAnimation : iconEndAnimation}
+              >
                 <CloseIcon color={"prime.default"} />
-              ) : (
+              </Box>
+
+              <Box
+                as={motion.div}
+                display={!search ? "flex" : "none"}
+                animation={!search ? iconAnimation : iconEndAnimation}
+              >
                 <Image src={svgSearch} w={22} h={22} mx={"auto"} />
-              )}
+              </Box>
             </Button>
           </HStack>
           <Button
@@ -147,8 +181,8 @@ const Navbar = () => {
             h={"auto"}
             bg={"none"}
             _hover={{
-                bg: 'none'
-              }}
+              bg: "none",
+            }}
             onClick={() => setGerelt(!gerelt)}
             display={{ md: "inline-flex", base: "none" }}
             zIndex={gerelt ? 30 : 10}
@@ -162,12 +196,20 @@ const Navbar = () => {
               border={"1px solid aqua"}
               borderColor={gerelt ? "white" : "prime.default"}
             >
-              <Image
-                src={gerelt ? svgCancel : svgMenu}
-                w={22}
-                h={22}
-                mr={4.5}
-              />
+              <Box
+                as={motion.div}
+                animation={!gerelt ? iconAnimation : iconEndAnimation}
+                display={!gerelt ? "flex" : "none"}
+              >
+                <Image src={svgMenu} w={22} h={22} mr={4.5} />
+              </Box>
+              <Box
+                as={motion.div}
+                animation={gerelt ? iconAnimation : iconEndAnimation}
+                display={gerelt ? "flex" : "none"}
+              >
+                <Image src={svgCancel} w={22} h={22} mr={4.5} />
+              </Box>
               <Text color={gerelt ? "white" : "prime.default"}>
                 {gereltTokh}
               </Text>
@@ -178,8 +220,8 @@ const Navbar = () => {
             h={"auto"}
             bg={"none"}
             _hover={{
-                bg: 'none'
-              }}
+              bg: "none",
+            }}
             display={{ md: "inline-flex", base: "none" }}
             onClick={() => setTokhiruulga(!tokhiruulgaActive)}
             zIndex={tokhiruulgaActive ? 30 : 10}
@@ -193,11 +235,22 @@ const Navbar = () => {
               border={"1px solid aqua"}
               borderColor={tokhiruulgaActive ? "white" : "prime.default"}
             >
-              <Image
-                src={tokhiruulgaActive ? svgCancel : svgMenu}
-                w={22}
-                h={22}
-              />
+              <Box
+                as={motion.div}
+                animation={
+                  !tokhiruulgaActive ? iconAnimation : iconEndAnimation
+                }
+                display={!tokhiruulgaActive ? "flex" : "none"}
+              >
+                <Image src={svgMenu} w={22} h={22} mr={4.5} />
+              </Box>
+              <Box
+                as={motion.div}
+                animation={tokhiruulgaActive ? iconAnimation : iconEndAnimation}
+                display={tokhiruulgaActive ? "flex" : "none"}
+              >
+                <Image src={svgCancel} w={22} h={22} mr={4.5} />
+              </Box>
               <Text color={tokhiruulgaActive ? "white" : "prime.default"}>
                 {tokhiruulga}
               </Text>
@@ -208,7 +261,7 @@ const Navbar = () => {
             h={"auto"}
             bg={"none"}
             onClick={() => setActive(!active)}
-_hover={{bg:'none'}}
+            _hover={{ bg: "none" }}
             zIndex={active ? 30 : 10}
             display={{ base: "inline-flex", md: "none" }}
           >
@@ -221,20 +274,34 @@ _hover={{bg:'none'}}
               border={"1px solid aqua"}
               borderColor={active ? "white" : "prime.default"}
             >
-              <Image
-                src={active ? svgCancel : svgMenu}
-                w={22}
-                h={22}
-                mr={4.5}
-              />
+              <Box
+                as={motion.div}
+                animation={!active ? iconAnimation : iconEndAnimation}
+                display={!active ? "flex" : "none"}
+              >
+                <Image src={svgMenu} w={22} h={22} mr={4.5} />
+              </Box>
+              <Box
+                as={motion.div}
+                animation={active ? iconAnimation : iconEndAnimation}
+                display={active ? "flex" : "none"}
+              >
+                <Image src={svgCancel} w={22} h={22} mr={4.5} />
+              </Box>
               <Text color={active ? "white" : "prime.default"}>{menu}</Text>
             </HStack>
           </Button>
         </HStack>
       </HStack>
       {(gerelt || tokhiruulgaActive || active) && (
-        <Box pos={"fixed"} zIndex={20} overflowY={{sm: 'scroll', base: 'scroll'}} inset={0} className="bg-nav">
-          {gerelt && (
+        <Box
+          pos={"fixed"}
+          zIndex={20}
+          overflowY={{ sm: "scroll", base: "scroll" }}
+          inset={0}
+          className="bg-nav"
+        >
+          <SlideFade in={gerelt} offsetY="-100px">
             <Grid
               w={"full"}
               mx={"auto"}
@@ -247,17 +314,22 @@ _hover={{bg:'none'}}
                 sm: "repeat(2, 1fr)",
                 base: "repeat(1, 1fr)",
               }}
+              display={gerelt ? "grid" : "none"}
             >
               {gereltNavValues.map((value, i) => {
                 return (
                   <GridItem key={i}>
-                    <NavItem title={value.title} link={value.link} onClick={reset}/>
+                    <NavItem
+                      title={value.title}
+                      link={value.link}
+                      onClick={reset}
+                    />
                   </GridItem>
                 );
               })}
             </Grid>
-          )}
-          {tokhiruulgaActive && (
+          </SlideFade>
+          <SlideFade in={tokhiruulgaActive} offsetY={"-100px"}>
             <Grid
               w={"full"}
               mx={"auto"}
@@ -269,17 +341,22 @@ _hover={{bg:'none'}}
                 sm: "repeat(2, 1fr)",
                 base: "repeat(1, 1fr)",
               }}
+              display={tokhiruulgaActive ? "grid" : "none"}
             >
               {tokhiruulgaNavValues.map((value, i) => {
                 return (
                   <GridItem key={i}>
-                    <NavItem title={value.title} link={value.link} onClick={reset}/> 
+                    <NavItem
+                      title={value.title}
+                      link={value.link}
+                      onClick={reset}
+                    />
                   </GridItem>
                 );
               })}
             </Grid>
-          )}
-          {active && (
+          </SlideFade>
+          <SlideFade in={active} offsetY={"-100px"}>
             <Grid
               w={"full"}
               mx={"auto"}
@@ -291,16 +368,21 @@ _hover={{bg:'none'}}
                 sm: "repeat(2, 1fr)",
                 base: "repeat(1, 1fr)",
               }}
+              display={active ? "grid" : "none"}
             >
               {tokhiruulgaNavValues.concat(gereltNavValues).map((value, i) => {
                 return (
                   <GridItem key={i}>
-                    <NavItem title={value.title} link={value.link} onClick={reset}/>
+                    <NavItem
+                      title={value.title}
+                      link={value.link}
+                      onClick={reset}
+                    />
                   </GridItem>
                 );
               })}
             </Grid>
-          )}
+          </SlideFade>
         </Box>
       )}
     </Box>

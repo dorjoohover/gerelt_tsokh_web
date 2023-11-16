@@ -4,43 +4,44 @@ import { Line } from "@/components/line";
 
 import { LineWidget, LineWidgetDetail } from "@/components/lines/article";
 import { LinkTitle } from "@/components/link";
-import { articleData } from "@/data/article.data";
-import { ArticleTypes } from "@/global/enum";
+import { workData } from "@/data/work.data";
+import { WorkTypes } from "@/global/enum";
 import { filterName } from "@/global/functions";
-import { article } from "@/global/string";
-import { articleTags } from "@/global/values";
-import { Article } from "@/model/article.model";
+import { work } from "@/global/string";
+
+import { workTags } from "@/global/values";
+import { Work } from "@/model/work.model";
 import { HStack } from "@chakra-ui/react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const ArticlePage = () => {
+const WorkPage = () => {
   const params = useSearchParams();
   const [page, setPage] = useState(0);
-  const [type, setType] = useState<ArticleTypes>(ArticleTypes.article);
-  const [data, setData] = useState<Article[]>([]);
+  const [type, setType] = useState<WorkTypes>(WorkTypes.research);
+  const [data, setData] = useState<Work[]>([]);
   const [value, setValue] = useState("");
-  const [selected, setSelected] = useState<Article | null>(null);
+  const [selected, setSelected] = useState<Work | null>(null);
   const getData = async () => {
     try {
-      let filtered = articleData.filter((d) => d.type == type);
+      let filtered = workData.filter((d) => d.type == type);
       setData(filtered.filter((d, i) => i >= page * 10 && i < (page + 1) * 10));
     } catch (error) {}
   };
   useEffect(() => {
-    if (params.get("name") != "") {
-      let name: any = params.get("name") as keyof typeof ArticleTypes;
-      setType(name ?? ArticleTypes.article);
-      setValue(filterName(name, articleTags));
+    if (params.get("name")) {
+      let name: any = params.get("name") as keyof typeof WorkTypes;
+      setType(name ?? WorkTypes.research);
+      setValue(filterName(name, workTags));
     }
   }, []);
   useEffect(() => {
     getData();
-    setValue(filterName(type, articleTags));
+    setValue(filterName(type, workTags));
   }, [type, page]);
   useEffect(() => {
     if (params.get("id")) {
-      let filtered = articleData.filter((d) => d._id == params.get("id"));
+      let filtered = workData.filter((d) => d._id == params.get("id"));
       if (filtered.length > 0) {
         setSelected(filtered[0]);
       } else {
@@ -48,9 +49,9 @@ const ArticlePage = () => {
       }
     }
     if (params.get("name")) {
-      let name: any = params.get("name") as keyof typeof ArticleTypes;
-      setType(name ?? ArticleTypes.article);
-      setValue(filterName(name, articleTags));
+      let name: any = params.get("name") as keyof typeof WorkTypes;
+      setType(name ?? WorkTypes.research);
+      setValue(filterName(name, workTags));
     }
   }, [params]);
 
@@ -58,7 +59,7 @@ const ArticlePage = () => {
     <VStackContainer>
       <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
         <LinkTitle
-          title={article}
+          title={work}
           value={value}
           detail={selected ? selected.title : ""}
           current={selected == null ? 1 : 2}
@@ -76,7 +77,7 @@ const ArticlePage = () => {
           ) : (
             data?.map((d, i) => {
               switch (d.type) {
-                case ArticleTypes.info:
+                case WorkTypes.research:
                   return (
                     <LineWidget
                       img={d.img!}
@@ -84,7 +85,7 @@ const ArticlePage = () => {
                       text={d.text}
                       title={d.title}
                       key={i}
-                      type="article"
+                      type="work"
                     />
                   );
                 default:
@@ -95,14 +96,14 @@ const ArticlePage = () => {
                       text={d.text}
                       title={d.title}
                       key={i}
-                      type="article"
+                      type="work"
                     />
                   );
               }
             }) ?? <></>
           )
         }
-        filter={articleTags}
+        filter={workTags}
         limit={5}
         page={page}
         type={type}
@@ -112,11 +113,11 @@ const ArticlePage = () => {
         changeType={(value) => {
           setType(value);
           setPage(0);
-          setSelected(null)
+          setSelected(null);
         }}
         changeSub={() => {}}
       />
     </VStackContainer>
   );
 };
-export default ArticlePage;
+export default WorkPage;
