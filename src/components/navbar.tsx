@@ -208,6 +208,7 @@ const Navbar = () => {
             h={"auto"}
             bg={"none"}
             onClick={() => setActive(!active)}
+_hover={{bg:'none'}}
             zIndex={active ? 30 : 10}
             display={{ base: "inline-flex", md: "none" }}
           >
