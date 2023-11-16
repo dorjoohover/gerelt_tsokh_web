@@ -1,5 +1,14 @@
 import { Info } from "@/model/info.model";
-import { Button, HStack, Icon, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  HStack,
+  Icon,
+  Image,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
+import Link from "next/link";
 import { FC } from "react";
 import { FaPlay } from "react-icons/fa";
 type InfoType = {
@@ -66,5 +75,37 @@ export const VoiceLine: FC<InfoType> = ({ data }) => {
         >{`${data.date} | ${data.duration} мин`}</Text>
       </VStack>
     </HStack>
+  );
+};
+export const VideoLine: FC<InfoType> = ({ data }) => {
+  return (
+    <VStack w={"full"} gap={{ md: 4.5, base: 4 }} alignItems={"start"}>
+      <Box pos={"relative"} w={"full"}>
+        <Image src={data.thumbnail} alt={""} w={"full"} />
+        <Link href={data.uri ?? "www.google.com"} target="_blank">
+          <Box
+            pos={"absolute"}
+            zIndex={5}
+            top={"50%"}
+            left={"50%"}
+            transform={"translate(-50%, -50%)"}
+            display={"flex"}
+            bg={"red"}
+            borderRadius={"100%"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            w={16}
+            h={16}
+          >
+            <Icon as={FaPlay} boxSize={25} color={"white"} />
+          </Box>
+        </Link>
+      </Box>
+      <Text variant={"smallTitle"} color={"text"}>
+        {data.title}
+      </Text>
+
+      <Text>{data.date}</Text>
+    </VStack>
   );
 };
