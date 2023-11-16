@@ -46,7 +46,7 @@ export const Line: FC<Types> = ({
       >
         {filter.map((tags, i) => {
           return (
-            <VStack w="full" alignItems={"start"}>
+            <VStack w="full" alignItems={"start"} key={i}>
               <Button
                 key={i}
                 p={0}

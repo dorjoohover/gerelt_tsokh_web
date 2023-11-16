@@ -35,7 +35,7 @@ const CustomAccordian = ({ data }: { data: AccordionType[] }) => {
     <Accordion w={"full"} allowToggle>
       {data.map((d, i) => {
         return (
-          <AccordionItem borderColor={"prime.default"}>
+          <AccordionItem borderColor={"prime.default"} key={i}>
             <AccordionButton
               onClick={() => {
                 if(active == i) {
