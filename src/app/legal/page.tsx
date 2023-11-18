@@ -90,7 +90,7 @@ const LegalPage = () => {
           selected != null ? (
             <LegalDetailWidget data={selected} />
           ) : (
-            <VStack w={"full"} alignItems={"start"} gap={{ lg: 78, base: 10 }}>
+            <VStack w={"full"} alignItems={"start"} gap={4}>
               {data?.map((d, i) => {
                 return (
                   <VStack w={"full"} alignItems={"start"} key={i}>
@@ -103,7 +103,7 @@ const LegalPage = () => {
                       bg={"none"}
                       p={0}
                     >
-                      <Text textDecor={"underline"}> {d.title}</Text>
+                      <Text textDecor={"underline"} textAlign={'start'}> {d.title}</Text>
                     </Button>
                   </VStack>
                 );

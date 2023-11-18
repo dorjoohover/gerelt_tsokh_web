@@ -188,7 +188,7 @@ const TokhiruulgaPage = () => {
         );
       case TokhiruulgaTypes.legal:
         return (
-          <VStack w={"full"} alignItems={"start"} gap={{ lg: 78, base: 10 }}>
+          <VStack w={"full"} alignItems={"start"} gap={4}>
             {data?.map((d, i) => {
               let v = d as LegalModel;
               return (

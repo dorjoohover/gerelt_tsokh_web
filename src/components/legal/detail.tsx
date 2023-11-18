@@ -10,7 +10,7 @@ import { LegalModel } from "@/model/legal.model";
 
 const LegalDetailWidget = ({ data }: { data: LegalModel }) => {
   return (
-    <VStack alignItems={"start"} w={"full"} gap={5}>
+    <VStack alignItems={"start"} w={"full"} gap={4}>
       <Text variant={"smallTitle"}  color={"text"}>
         {data.title.toUpperCase()}
       </Text>
