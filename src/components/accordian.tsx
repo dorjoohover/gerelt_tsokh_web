@@ -54,14 +54,13 @@ const CustomAccordian = ({ data }: { data: AccordionType[] }) => {
                     <AddIcon color={"prime.default"} />
                   </Box>
                   <Box
-                    as="span"
+                   
                     flex="1"
                     textAlign="left"
                     ml={8}
-                    fontSize={20}
-                    fontWeight={"bold"}
+                   
                   >
-                    {d.title}
+                    <Text variant={'smallTitle'} color={'text'}>{d.title}</Text>
                   </Box>
                 </AccordionButton>
 

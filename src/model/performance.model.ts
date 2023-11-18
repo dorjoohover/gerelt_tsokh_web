@@ -23,9 +23,11 @@ export  interface PerformanceModel {
 	employeeWarning?: PerformanceFunctionDetail[],
 	employerWarning?: PerformanceFunctionDetail[],
 
-	functions: PerformanceFunction[]
+	functions?: PerformanceFunction[]
     setup?: PerformanceFunction[],
-    other?: PerformanceFunction[],
+    key?: PerformanceFunction[],
+    space?: PerformanceFunctionDetail[],
+    trigger?: PerformanceFunctionDetail[],
     condition?: PerformanceFunction,
 
 }

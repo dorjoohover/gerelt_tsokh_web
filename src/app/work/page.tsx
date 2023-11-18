@@ -61,7 +61,7 @@ const WorkPage = () => {
       setSelected(null);
     }
   }, [params]);
-  const router = useRouter();
+
 
   return (
     <VStackContainer>
@@ -119,7 +119,7 @@ const WorkPage = () => {
         page={page}
         type={type}
         value={value}
-        length={selected ? 1 : length}
+        length={selected ? 1 : dataCount}
         changePage={(value) => setPage(value)}
         changeType={(value) => {
        

@@ -1,6 +1,7 @@
 import {
   ArticleTypes,
   InfoTypes,
+  LegalTypes,
   PerformanceTypes,
   TokhiruulgaTypes,
   WorkTypes,
@@ -143,10 +144,86 @@ export const tokhiruulgaTags: FilterType[] = [
   {
     name: hotTopics,
     value: TokhiruulgaTypes.topic,
+    sub: [
+      {
+        name: "A-Б хооронд",
+        value: PerformanceTypes.ab,
+      },
+      {
+        name: "В-Г хооронд",
+        value: PerformanceTypes.vg,
+      },
+      {
+        name: "Д-Е хооронд",
+        value: PerformanceTypes.de,
+      },
+      {
+        name: "Ё-Ж хооронд",
+        value: PerformanceTypes.ej,
+      },
+      {
+        name: "З-И хооронд",
+        value: PerformanceTypes.zi,
+      },
+      {
+        name: "К-Л хооронд",
+        value: PerformanceTypes.kl,
+      },
+      {
+        name: "М-Н хооронд",
+        value: PerformanceTypes.mn,
+      },
+      {
+        name: "О-Ө хооронд",
+        value: PerformanceTypes.ou,
+      },
+      {
+        name: "П-Р хооронд",
+        value: PerformanceTypes.pr,
+      },
+      {
+        name: "С-Т хооронд",
+        value: PerformanceTypes.st,
+      },
+      {
+        name: "У-Ү хооронд",
+        value: PerformanceTypes.uv,
+      },
+      {
+        name: "Ф-Х хооронд",
+        value: PerformanceTypes.ph,
+      },
+      {
+        name: "Ц-Ч хооронд",
+        value: PerformanceTypes.tsch,
+      },
+      {
+        name: "Ш-Щ хооронд",
+        value: PerformanceTypes.shshch,
+      },
+      {
+        name: "Э-Я хооронд",
+        value: PerformanceTypes.ey,
+      },
+    ],
   },
   {
     name: legalInfo,
     value: TokhiruulgaTypes.legal,
+    sub: [
+      {
+        name: "Хууль",
+        value: LegalTypes.law
+      },
+      {
+        name: "Тогтоол",
+        value: LegalTypes.decree
+      },
+      {
+        name: "Журам",
+        value: LegalTypes.regulation
+      },
+    ],
   },
   {
     name: additionLearningAdvice,

@@ -102,7 +102,7 @@ export const Line: FC<Types> = ({
                   )}
                 </HStack>
               </Button>
-              {tags.sub && active && (
+              {tags.sub && active && tags.value == type && (
                 <VStack w="full" alignItems={"start"} pl={16}>
                   {tags.sub.map((e, index) => {
                     return (

@@ -48,7 +48,7 @@ export const LinkTitle: FC<Types> = ({
             >{`${
               detail
                 ? detail.length > 30
-                  ? `${detail.substring(0, 47)}...`
+                  ? `${detail.substring(0, 37)}...`
                   : detail
                 : ""
             } `}</Text>
@@ -61,7 +61,7 @@ export const LinkTitle: FC<Types> = ({
             >{`${
               name
                 ? name.length > 30
-                  ? `${name.substring(0, 47)}...`
+                  ? `${name.substring(0, 37)}...`
                   : name
                 : ""
             } `}</Text>

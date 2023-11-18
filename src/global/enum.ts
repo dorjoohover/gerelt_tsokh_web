@@ -48,3 +48,26 @@ export enum PerformanceTypes {
   shshch = "shshch",
   ey = "ey",
 }
+export enum TopicTypes {
+  ab = "ab",
+  vg = "vg",
+  de = "de",
+  ej = "ej",
+  zi = "zi",
+  kl = "kl",
+  mn = "mn",
+  ou = "ou",
+  pr = "pr",
+  st = "st",
+  uv = "uv",
+  ph = "ph",
+  tsch = "tsch",
+  shshch = "shshch",
+  ey = "ey",
+}
+export enum LegalTypes {
+  law = "law",
+  decree = "decree",
+  regulation = "regulation",
+
+}

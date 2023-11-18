@@ -107,10 +107,43 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
           },
           
           {
-            title: "Боломжит тохируулгууд \nАжил үүргийн функцээр",
+            title: data.space != undefined ? "Амрах хувийн орон зай" : "",
             child: (
               <VStack w={"full"} alignItems={"start"} gap={8}>
-                {data.functions.map((fun, index) => {
+                {data.space?.map((fun, index) => {
+                  return (
+                    <VStack key={index} w={"full"} alignItems={"start"} gap={4}>
+                      <Text >{fun.title}</Text>
+                      {fun.text &&  <Text>{fun.text}</Text>}
+
+                    </VStack>
+                  );
+                })}
+              </VStack>
+            ),
+          },
+          {
+            title: data.trigger != undefined ? "Сэдрээгч хүчин зүйлсийг илрүүлж багасгах" : "",
+            child: (
+              <VStack w={"full"} alignItems={"start"} gap={8}>
+                {data.trigger?.map((fun, index) => {
+                  return (
+                    <VStack key={index} w={"full"} alignItems={"start"} gap={4}>
+                      <Text >{fun.title}</Text>
+                     {fun.text &&  <Text>{fun.text}</Text>}
+
+                    </VStack>
+                  );
+                })}
+              </VStack>
+            ),
+          },
+          
+          {
+            title: data.functions != undefined ? "Боломжит тохируулгууд \nАжил үүргийн функцээр" : "",
+            child: (
+              <VStack w={"full"} alignItems={"start"} gap={8}>
+                {data.functions?.map((fun, index) => {
                   return (
                     <VStack key={index} w={"full"} alignItems={"start"} gap={4}>
                       <Text>{fun.title}</Text>
@@ -134,12 +167,12 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
           },
           {
             title:
-              data.other != undefined
-                ? "Бусад боломжит хувилбар "
+              data.key != undefined
+                ? "Түлхүү хэрэглэгддэг тохируулгууд:"
                 : "",
             child: (
               <VStack w={"full"} alignItems={"start"} gap={8}>
-                {data.other?.map((fun, index) => {
+                {data.key?.map((fun, index) => {
                   return (
                     <VStack key={index} w={"full"} alignItems={"start"} gap={4}>
                       <Text>{fun.title}</Text>

@@ -34,6 +34,10 @@ import {
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState, ReactNode } from "react";
+import { LegalModel } from "@/model/legal.model";
+import { legalData } from "@/data/legal.data";
+import { TopicModel } from "@/model/topic.model";
+import { topicData } from "@/data/topic.data";
 
 const TokhiruulgaPage = () => {
   const params = useSearchParams();
@@ -45,6 +49,8 @@ const TokhiruulgaPage = () => {
   const [value, setValue] = useState("");
   const [sub, setSub] = useState<number | null>();
   const [selected, setSelected] = useState<any | null>(null);
+  const [dataCount, setDataCount] = useState<number>(0);
+  const [limit, setLimit] = useState<number>(5)
   const getData = async () => {
     try {
       switch (type) {
@@ -52,10 +58,37 @@ const TokhiruulgaPage = () => {
           let filtered = performanceData.filter(
             (d) => d.type == tokhiruulgaTags[3].sub![sub!].value
           );
+          setLimit(10)
 
           setData(
             filtered.filter((d, i) => i >= page * 10 && i < (page + 1) * 10)
           );
+          setDataCount(filtered.length ?? 0);
+          break;
+        case TokhiruulgaTypes.legal:
+          let filteredLegal = legalData.filter(
+            (d) => d.type == tokhiruulgaTags[5].sub![sub!].value
+          );
+
+          setLimit(filteredLegal.length == 0 ? 5 : filteredLegal.length);
+          setData(
+            filteredLegal
+          );
+          setDataCount(filteredLegal.length ?? 0);
+          break;
+        case TokhiruulgaTypes.topic:
+          let filteredTopic = topicData.filter(
+            (d) => d.type == tokhiruulgaTags[4].sub![sub!].value
+          );
+
+          setLimit(filteredTopic.length == 0 ? 10 : filteredTopic.length);
+          setData(
+            filteredTopic.filter(
+              (d, i) => i >= page * 10 && i < (page + 1) * 10
+            )
+          );
+          setDataCount(filteredTopic.length ?? 0);
+          break;
       }
     } catch (error) {}
   };
@@ -102,12 +135,7 @@ const TokhiruulgaPage = () => {
             uri={overviewValues.uri}
           />
         );
-      case TokhiruulgaTypes.notice:
-        return (
-          <VStack w={"full"}>
-            <Text>{noticeValues}</Text>
-          </VStack>
-        );
+
       case TokhiruulgaTypes.performance:
         return (
           <VStack w={"full"} alignItems={"start"} gap={{ lg: 78, base: 10 }}>
@@ -124,6 +152,43 @@ const TokhiruulgaPage = () => {
                   </Text>
                   <Link href={`/${type}?id=${v._id}`}>
                     <Text textDecor={"underline"}>{more}</Text>
+                  </Link>
+                </VStack>
+              );
+            })}
+          </VStack>
+        );
+      case TokhiruulgaTypes.topic:
+        return (
+          <VStack w={"full"} alignItems={"start"} gap={{ lg: 78, base: 10 }}>
+            {data?.map((d, i) => {
+              let v = d as TopicModel;
+              return (
+                <VStack w={"full"} alignItems={"start"} key={i}>
+                  <Text variant={"title"} color={"text"}>
+                    {v.title}
+                  </Text>
+
+                  <Text mb={{ md: 0, base: 4 }} noOfLines={{ md: 3, base: 4 }}>
+                    {v.text}
+                  </Text>
+                  <Link href={`/${type}?id=${v._id}`}>
+                    <Text textDecor={"underline"}>{more}</Text>
+                  </Link>
+                </VStack>
+              );
+            })}
+          </VStack>
+        );
+      case TokhiruulgaTypes.legal:
+        return (
+          <VStack w={"full"} alignItems={"start"} gap={{ lg: 78, base: 10 }}>
+            {data?.map((d, i) => {
+              let v = d as LegalModel;
+              return (
+                <VStack w={"full"} alignItems={"start"} key={i}>
+                  <Link href={`/${type}?id=${v._id}`}>
+                    <Text textDecor={"underline"}>{v.title}</Text>
                   </Link>
                 </VStack>
               );
@@ -272,11 +337,11 @@ const TokhiruulgaPage = () => {
       <Line
         child={changePage()}
         filter={tokhiruulgaTags}
-        limit={5}
+        limit={limit}
         page={page}
         type={type}
         value={value}
-        length={selected || data?.length < 1 ? 1 : 10}
+        length={selected || data?.length < 1 ? 1 : dataCount}
         changePage={(value) => setPage(value)}
         changeType={(value, s) => {
           setType(value);
