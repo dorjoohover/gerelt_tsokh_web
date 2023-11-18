@@ -34,40 +34,44 @@ const CustomAccordian = ({ data }: { data: AccordionType[] }) => {
   return (
     <Accordion w={"full"} allowToggle>
       {data.map((d, i) => {
-        return (
-          <AccordionItem borderColor={"prime.default"} key={i}>
-            <AccordionButton
-              onClick={() => {
-                if(active == i) {
-                  setActive(null);
-                } else {
-                  setActive(i);
-                }
-              }}
-            >
-              <Box
-                as={motion.div}
-                animation={active == i ? animationInitial : animation}
-              >
-                <AddIcon color={"prime.default"} />
-              </Box>
-              <Box
-                as="span"
-                flex="1"
-                textAlign="left"
-                ml={8}
-                fontSize={20}
-                fontWeight={"bold"}
-              >
-                {d.title}
-              </Box>
-            </AccordionButton>
+        {
+          return (
+            d.title != "" && (
+              <AccordionItem borderColor={"prime.default"} key={i}>
+                <AccordionButton
+                  onClick={() => {
+                    if (active == i) {
+                      setActive(null);
+                    } else {
+                      setActive(i);
+                    }
+                  }}
+                >
+                  <Box
+                    as={motion.div}
+                    animation={active == i ? animationInitial : animation}
+                  >
+                    <AddIcon color={"prime.default"} />
+                  </Box>
+                  <Box
+                    as="span"
+                    flex="1"
+                    textAlign="left"
+                    ml={8}
+                    fontSize={20}
+                    fontWeight={"bold"}
+                  >
+                    {d.title}
+                  </Box>
+                </AccordionButton>
 
-            <AccordionPanel pb={4}>
-            {d.child ?? <Text>хоосон</Text>}
-            </AccordionPanel>
-          </AccordionItem>
-        );
+                <AccordionPanel pb={4}>
+                  {d.child ?? <Text>хоосон</Text>}
+                </AccordionPanel>
+              </AccordionItem>
+            )
+          );
+        }
       })}
     </Accordion>
   );

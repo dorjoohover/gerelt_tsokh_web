@@ -3,6 +3,11 @@ const assets = '/assets/'
 const img = `${assets}img/`
 const info = `${img}info/`
 const partner = `${img}partner/`
+const about = `${img}about/`
+const doneWork = `${img}doneWork/`
+const article = `${img}article/`
+
+
 
 // svg
 const svg = `${assets}svg/`
@@ -14,7 +19,43 @@ export const imgLogo = `${assets}logo.png`
 export const imgLogoWhite = `${assets}logo white.png`
 export const imgGereltTsokh = `${img}gerelt_tsokh.png`
 export const imgTokhiruulga = `${img}tokhiruulga.png`
-export const imgFoundation = `${img}foundation.png`
+
+
+
+
+// about
+export const imgGratitude = `${about}gratidude.jpg`
+export const imgFoundation = `${about}foundation.jpg`
+export const imgDoneProject = `${about}doneProject.jpg`
+export const imgDoneProject1 = `${about}doneProject1.jpg`
+export const imgDoneProject2 = `${about}doneProject2.jpg`
+export const imgDoneResearch = `${about}doneProject2.jpg`
+export const imgDoneScholarship = `${about}doneScholarship.jpg`
+export const imgFoundation1 = `${about}foundation1.jpg`
+
+// done work
+export const imgDoneWork1 = `${doneWork}1.jpg`
+export const imgDoneWork2 = `${doneWork}2.jpg`
+export const imgDoneWork3 = `${doneWork}3.jpg`
+export const imgDoneWork4 = `${doneWork}4.jpg`
+export const imgDoneWork5 = `${doneWork}5.jpg`
+export const imgDoneWork6 = `${doneWork}6.jpg`
+export const imgDoneWork7 = `${doneWork}7.jpg`
+export const imgDoneWork8 = `${doneWork}8.jpg`
+export const imgDoneWork9 = `${doneWork}9.jpg`
+export const imgDoneWork10 = `${doneWork}10.jpg`
+// article
+export const imgArticle1 = `${article}1.jpg`
+export const imgArticle2 = `${article}2.jpg`
+export const imgArticle3 = `${article}3.jpg`
+export const imgArticle4 = `${article}4.jpg`
+export const imgArticle5 = `${article}5.jpg`
+export const imgArticle6 = `${article}6.jpg`
+export const imgArticle7 = `${article}7.jpg`
+export const imgArticle8 = `${article}8.jpg`
+export const imgArticle9 = `${article}9.jpg`
+export const imgArticle10 = `${article}10.jpg`
+
 
 // header
 export const  imgHeader = `${img}header.png`
@@ -25,11 +66,11 @@ export const imgInfo = `${info}info.png`
 export const imgInfo1 = `${info}info1.png`
 
 // partner
-export const imgEULogo = `${partner}EU logo.png`
-export const imgGACLogo = `${partner}GAC logo.png`
-export const imgCCRLogo = `${partner}CCR logo.png`
+export const imgEULogo = `${partner}EU.png`
+export const imgGACLogo = `${partner}GAC.png`
+export const imgCCRLogo = `${partner}CCR.png`
 export const imgMONESLogo = `${partner}MONES.png`
-export const imgTAFLogo = `${partner}TAF logo.png`
+export const imgTAFLogo = `${partner}TAF.png`
 
 
 

@@ -22,7 +22,7 @@ import {
   tokhiruulgaMn,
   watchOtherArticle,
 } from "@/global/string";
-import { additionInfoValues, partnerValues } from "@/global/values";
+import { additionInfoValues, partnerValues } from "@/values/values";
 import {
   Box,
   Button,
@@ -299,7 +299,6 @@ export default function Home() {
         <Grid
           gridTemplateColumns={{
             md: "repeat(5, 1fr)",
-            
             base: "repeat(1, 1fr)",
           }}
           gap={{
@@ -307,6 +306,7 @@ export default function Home() {
        
           }}
           w={"full"}
+        
           alignItems={"center"}
         >
           {partnerValues.map((partner, index) => {
@@ -325,6 +325,7 @@ export default function Home() {
                   base:
                     index != partnerValues.length - 1 ? "1px solid aqua" : "",
                 }}
+                py={{base: 6}}
                 borderColor={{
                   md: "none",
                   base: "prime.default",
@@ -333,8 +334,9 @@ export default function Home() {
                 alignItems={"center"}
                 justifyContent={"center"}
                 key={index}
+             
               >
-                <Image src={partner} key={index} mx={"auto"} />
+                <Image src={partner} key={index} mx={"auto"}  h={'100%'}/>
               </GridItem>
             );
           })}

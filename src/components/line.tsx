@@ -4,6 +4,7 @@ import { FilterType } from "@/global/functions";
 
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { Box, Button, HStack, Select, Text, VStack } from "@chakra-ui/react";
+import { usePathname, useRouter,  } from "next/navigation";
 import { FC, ReactNode, useState } from "react";
 
 type Types = {
@@ -31,9 +32,13 @@ export const Line: FC<Types> = ({
   changeType,
   changeSub = () => {},
   filter,
+
   limit = 5,
 }) => {
   const [active, setActive] = useState<number | null>();
+  const router = useRouter();
+
+  const pathname = usePathname();
 
   return (
     <HStack w={"full"} alignItems={"start"}>
@@ -54,7 +59,11 @@ export const Line: FC<Types> = ({
                 w={"full"}
                 bg={"transparent"}
                 textTransform={"none"}
-                onClick={() => {
+                onClick={(e) => {
+
+                  router.refresh();
+                  router.push(`${pathname}?name=${tags.value}`);
+
                   changeType(tags.value, tags.sub != undefined);
                   if (tags.sub != undefined) {
                     if (active == i) {

@@ -1,7 +1,7 @@
 "use client";
 import { imgLogo, svgCancel, svgMenu, svgSearch } from "@/global/assets";
 import { gereltTokh, menu, navText, tokhiruulga } from "@/global/string";
-import { gereltNavValues, tokhiruulgaNavValues } from "@/global/values";
+import { gereltNavValues, tokhiruulgaNavValues } from "@/values/navbar.value";
 import { CloseIcon } from "@chakra-ui/icons";
 import {
   Box,

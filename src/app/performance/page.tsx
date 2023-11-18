@@ -10,11 +10,11 @@ import { PerformanceTypes } from "@/global/enum";
 
 import { filterName } from "@/global/functions";
 import { more, performance, tokhiruulga, tokhiruulgaMn } from "@/global/string";
-import { tokhiruulgaTags } from "@/global/values";
+import { tokhiruulgaTags } from "@/values/tags";
 import { PerformanceModel } from "@/model/performance.model";
 
 import { Button, HStack, Text, VStack } from "@chakra-ui/react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const PerformancePage = () => {
@@ -23,10 +23,12 @@ const PerformancePage = () => {
   const [type, setType] = useState<PerformanceTypes>(PerformanceTypes.ab);
   const [data, setData] = useState<PerformanceModel[]>([]);
   const [value, setValue] = useState("");
+  const [dataCount, setCount] = useState<number>(0);
   const [selected, setSelected] = useState<PerformanceModel | null>(null);
-  const getData = async () => {
+  const getData = async (t: PerformanceTypes) => {
     try {
-      let filtered = performanceData.filter((d) => d.type == type);
+      let filtered = performanceData.filter((d) => d.type == t);
+      setCount(filtered.length);
       setData(filtered.filter((d, i) => i >= page * 10 && i < (page + 1) * 10));
     } catch (error) {}
   };
@@ -40,6 +42,7 @@ const PerformancePage = () => {
       }
     } catch (error) {}
   };
+
   useEffect(() => {
     if (params.get("name")) {
       let name: any = params.get("name") as keyof typeof PerformanceTypes;
@@ -48,20 +51,23 @@ const PerformancePage = () => {
     }
   }, []);
   useEffect(() => {
-    getData();
-    setValue(filterName(type, tokhiruulgaTags[3].sub!));
-  }, [type, page]);
+    getData(type);
+  }, [page]);
   useEffect(() => {
     if (params.get("id") != undefined) {
       getDataById(params.get("id")!);
+      
     }
     if (params.get("name")) {
       let name: any = params.get("name") as keyof typeof PerformanceTypes;
       setType(name ?? PerformanceTypes.ab);
       setValue(filterName(name, tokhiruulgaTags[3].sub!));
+      setPage(0);
+      getData(name);
+      setSelected(null);
     }
   }, [params]);
-
+  const router = useRouter()
   return (
     <VStackContainer>
       <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
@@ -94,9 +100,12 @@ const PerformancePage = () => {
                       {d.text}
                     </Text>
                     <Button
-                      onClick={() => getDataById(d._id)}
+                      onClick={() => {
+                        getDataById(d._id)
+                        router.push(`/performance?id=${d._id}`)
+                      }}
                       _hover={{ bg: "none" }}
-                      bg={'none'}
+                      bg={"none"}
                       p={0}
                     >
                       <Text textDecor={"underline"}>{more}</Text>
@@ -112,13 +121,9 @@ const PerformancePage = () => {
         page={page}
         type={type}
         value={value}
-        length={selected ? 1 : 10}
+        length={selected ? 1 : dataCount}
         changePage={(value) => setPage(value)}
-        changeType={(value) => {
-          setType(value);
-          setPage(0);
-          setSelected(null);
-        }}
+        changeType={(value) => {}}
         changeSub={() => {}}
       />
     </VStackContainer>

@@ -6,7 +6,7 @@ const Text = defineStyleConfig({
     textTransform: "none",
     color:'text',
     fontSize: '20px',
-    whiteSpace:'pre-line'
+    whiteSpace:'pre-wrap'
   },
   variants: {
     display: {

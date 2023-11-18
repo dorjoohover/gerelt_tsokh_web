@@ -19,7 +19,7 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
       <VStack w={"full"} alignItems={{ base: "start", md: "center" }}>
         <Text>{data.text}</Text>
       </VStack>
-      <OrderedList ml={6}>
+      {/* <OrderedList ml={6}>
         {data.questions?.map((question, index) => {
           return (
             <ListItem fontSize={20} py={4} color={"text"} pl={10} key={index}>
@@ -27,14 +27,87 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
             </ListItem>
           );
         })}
-      </OrderedList>
+      </OrderedList> */}
       <CustomAccordian
         data={[
+          
           {
-            title: "Боломжит тохируулгууд",
+            title:
+              data.employerWarning != undefined
+                ? "Ажилтанд өгөх бяцхан санамжууд"
+                : "",
+            child: (
+              <VStack w={"full"} alignItems={"start"} gap={4}>
+                <UnorderedList>
+                  {data.employerWarning?.map((detail, i) => {
+                    return (
+                      <ListItem py={4} pl={10} color={"text"} key={i}>
+                        <VStack alignItems={"start"}>
+                          <Text color={"blue"}>{detail.title}</Text>
+                          {detail.text && <Text>{detail.text}</Text>}
+                        </VStack>
+                      </ListItem>
+                    );
+                  })}
+                </UnorderedList>
+              </VStack>
+            ),
           },
           {
-            title: "Ажил үүргийн функцээр",
+            title:
+              data.employerWarning != undefined
+                ? "Ажил олгогчид өгөх бяцхан санамжууд"
+                : "",
+            child: (
+              <VStack w={"full"} alignItems={"start"} gap={4}>
+                <UnorderedList>
+                  {data.employerWarning?.map((detail, i) => {
+                    return (
+                      <ListItem py={4} pl={10} color={"text"} key={i}>
+                        <VStack alignItems={"start"}>
+                          <Text color={"blue"}>{detail.title}</Text>
+                          {detail.text && <Text>{detail.text}</Text>}
+                        </VStack>
+                      </ListItem>
+                    );
+                  })}
+                </UnorderedList>
+              </VStack>
+            ),
+          },
+          {
+            title:
+              data.setup != undefined
+                ? "Гол тохируулгууд "
+                : "",
+            child: (
+              <VStack w={"full"} alignItems={"start"} gap={8}>
+                {data.setup?.map((fun, index) => {
+                  return (
+                    <VStack key={index} w={"full"} alignItems={"start"} gap={4}>
+                      <Text>{fun.title}</Text>
+                      <UnorderedList>
+                        {fun.details.map((detail, i) => {
+                          return (
+                            <ListItem py={4} pl={10} color={"text"} key={i}>
+                              <VStack alignItems={"start"}>
+                                <Text color={"blue"}>{detail.title}</Text>
+                                {detail.text && <Text>{detail.text}</Text>}
+                              </VStack>
+                            </ListItem>
+                          );
+                        })}
+                      </UnorderedList>
+                    </VStack>
+                  );
+                })}
+              </VStack>
+
+            ),
+          },
+          
+          {
+            title: "Боломжит тохируулгууд \nАжил үүргийн функцээр",
             child: (
               <VStack w={"full"} alignItems={"start"} gap={8}>
                 {data.functions.map((fun, index) => {
@@ -44,12 +117,10 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
                       <UnorderedList>
                         {fun.details.map((detail, i) => {
                           return (
-                            <ListItem py={4} pl={10} color={'text'} key={i}>
+                            <ListItem py={4} pl={10} color={"text"} key={i}>
                               <VStack alignItems={"start"}>
                                 <Text color={"blue"}>{detail.title}</Text>
-                                {detail.text && (
-                                  <Text >{detail.text}</Text>
-                                )}
+                                {detail.text && <Text>{detail.text}</Text>}
                               </VStack>
                             </ListItem>
                           );
@@ -62,7 +133,54 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
             ),
           },
           {
-            title: "Нөхцөл ба Шийдэл",
+            title:
+              data.other != undefined
+                ? "Бусад боломжит хувилбар "
+                : "",
+            child: (
+              <VStack w={"full"} alignItems={"start"} gap={8}>
+                {data.other?.map((fun, index) => {
+                  return (
+                    <VStack key={index} w={"full"} alignItems={"start"} gap={4}>
+                      <Text>{fun.title}</Text>
+                      <UnorderedList>
+                        {fun.details.map((detail, i) => {
+                          return (
+                            <ListItem py={4} pl={10} color={"text"} key={i}>
+                              <VStack alignItems={"start"}>
+                                <Text color={"blue"}>{detail.title}</Text>
+                                {detail.text && <Text>{detail.text}</Text>}
+                              </VStack>
+                            </ListItem>
+                          );
+                        })}
+                      </UnorderedList>
+                    </VStack>
+                  );
+                })}
+              </VStack>
+
+            ),
+          },
+          {
+            title: data.condition != undefined ? "Нөхцөл ба Шийдэл" : '',
+            child: (
+              <VStack  w={"full"} alignItems={"start"} gap={4}>
+                      <Text>{data.condition?.title}</Text>
+                      <UnorderedList>
+                        {data.condition?.details?.map((detail, i) => {
+                          return (
+                            <ListItem py={4} pl={10} color={"text"} key={i}>
+                              <VStack alignItems={"start"}>
+                                {/* <Text color={"blue"}>{detail.title}</Text> */}
+                                {detail.text && <Text>{detail.text}</Text>}
+                              </VStack>
+                            </ListItem>
+                          );
+                        })}
+                      </UnorderedList>
+                    </VStack>
+            )
           },
         ]}
       />

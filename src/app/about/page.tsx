@@ -1,5 +1,6 @@
 import { RoundedCard } from "@/components/card";
 import { VStackContainer } from "@/components/container";
+
 import {
   aboutUs,
   directionActivity,
@@ -14,7 +15,7 @@ import {
   missionValue,
   valuableValues,
   visionValue,
-} from "@/global/values";
+} from "@/values/values";
 import {
   Box,
   Center,
@@ -78,27 +79,21 @@ export default function About() {
       >
         {foundationHistory}
       </Text>
-
-      <Box w={"full"}>
-        <HStack w={"full"} alignItems={"start"} mb={10} flexDir={{md: 'row', base: 'column'}}>
-         
-          <Box w={{md: "50%", base: '100%'}}>
-            <Text variant={"smallTitle"} color={"text"} mb={{md: 8, base: 4}}>
-              {foundationHistoryValue.title}
-            </Text>
-            {foundationHistoryValue.semiTitle && (
-              <Text mb={{md: 12, base: 4}} fontStyle={"italic"}>
-                {foundationHistoryValue.semiTitle}
-              </Text>
-            )}
-            <Text >{foundationHistoryValue.text}</Text>
-          </Box>
-          <Box w={{md: "50%", base: '100%'}} ml={{ md: 10 }} mt={{md: 0, base: 8}} >
-            <Image src={foundationHistoryValue.img} />
-          </Box>
-        </HStack>
-
-        <Text>{foundationHistoryValue.text1}</Text>
+      <Box w={"full"} alignItems={"start"} fontSize={"20px"} color={"text"}>
+        <Box
+          w={{ md: "50%", base: "100%" }}
+          ml={{ md: 10, base: 0 }}
+          float={"right"}
+        >
+          <Image src={foundationHistoryValue.img} alt={""} />
+        </Box>
+        <Text variant={"smallTitle"} color={"text"} mb={{ md: 8, base: 4 }}>
+          {foundationHistoryValue.title}
+        </Text>
+        <Text mb={{ md: 12, base: 4 }} fontStyle={"italic"}>
+          {foundationHistoryValue.semiTitle}
+        </Text>
+        <Text as={"span"}>{foundationHistoryValue.text}</Text>
       </Box>
     </VStackContainer>
   );

@@ -1,9 +1,9 @@
 import { copyrightFooter, gereltTokh, tokhiruulga } from "@/global/string";
 import { Box, HStack, Icon, Text, VStack } from "@chakra-ui/react";
 import { HStackContainer } from "./container";
-import { socials, tokhiruulgaNavValues } from "@/global/values";
+import { tokhiruulgaNavValues } from "@/values/navbar.value";
+import { socials } from "@/values/values";
 import Link from "next/link";
-
 
 const Footer = () => {
   return (
@@ -19,9 +19,12 @@ const Footer = () => {
           <Text color={"white"} variant={"normal"} fontWeight={"bold"}>
             {gereltTokh}
           </Text>
-          <Text color={"white"} variant={"normal"}>
-            gerelt.tsokhb@tokhiruulga.mn
-          </Text>
+          <Link href={"mailto: gerelt.tsokhb@tokhiruulga.mn"} target="_blank">
+            <Text color={"white"} variant={"normal"}>
+              {" "}
+              gerelt.tsokhb@tokhiruulga.mn
+            </Text>
+          </Link>
         </VStack>
         <VStack w={"full"} flex={1} alignItems={"start"} gap={{ md: 10 }}>
           <Text color={"white"} variant={"normal"} fontWeight={"bold"}>
@@ -65,9 +68,16 @@ const Footer = () => {
         <HStack gap={1}>
           {socials.map((social, i) => {
             return (
-              <Link href={social.uri} key={i}>
-                
-                <Box display={'flex'} justifyContent={'center'} bg={'prime.default'} alignItems={'center'} w={6} h={6} borderRadius={8}>
+              <Link href={social.uri} target="_blank" key={i}>
+                <Box
+                  display={"flex"}
+                  justifyContent={"center"}
+                  bg={"prime.default"}
+                  alignItems={"center"}
+                  w={6}
+                  h={6}
+                  borderRadius={8}
+                >
                   <Icon as={social.icon} boxSize={4} color={"white"} />
                 </Box>
               </Link>

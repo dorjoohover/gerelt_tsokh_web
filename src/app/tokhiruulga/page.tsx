@@ -17,8 +17,8 @@ import {
   gratitudeValues,
   noticeValues,
   overviewValues,
-  tokhiruulgaTags,
-} from "@/global/values";
+} from "@/values/values";
+import { tokhiruulgaTags } from "@/values/tags";
 import { PerformanceModel } from "@/model/performance.model";
 
 import {
@@ -49,7 +49,6 @@ const TokhiruulgaPage = () => {
     try {
       switch (type) {
         case TokhiruulgaTypes.performance:
-        
           let filtered = performanceData.filter(
             (d) => d.type == tokhiruulgaTags[3].sub![sub!].value
           );
@@ -68,7 +67,7 @@ const TokhiruulgaPage = () => {
     }
   }, []);
   useEffect(() => {
-    getData()
+    getData();
     setValue(filterName(type, tokhiruulgaTags));
   }, [type, page]);
   useEffect(() => {

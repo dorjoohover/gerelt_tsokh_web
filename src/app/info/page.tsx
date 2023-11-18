@@ -7,7 +7,7 @@ import { additionInfoData } from "@/data/addition_info.data";
 import { InfoTypes } from "@/global/enum";
 import { filterName } from "@/global/functions";
 import { additionInfo } from "@/global/string";
-import { additionInfoTags } from "@/global/values";
+import { additionInfoTags } from "@/values/tags";
 import { Info } from "@/model/info.model";
 import { Grid, GridItem, HStack, SlideFade } from "@chakra-ui/react";
 import { useSearchParams } from "next/navigation";

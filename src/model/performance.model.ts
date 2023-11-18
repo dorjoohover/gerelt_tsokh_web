@@ -10,6 +10,7 @@ export interface PerformanceFunctionDetail {
 }
 
 export interface PerformanceFunction {
+    id?: number
     title: string
     details: PerformanceFunctionDetail[]
 }
@@ -19,8 +20,12 @@ export  interface PerformanceModel {
 	type: PerformanceTypes;
 	title: string;
 	text: string;
-	questions: PerformanceQuestion[],
+	employeeWarning?: PerformanceFunctionDetail[],
+	employerWarning?: PerformanceFunctionDetail[],
+
 	functions: PerformanceFunction[]
-    setup?: any,
-    condition?: any
+    setup?: PerformanceFunction[],
+    other?: PerformanceFunction[],
+    condition?: PerformanceFunction,
+
 }

@@ -8,7 +8,7 @@ import { articleData } from "@/data/article.data";
 import { ArticleTypes } from "@/global/enum";
 import { filterName } from "@/global/functions";
 import { article } from "@/global/string";
-import { articleTags } from "@/global/values";
+import { articleTags } from "@/values/tags";
 import { Article } from "@/model/article.model";
 import { HStack } from "@chakra-ui/react";
 import { useSearchParams } from "next/navigation";

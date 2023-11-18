@@ -1,4 +1,3 @@
-import { NavItemsTypes } from "@/components/navbar";
 import {
   imgCCRLogo,
   imgEULogo,
@@ -12,7 +11,7 @@ import {
   svgVideo,
   svgVoice,
   svgYt,
-} from "./assets";
+} from "../global/assets";
 import {
   ArticleTypes,
   FormTypes,
@@ -20,8 +19,8 @@ import {
   PerformanceTypes,
   TokhiruulgaTypes,
   WorkTypes,
-} from "./enum";
-import { FilterType } from "./functions";
+} from "../global/enum";
+import { FilterType } from "../global/functions";
 import {
   accessibleEmployment,
   additionLearningAdvice,
@@ -41,155 +40,13 @@ import {
   textInfo,
   videoInfo,
   voiceInfo,
-} from "./string";
-import { FaFacebookF, FaFacebookSquare, FaTwitter, FaYoutube } from "react-icons/fa";
-
-export const additionInfoTags: FilterType[] = [
-  {
-    name: "Текст мэдээллүүд",
-    value: InfoTypes.text,
-  },
-  {
-    name: "Дуут мэдээллүүд",
-    value: InfoTypes.voice,
-  },
-  {
-    name: "Дүрст мэдээллүүд",
-    value: InfoTypes.video,
-  },
-];
-export const articleTags: FilterType[] = [
-  {
-    name: "Нийтлэл",
-    value: ArticleTypes.article,
-  },
-  {
-    name: "Мэдээ",
-    value: ArticleTypes.info,
-  },
-];
-export const workTags: FilterType[] = [
-  {
-    name: "Судалгаа ",
-    value: WorkTypes.research,
-  },
-  {
-    name: "Сургалт ба зөвлөгөө үйлчилгээ ",
-    value: WorkTypes.advice,
-  },
-  {
-    name: "Төсөл",
-    value: WorkTypes.project,
-  },
-  {
-    name: "Тэтгэлэг ба хандив",
-    value: WorkTypes.donation,
-  },
-];
-export const tokhiruulgaTags: FilterType[] = [
-  {
-    name: gratitude,
-    value: TokhiruulgaTypes.gratitude,
-  },
-  {
-    name: overview,
-    value: TokhiruulgaTypes.overview,
-  },
-  {
-    name: copyrightNotice,
-    value: TokhiruulgaTypes.notice,
-  },
-  {
-    name: performance,
-    value: TokhiruulgaTypes.performance,
-    sub: [
-      {
-        name: "A-Б хооронд",
-        value: PerformanceTypes.ab,
-      },
-      {
-        name: "В-Г хооронд",
-        value: PerformanceTypes.vg,
-      },
-      {
-        name: "Д-Е хооронд",
-        value: PerformanceTypes.de,
-      },
-      {
-        name: "Ё-Ж хооронд",
-        value: PerformanceTypes.ej,
-      },
-      {
-        name: "З-И хооронд",
-        value: PerformanceTypes.zi,
-      },
-      {
-        name: "К-Л хооронд",
-        value: PerformanceTypes.kl,
-      },
-      {
-        name: "М-Н хооронд",
-        value: PerformanceTypes.mn,
-      },
-      {
-        name: "О-Ө хооронд",
-        value: PerformanceTypes.ou,
-      },
-      {
-        name: "П-Р хооронд",
-        value: PerformanceTypes.pr,
-      },
-      {
-        name: "С-Т хооронд",
-        value: PerformanceTypes.st,
-      },
-      {
-        name: "У-Ү хооронд",
-        value: PerformanceTypes.uv,
-      },
-      {
-        name: "Ф-Х хооронд",
-        value: PerformanceTypes.ph,
-      },
-      {
-        name: "Ц-Ч хооронд",
-        value: PerformanceTypes.tsch,
-      },
-      {
-        name: "Ш-Щ хооронд",
-        value: PerformanceTypes.shshch,
-      },
-      {
-        name: "Э-Я хооронд",
-        value: PerformanceTypes.ey,
-      },
-    ],
-  },
-  {
-    name: hotTopics,
-    value: TokhiruulgaTypes.topic,
-  },
-  {
-    name: legalInfo,
-    value: TokhiruulgaTypes.legal,
-  },
-  {
-    name: additionLearningAdvice,
-    value: TokhiruulgaTypes.advice,
-  },
-  {
-    name: supplier,
-    value: TokhiruulgaTypes.supplier,
-  },
-  {
-    name: feedback,
-    value: TokhiruulgaTypes.feedback,
-  },
-  {
-    name: contact,
-    value: TokhiruulgaTypes.contact,
-  },
-];
+} from "../global/string";
+import {
+  FaFacebookF,
+  FaFacebookSquare,
+  FaTwitter,
+  FaYoutube,
+} from "react-icons/fa";
 
 export const additionInfoValues = [
   {
@@ -222,12 +79,12 @@ export const visionValue =
   "Үйлдэл гүйцэтгэх чадвар алдалттай хүүхэд, залуучууд, насанд хүрэгсэд хараат бус бие даасан байдлаа нэмэгдүүлж, эрх чөлөөгөө олж авахад нь хөтөлнө.";
 
 export const missionValue =
-  "Бид суралцах болон хөдөлмөр эрхлэх үйл явцыг хүртээмжтэй болгоход тохируулга үйлчилгээг мэргэжлийн түвшинд цогцоор үзүүлдэг болоход хүчээ сорино. Олон улсын ангиллын аргачлалаар ажиллаж мэргэжлийн зөвлөх үйлчилгээгүйгээр хувь нэмрээ оруулна.\nХүртээмжтэйгээр суралцахуй болон хүртээмжтэйгээр хөдөлмөр эрхлэхүйн соёлыг нэвтрүүлэхийг бид эрмэлзэнэ.";
+  "Бид суралцах болон хөдөлмөр эрхлэх үйл явцыг хүртээмжтэй болгоход тохируулга үйлчилгээг мэргэжлийн түвшинд цогцоор үзүүлдэг болоход хүчээ сорино. Олон улсын ангиллын аргачлалаар ажиллаж мэргэжлийн зөвлөх үйлчилгээгүйгээр хувь нэмрээ оруулна.\n\nХүртээмжтэйгээр суралцахуй болон хүртээмжтэйгээр хөдөлмөр эрхлэхүйн соёлыг нэвтрүүлэхийг бид эрмэлзэнэ.";
 
 export const valuableValues = [
   {
     title: innovativeIdea,
-    text: "Асуудлыг шийдлийн хамт бодит амьдралаас олж харан зоригтойгоор шинийг санаачилна.",
+    text: "Асуудлыг шийдлийн хамт бодит амьдралаас олж харан зоригтойгоор шинийг санаачилна. ",
   },
   {
     title: consistent,
@@ -254,133 +111,8 @@ export const foundationHistoryValue = {
   title: "Гэрэлт Цох Байшин ТББ",
   semiTitle:
     "Ашгийн төлөө бус, гишүүнчлэлгүй, нийгэмд үйлчлэх иргэний нийгмийн нэг хэсэг",
-  text: "Аливаа бүхний эхлэл нь хүн учир байгууллагын түүхийг ч мөн үүсгэн байгуулагч нь эхлүүлэн бичсэн байх юм.\n Гэрэлт Цох Байшин ТББ-ыг санаачлагч Оюунтөгс гэх ид залуу насандаа харах чадварынхаа ерэн хувийг алдсан нэгэн бүсгүй амьдралын олон нугачааг бүрзгэр харанхуйн дунд давж яваа нэгэн билээ.\nОюун санааны эрх чөлөөгөө бүрэн шахуу алдсан амьдралынхаа дөрвөн жилийг нөхө гэсэн мэт хурдтай гүйсээр байгаа нь энэхүү байгууллагын үндэс суурь тавигдсантай холбоотой.\n Түүний амьдралын хоёр дах хуудас буюу шинэ амьдралаас нь эхлэн товч хүүрнэхэд харааны бэрхшээлтэй иргэдтэйгээ хамт хөл нийлүүлэн цагаан таягаар хөтөч хийн алхсан хоёр жил хагасын дотор үлдсэн амьдралдаа хүрэх зорилгоо тодорхойлсон учир онолын шинэлэг мэдлэг болон хувийн туршлагыг хослуулан өөрийгөө боловсруулах хэрэгтэйгээ байгаагаа олж харсан хэрэг.",
-  text1:
-    "Тийнхүү Fulbright тэтгэлэгт өрсөлдөх зориг хүрч олон хүний итгэлийг хүлээн шалгарснаар Монголдоо байдаггүй мэргэжил болох Certified Rehabilitation Counseling мэргэжлээр АНУ-д магистраа хамгаалж ирээд тун удалгүй Гэрэлт Цох Байшин-г байгуулсан.\n Хөгжлийн бэрхшээлийн нөхөн сэргээх зөвлөх мэргэжлээр цогц ойлголт авч хүн төвтэй аргачлалын нууцыг тайлсан тул бүх бэрхшээлт үр өгөөжтэй байхуйц хүрээнд хувь нэмрээ оруулахыг хүссэн юм.\n Онолын хөтөлбөрөөс гадна гурван төрлийн дадлага ажил хийсний нэг нь сэтгэцийн эмгэгтэй хүмүүсийн өөрсдийнх нь бодит амьдралаас үүсэн хөгжсөн ClubHouse нийгэм – сэтгэл зүйн нөхөн сэргээх цогц загвар, нөгөө нь суралцаж байсан их сургуулийнхаа хөгжлийн бэрхшээлтэй оюутнуудад тохируулга үйлчилгээ үзүүлдэг цогц мэргэжлийн төв харин гурав дах нь хөгжлийн бэрхшээлтэй иргэдийг ажилд зуучлах онол дадлага хосолсон аргачлал юм.\n Цаг хугацаа, оюун бодлоо бүрэн зориулж суралцсан хоёр жилийнхээ үр дүнг гаргаж дээд боловсрол дах тэгш хамруулах сургалтын орчныг бий болгох, ажлын байрны тохируулгыг ICFD буюу өвчин ба үйлдлийн чадвар алдалтыг ангилах олон улсын аргачлалд суурилсан мэргэжлийн цогц цахим гарын авлага гаргаж зөвлөх үйлчилгээнийхээ ажлын зэвсгийг билгэн толилуулсан нь байгуулахынхнаа үндсэн чиглэлд нийцэж байна.\n Асуудлын орхигдсон өнцгийг мэдрэмжтэйгээр харж, эрх чөлөөтэйгөөр сэтгэн ажиллахын төлөө тэмцдэг бас хамтардаг чанар иргэний нийгмийн зүтгэлтнүүдийн гол онцлог билээ.",
+  text: "Аливаа бүхний эхлэл нь хүн учир байгууллагын түүхийг ч мөн үүсгэн байгуулагч нь эхлүүлэн бичсэн байх юм.\n\nГэрэлт Цох Байшин ТББ-ыг санаачлагч Оюунтөгс гэх ид залуу насандаа харах чадварынхаа ерэн хувийг алдсан нэгэн бүсгүй амьдралын олон нугачааг бүрзгэр харанхуйн дунд давж яваа нэгэн билээ.\n\nОюун санааны эрх чөлөөгөө бүрэн шахуу алдсан амьдралынхаа дөрвөн жилийг нөхө гэсэн мэт хурдтай гүйсээр байгаа нь энэхүү байгууллагын үндэс суурь тавигдсантай холбоотой.\n\nТүүний амьдралын хоёр дах хуудас буюу шинэ амьдралаас нь эхлэн товч хүүрнэхэд харааны бэрхшээлтэй иргэдтэйгээ хамт хөл нийлүүлэн цагаан таягаар хөтөч хийн алхсан хоёр жил хагасын дотор үлдсэн амьдралдаа хүрэх зорилгоо тодорхойлсон учир онолын шинэлэг мэдлэг болон хувийн туршлагыг хослуулан өөрийгөө боловсруулах хэрэгтэйгээ байгаагаа олж харсан хэрэг.\n\n\n\nТийнхүү Fulbright тэтгэлэгт өрсөлдөх зориг хүрч олон хүний итгэлийг хүлээн шалгарснаар Монголдоо байдаггүй мэргэжил болох Certified Rehabilitation Counseling мэргэжлээр АНУ-д магистраа хамгаалж ирээд тун удалгүй Гэрэлт Цох Байшин-г байгуулсан.\n Хөгжлийн бэрхшээлийн нөхөн сэргээх зөвлөх мэргэжлээр цогц ойлголт авч хүн төвтэй аргачлалын нууцыг тайлсан тул бүх бэрхшээлт үр өгөөжтэй байхуйц хүрээнд хувь нэмрээ оруулахыг хүссэн юм.\n\n Онолын хөтөлбөрөөс гадна гурван төрлийн дадлага ажил хийсний нэг нь сэтгэцийн эмгэгтэй хүмүүсийн өөрсдийнх нь бодит амьдралаас үүсэн хөгжсөн ClubHouse нийгэм – сэтгэл зүйн нөхөн сэргээх цогц загвар, нөгөө нь суралцаж байсан их сургуулийнхаа хөгжлийн бэрхшээлтэй оюутнуудад тохируулга үйлчилгээ үзүүлдэг цогц мэргэжлийн төв харин гурав дах нь хөгжлийн бэрхшээлтэй иргэдийг ажилд зуучлах онол дадлага хосолсон аргачлал юм.\n\n Цаг хугацаа, оюун бодлоо бүрэн зориулж суралцсан хоёр жилийнхээ үр дүнг гаргаж дээд боловсрол дах тэгш хамруулах сургалтын орчныг бий болгох, ажлын байрны тохируулгыг ICFD буюу өвчин ба үйлдлийн чадвар алдалтыг ангилах олон улсын аргачлалд суурилсан мэргэжлийн цогц цахим гарын авлага гаргаж зөвлөх үйлчилгээнийхээ ажлын зэвсгийг билгэн толилуулсан нь байгуулахынхнаа үндсэн чиглэлд нийцэж байна.\n\nАсуудлын орхигдсон өнцгийг мэдрэмжтэйгээр харж, эрх чөлөөтэйгөөр сэтгэн ажиллахын төлөө тэмцдэг бас хамтардаг чанар иргэний нийгмийн зүтгэлтнүүдийн гол онцлог билээ.",
 };
-
-export const gereltNavValues: NavItemsTypes[] = [
-  {
-    title: "Гэрэлт Цох Байшин ТББ",
-    link: [
-      {
-        name: "Бидний тухай",
-        value: "/about",
-      },
-    ],
-  },
-  {
-    title: "Хийгдэж буй ажил",
-    link: [
-      {
-        name: "Судалгаа",
-        value: "/about",
-      },
-      {
-        name: "Төсөл",
-        value: "/about",
-      },
-      {
-        name: "Сургалт ба зөвлөгөө үйлчилгээ",
-        value: "/about",
-      },
-      {
-        name: "Зарлагдсан тэтгэлэг ба хандив",
-        value: "/about",
-      },
-    ],
-  },
-  {
-    title: "Хийгдсэн ажил",
-    link: [
-      {
-        name: "Судалгаа",
-        value: "/work?name=research",
-      },
-      {
-        name: "Төсөл",
-        value: "/work?name=project",
-      },
-      {
-        name: "Сургалт ба зөвлөгөө үйлчилгээ",
-        value: "/work?name=advice",
-      },
-      {
-        name: "Тэтгэлэг ба хандив",
-        value: "/work?name=donation",
-      },
-    ],
-  },
-  {
-    title: "Холбогдох нэмэлт мэдээлэл ",
-    link: [
-      {
-        name: "Текст мэдээлэл",
-        value: "/info?name=text",
-      },
-      {
-        name: "Дуут мэдээлэл",
-        value: "/info?name=voice",
-      },
-      {
-        name: "Дүрст мэдээлэл",
-        value: "/info?name=video",
-      },
-      {
-        name: "Тэтгэлэг ба хандив",
-        value: "/about",
-      },
-    ],
-  },
-];
-
-export const tokhiruulgaNavValues: NavItemsTypes[] = [
-  {
-    title: "Tokhiruulga.mn",
-    link: [
-      {
-        name: gratitude,
-        value: "/tokhiruulga?name=gratitude",
-      },
-      {
-        name: overview,
-        value: "/tokhiruulga?name=overview",
-      },
-      {
-        name: copyrightNotice,
-        value: "/tokhiruulga?name=notice",
-      },
-      {
-        name: performance,
-        value: "/tokhiruulga?name=performance",
-      },
-      {
-        name: hotTopics,
-        value: "/tokhiruulga?name=topic",
-      },
-      {
-        name: legalInfo,
-        value: "/tokhiruulga?name=legal",
-      },
-      {
-        name: additionLearningAdvice,
-        value: "/tokhiruulga?name=advice",
-      },
-      {
-        name: supplier,
-        value: "/tokhiruulga?name=supplier",
-      },
-      {
-        name: feedback,
-        value: "/tokhiruulga?name=feeback",
-      },
-      {
-        name: contact,
-        value: "/tokhiruulga?name=cantact",
-      },
-    ],
-  },
-];
 
 // tokhiruulga
 
@@ -586,7 +318,7 @@ export const contactValues = [
 export const socials = [
   {
     icon: FaFacebookF,
-    uri: "www.facebook.com",
+    uri: "https://www.facebook.com/fireflyhousengo",
   },
   {
     icon: FaTwitter,
@@ -597,3 +329,5 @@ export const socials = [
     uri: "www.youtube.com",
   },
 ];
+
+// about

@@ -17,16 +17,24 @@ type LineWidgetType = {
   title: string;
   text: string;
   id: string;
-  type: string
+  type: string;
+  semiTitle?: string;
 };
 type LineWidgetDetailType = {
   img?: string;
   title: string;
   text: string;
   id?: string;
-  
+  semiTitle?: string;
 };
-export const LineWidget: FC<LineWidgetType> = ({ img, type, title, text, id }) => {
+export const LineWidget: FC<LineWidgetType> = ({
+  img,
+  type,
+  title,
+  semiTitle,
+  text,
+  id,
+}) => {
   return (
     <HStack
       w={"full"}
@@ -38,16 +46,21 @@ export const LineWidget: FC<LineWidgetType> = ({ img, type, title, text, id }) =
         <Image src={img} alt={id} />
       </Box>
 
-      <VStack w={"full"} alignItems={{ base: "start" }} flex={2}>
-        <HStack
-          w={"full"}
-          justifyContent={"space-between"}
-          mb={{ md: 8, base: 4 }}
-        >
-          <Text variant={"title"} color={"text"}>
-            {title}
+      <VStack
+        w={"full"}
+        alignItems={{ base: "start" }}
+        gap={{ md: 4 }}
+        flex={2}
+      >
+        <Text variant={"title"} color={"text"}>
+          {title}
+        </Text>
+        {semiTitle && (
+          <Text fontStyle={"italic"} color={"text"}>
+            {semiTitle}
           </Text>
-        </HStack>
+        )}
+
         <Text mb={{ md: 0, base: 4 }} noOfLines={{ md: 3, base: 4 }}>
           {text}
         </Text>
@@ -63,11 +76,17 @@ export const LineWidgetDetail: FC<LineWidgetDetailType> = ({
   title,
   id,
   text,
+  semiTitle
 }) => {
   return (
     <VStack alignItems={"start"} w={"full"} gap={5}>
       <Text variant={"title"}>{title}</Text>
-      <Image src={img} w={'full'} alt={id ?? ""} />
+      {semiTitle && (
+          <Text fontStyle={"italic"} color={"text"}>
+            {semiTitle}
+          </Text>
+        )}
+      <Image src={img} w={"full"} alt={id ?? ""} />
       <VStack w={"full"} alignItems={{ base: "start", md: "center" }}>
         <Text>{text}</Text>
       </VStack>

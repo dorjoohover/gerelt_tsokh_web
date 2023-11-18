@@ -9,10 +9,10 @@ import { WorkTypes } from "@/global/enum";
 import { filterName } from "@/global/functions";
 import { work } from "@/global/string";
 
-import { workTags } from "@/global/values";
+import { workTags } from "@/values/tags";
 import { Work } from "@/model/work.model";
 import { HStack } from "@chakra-ui/react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const WorkPage = () => {
@@ -22,9 +22,11 @@ const WorkPage = () => {
   const [data, setData] = useState<Work[]>([]);
   const [value, setValue] = useState("");
   const [selected, setSelected] = useState<Work | null>(null);
-  const getData = async () => {
+  const [dataCount, setCount] = useState<number>(0);
+  const getData = async (t: WorkTypes) => {
     try {
-      let filtered = workData.filter((d) => d.type == type);
+      let filtered = workData.filter((d) => d.type == t);
+      setCount(filtered.length);
       setData(filtered.filter((d, i) => i >= page * 10 && i < (page + 1) * 10));
     } catch (error) {}
   };
@@ -33,12 +35,14 @@ const WorkPage = () => {
       let name: any = params.get("name") as keyof typeof WorkTypes;
       setType(name ?? WorkTypes.research);
       setValue(filterName(name, workTags));
+      console.log(name);
+      getData(name);
     }
   }, []);
   useEffect(() => {
-    getData();
-    setValue(filterName(type, workTags));
-  }, [type, page]);
+    getData(type);
+  }, [page]);
+
   useEffect(() => {
     if (params.get("id")) {
       let filtered = workData.filter((d) => d._id == params.get("id"));
@@ -52,8 +56,12 @@ const WorkPage = () => {
       let name: any = params.get("name") as keyof typeof WorkTypes;
       setType(name ?? WorkTypes.research);
       setValue(filterName(name, workTags));
+      setPage(0);
+      getData(name);
+      setSelected(null);
     }
   }, [params]);
+  const router = useRouter();
 
   return (
     <VStackContainer>
@@ -73,6 +81,7 @@ const WorkPage = () => {
               title={selected.title}
               img={selected.img}
               id={selected._id}
+              semiTitle={selected.semiTitle}
             />
           ) : (
             data?.map((d, i) => {
@@ -83,6 +92,7 @@ const WorkPage = () => {
                       img={d.img!}
                       id={d._id}
                       text={d.text}
+                      semiTitle={d.semiTitle}
                       title={d.title}
                       key={i}
                       type="work"
@@ -95,6 +105,7 @@ const WorkPage = () => {
                       id={d._id}
                       text={d.text}
                       title={d.title}
+                      semiTitle={d.semiTitle}
                       key={i}
                       type="work"
                     />
@@ -108,12 +119,10 @@ const WorkPage = () => {
         page={page}
         type={type}
         value={value}
-        length={selected ? 1 : 10}
+        length={selected ? 1 : length}
         changePage={(value) => setPage(value)}
         changeType={(value) => {
-          setType(value);
-          setPage(0);
-          setSelected(null);
+       
         }}
         changeSub={() => {}}
       />
