@@ -4,8 +4,8 @@ import { FilterType } from "@/global/functions";
 
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { Box, Button, HStack, Select, Text, VStack } from "@chakra-ui/react";
-import { usePathname, useRouter,  } from "next/navigation";
-import { FC, ReactNode, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { FC, ReactNode, useState, useEffect } from "react";
 
 type Types = {
   page: number;
@@ -35,10 +35,18 @@ export const Line: FC<Types> = ({
 
   limit = 5,
 }) => {
-  const [active, setActive] = useState<number | null>();
+  const [active, setActive] = useState<boolean>(true);
+  const [current, setCurrent] = useState<number | null>();
+  const [select, setSelect] = useState(type);
   const router = useRouter();
 
   const pathname = usePathname();
+  const params = useSearchParams();
+  useEffect(() => {
+    if (params.get("name")) {
+      setSelect(params.get("name"));
+    }
+  }, [params.get("name")]);
 
   return (
     <HStack w={"full"} alignItems={"start"}>
@@ -60,16 +68,16 @@ export const Line: FC<Types> = ({
                 bg={"transparent"}
                 textTransform={"none"}
                 onClick={(e) => {
-
-                  router.refresh();
                   router.push(`${pathname}?name=${tags.value}`);
 
                   changeType(tags.value, tags.sub != undefined);
                   if (tags.sub != undefined) {
-                    if (active == i) {
-                      setActive(null);
+                    if (current == i) {
+                      setActive(false);
+                      setCurrent(null);
                     } else {
-                      setActive(i);
+                      setActive(true);
+                      setCurrent(i);
                     }
                   }
                 }}
@@ -152,8 +160,21 @@ export const Line: FC<Types> = ({
       >
         <Select
           display={{ lg: "none", base: "flex" }}
-          defaultValue={value}
+          value={select}
+          border={"none"}
+          borderBottom={"1px solid aqua"}
+          borderColor={"prime.default"}
+          iconColor="prime.default"
+          borderRadius={0}
+          color={"prime.default"}
+          fontWeight={"bold"}
+          fontSize={"16px"}
+          textTransform={"uppercase"}
           onChange={(e) => {
+            e.stopPropagation();
+            setSelect(e.target.value);
+
+            router.push(`${pathname}?name=${e.target.value}`);
             changeType(e.target.value);
           }}
         >

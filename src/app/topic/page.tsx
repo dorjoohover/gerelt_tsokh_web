@@ -101,7 +101,7 @@ const TopicPage = () => {
                     <Button
                       onClick={() => {
                         getDataById(d._id);
-                        router.push(`/topc?id=${d._id}`);
+                        router.push(`/topic?id=${d._id}`);
                       }}
                       _hover={{ bg: "none" }}
                       bg={"none"}

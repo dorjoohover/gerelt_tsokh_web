@@ -15,6 +15,7 @@ import {
   contactValues,
   feedbackValues,
   gratitudeValues,
+  noticeValue,
   noticeValues,
   overviewValues,
 } from "@/values/values";
@@ -47,7 +48,7 @@ const TokhiruulgaPage = () => {
   );
   const [data, setData] = useState<any[]>([]);
   const [value, setValue] = useState("");
-  const [sub, setSub] = useState<number | null>();
+  const [sub, setSub] = useState<number | null>(0);
   const [selected, setSelected] = useState<any | null>(null);
   const [dataCount, setDataCount] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5)
@@ -135,7 +136,12 @@ const TokhiruulgaPage = () => {
             uri={overviewValues.uri}
           />
         );
-
+      case TokhiruulgaTypes.notice:
+        return (
+      
+            <Text>{noticeValue}</Text>
+    
+        )
       case TokhiruulgaTypes.performance:
         return (
           <VStack w={"full"} alignItems={"start"} gap={{ lg: 78, base: 10 }}>

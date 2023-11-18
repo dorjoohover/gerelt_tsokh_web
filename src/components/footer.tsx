@@ -7,15 +7,21 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <VStack w={"full"} bg={"darkPrime"} px={{ md: 10 }} py={{ md: 14 }}>
+    <VStack
+      w={"full"}
+      bg={"darkPrime"}
+      px={{ md: 10 }}
+      py={{ md: 14, base: 9 }}
+    >
       <HStack
         maxW={"1240px"}
         w={"full"}
         px={{ md: 10, base: 6 }}
         alignItems={"start"}
         m="auto"
+        flexDir={{ md: "row", base: "column" }}
       >
-        <VStack w={"full"} flex={1} alignItems={"start"} gap={{ md: 10 }}>
+        <VStack w={"full"} flex={1} alignItems={"start"} gap={10}>
           <Text color={"white"} variant={"normal"} fontWeight={"bold"}>
             {gereltTokh}
           </Text>
@@ -26,11 +32,22 @@ const Footer = () => {
             </Text>
           </Link>
         </VStack>
-        <VStack w={"full"} flex={1} alignItems={"start"} gap={{ md: 10 }}>
-          <Text color={"white"} variant={"normal"} fontWeight={"bold"}>
+        <VStack
+          w={"full"}
+          flex={1}
+          alignItems={"start"}
+          gap={{ md: 10 }}
+          mt={{ md: 0, base: 20 }}
+        >
+          <Text
+            color={"white"}
+            variant={"normal"}
+            fontWeight={"bold"}
+            mb={{ md: 0, base: 10 }}
+          >
             {tokhiruulga}
           </Text>
-          <HStack w={"full"}>
+          <HStack w={"full"} flexDir={{ md: "row", base: "column" }}>
             <VStack flex={1} w={"full"} alignItems={"start"}>
               {tokhiruulgaNavValues[0].link.slice(0, 5).map((link, i) => {
                 return (
@@ -62,10 +79,16 @@ const Footer = () => {
         maxW={"1240px"}
         mx={"auto"}
         px={{ md: 10, base: 6 }}
-        mt={{ md: 20 }}
+        mt={20}
+        alignItems={{ base: "start" }}
+        flexDir={{ md: "row", base: "column-reverse" }}
       >
-        <Text color={"white"} variant={"normal"}>{`© ${copyrightFooter}`}</Text>
-        <HStack gap={1}>
+        <Text
+          color={"white"}
+          variant={"normal"}
+  
+        >{`© ${copyrightFooter}`}</Text>
+        <HStack gap={1}         mb={{ md: 0, base: 10 }}>
           {socials.map((social, i) => {
             return (
               <Link href={social.uri} target="_blank" key={i}>

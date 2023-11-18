@@ -25,6 +25,7 @@ const PerformancePage = () => {
   const [value, setValue] = useState("");
   const [dataCount, setCount] = useState<number>(0);
   const [selected, setSelected] = useState<PerformanceModel | null>(null);
+  const router = useRouter()
   const getData = async (t: PerformanceTypes) => {
     try {
       let filtered = performanceData.filter((d) => d.type == t);
@@ -32,6 +33,7 @@ const PerformancePage = () => {
       setData(filtered.filter((d, i) => i >= page * 10 && i < (page + 1) * 10));
     } catch (error) {}
   };
+
   const getDataById = (id: string) => {
     try {
       let filtered = performanceData.filter((d) => d._id == id);
@@ -60,6 +62,7 @@ const PerformancePage = () => {
     }
     if (params.get("name")) {
       let name: any = params.get("name") as keyof typeof PerformanceTypes;
+      // router.
       setType(name ?? PerformanceTypes.ab);
       setValue(filterName(name, tokhiruulgaTags[3].sub!));
       setPage(0);
@@ -67,7 +70,7 @@ const PerformancePage = () => {
       setSelected(null);
     }
   }, [params]);
-  const router = useRouter()
+
   return (
     <VStackContainer>
       <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
@@ -120,6 +123,7 @@ const PerformancePage = () => {
         limit={10}
         page={page}
         type={type}
+
         value={value}
         length={selected ? 1 : dataCount}
         changePage={(value) => setPage(value)}
