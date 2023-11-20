@@ -34,7 +34,7 @@ const NavItem: FC<NavItemsTypes> = ({ title, link, onClick }) => {
   return (
     <VStack
       w={"full"}
-      alignItems={{  base: "start" }}
+      alignItems={"start" }
     >
       <Text
         w={{ base: "full", sm: "auto" }}
