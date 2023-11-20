@@ -24,7 +24,7 @@ export const imgTokhiruulga = `${img}tokhiruulga.png`
 
 
 // about
-export const imgGratitude = `${about}gratidude.jpg`
+export const imgGratitude = `${about}gratitude.jpg`
 export const imgFoundation = `${about}foundation.jpg`
 export const imgDoneProject = `${about}doneProject.jpg`
 export const imgDoneProject1 = `${about}doneProject1.jpg`

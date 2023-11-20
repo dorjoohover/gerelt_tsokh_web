@@ -113,6 +113,8 @@ export const SliderCard: FC<Types> = ({ body, footer, bg, current }) => {
           base: "-40%",
         }}
         left={{
+          xl: '0',
+          lg: '-50%',
           md: "-75%",
           base: "-150%",
         }}
