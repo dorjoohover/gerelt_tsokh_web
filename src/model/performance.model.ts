@@ -6,7 +6,8 @@ export interface PerformanceQuestion  {
 }
 export interface PerformanceFunctionDetail {
     title: string,
-    text?: string
+    text?: string,
+    img? : string
 }
 
 export interface PerformanceFunction {
@@ -23,6 +24,7 @@ export  interface PerformanceModel {
 	employeeWarning?: PerformanceFunctionDetail[],
 	employerWarning?: PerformanceFunctionDetail[],
 
+	possible?: PerformanceFunction[]
 	functions?: PerformanceFunction[]
     setup?: PerformanceFunction[],
     key?: PerformanceFunction[],

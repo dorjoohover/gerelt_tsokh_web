@@ -176,7 +176,7 @@ export const RoundedCard: FC<RoundedType> = ({bg, title, text, py, icon }) => {
       py={ 10 }
       px={{ md: 9, base: 6 }}
       borderRadius={12}
-      border={"1px solid aqua "}
+      border={"1px solid #00BCA9 "}
       borderColor={'prime.default'}
       bg={bg}
       h={'full'}

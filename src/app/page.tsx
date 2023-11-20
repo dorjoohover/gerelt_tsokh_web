@@ -168,13 +168,13 @@ export default function Home() {
               body={<Image src={imgGereltTsokh} />}
               footer={
                 <Text variant={"title"} color={"darkPrime"}>
-                  {gereltTokh}
+                {gereltTokh}
                 </Text>
               }
             />
           </Link>
 
-          <Link href={'/'} >
+          <Link href={'/tokhiruulga?name=gratitude'} >
           <CustomCard
             body={<Image src={imgTokhiruulga} />}
             footer={
@@ -318,12 +318,12 @@ export default function Home() {
                 }}
                 borderTop={{
                   md: "none",
-                  base: index == 0 ? "1px solid aqua" : "",
+                  base: index == 0 ? "1px solid #00BCA9" : "",
                 }}
                 borderBottom={{
                   md: "none",
                   base:
-                    index != partnerValues.length - 1 ? "1px solid aqua" : "",
+                    index != partnerValues.length - 1 ? "1px solid #00BCA9" : "",
                 }}
                 py={{base: 6}}
                 borderColor={{

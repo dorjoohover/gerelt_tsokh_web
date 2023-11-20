@@ -60,7 +60,7 @@ const CustomAccordian = ({ data }: { data: AccordionType[] }) => {
                     ml={8}
                    
                   >
-                    <Text variant={'smallTitle'} color={'text'}>{d.title}</Text>
+                    <Text variant={'smallTitle'} textTransform={'uppercase'} color={'text'}>{d.title}</Text>
                   </Box>
                 </AccordionButton>
 

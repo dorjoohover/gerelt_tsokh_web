@@ -101,7 +101,7 @@ const Navbar = () => {
       top={0}
       left={0}
       right={0}
-      borderBottom={"5px solid aqua"}
+      borderBottom={"5px solid #00BCA9"}
       borderColor={"prime.default"}
       zIndex={10}
       bg={"white"}
@@ -135,7 +135,7 @@ const Navbar = () => {
             justifyContent={"end"}
             alignItems={"center"}
             h={10}
-            border={"1px solid aqua"}
+            border={"1px solid #00BCA9"}
             borderColor={"prime.default"}
             ml={6}
           >
@@ -193,7 +193,7 @@ const Navbar = () => {
               alignItems={"center"}
               h={10}
               px={2.5}
-              border={"1px solid aqua"}
+              border={"1px solid #00BCA9"}
               borderColor={gerelt ? "white" : "prime.default"}
             >
               <Box
@@ -232,7 +232,7 @@ const Navbar = () => {
               alignItems={"center"}
               h={10}
               px={2.5}
-              border={"1px solid aqua"}
+              border={"1px solid #00BCA9"}
               borderColor={tokhiruulgaActive ? "white" : "prime.default"}
             >
               <Box
@@ -271,7 +271,7 @@ const Navbar = () => {
               alignItems={"center"}
               h={10}
               px={2.5}
-              border={"1px solid aqua"}
+              border={"1px solid #00BCA9"}
               borderColor={active ? "white" : "prime.default"}
             >
               <Box

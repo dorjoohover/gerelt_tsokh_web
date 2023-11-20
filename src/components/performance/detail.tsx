@@ -1,8 +1,11 @@
 import {
   PerformanceModel,
   PerformanceQuestion,
+  PerformanceFunction
 } from "@/model/performance.model";
 import {
+  Box,
+  Image,
   ListItem,
   OrderedList,
   Text,
@@ -10,6 +13,55 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import CustomAccordian from "../accordian";
+import { imgArticle1, imgDoneWork10 } from "@/global/assets";
+import {FC} from 'react'
+type AccordianWidgetType = {
+  fun: PerformanceFunction,
+  length: number
+}
+
+
+const AccordianWidget:FC<AccordianWidgetType> = ({fun, length}) => {
+  return <VStack  w={"full"} alignItems={"start"} gap={4}>
+  <Text>{fun.title}</Text>
+  <UnorderedList>
+    {fun.details.map((detail, i) => {
+      return (
+        <ListItem py={4} pl={10} color={"text"} key={i}>
+          <VStack alignItems={"start"} w='full'>
+            <Box className="title">
+              <Text color={"blue"}>{detail.title}</Text>
+              {
+          <Box
+            pos="absolute"
+            top={
+              i == 0
+                ? "0%"
+                : i == length-1
+                ? "-50%"
+                : "50%"
+            }
+            left="50%"
+            zIndex={20}
+            display={"none"}
+          >
+            <Image
+              src={imgDoneWork10}
+              maxW={400}
+              maxH={250}
+              w={"auto"}
+            />
+          </Box>
+        }
+            </Box>
+            {detail.text && <Text>{detail.text}</Text>}
+          </VStack>
+        </ListItem>
+      );
+    })}
+  </UnorderedList>
+</VStack>
+}
 
 const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
   return (
@@ -30,7 +82,6 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
       </OrderedList> */}
       <CustomAccordian
         data={[
-          
           {
             title:
               data.employerWarning != undefined
@@ -42,8 +93,32 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
                   {data.employerWarning?.map((detail, i) => {
                     return (
                       <ListItem py={4} pl={10} color={"text"} key={i}>
-                        <VStack alignItems={"start"}>
-                          <Text color={"blue"}>{detail.title}</Text>
+                        <VStack alignItems={"start"} w='full'>
+                          <Box className="title">
+                            <Text color={"blue"}>{detail.title}</Text>
+                            {
+                              <Box
+                                pos="absolute"
+                                top={
+                                  i == 0
+                                    ? "0%"
+                                    : i == data.employerWarning!.length - 1
+                                    ? "-50%"
+                                    : "50%"
+                                }
+                                left="50%"
+                                zIndex={20}
+                                display={"none"}
+                              >
+                                <Image
+                                  src={imgDoneWork10}
+                                  maxW={400}
+                                  maxH={250}
+                                  w={"auto"}
+                                />
+                              </Box>
+                            }
+                          </Box>
                           {detail.text && <Text>{detail.text}</Text>}
                         </VStack>
                       </ListItem>
@@ -64,8 +139,33 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
                   {data.employerWarning?.map((detail, i) => {
                     return (
                       <ListItem py={4} pl={10} color={"text"} key={i}>
-                        <VStack alignItems={"start"}>
-                          <Text color={"blue"}>{detail.title}</Text>
+                        <VStack alignItems={"start"} w='full'>
+                          <Box className="title">
+                            <Text color={"blue"}>{detail.title}</Text>
+                            {
+                              <Box
+                                pos="absolute"
+                                top={
+                                  i == 0
+                                    ? "0%"
+                                    : i == data.employerWarning!.length - 1
+                                    ? "-50%"
+                                    : "50%"
+                                }
+                                left="50%"
+                                zIndex={20}
+                                display={"none"}
+                              >
+                                <Image
+                                  src={imgDoneWork10}
+                                  maxW={400}
+                                  maxH={250}
+                                  w={"auto"}
+                                />
+                              </Box>
+                            }
+                            
+                          </Box>
                           {detail.text && <Text>{detail.text}</Text>}
                         </VStack>
                       </ListItem>
@@ -76,36 +176,18 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
             ),
           },
           {
-            title:
-              data.setup != undefined
-                ? "Гол тохируулгууд "
-                : "",
+            title: data.setup != undefined ? "Гол тохируулгууд " : "",
             child: (
               <VStack w={"full"} alignItems={"start"} gap={8}>
                 {data.setup?.map((fun, index) => {
                   return (
-                    <VStack key={index} w={"full"} alignItems={"start"} gap={4}>
-                      <Text>{fun.title}</Text>
-                      <UnorderedList>
-                        {fun.details.map((detail, i) => {
-                          return (
-                            <ListItem py={4} pl={10} color={"text"} key={i}>
-                              <VStack alignItems={"start"}>
-                                <Text color={"blue"}>{detail.title}</Text>
-                                {detail.text && <Text>{detail.text}</Text>}
-                              </VStack>
-                            </ListItem>
-                          );
-                        })}
-                      </UnorderedList>
-                    </VStack>
+                    <AccordianWidget key={index} fun={fun} length={data.setup!.length }/>
                   );
                 })}
               </VStack>
-
             ),
           },
-          
+
           {
             title: data.space != undefined ? "Амрах хувийн орон зай" : "",
             child: (
@@ -113,52 +195,8 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
                 {data.space?.map((fun, index) => {
                   return (
                     <VStack key={index} w={"full"} alignItems={"start"} gap={4}>
-                      <Text >{fun.title}</Text>
-                      {fun.text &&  <Text>{fun.text}</Text>}
-
-                    </VStack>
-                  );
-                })}
-              </VStack>
-            ),
-          },
-          {
-            title: data.trigger != undefined ? "Сэдрээгч хүчин зүйлсийг илрүүлж багасгах" : "",
-            child: (
-              <VStack w={"full"} alignItems={"start"} gap={8}>
-                {data.trigger?.map((fun, index) => {
-                  return (
-                    <VStack key={index} w={"full"} alignItems={"start"} gap={4}>
-                      <Text >{fun.title}</Text>
-                     {fun.text &&  <Text>{fun.text}</Text>}
-
-                    </VStack>
-                  );
-                })}
-              </VStack>
-            ),
-          },
-          
-          {
-            title: data.functions != undefined ? "Боломжит тохируулгууд \nАжил үүргийн функцээр" : "",
-            child: (
-              <VStack w={"full"} alignItems={"start"} gap={8}>
-                {data.functions?.map((fun, index) => {
-                  return (
-                    <VStack key={index} w={"full"} alignItems={"start"} gap={4}>
                       <Text>{fun.title}</Text>
-                      <UnorderedList>
-                        {fun.details.map((detail, i) => {
-                          return (
-                            <ListItem py={4} pl={10} color={"text"} key={i}>
-                              <VStack alignItems={"start"}>
-                                <Text color={"blue"}>{detail.title}</Text>
-                                {detail.text && <Text>{detail.text}</Text>}
-                              </VStack>
-                            </ListItem>
-                          );
-                        })}
-                      </UnorderedList>
+                      {fun.text && <Text>{fun.text}</Text>}
                     </VStack>
                   );
                 })}
@@ -167,53 +205,78 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
           },
           {
             title:
-              data.key != undefined
-                ? "Түлхүү хэрэглэгддэг тохируулгууд:"
+              data.trigger != undefined
+                ? "Сэдрээгч хүчин зүйлсийг илрүүлж багасгах"
                 : "",
             child: (
               <VStack w={"full"} alignItems={"start"} gap={8}>
-                {data.key?.map((fun, index) => {
+                {data.trigger?.map((fun, index) => {
                   return (
                     <VStack key={index} w={"full"} alignItems={"start"} gap={4}>
                       <Text>{fun.title}</Text>
-                      <UnorderedList>
-                        {fun.details.map((detail, i) => {
-                          return (
-                            <ListItem py={4} pl={10} color={"text"} key={i}>
-                              <VStack alignItems={"start"}>
-                                <Text color={"blue"}>{detail.title}</Text>
-                                {detail.text && <Text>{detail.text}</Text>}
-                              </VStack>
-                            </ListItem>
-                          );
-                        })}
-                      </UnorderedList>
+                      {fun.text && <Text>{fun.text}</Text>}
                     </VStack>
                   );
                 })}
               </VStack>
-
             ),
           },
           {
-            title: data.condition != undefined ? "Нөхцөл ба Шийдэл" : '',
+            title: data.possible != undefined ? "Боломжит тохируулгууд" : "",
             child: (
-              <VStack  w={"full"} alignItems={"start"} gap={4}>
-                      <Text>{data.condition?.title}</Text>
-                      <UnorderedList>
-                        {data.condition?.details?.map((detail, i) => {
-                          return (
-                            <ListItem py={4} pl={10} color={"text"} key={i}>
-                              <VStack alignItems={"start"}>
-                                {/* <Text color={"blue"}>{detail.title}</Text> */}
-                                {detail.text && <Text>{detail.text}</Text>}
-                              </VStack>
-                            </ListItem>
-                          );
-                        })}
-                      </UnorderedList>
-                    </VStack>
-            )
+              <VStack w={"full"} alignItems={"start"} gap={8}>
+                {data.possible?.map((fun, index) => {
+                  return (
+                   < AccordianWidget fun={fun} key={index} length={data.possible!.length}/>
+                  );
+                })}
+              </VStack>
+            ),
+          },
+          {
+            title: data.functions != undefined ? "Ажил үүргийн функцээр" : "",
+            child: (
+              <VStack w={"full"} alignItems={"start"} gap={8}>
+                {data.functions?.map((fun, index) => {
+                  return (
+                    < AccordianWidget fun={fun} key={index} length={data.functions!.length}/>
+                  );
+                })}
+              </VStack>
+            ),
+          },
+          {
+            title:
+              data.key != undefined ? "Түлхүү хэрэглэгддэг тохируулгууд:" : "",
+            child: (
+              <VStack w={"full"} alignItems={"start"} gap={8}>
+                {data.key?.map((fun, index) => {
+                  return (
+                    < AccordianWidget fun={fun} key={index} length={data.key!.length}/>
+                  );
+                })}
+              </VStack>
+            ),
+          },
+          {
+            title: data.condition != undefined ? "Нөхцөл ба Шийдэл" : "",
+            child: (
+              <VStack w={"full"} alignItems={"start"} gap={4}>
+                <Text>{data.condition?.title}</Text>
+                <UnorderedList>
+                  {data.condition?.details?.map((detail, i) => {
+                    return (
+                      <ListItem py={4} pl={10} color={"text"} key={i}>
+                        <VStack alignItems={"start"} w='full'>
+                          {/* <Box className='title'><Text color={"blue"} >{detail.title}</Text></Box> */}
+                          {detail.text && <Text>{detail.text}</Text>}
+                        </VStack>
+                      </ListItem>
+                    );
+                  })}
+                </UnorderedList>
+              </VStack>
+            ),
           },
         ]}
       />

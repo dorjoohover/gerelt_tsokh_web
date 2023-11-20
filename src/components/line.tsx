@@ -88,7 +88,7 @@ export const Line: FC<Types> = ({
                 <HStack
                   w={"full"}
                   justifyContent={"space-between"}
-                  borderTop={i != 0 ? "1px solid aqua" : ""}
+                  borderTop={i != 0 ? "1px solid #00BCA9" : ""}
                   borderColor={"prime.default"}
                 >
                   <Text
@@ -101,7 +101,7 @@ export const Line: FC<Types> = ({
                   </Text>
                   {tags.sub != undefined && (
                     <Box>
-                      {!active ? (
+                      {active ? (
                         <ChevronDownIcon color={"prime.default"} />
                       ) : (
                         <ChevronUpIcon color={"prime.default"} />
@@ -132,7 +132,7 @@ export const Line: FC<Types> = ({
                           <Text
                             w={"full"}
                             fontWeight={index == sub ? "bold" : 400}
-                            borderTop={index != 0 ? "1px solid aqua" : ""}
+                            borderTop={index != 0 ? "1px solid #00BCA9" : ""}
                             borderColor={"prime.default"}
                             py={4}
                             textAlign={"start"}
@@ -153,7 +153,7 @@ export const Line: FC<Types> = ({
       <VStack
         w={"full"}
         pl={{ lg: 10, base: 0 }}
-        borderLeft={{ lg: "1px solid aqua", base: "" }}
+        borderLeft={{ lg: "1px solid #00BCA9", base: "" }}
         borderColor={"prime.default"}
         gap={{ lg: 78, base: 10 }}
         pt={{ lg: 0, base: 8 }}
@@ -162,7 +162,7 @@ export const Line: FC<Types> = ({
           display={{ lg: "none", base: "flex" }}
           value={select}
           border={"none"}
-          borderBottom={"1px solid aqua"}
+          borderBottom={"1px solid #00BCA9"}
           borderColor={"prime.default"}
           iconColor="prime.default"
           borderRadius={0}

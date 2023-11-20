@@ -29,3 +29,13 @@
 }
 
 
+.title {
+  cursor: pointer;
+  width: '100%';
+  position: relative;
+}
+
+.title:hover div{
+  display: block;
+}
+
