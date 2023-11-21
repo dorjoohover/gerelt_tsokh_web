@@ -51,7 +51,7 @@ const TokhiruulgaPage = () => {
   const [sub, setSub] = useState<number | null>(0);
   const [selected, setSelected] = useState<any | null>(null);
   const [dataCount, setDataCount] = useState<number>(0);
-  const [limit, setLimit] = useState<number>(5)
+  const [limit, setLimit] = useState<number>(5);
   const getData = async () => {
     try {
       switch (type) {
@@ -59,7 +59,7 @@ const TokhiruulgaPage = () => {
           let filtered = performanceData.filter(
             (d) => d.type == tokhiruulgaTags[3].sub![sub!].value
           );
-          setLimit(10)
+          setLimit(10);
 
           setData(
             filtered.filter((d, i) => i >= page * 10 && i < (page + 1) * 10)
@@ -72,9 +72,7 @@ const TokhiruulgaPage = () => {
           );
 
           setLimit(filteredLegal.length == 0 ? 5 : filteredLegal.length);
-          setData(
-            filteredLegal
-          );
+          setData(filteredLegal);
           setDataCount(filteredLegal.length ?? 0);
           break;
         case TokhiruulgaTypes.topic:
@@ -137,11 +135,7 @@ const TokhiruulgaPage = () => {
           />
         );
       case TokhiruulgaTypes.notice:
-        return (
-      
-            <Text>{noticeValue}</Text>
-    
-        )
+        return <Text>{noticeValue}</Text>;
       case TokhiruulgaTypes.performance:
         return (
           <VStack w={"full"} alignItems={"start"} gap={{ lg: 78, base: 10 }}>
@@ -319,13 +313,7 @@ const TokhiruulgaPage = () => {
           </VStack>
         );
       default:
-        return (
-          <GratitudeWidget
-            img={gratitudeValues.img}
-            text={gratitudeValues.text}
-            text1={gratitudeValues.text1}
-          />
-        );
+        return <VStack></VStack>;
     }
   };
 
