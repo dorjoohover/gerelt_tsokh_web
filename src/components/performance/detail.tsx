@@ -1,69 +1,68 @@
 import {
   PerformanceModel,
   PerformanceQuestion,
-  PerformanceFunction
+  PerformanceFunction,
 } from "@/model/performance.model";
 import {
   Box,
   Image,
   ListItem,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalOverlay,
   OrderedList,
   Text,
   UnorderedList,
   VStack,
+  useDisclosure,
 } from "@chakra-ui/react";
 import CustomAccordian from "../accordian";
 import { imgArticle1, imgDoneWork10 } from "@/global/assets";
-import {FC} from 'react'
+import { FC, useState } from "react";
 type AccordianWidgetType = {
-  fun: PerformanceFunction,
-  length: number
-}
+  fun: PerformanceFunction;
+  length: number;
+  onClick: (value: string) => void;
+};
 
-
-const AccordianWidget:FC<AccordianWidgetType> = ({fun, length}) => {
-  return <VStack  w={"full"} alignItems={"start"} gap={4}>
-  <Text>{fun.title}</Text>
-  <UnorderedList>
-    {fun.details.map((detail, i) => {
-      return (
-        <ListItem py={4} pl={10} color={"text"} key={i}>
-          <VStack alignItems={"start"} w='full'>
-            <Box className="title">
-              <Text color={"blue"}>{detail.title}</Text>
-              {
-          <Box
-            pos="absolute"
-            top={
-              i == 0
-                ? "0%"
-                : i == length-1
-                ? "-50%"
-                : "50%"
-            }
-            left="50%"
-            zIndex={20}
-            display={"none"}
-          >
-            <Image
-              src={imgDoneWork10}
-              maxW={400}
-              maxH={250}
-              w={"auto"}
-            />
-          </Box>
-        }
-            </Box>
-            {detail.text && <Text>{detail.text}</Text>}
-          </VStack>
-        </ListItem>
-      );
-    })}
-  </UnorderedList>
-</VStack>
-}
+const AccordianWidget: FC<AccordianWidgetType> = ({ fun, length, onClick }) => {
+  return (
+    <VStack w={"full"} alignItems={"start"} gap={4}>
+      <Text>{fun.title}</Text>
+      <UnorderedList>
+        {fun.details.map((detail, i) => {
+          return (
+            <ListItem py={4} pl={10} color={"text"} key={i}>
+              <VStack alignItems={"start"} w="full">
+                <Box
+                  cursor={"pointer"}
+                  onClick={() => onClick(detail.img ?? imgArticle1)}
+                >
+                  <Text color={"blue"}>{detail.title}</Text>
+                </Box>
+                {detail.text && <Text>{detail.text}</Text>}
+              </VStack>
+            </ListItem>
+          );
+        })}
+      </UnorderedList>
+    </VStack>
+  );
+};
 
 const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [img, setImg] = useState("");
+  const viewImg = (value: string) => {
+    {
+      setImg(value);
+      if (value != "") {
+        onOpen();
+      }
+    }
+  };
   return (
     <VStack alignItems={"start"} w={"full"} gap={5}>
       <Text variant={"title"}>{data.title}</Text>
@@ -93,31 +92,12 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
                   {data.employerWarning?.map((detail, i) => {
                     return (
                       <ListItem py={4} pl={10} color={"text"} key={i}>
-                        <VStack alignItems={"start"} w='full'>
-                          <Box className="title">
+                        <VStack alignItems={"start"} w="full">
+                          <Box
+                            className="title"
+                            onClick={() => viewImg(detail.img ?? imgArticle1)}
+                          >
                             <Text color={"blue"}>{detail.title}</Text>
-                            {
-                              <Box
-                                pos="absolute"
-                                top={
-                                  i == 0
-                                    ? "0%"
-                                    : i == data.employerWarning!.length - 1
-                                    ? "-50%"
-                                    : "50%"
-                                }
-                                left="50%"
-                                zIndex={20}
-                                display={"none"}
-                              >
-                                <Image
-                                  src={imgDoneWork10}
-                                  maxW={400}
-                                  maxH={250}
-                                  w={"auto"}
-                                />
-                              </Box>
-                            }
                           </Box>
                           {detail.text && <Text>{detail.text}</Text>}
                         </VStack>
@@ -139,32 +119,12 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
                   {data.employerWarning?.map((detail, i) => {
                     return (
                       <ListItem py={4} pl={10} color={"text"} key={i}>
-                        <VStack alignItems={"start"} w='full'>
-                          <Box className="title">
+                        <VStack alignItems={"start"} w="full">
+                          <Box
+                            className="title"
+                            onClick={() => viewImg(detail.img ?? imgArticle1)}
+                          >
                             <Text color={"blue"}>{detail.title}</Text>
-                            {
-                              <Box
-                                pos="absolute"
-                                top={
-                                  i == 0
-                                    ? "0%"
-                                    : i == data.employerWarning!.length - 1
-                                    ? "-50%"
-                                    : "50%"
-                                }
-                                left="50%"
-                                zIndex={20}
-                                display={"none"}
-                              >
-                                <Image
-                                  src={imgDoneWork10}
-                                  maxW={400}
-                                  maxH={250}
-                                  w={"auto"}
-                                />
-                              </Box>
-                            }
-                            
                           </Box>
                           {detail.text && <Text>{detail.text}</Text>}
                         </VStack>
@@ -181,7 +141,14 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
               <VStack w={"full"} alignItems={"start"} gap={8}>
                 {data.setup?.map((fun, index) => {
                   return (
-                    <AccordianWidget key={index} fun={fun} length={data.setup!.length }/>
+                    <AccordianWidget
+                      onClick={(value: string) => {
+                        viewImg(value);
+                      }}
+                      key={index}
+                      fun={fun}
+                      length={data.setup!.length}
+                    />
                   );
                 })}
               </VStack>
@@ -227,7 +194,14 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
               <VStack w={"full"} alignItems={"start"} gap={8}>
                 {data.possible?.map((fun, index) => {
                   return (
-                   < AccordianWidget fun={fun} key={index} length={data.possible!.length}/>
+                    <AccordianWidget
+                      onClick={(value: string) => {
+                        viewImg(value);
+                      }}
+                      fun={fun}
+                      key={index}
+                      length={data.possible!.length}
+                    />
                   );
                 })}
               </VStack>
@@ -239,7 +213,14 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
               <VStack w={"full"} alignItems={"start"} gap={8}>
                 {data.functions?.map((fun, index) => {
                   return (
-                    < AccordianWidget fun={fun} key={index} length={data.functions!.length}/>
+                    <AccordianWidget
+                      onClick={(value: string) => {
+                        viewImg(value);
+                      }}
+                      fun={fun}
+                      key={index}
+                      length={data.functions!.length}
+                    />
                   );
                 })}
               </VStack>
@@ -252,7 +233,14 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
               <VStack w={"full"} alignItems={"start"} gap={8}>
                 {data.key?.map((fun, index) => {
                   return (
-                    < AccordianWidget fun={fun} key={index} length={data.key!.length}/>
+                    <AccordianWidget
+                      onClick={(value: string) => {
+                        viewImg(value);
+                      }}
+                      fun={fun}
+                      key={index}
+                      length={data.key!.length}
+                    />
                   );
                 })}
               </VStack>
@@ -267,7 +255,7 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
                   {data.condition?.details?.map((detail, i) => {
                     return (
                       <ListItem py={4} pl={10} color={"text"} key={i}>
-                        <VStack alignItems={"start"} w='full'>
+                        <VStack alignItems={"start"} w="full">
                           {/* <Box className='title'><Text color={"blue"} >{detail.title}</Text></Box> */}
                           {detail.text && <Text>{detail.text}</Text>}
                         </VStack>
@@ -280,6 +268,15 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
           },
         ]}
       />
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalCloseButton />
+          <ModalBody p={4} mt={10}>
+            <Image src={img} w={"full"} />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </VStack>
   );
 };

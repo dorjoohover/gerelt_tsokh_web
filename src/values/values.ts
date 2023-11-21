@@ -4,11 +4,15 @@ import {
   imgFoundation,
   imgGACLogo,
   imgGratitude,
+  imgIcon1,
+  imgIcon2,
   imgInfo1,
   imgMONESLogo,
   imgTAFLogo,
   svgFb,
+
   svgText,
+
   svgTwitter,
   svgVideo,
   svgVoice,
@@ -69,10 +73,10 @@ export const additionInfoValues = [
 ];
 
 export const partnerValues = [
-  imgEULogo,
-  imgGACLogo,
   imgCCRLogo,
+  imgGACLogo,
   imgMONESLogo,
+  imgEULogo,
   imgTAFLogo,
 ];
 
@@ -99,11 +103,11 @@ export const valuableValues = [
 ];
 export const directionActivityValues = [
   {
-    icon: svgText,
+    icon: imgIcon1,
     text: inclusiveEducation,
   },
   {
-    icon: svgText,
+    icon: imgIcon2,
     text: accessibleEmployment,
   },
 ];

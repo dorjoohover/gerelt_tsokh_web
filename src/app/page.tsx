@@ -162,28 +162,29 @@ export default function Home() {
             md: "row",
             base: "column",
           }}
+          p={0}
         >
           <Link href={"/about"}>
             <CustomCard
               body={<Image src={imgGereltTsokh} />}
               footer={
                 <Text variant={"title"} color={"darkPrime"}>
-                {gereltTokh}
+                  {gereltTokh}
                 </Text>
               }
             />
           </Link>
 
-          <Link href={'/tokhiruulga?name=gratitude'} >
-          <CustomCard
-            body={<Image src={imgTokhiruulga} />}
-            footer={
-              <Text variant={"title"} color={"darkPrime"}>
-                {tokhiruulgaMn}
-              </Text>
-            }/>
+          <Link href={"/tokhiruulga?name=gratitude"}>
+            <CustomCard
+              body={<Image src={imgTokhiruulga} />}
+              footer={
+                <Text variant={"title"} color={"darkPrime"}>
+                  {tokhiruulgaMn}
+                </Text>
+              }
+            />
           </Link>
-         
         </HStack>
         <Box h={4} />
         <Text
@@ -196,7 +197,7 @@ export default function Home() {
         >
           {additionInfo}
         </Text>
-        <HStackContainer>
+        <HStack w={"full"} gap={10}>
           {additionInfoValues.map((value, index) => {
             return (
               <AdditionCard
@@ -207,15 +208,15 @@ export default function Home() {
               />
             );
           })}
-        </HStackContainer>
+        </HStack>
         <Box h={12} />
       </VStackContainer>
       <VStack
         w={"full"}
         pos={"relative"}
-        px={{ gl: 10, base: 0 }}
+        px={{ lg: 10, base: 0 }}
         maxW={"1240px"}
-        mx={'auto'}
+        mx={"auto"}
       >
         <Box
           borderRadius={{ md: 12, base: 0 }}
@@ -226,8 +227,8 @@ export default function Home() {
           }}
           pos={"absolute"}
           top={0}
-          left={0}
-          right={0}
+          left={{ lg: 10, base: 0 }}
+          right={{ lg: 10, base: 0 }}
           zIndex={0}
         />
         <Text variant={"title"} zIndex={1} color={"white"} mt={9} mb={8}>
@@ -280,7 +281,13 @@ export default function Home() {
             }
           />
         </HStackContainer>
-        <Button onClick={() => {router.push('/article')}} textTransform={"none"} mt={10}>
+        <Button
+          onClick={() => {
+            router.push("/article");
+          }}
+          textTransform={"none"}
+          mt={10}
+        >
           {watchOtherArticle}
         </Button>
       </VStack>
@@ -303,10 +310,8 @@ export default function Home() {
           }}
           gap={{
             md: 10,
-       
           }}
           w={"full"}
-        
           alignItems={"center"}
         >
           {partnerValues.map((partner, index) => {
@@ -323,9 +328,11 @@ export default function Home() {
                 borderBottom={{
                   md: "none",
                   base:
-                    index != partnerValues.length - 1 ? "1px solid #00BCA9" : "",
+                    index != partnerValues.length - 1
+                      ? "1px solid #00BCA9"
+                      : "",
                 }}
-                py={{base: 6}}
+                py={{ base: 6 }}
                 borderColor={{
                   md: "none",
                   base: "prime.default",
@@ -334,9 +341,8 @@ export default function Home() {
                 alignItems={"center"}
                 justifyContent={"center"}
                 key={index}
-             
               >
-                <Image src={partner} key={index} mx={"auto"}  h={'100%'}/>
+                <Image src={partner} key={index} mx={"auto"} h={"100%"} />
               </GridItem>
             );
           })}

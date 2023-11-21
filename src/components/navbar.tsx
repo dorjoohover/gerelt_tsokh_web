@@ -310,8 +310,8 @@ const Navbar = () => {
               gap={10}
               px={6}
               gridTemplateColumns={{
-                md: "repeat(3, 1fr)",
-                sm: "repeat(2, 1fr)",
+               
+                md: "repeat(2, 1fr)",
                 base: "repeat(1, 1fr)",
               }}
               display={gerelt ? "grid" : "none"}
@@ -337,8 +337,8 @@ const Navbar = () => {
               mt={90}
               px={6}
               gridTemplateColumns={{
-                md: "repeat(3, 1fr)",
-                sm: "repeat(2, 1fr)",
+            
+                md: "repeat(2, 1fr)",
                 base: "repeat(1, 1fr)",
               }}
               display={tokhiruulgaActive ? "grid" : "none"}
@@ -364,8 +364,8 @@ const Navbar = () => {
               mt={90}
               px={6}
               gridTemplateColumns={{
-                md: "repeat(3, 1fr)",
-                sm: "repeat(2, 1fr)",
+      
+                md: "repeat(2, 1fr)",
                 base: "repeat(1, 1fr)",
               }}
               display={active ? "grid" : "none"}

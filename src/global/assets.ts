@@ -32,7 +32,8 @@ export const imgDoneProject2 = `${about}doneProject2.jpg`
 export const imgDoneResearch = `${about}doneProject2.jpg`
 export const imgDoneScholarship = `${about}doneScholarship.jpg`
 export const imgFoundation1 = `${about}foundation1.jpg`
-
+export const imgIcon1 = `${img}icon1.png`
+export const imgIcon2 = `${img}icon2.png`
 // done work
 export const imgDoneWork1 = `${doneWork}1.jpg`
 export const imgDoneWork2 = `${doneWork}2.jpg`

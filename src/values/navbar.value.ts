@@ -27,19 +27,19 @@ export const gereltNavValues: NavItemsTypes[] = [
     link: [
       {
         name: "Судалгаа",
-        value: "/about",
+        value: "/",
       },
       {
         name: "Төсөл",
-        value: "/about",
+        value: "/",
       },
       {
         name: "Сургалт ба зөвлөгөө үйлчилгээ",
-        value: "/about",
+        value: "/",
       },
       {
         name: "Зарлагдсан тэтгэлэг ба хандив",
-        value: "/about",
+        value: "/",
       },
     ],
   },
@@ -125,11 +125,11 @@ export const tokhiruulgaNavValues: NavItemsTypes[] = [
       },
       {
         name: feedback,
-        value: "/tokhiruulga?name=feeback",
+        value: "/tokhiruulga?name=feedback",
       },
       {
         name: contact,
-        value: "/tokhiruulga?name=cantact",
+        value: "/tokhiruulga?name=contact",
       },
     ],
   },
