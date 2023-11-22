@@ -32,6 +32,7 @@ import {
   Image,
   Grid,
   GridItem,
+  Heading,
 } from "@chakra-ui/react";
 import Slider from "react-slick";
 import Link from "next/link";
@@ -103,9 +104,9 @@ export default function Home() {
                 justifyContent={"center"}
                 alignItems={"start"}
               >
-                <Text variant={"display"} mt={6}>
+                <Heading variant={"display"} mt={6}>
                   {tokhiruulga}
-                </Text>
+                </Heading>
                 <Text variant={"smallTitle"}>{purpose}</Text>
                 <Text color={"white"}>{purposeText}</Text>
                 <Box
@@ -168,9 +169,16 @@ export default function Home() {
             <CustomCard
               body={<Image src={imgGereltTsokh} />}
               footer={
-                <Text variant={"title"} color={"darkPrime"}>
+                <Heading
+                  variant={"title"}
+                  fontSize={{
+                    md: "22px",
+                    base: "16px",
+                  }}
+                  color={"darkPrime"}
+                >
                   {gereltTokh}
-                </Text>
+                </Heading>
               }
             />
           </Link>
@@ -179,24 +187,35 @@ export default function Home() {
             <CustomCard
               body={<Image src={imgTokhiruulga} />}
               footer={
-                <Text variant={"title"} color={"darkPrime"}>
+                <Heading
+                  variant={"title"}
+                  fontSize={{
+                    md: "22px",
+                    base: "16px",
+                  }}
+                  color={"darkPrime"}
+                >
                   {tokhiruulgaMn}
-                </Text>
+                </Heading>
               }
             />
           </Link>
         </HStack>
         <Box h={4} />
-        <Text
+        <Heading
           variant={"title"}
           color={"prime.default"}
+          fontSize={{
+            md: "22px",
+            base: "16px",
+          }}
           m={{
             md: 0,
             base: "auto",
           }}
         >
           {additionInfo}
-        </Text>
+        </Heading>
         <HStack w={"full"} gap={10}>
           {additionInfoValues.map((value, index) => {
             return (
@@ -231,9 +250,19 @@ export default function Home() {
           right={{ lg: 10, base: 0 }}
           zIndex={0}
         />
-        <Text variant={"title"} zIndex={1} color={"white"} mt={9} mb={8}>
+        <Heading
+          variant={"title"}
+          fontSize={{
+            md: "22px",
+            base: "16px",
+          }}
+          zIndex={1}
+          color={"white"}
+          mt={9}
+          mb={8}
+        >
           {specialInfo}
-        </Text>
+        </Heading>
         <HStackContainer
           margin={{ lg: "0 40px 0 40px", base: "0 24px 0 24px" }}
           w="auto"
@@ -242,10 +271,18 @@ export default function Home() {
             body={<Image src={imgInfo} w={"full"} />}
             footer={
               <VStack gap={7}>
-                <Text variant={"title"} mb={1} color={"prime.default"}>
+                <Heading
+                  fontSize={{
+                    md: "22px",
+                    base: "16px",
+                  }}
+                  variant={"title"}
+                  mb={1}
+                  color={"prime.default"}
+                >
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Asperiores, delectus?
-                </Text>
+                </Heading>
                 <Text>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Voluptates, inventore...
@@ -263,10 +300,18 @@ export default function Home() {
             body={<Image src={imgInfo} w={"full"} />}
             footer={
               <VStack gap={7}>
-                <Text variant={"title"} mb={1} color={"prime.default"}>
+                <Heading
+                  fontSize={{
+                    md: "22px",
+                    base: "16px",
+                  }}
+                  variant={"title"}
+                  mb={1}
+                  color={"prime.default"}
+                >
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Asperiores, delectus?
-                </Text>
+                </Heading>
                 <Text>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Voluptates, inventore...
@@ -293,15 +338,19 @@ export default function Home() {
       </VStack>
       <Box h={12} />
       <VStackContainer>
-        <Text
+        <Heading
           variant={"title"}
           mx={"auto"}
           textAlign={"center"}
           color={"prime.default"}
           mb={9}
+          fontSize={{
+            md: "22px",
+            base: "16px",
+          }}
         >
           {partners}
-        </Text>
+        </Heading>
 
         <Grid
           gridTemplateColumns={{

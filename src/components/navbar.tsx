@@ -9,6 +9,7 @@ import {
   Grid,
   GridItem,
   HStack,
+  Heading,
   Image,
   Input,
   SlideFade,
@@ -36,7 +37,7 @@ const NavItem: FC<NavItemsTypes> = ({ title, link, onClick }) => {
       w={"full"}
       alignItems={"start" }
     >
-      <Text
+      <Heading
         w={{ base: "full", sm: "auto" }}
         variant={"smallTitle"}
         color={"white"}
@@ -45,7 +46,7 @@ const NavItem: FC<NavItemsTypes> = ({ title, link, onClick }) => {
         mb={3}
       >
         {title}
-      </Text>
+      </Heading>
       {link.map((l, i) => {
         return (
           <Link href={`${l.value}`} key={i} onClick={onClick}>

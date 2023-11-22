@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   HStack,
+  Heading,
   Icon,
   Image,
   Text,
@@ -22,9 +23,16 @@ export const TextLine: FC<InfoType> = ({ data }) => {
         justifyContent={"space-between"}
         mb={{ md: 8, base: 4 }}
       >
-        <Text variant={"title"} color={"text"}>
+        <Heading
+          fontSize={{
+            md: "22px",
+            base: "16px",
+          }}
+          variant={"title"}
+          color={"text"}
+        >
           {data.title}
-        </Text>
+        </Heading>
         <Text
           variant={"normal"}
           display={{ md: "inline-block", base: "none" }}
@@ -60,9 +68,16 @@ export const VoiceLine: FC<InfoType> = ({ data }) => {
           justifyContent={"space-between"}
           mb={{ md: 8, base: 4 }}
         >
-          <Text variant={"title"} color={"text"}>
+          <Heading
+            fontSize={{
+              md: "22px",
+              base: "16px",
+            }}
+            variant={"title"}
+            color={"text"}
+          >
             {data.title}
-          </Text>
+          </Heading>
           <Text
             variant={"normal"}
             display={{ md: "inline-block", base: "none" }}
@@ -101,9 +116,9 @@ export const VideoLine: FC<InfoType> = ({ data }) => {
           </Box>
         </Link>
       </Box>
-      <Text variant={"smallTitle"} color={"text"}>
+      <Heading fontSize={"20px"} variant={"smallTitle"} color={"text"}>
         {data.title}
-      </Text>
+      </Heading>
 
       <Text>{data.date}</Text>
     </VStack>

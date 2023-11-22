@@ -13,7 +13,7 @@ import { hotTopics, more, tokhiruulga, tokhiruulgaMn } from "@/global/string";
 import { TopicModel } from "@/model/topic.model";
 import { tokhiruulgaTags } from "@/values/tags";
 
-import { Button, HStack, Text, VStack } from "@chakra-ui/react";
+import { Button, HStack, Heading, Text, VStack } from "@chakra-ui/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -88,9 +88,16 @@ const TopicPage = () => {
               {data?.map((d, i) => {
                 return (
                   <VStack w={"full"} alignItems={"start"} key={i}>
-                    <Text variant={"title"} color={"text"}>
+                    <Heading
+                      fontSize={{
+                        md: "22px",
+                        base: "16px",
+                      }}
+                      variant={"title"}
+                      color={"text"}
+                    >
                       {d.title}
-                    </Text>
+                    </Heading>
 
                     <Text
                       mb={{ md: 0, base: 4 }}

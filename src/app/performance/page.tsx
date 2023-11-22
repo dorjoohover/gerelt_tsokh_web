@@ -13,7 +13,7 @@ import { more, performance, tokhiruulga, tokhiruulgaMn } from "@/global/string";
 import { tokhiruulgaTags } from "@/values/tags";
 import { PerformanceModel } from "@/model/performance.model";
 
-import { Button, HStack, Text, VStack } from "@chakra-ui/react";
+import { Button, HStack, Heading, Text, VStack } from "@chakra-ui/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -25,7 +25,7 @@ const PerformancePage = () => {
   const [value, setValue] = useState("");
   const [dataCount, setCount] = useState<number>(0);
   const [selected, setSelected] = useState<PerformanceModel | null>(null);
-  const router = useRouter()
+  const router = useRouter();
   const getData = async (t: PerformanceTypes) => {
     try {
       let filtered = performanceData.filter((d) => d.type == t);
@@ -58,7 +58,6 @@ const PerformancePage = () => {
   useEffect(() => {
     if (params.get("id") != undefined) {
       getDataById(params.get("id")!);
-      
     }
     if (params.get("name")) {
       let name: any = params.get("name") as keyof typeof PerformanceTypes;
@@ -92,9 +91,16 @@ const PerformancePage = () => {
               {data?.map((d, i) => {
                 return (
                   <VStack w={"full"} alignItems={"start"} key={i}>
-                    <Text variant={"title"} color={"text"}>
+                    <Heading
+                      fontSize={{
+                        md: "22px",
+                        base: "16px",
+                      }}
+                      variant={"title"}
+                      color={"text"}
+                    >
                       {d.title}
-                    </Text>
+                    </Heading>
 
                     <Text
                       mb={{ md: 0, base: 4 }}
@@ -104,8 +110,8 @@ const PerformancePage = () => {
                     </Text>
                     <Button
                       onClick={() => {
-                        getDataById(d._id)
-                        router.push(`/performance?id=${d._id}`)
+                        getDataById(d._id);
+                        router.push(`/performance?id=${d._id}`);
                       }}
                       _hover={{ bg: "none" }}
                       bg={"none"}
@@ -123,7 +129,6 @@ const PerformancePage = () => {
         limit={10}
         page={page}
         type={type}
-
         value={value}
         length={selected ? 1 : dataCount}
         changePage={(value) => setPage(value)}

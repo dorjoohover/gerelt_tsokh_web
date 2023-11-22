@@ -27,6 +27,7 @@ import {
   Grid,
   GridItem,
   HStack,
+  Heading,
   Input,
   Text,
   Textarea,
@@ -143,9 +144,16 @@ const TokhiruulgaPage = () => {
               let v = d as PerformanceModel;
               return (
                 <VStack w={"full"} alignItems={"start"} key={i}>
-                  <Text variant={"title"} color={"text"}>
+                  <Heading
+                    fontSize={{
+                      md: "22px",
+                      base: "16px",
+                    }}
+                    variant={"title"}
+                    color={"text"}
+                  >
                     {v.title}
-                  </Text>
+                  </Heading>
 
                   <Text mb={{ md: 0, base: 4 }} noOfLines={{ md: 3, base: 4 }}>
                     {v.text}
@@ -165,9 +173,16 @@ const TokhiruulgaPage = () => {
               let v = d as TopicModel;
               return (
                 <VStack w={"full"} alignItems={"start"} key={i}>
-                  <Text variant={"title"} color={"text"}>
+                  <Heading
+                    fontSize={{
+                      md: "22px",
+                      base: "16px",
+                    }}
+                    variant={"title"}
+                    color={"text"}
+                  >
                     {v.title}
-                  </Text>
+                  </Heading>
 
                   <Text mb={{ md: 0, base: 4 }} noOfLines={{ md: 3, base: 4 }}>
                     {v.text}
@@ -248,9 +263,14 @@ const TokhiruulgaPage = () => {
       case TokhiruulgaTypes.contact:
         return (
           <VStack w={"full"} gap={10} alignItems={"start"}>
-            <Text mb={2} variant={"smallTitle"} color={"text"}>
+            <Heading
+              fontSize={"20px"}
+              mb={2}
+              variant={"smallTitle"}
+              color={"text"}
+            >
               {feedback}
-            </Text>
+            </Heading>
             <Grid
               w={"full"}
               gridTemplateColumns={{

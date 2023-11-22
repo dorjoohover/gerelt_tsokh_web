@@ -12,6 +12,7 @@ import {
   CardBody,
   CardFooter,
   HStack,
+  Heading,
   Image,
   Text,
   VStack,
@@ -32,7 +33,7 @@ type AdditionType = {
   icon: string;
   text: string;
 
-  onClick: () => void
+  onClick: () => void;
 };
 const CustomCard: FC<Types> = ({
   body,
@@ -48,7 +49,7 @@ const CustomCard: FC<Types> = ({
       borderBottomColor={"prime.default"}
       borderBottomWidth={"6px"}
       borderRadius={0}
-      h={'full'}
+      h={"full"}
     >
       <CardBody bg={bodyBg} padding={0}>
         {body}
@@ -69,7 +70,7 @@ const CustomCard: FC<Types> = ({
   );
 };
 
-export const AdditionCard: FC<AdditionType> = ({ icon, text,  onClick }) => {
+export const AdditionCard: FC<AdditionType> = ({ icon, text, onClick }) => {
   return (
     <VStack w={"full"} borderRadius={12} bg={"prime.default"} pt={8} pb={14}>
       <Image src={icon} w={10} />
@@ -113,8 +114,8 @@ export const SliderCard: FC<Types> = ({ body, footer, bg, current }) => {
           base: "-40%",
         }}
         left={{
-          xl: '0',
-          lg: '-50%',
+          xl: "0",
+          lg: "-50%",
           md: "-75%",
           base: "-150%",
         }}
@@ -166,31 +167,38 @@ export const SliderCard: FC<Types> = ({ body, footer, bg, current }) => {
 type RoundedType = {
   title?: string;
   text: string;
-  py?: number,
-  icon?: string,
-  bg?: string
+  py?: number;
+  icon?: string;
+  bg?: string;
 };
 
-export const RoundedCard: FC<RoundedType> = ({bg, title, text, py, icon }) => {
+export const RoundedCard: FC<RoundedType> = ({ bg, title, text, py, icon }) => {
   return (
     <VStack
       w={"full"}
-      py={ 10 }
+      py={10}
       px={{ md: 9, base: 6 }}
       borderRadius={12}
       border={"1px solid #00BCA9 "}
-      borderColor={'prime.default'}
+      borderColor={"prime.default"}
       bg={bg}
-      h={'full'}
-
+      h={"full"}
     >
-      {title && <Text variant={"smallTitle"} textAlign={'center'} color={"text"} mb={{md: 10}}>
-        {title}
-      </Text>}
-      {
-        icon && <Image src={icon} w={10}/>
-      }
-      <Text textAlign={'center'} color={bg ? 'white' : 'text'}>{text}</Text>
+      {title && (
+        <Heading
+          variant={"smallTitle"}
+          textAlign={"center"}
+          color={"text"}
+          fontSize={"20px"}
+          mb={{ md: 10 }}
+        >
+          {title}
+        </Heading>
+      )}
+      {icon && <Image src={icon} w={10} />}
+      <Text textAlign={"center"} color={bg ? "white" : "text"}>
+        {text}
+      </Text>
     </VStack>
   );
 };

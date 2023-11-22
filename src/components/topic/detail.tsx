@@ -3,6 +3,7 @@ import {
   PerformanceQuestion,
 } from "@/model/performance.model";
 import {
+  Heading,
   ListItem,
   OrderedList,
   Text,
@@ -15,7 +16,15 @@ import { TopicModel } from "@/model/topic.model";
 const TopicDetailWidget = ({ data }: { data: TopicModel }) => {
   return (
     <VStack alignItems={"start"} w={"full"} gap={5}>
-      <Text variant={"title"}>{data.title}</Text>
+      <Heading
+        fontSize={{
+          md: "22px",
+          base: "16px",
+        }}
+        variant={"title"}
+      >
+        {data.title}
+      </Heading>
 
       <Text>{data.text}</Text>
     </VStack>

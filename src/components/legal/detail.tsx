@@ -1,17 +1,11 @@
-import {
-  HStack,
-
-  Text,
-
-  VStack,
-} from "@chakra-ui/react";
+import { HStack, Heading, Text, VStack } from "@chakra-ui/react";
 import CustomAccordian from "../accordian";
 import { LegalModel } from "@/model/legal.model";
 
 const LegalDetailWidget = ({ data }: { data: LegalModel }) => {
   return (
     <VStack alignItems={"start"} w={"full"} gap={4}>
-      <Text variant={"smallTitle"}  color={"text"}>
+      <Text variant={"smallTitle"} color={"text"}>
         {data.title.toUpperCase()}
       </Text>
       {data.date && (
@@ -26,9 +20,9 @@ const LegalDetailWidget = ({ data }: { data: LegalModel }) => {
       {data.details.map((detail, index) => {
         return (
           <VStack w={"full"} alignItems={"start"} key={index}>
-            <Text variant={"smallTitle"} color={"text"}>
+            <Heading fontSize={"20px"} variant={"smallTitle"} color={"text"}>
               {detail.title}
-            </Text>
+            </Heading>
             <Text>{detail.text}</Text>
           </VStack>
         );

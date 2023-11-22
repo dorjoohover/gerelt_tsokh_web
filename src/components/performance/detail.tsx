@@ -5,6 +5,7 @@ import {
 } from "@/model/performance.model";
 import {
   Box,
+  Heading,
   Image,
   ListItem,
   Modal,
@@ -30,7 +31,7 @@ type AccordianWidgetType = {
 const AccordianWidget: FC<AccordianWidgetType> = ({ fun, length, onClick }) => {
   return (
     <VStack w={"full"} alignItems={"start"} gap={4}>
-      <Text>{fun.title}</Text>
+      <Heading fontSize={"16px"}>{fun.title}</Heading>
       <UnorderedList>
         {fun.details.map((detail, i) => {
           return (
@@ -65,7 +66,15 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
   };
   return (
     <VStack alignItems={"start"} w={"full"} gap={5}>
-      <Text variant={"title"}>{data.title}</Text>
+      <Heading
+        fontSize={{
+          md: "22px",
+          base: "16px",
+        }}
+        variant={"title"}
+      >
+        {data.title}
+      </Heading>
 
       <VStack w={"full"} alignItems={{ base: "start", md: "center" }}>
         <Text>{data.text}</Text>
@@ -124,7 +133,9 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
                             className="title"
                             onClick={() => viewImg(detail.img ?? imgArticle1)}
                           >
-                            <Text color={"blue"}>{detail.title}</Text>
+                            <Heading fontSize={"16px"} color={"blue"}>
+                              {detail.title}
+                            </Heading>
                           </Box>
                           {detail.text && <Text>{detail.text}</Text>}
                         </VStack>
@@ -162,7 +173,7 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
                 {data.space?.map((fun, index) => {
                   return (
                     <VStack key={index} w={"full"} alignItems={"start"} gap={4}>
-                      <Text>{fun.title}</Text>
+                      <Heading fontSize={'16px'}>{fun.title}</Heading>
                       {fun.text && <Text>{fun.text}</Text>}
                     </VStack>
                   );
@@ -180,7 +191,7 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
                 {data.trigger?.map((fun, index) => {
                   return (
                     <VStack key={index} w={"full"} alignItems={"start"} gap={4}>
-                      <Text>{fun.title}</Text>
+                      <Heading fontSize={'16px'}>{fun.title}</Heading>
                       {fun.text && <Text>{fun.text}</Text>}
                     </VStack>
                   );
@@ -250,7 +261,7 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
             title: data.condition != undefined ? "Нөхцөл ба Шийдэл" : "",
             child: (
               <VStack w={"full"} alignItems={"start"} gap={4}>
-                <Text>{data.condition?.title}</Text>
+                <Heading fontSize={'16px'}>{data.condition?.title}</Heading>
                 <UnorderedList>
                   {data.condition?.details?.map((detail, i) => {
                     return (

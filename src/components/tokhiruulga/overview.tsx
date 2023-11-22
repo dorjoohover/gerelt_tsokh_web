@@ -1,4 +1,12 @@
-import { Box, HStack, Icon, Image, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  HStack,
+  Heading,
+  Icon,
+  Image,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import Link from "next/link";
 import { FC } from "react";
 import { FaPlay } from "react-icons/fa";
@@ -11,7 +19,7 @@ type Types = {
 };
 const OverviewWidget: FC<Types> = ({ img, text, uri, question, purpose }) => {
   return (
-    <VStack w={"full"} gap={{ md: 12, base: 10 }} alignItems={'start'}>
+    <VStack w={"full"} gap={{ md: 12, base: 10 }} alignItems={"start"}>
       <Text>{text}</Text>
       <Box pos={"relative"} w={"full"}>
         <Image src={img} alt={""} w={"full"} />
@@ -30,13 +38,13 @@ const OverviewWidget: FC<Types> = ({ img, text, uri, question, purpose }) => {
             w={16}
             h={16}
           >
-            <Icon as={FaPlay} boxSize={25} color={'white'}/>
+            <Icon as={FaPlay} boxSize={25} color={"white"} />
           </Box>
         </Link>
       </Box>
-      <Text variant={"smallTitle"} color={"text"}>
+      <Heading fontSize={"20px"} variant={"smallTitle"} color={"text"}>
         Зорилго
-      </Text>
+      </Heading>
       <Text fontStyle={"italic"}>{question}</Text>
       <Text>{purpose}</Text>
     </VStack>

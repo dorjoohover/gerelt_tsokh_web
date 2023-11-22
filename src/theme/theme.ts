@@ -3,6 +3,7 @@ import Button from "./button";
 import Card, { CardFooter } from "./card";
 import { TextArea, Input } from "./form";
 import Text from "./text";
+import Heading from "./heading";
 import { Box, HStack } from "./box";
 export const theme = extendTheme({
   colors: {
@@ -32,5 +33,6 @@ export const theme = extendTheme({
     HStack,
     TextArea,
     Input,
+    Heading
   },
 });

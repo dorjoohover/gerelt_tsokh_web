@@ -7,6 +7,7 @@ import {
   AccordionPanel,
   Box,
   Button,
+  Heading,
   Text,
   chakra,
   keyframes,
@@ -53,14 +54,15 @@ const CustomAccordian = ({ data }: { data: AccordionType[] }) => {
                   >
                     <AddIcon color={"prime.default"} />
                   </Box>
-                  <Box
-                   
-                    flex="1"
-                    textAlign="left"
-                    ml={8}
-                   
-                  >
-                    <Text variant={'smallTitle'} textTransform={'uppercase'} color={'text'}>{d.title}</Text>
+                  <Box flex="1" textAlign="left" ml={8}>
+                    <Heading
+                      fontSize={"20px"}
+                      variant={"smallTitle"}
+                      textTransform={"uppercase"}
+                      color={"text"}
+                    >
+                      {d.title}
+                    </Heading>
                   </Box>
                 </AccordionButton>
 

@@ -20,6 +20,7 @@ import {
   Box,
   Center,
   HStack,
+  Heading,
   Image,
   Text,
   VStack,
@@ -30,22 +31,35 @@ import {
 export default function About() {
   return (
     <VStackContainer gap={{ md: 12, base: 9 }}>
-      <Text
+      <Heading
         variant={"title"}
         mt={{
           md: 12,
           base: 9,
         }}
+        fontSize={{
+          md: "22px",
+          base: "16px",
+        }}
         color={"prime.default"}
         mx={"auto"}
       >
         {aboutUs}
-      </Text>
+      </Heading>
       <RoundedCard title={vision} text={visionValue} />
       <RoundedCard title={mission} text={missionValue} />
-      <Text variant={"title"} mt={1} color={"prime.default"} mx={"auto"}>
+      <Heading
+        fontSize={{
+          md: "22px",
+          base: "16px",
+        }}
+        variant={"title"}
+        mt={1}
+        color={"prime.default"}
+        mx={"auto"}
+      >
         {valuable}
-      </Text>
+      </Heading>
       <HStack
         gap={{ md: 10, base: 7 }}
         w={"100%"}
@@ -55,9 +69,18 @@ export default function About() {
           return <RoundedCard title={v.title} text={v.text} key={index} />;
         })}
       </HStack>
-      <Text variant={"title"} mt={1} color={"prime.default"} mx={"auto"}>
+      <Heading
+        fontSize={{
+          md: "22px",
+          base: "16px",
+        }}
+        variant={"title"}
+        mt={1}
+        color={"prime.default"}
+        mx={"auto"}
+      >
         {directionActivity}
-      </Text>
+      </Heading>
       <HStack gap={10} w={"100%"} flexDir={{ md: "row", base: "column" }}>
         {directionActivityValues.map((d, index) => {
           return (
@@ -71,14 +94,18 @@ export default function About() {
           );
         })}
       </HStack>
-      <Text
+      <Heading
+        fontSize={{
+          md: "22px",
+          base: "16px",
+        }}
         variant={"title"}
         mt={4}
         color={"prime.default"}
         mx={{ md: 0, base: "auto" }}
       >
         {foundationHistory}
-      </Text>
+      </Heading>
       <Box w={"full"} alignItems={"start"} fontSize={"20px"} color={"text"}>
         <Box
           w={{ md: "50%", base: "100%" }}
@@ -87,9 +114,14 @@ export default function About() {
         >
           <Image src={foundationHistoryValue.img} alt={""} />
         </Box>
-        <Text variant={"smallTitle"} color={"text"} mb={{ md: 8, base: 4 }}>
+        <Heading
+          fontSize={'20px'}
+          variant={"smallTitle"}
+          color={"text"}
+          mb={{ md: 8, base: 4 }}
+        >
           {foundationHistoryValue.title}
-        </Text>
+        </Heading>
         <Text mb={{ md: 12, base: 4 }} fontStyle={"italic"}>
           {foundationHistoryValue.semiTitle}
         </Text>

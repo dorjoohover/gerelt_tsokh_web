@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   HStack,
+  Heading,
   Icon,
   Image,
   Text,
@@ -52,13 +53,20 @@ export const LineWidget: FC<LineWidgetType> = ({
         gap={{ md: 4 }}
         flex={2}
       >
-        <Text variant={"title"} color={"text"}>
+        <Heading
+          fontSize={{
+            md: "22px",
+            base: "16px",
+          }}
+          variant={"title"}
+          color={"text"}
+        >
           {title}
-        </Text>
+        </Heading>
         {semiTitle && (
-          <Text fontStyle={"italic"} color={"text"}>
+          <Heading fontSize={"20px"} fontStyle={"italic"} color={"text"}>
             {semiTitle}
-          </Text>
+          </Heading>
         )}
 
         <Text mb={{ md: 0, base: 4 }} noOfLines={{ md: 3, base: 4 }}>
@@ -76,16 +84,16 @@ export const LineWidgetDetail: FC<LineWidgetDetailType> = ({
   title,
   id,
   text,
-  semiTitle
+  semiTitle,
 }) => {
   return (
     <VStack alignItems={"start"} w={"full"} gap={5}>
-      <Text variant={"title"}>{title}</Text>
+      <Heading variant={"title"}>{title}</Heading>
       {semiTitle && (
-          <Text fontStyle={"italic"} color={"text"}>
-            {semiTitle}
-          </Text>
-        )}
+        <Text fontStyle={"italic"} color={"text"}>
+          {semiTitle}
+        </Text>
+      )}
       <Image src={img} w={"full"} alt={id ?? ""} />
       <VStack w={"full"} alignItems={{ base: "start", md: "center" }}>
         <Text>{text}</Text>
