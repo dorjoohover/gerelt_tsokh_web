@@ -6,6 +6,7 @@ export const purposeText =
 
 export const gereltTokh = "Гэрэлт Цох Байшин ТББ";
 export const additionInfo = "НЭМЭЛТ МЭДЭЭЛЛҮҮД";
+
 export const textInfo = "ТЕКСТ МЭДЭЭЛЛҮҮД";
 
 export const navText = "Хүртээмжтэй хөдөлмөр эрхлэлтийн соёл";

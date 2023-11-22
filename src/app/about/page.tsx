@@ -112,7 +112,7 @@ export default function About() {
           ml={{ md: 10, base: 0 }}
           float={"right"}
         >
-          <Image src={foundationHistoryValue.img} alt={""} />
+          <Image src={foundationHistoryValue.img} alt={foundationHistory} />
         </Box>
         <Heading
           fontSize={'20px'}

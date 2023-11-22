@@ -52,7 +52,7 @@ const ArticlePage = () => {
       setType(name ?? ArticleTypes.article);
       setValue(filterName(name, articleTags));
     }
-  }, [params]);
+  }, [params.get("id"), params.get("name")]);
 
   return (
     <VStackContainer>
@@ -112,7 +112,7 @@ const ArticlePage = () => {
         changeType={(value) => {
           setType(value);
           setPage(0);
-          setSelected(null)
+          setSelected(null);
         }}
         changeSub={() => {}}
       />

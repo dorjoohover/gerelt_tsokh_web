@@ -173,7 +173,7 @@ const Navbar = () => {
                 display={!search ? "flex" : "none"}
                 animation={!search ? iconAnimation : iconEndAnimation}
               >
-                <Image src={svgSearch} w={22} h={22} mx={"auto"} />
+                <Image src={svgSearch} w={22} h={22} mx={"auto"} alt="search"/>
               </Box>
             </Button>
           </HStack>
@@ -202,14 +202,14 @@ const Navbar = () => {
                 animation={!gerelt ? iconAnimation : iconEndAnimation}
                 display={!gerelt ? "flex" : "none"}
               >
-                <Image src={svgMenu} w={22} h={22} mr={4.5} />
+                <Image src={svgMenu} w={22} h={22} mr={4.5} alt={'menu'}/>
               </Box>
               <Box
                 as={motion.div}
                 animation={gerelt ? iconAnimation : iconEndAnimation}
                 display={gerelt ? "flex" : "none"}
               >
-                <Image src={svgCancel} w={22} h={22} mr={4.5} />
+                <Image src={svgCancel} w={22} h={22} mr={4.5} alt="cancel"/>
               </Box>
               <Text color={gerelt ? "white" : "prime.default"}>
                 {gereltTokh}
@@ -243,14 +243,14 @@ const Navbar = () => {
                 }
                 display={!tokhiruulgaActive ? "flex" : "none"}
               >
-                <Image src={svgMenu} w={22} h={22} mr={4.5} />
+                <Image src={svgMenu} w={22} h={22} mr={4.5} alt="menu"/>
               </Box>
               <Box
                 as={motion.div}
                 animation={tokhiruulgaActive ? iconAnimation : iconEndAnimation}
                 display={tokhiruulgaActive ? "flex" : "none"}
               >
-                <Image src={svgCancel} w={22} h={22} mr={4.5} />
+                <Image src={svgCancel} w={22} h={22} mr={4.5} alt="cancel"/>
               </Box>
               <Text color={tokhiruulgaActive ? "white" : "prime.default"}>
                 {tokhiruulga}
@@ -280,14 +280,14 @@ const Navbar = () => {
                 animation={!active ? iconAnimation : iconEndAnimation}
                 display={!active ? "flex" : "none"}
               >
-                <Image src={svgMenu} w={22} h={22} mr={4.5} />
+                <Image src={svgMenu} w={22} h={22} mr={4.5} alt="menu"/>
               </Box>
               <Box
                 as={motion.div}
                 animation={active ? iconAnimation : iconEndAnimation}
                 display={active ? "flex" : "none"}
               >
-                <Image src={svgCancel} w={22} h={22} mr={4.5} />
+                <Image src={svgCancel} w={22} h={22} mr={4.5} alt="cancel"/>
               </Box>
               <Text color={active ? "white" : "prime.default"}>{menu}</Text>
             </HStack>

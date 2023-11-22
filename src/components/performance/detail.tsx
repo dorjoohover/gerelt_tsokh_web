@@ -284,7 +284,7 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
         <ModalContent>
           <ModalCloseButton />
           <ModalBody p={4} mt={10}>
-            <Image src={img} w={"full"} />
+            <Image src={img} w={"full"} alt="img" />
           </ModalBody>
         </ModalContent>
       </Modal>

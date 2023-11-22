@@ -16,6 +16,7 @@ const svg = `${assets}svg/`
 const voice = `${assets}voice/`
 
 export const imgLogo = `${assets}logo.png`
+export const imgMiniLogo = `${assets}miniLogo.png`
 export const imgLogoWhite = `${assets}logo white.png`
 export const imgGereltTsokh = `${img}gerelt_tsokh.png`
 export const imgTokhiruulga = `${img}tokhiruulga.png`

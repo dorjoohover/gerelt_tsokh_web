@@ -73,7 +73,7 @@ const CustomCard: FC<Types> = ({
 export const AdditionCard: FC<AdditionType> = ({ icon, text, onClick }) => {
   return (
     <VStack w={"full"} borderRadius={12} bg={"prime.default"} pt={8} pb={14}>
-      <Image src={icon} w={10} />
+      <Image src={icon} w={10} alt={"icon"} />
       <Text variant={"smallTitle"} mt={4} mb={9}>
         {text}
       </Text>
@@ -128,6 +128,7 @@ export const SliderCard: FC<Types> = ({ body, footer, bg, current }) => {
         w={{ md: 0, base: "auto" }}
         h={{ md: "auto", base: "200px" }}
         src={bg}
+        alt={"bg"}
       />
       <Box
         w={"full"}
@@ -195,7 +196,7 @@ export const RoundedCard: FC<RoundedType> = ({ bg, title, text, py, icon }) => {
           {title}
         </Heading>
       )}
-      {icon && <Image src={icon} w={10} />}
+      {icon && <Image src={icon} w={10} alt={"icon"} />}
       <Text textAlign={"center"} color={bg ? "white" : "text"}>
         {text}
       </Text>

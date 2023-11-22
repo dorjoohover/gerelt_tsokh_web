@@ -79,10 +79,6 @@ export const gereltNavValues: NavItemsTypes[] = [
         name: "Дүрст мэдээлэл",
         value: "/info?name=video",
       },
-      {
-        name: "Тэтгэлэг ба хандив",
-        value: "/about",
-      },
     ],
   },
 ];

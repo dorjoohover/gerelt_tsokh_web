@@ -21,7 +21,7 @@ export const LinkTitle: FC<Types> = ({
 }) => {
   return (
     <HStack w={"full"} justifyContent={"space-between"} mt={8}>
-      <Heading variant={"title"} maxW={250} as="head" color={"prime.default"}>
+      <Heading variant={"title"} maxW={{lg: 400, md: 250}} color={"prime.default"}>
         {title}
       </Heading>
       <VStack alignItems={"end"} gap={0}>
