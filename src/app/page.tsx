@@ -216,7 +216,12 @@ export default function Home() {
         >
           {additionInfo}
         </Heading>
-        <HStack w={"full"} gap={10}>
+        <HStack w={"full"}  gap={{ md: 10, base: 6 }}
+          flexDir={{
+            md: "row",
+            base: "column",
+          }}
+          p={0}>
           {additionInfoValues.map((value, index) => {
             return (
               <AdditionCard
