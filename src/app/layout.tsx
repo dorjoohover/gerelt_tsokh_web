@@ -29,11 +29,20 @@ export default function RootLayout({
       <body>
         <ChakraProvider theme={theme}>
           <Fonts />
-          <Navbar />
-          <Box h={20} />
+          {!pathname.includes("admin") && (
+            <>
+              <Navbar />
+              <Box h={20} />
+            </>
+          )}
           {children}
-          <Box h={10} />
-          <Footer />
+
+          {!pathname.includes("admin") && (
+            <>
+              <Box h={10} />
+              <Footer />
+            </>
+          )}
         </ChakraProvider>
       </body>
     </html>
