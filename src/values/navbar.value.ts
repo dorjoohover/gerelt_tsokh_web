@@ -75,10 +75,24 @@ export const gereltNavValues: NavItemsTypes[] = [
         name: "Дуут мэдээлэл",
         value: "/info?name=voice",
       },
+      // {
+      //   name: "Дүрст мэдээлэл",
+      //   value: "/info?name=video",
+      // },
+    ],
+  },
+  {
+    title: "Нийтлэл",
+    link: [
       {
-        name: "Дүрст мэдээлэл",
-        value: "/info?name=video",
+        name: "Нийтлэл",
+        value: "/article?name=article",
       },
+      {
+        name: "Мэдээ",
+        value: "/article?name=info",
+      },
+
     ],
   },
 ];

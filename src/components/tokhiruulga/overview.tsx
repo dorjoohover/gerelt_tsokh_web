@@ -20,10 +20,18 @@ type Types = {
 const OverviewWidget: FC<Types> = ({ img, text, uri, question, purpose }) => {
   return (
     <VStack w={"full"} gap={{ md: 12, base: 10 }} alignItems={"start"}>
-      <Text>{text}</Text>
+      <Heading
+        fontSize={"20px"}
+        color={"text"}
+        whiteSpace={"pre-wrap"}
+        lineHeight={1.5}
+        fontWeight={400}
+      >
+        {text}
+      </Heading>
       <Box pos={"relative"} w={"full"}>
-        <Image src={img} alt={""} w={"full"} />
         <Link href={uri} target="_blank">
+          <Image src={img} alt={""} w={"full"} />
           <Box
             pos={"absolute"}
             zIndex={5}

@@ -1,5 +1,12 @@
 "use client";
-import { Checkbox, CheckboxGroup, Text, VStack } from "@chakra-ui/react";
+import {
+  Checkbox,
+  CheckboxGroup,
+  Radio,
+  RadioGroup,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { FC, useState } from "react";
 type OptionType = {
   text: string;
@@ -11,8 +18,8 @@ export type InputTypes = {
   options?: OptionType[];
 };
 
-const CustomCheckBox: FC<InputTypes> = ({ question, number, options }) => {
-  const [selected, setSelected] = useState<(string | number)[]>([]);
+const RadioBox: FC<InputTypes> = ({ question, number, options }) => {
+  const [value, setValue] = useState<string | undefined>();
   return (
     <VStack w={"full"} gap={6} alignItems={"start"}>
       <Text
@@ -21,31 +28,30 @@ const CustomCheckBox: FC<InputTypes> = ({ question, number, options }) => {
         color={"text"}
       >{`${number}. ${question}`}</Text>
 
-      <CheckboxGroup
-        colorScheme="red"
-        onChange={(e) => {
-          setSelected(e);
-        }}
-      >
+      <RadioGroup onChange={setValue} value={value}>
         <VStack alignItems={"start"}>
           {options?.map((option, i) => {
             return (
-              <Checkbox
+              <Radio
                 borderColor={"prime.default"}
+                borderRadius={9}
                 size={"lg"}
-                iconColor={"prime.default"}
+                bg={option.value == value ? "prime.default" : "white"}
+                // color={"prime.default"}
+                // _checked={{ bg: "prime.default",color:'white'  }}
+                // ringOffsetColor={"prime.default"}
+                // colorScheme={"prime.default"}
                 value={option.value}
-                isChecked={selected.includes(option.value)}
                 key={i}
               >
                 {option.text}
-              </Checkbox>
+              </Radio>
             );
           })}
         </VStack>
-      </CheckboxGroup>
+      </RadioGroup>
     </VStack>
   );
 };
 
-export default CustomCheckBox;
+export default RadioBox;

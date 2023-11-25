@@ -1,6 +1,6 @@
 "use client";
 import { VStackContainer } from "@/components/container";
-import { TextLine, VideoLine, VoiceLine } from "@/components/lines/info";
+import { TextLine, VoiceLine } from "@/components/lines/info";
 import { Line } from "@/components/line";
 import { LinkTitle } from "@/components/link";
 import { additionInfoData } from "@/data/addition_info.data";
@@ -45,76 +45,52 @@ export default function InfoPage() {
       </HStack>
       <Line
         child={
-          data[0]?.type == InfoTypes.video ? (
-            <Grid
-              w={"full"}
-              gridTemplateColumns={{
-                md: "repeat(2, 1fr)",
-              }}
-              gap={{ md: 10, base: 6 }}
-            >
-              {data?.map((d, i) => {
+          data?.map((d, i) => {
+            switch (d.type) {
+              case InfoTypes.text:
                 return (
-                  <GridItem key={i}>
-                    <SlideFade
-                      in={true}
-                      offsetX={"50px"}
-                      transition={{ enter: { delay: i * 0.3, duration: 0.3 } }}
-                    >
-                      <VideoLine data={d} key={i} />
-                    </SlideFade>
-                  </GridItem>
+                  <SlideFade
+                    in={true}
+                    offsetX={"50px"}
+                    transition={{ enter: { delay: i * 0.3, duration: 0.3 } }}
+                  >
+                    <TextLine data={d} key={i} />
+                  </SlideFade>
                 );
-              })}
-            </Grid>
-          ) : (
-            data?.map((d, i) => {
-              switch (d.type) {
-                case InfoTypes.text:
-                  return (
-                    <SlideFade
-                      in={true}
-                      offsetX={"50px"}
-                      transition={{ enter: { delay: i * 0.3, duration: 0.3 } }}
-                    >
-                      <TextLine data={d} key={i} />
-                    </SlideFade>
-                  );
-                case InfoTypes.voice:
-                  return (
-                    <SlideFade
-                      in={true}
-                      offsetX={"50px"}
-                      transition={{ enter: { delay: i * 0.3, duration: 0.3 } }}
-                    >
-                      <VoiceLine data={d} key={i} />
-                    </SlideFade>
-                  );
+              case InfoTypes.voice:
+                return (
+                  <SlideFade
+                    in={true}
+                    offsetX={"50px"}
+                    transition={{ enter: { delay: i * 0.3, duration: 0.3 } }}
+                  >
+                    <VoiceLine data={d} key={i} />
+                  </SlideFade>
+                );
 
-                case InfoTypes.voice:
-                  return (
-                    <SlideFade
-                      in={true}
-                      offsetX={"50px"}
-                      transition={{ enter: { delay: i * 0.3, duration: 0.3 } }}
-                    >
-                      <VoiceLine data={d} key={i} />
-                    </SlideFade>
-                  );
+              case InfoTypes.voice:
+                return (
+                  <SlideFade
+                    in={true}
+                    offsetX={"50px"}
+                    transition={{ enter: { delay: i * 0.3, duration: 0.3 } }}
+                  >
+                    <VoiceLine data={d} key={i} />
+                  </SlideFade>
+                );
 
-                default:
-                  return (
-                    <SlideFade
-                      in={true}
-                      offsetX={"50px"}
-                      transition={{ enter: { delay: i * 0.3, duration: 0.3 } }}
-                    >
-                      <TextLine data={d} key={i} />
-                    </SlideFade>
-                  );
-              }
-            }) ?? <></>
-          )
+              default:
+                return (
+                  <SlideFade
+                    in={true}
+                    offsetX={"50px"}
+                    transition={{ enter: { delay: i * 0.3, duration: 0.3 } }}
+                  >
+                    <TextLine data={d} key={i} />
+                  </SlideFade>
+                );
+            }
+          }) ?? <></>
         }
         filter={additionInfoTags}
         limit={5}

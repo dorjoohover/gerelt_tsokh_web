@@ -74,7 +74,8 @@ export const imgCCRLogo = `${partner}CCR.png`
 export const imgMONESLogo = `${partner}MONES.png`
 export const imgTAFLogo = `${partner}TAF.png`
 
-
+// advice
+export const imgAdvice = `${assets}advice.png`
 
 // 
 export const svgText = `${svg}text.svg`

@@ -7,11 +7,18 @@ import { LinkTitle } from "@/components/link";
 import GratitudeWidget from "@/components/tokhiruulga/gratitude";
 import OverviewWidget from "@/components/tokhiruulga/overview";
 import { performanceData } from "@/data/performance.data";
-import { imgFoundation } from "@/global/assets";
+import { imgAdvice, imgFoundation } from "@/global/assets";
 import { FormTypes, TokhiruulgaTypes } from "@/global/enum";
 import { filterName } from "@/global/functions";
-import { feedback, more, send, tokhiruulga } from "@/global/string";
 import {
+  additionLearningAdvice,
+  feedback,
+  more,
+  send,
+  tokhiruulga,
+} from "@/global/string";
+import {
+  advice,
   contactValues,
   feedbackValues,
   gratitudeValues,
@@ -23,11 +30,15 @@ import { tokhiruulgaTags } from "@/values/tags";
 import { PerformanceModel } from "@/model/performance.model";
 
 import {
+  AspectRatio,
+  Box,
   Button,
   Grid,
   GridItem,
   HStack,
   Heading,
+  Icon,
+  Image,
   Input,
   Text,
   Textarea,
@@ -40,6 +51,8 @@ import { LegalModel } from "@/model/legal.model";
 import { legalData } from "@/data/legal.data";
 import { TopicModel } from "@/model/topic.model";
 import { topicData } from "@/data/topic.data";
+import RadioBox from "@/components/radiobox";
+import { FaPlay } from "react-icons/fa";
 
 const TokhiruulgaPage = () => {
   const params = useSearchParams();
@@ -136,7 +149,11 @@ const TokhiruulgaPage = () => {
           />
         );
       case TokhiruulgaTypes.notice:
-        return <Text>{noticeValue}</Text>;
+        return (
+          <Heading fontSize={"20px"} color={"text"} lineHeight={1.5}>
+            {noticeValue}
+          </Heading>
+        );
       case TokhiruulgaTypes.performance:
         return (
           <VStack w={"full"} alignItems={"start"} gap={{ lg: 78, base: 10 }}>
@@ -210,6 +227,30 @@ const TokhiruulgaPage = () => {
             })}
           </VStack>
         );
+      case TokhiruulgaTypes.advice:
+        return (
+          <Box pos={"relative"} w={"full"}>
+            <Link href={advice} target="_blank">
+            <Image src={imgAdvice} alt={""} w={"full"} />
+              <Box
+                pos={"absolute"}
+                zIndex={5}
+                top={"50%"}
+                left={"50%"}
+                transform={"translate(-50%, -50%)"}
+                display={"flex"}
+                bg={"red"}
+                borderRadius={"100%"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                w={16}
+                h={16}
+              >
+                <Icon as={FaPlay} boxSize={25} color={"white"} />
+              </Box>
+            </Link>
+          </Box>
+        );
       case TokhiruulgaTypes.feedback:
         return (
           <VStack w={"full"} gap={10} alignItems={"start"}>
@@ -224,7 +265,7 @@ const TokhiruulgaPage = () => {
               switch (feed.type) {
                 case FormTypes.checkbox:
                   return (
-                    <CustomCheckBox
+                    <RadioBox
                       number={feed.number}
                       question={feed.question}
                       key={i}

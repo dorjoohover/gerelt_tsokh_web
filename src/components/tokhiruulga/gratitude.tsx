@@ -22,7 +22,7 @@ const GratitudeWidget: FC<Types> = ({ img, text, text1 }) => {
         >
           <Image src={img} alt={""} />
         </Box>
-        <span>{text}</span>
+        <h1>{text}</h1>
       </Box>
       <Text>{text1}</Text>
     </VStack>

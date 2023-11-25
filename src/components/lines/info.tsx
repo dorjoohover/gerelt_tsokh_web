@@ -92,35 +92,35 @@ export const VoiceLine: FC<InfoType> = ({ data }) => {
     </HStack>
   );
 };
-export const VideoLine: FC<InfoType> = ({ data }) => {
-  return (
-    <VStack w={"full"} gap={{ md: 4.5, base: 4 }} alignItems={"start"}>
-      <Box pos={"relative"} w={"full"}>
-        <Image src={data.thumbnail} alt={""} w={"full"} />
-        <Link href={data.uri ?? "www.google.com"} target="_blank">
-          <Box
-            pos={"absolute"}
-            zIndex={5}
-            top={"50%"}
-            left={"50%"}
-            transform={"translate(-50%, -50%)"}
-            display={"flex"}
-            bg={"red"}
-            borderRadius={"100%"}
-            justifyContent={"center"}
-            alignItems={"center"}
-            w={16}
-            h={16}
-          >
-            <Icon as={FaPlay} boxSize={25} color={"white"} />
-          </Box>
-        </Link>
-      </Box>
-      <Heading fontSize={"20px"} variant={"smallTitle"} color={"text"}>
-        {data.title}
-      </Heading>
+// export const VideoLine: FC<InfoType> = ({ data }) => {
+//   return (
+//     <VStack w={"full"} gap={{ md: 4.5, base: 4 }} alignItems={"start"}>
+//       <Box pos={"relative"} w={"full"}>
+//         <Image src={data.thumbnail} alt={""} w={"full"} />
+//         <Link href={data.uri ?? "www.google.com"} target="_blank">
+//           <Box
+//             pos={"absolute"}
+//             zIndex={5}
+//             top={"50%"}
+//             left={"50%"}
+//             transform={"translate(-50%, -50%)"}
+//             display={"flex"}
+//             bg={"red"}
+//             borderRadius={"100%"}
+//             justifyContent={"center"}
+//             alignItems={"center"}
+//             w={16}
+//             h={16}
+//           >
+//             <Icon as={FaPlay} boxSize={25} color={"white"} />
+//           </Box>
+//         </Link>
+//       </Box>
+//       <Heading fontSize={"20px"} variant={"smallTitle"} color={"text"}>
+//         {data.title}
+//       </Heading>
 
-      <Text>{data.date}</Text>
-    </VStack>
-  );
-};
+//       <Text>{data.date}</Text>
+//     </VStack>
+//   );
+// };
