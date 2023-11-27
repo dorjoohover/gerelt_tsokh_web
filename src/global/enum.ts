@@ -31,6 +31,18 @@ export enum TokhiruulgaTypes {
   feedback = "feedback",
   contact = "contact",
 }
+
+export enum MedicalTypes {
+  EMPLOYER = 'EMPLOYER',
+  EMPLOYEE = 'EMPLOYEE',
+  SETUP = 'SETUP',
+  SPACE = 'SPACE',
+  TRIGGER = 'TRIGGER',
+  POSSIBLE = 'POSSIBLE',
+  FUNCTIONS = 'FUNCTIONS',
+  KEYS = 'KEYS',
+  // CONDITION = 'CONDITION',
+}
 export enum PerformanceTypes {
   ab = "ab",
   vg = "vg",

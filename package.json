@@ -11,8 +11,11 @@
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.2",
+    "@ckeditor/ckeditor5-build-classic": "^40.1.0",
+    "@ckeditor/ckeditor5-react": "^6.2.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "ckeditor5-custom-build": "^0.0.6",
     "cookies-next": "^4.1.0",
     "framer-motion": "^10.16.5",
     "next": "14.0.2",

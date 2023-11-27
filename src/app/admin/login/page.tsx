@@ -26,7 +26,7 @@ export default function AdminLoginPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: payload.username,
+          username: payload.username.toLowerCase(),
           password: payload.password,
         }),
       });

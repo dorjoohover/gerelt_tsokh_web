@@ -1,147 +1,98 @@
 "use client";
-import {
-  Box,
-  BoxProps,
-  Button,
-  CloseButton,
-  Drawer,
-  DrawerContent,
-  Flex,
-  FlexProps,
-  HStack,
-  Icon,
-  Text,
-  VStack,
-  useColorModeValue,
-  useDisclosure,
-} from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
-import { useEffect, ReactText } from "react";
-// import AdminLoginPage from "../../components/admin/Login";
-import { getCookie, deleteCookie } from "cookies-next";
-import AdminLoginPage from "./login/page";
-import { IconType } from "react-icons";
-import {
-  FiHome,
-  FiTrendingUp,
-  FiCompass,
-  FiStar,
-  FiSettings,
-  FiMenu,
-} from "react-icons/fi";
-interface LinkItemProps {
-  name: string;
-  icon: IconType;
-}
-const LinkItems: Array<LinkItemProps> = [
-  { name: "Home", icon: FiHome },
-  { name: "Trending", icon: FiTrendingUp },
-  { name: "Explore", icon: FiCompass },
-  { name: "Favourites", icon: FiStar },
-  { name: "Settings", icon: FiSettings },
-];
+import { Box, HStack, Input, Text, useColorModeValue } from "@chakra-ui/react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, ReactNode, useState } from "react";
+
+import { getCookie } from "cookies-next";
+
+import SidebarContent from "@/components/admin/Navbar";
+
+import CustomEditor from "@/components/custom-editor";
+import AdminForm from "@/components/admin/Form";
+import AdminInfo from "@/components/admin/Info";
+import AdminWork from "@/components/admin/Work";
+import AdminArticle from "@/components/admin/Article";
+import AdminPerformance, { AdminPerformanceCustom } from "@/components/admin/Performance";
+import AdminTopic from "@/components/admin/Topic";
+import AdminLegal from "@/components/admin/Legalt";
 
 export default function AdminPage() {
   const token = getCookie("token");
   const router = useRouter();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [current, setCurrent] = useState<number>(0);
+  const params = useSearchParams();
+  const [route, setRoute] = useState({
+    value: "",
+    type: "",
+  });
+ 
   useEffect(() => {
     if (!token) {
       router.push("/admin/login");
     }
   }, [token]);
+  useEffect(() => {
+    setRoute((prev) => ({
+      ...prev,
+      value: params.get("route") ?? "",
+      type: params.get("name") ?? "",
+    }));
+  }, [params]);
+
+  const View = (): ReactNode => {
+    switch (route.value) {
+      case "info":
+        return (
+          <AdminInfo route={{type: route.type}}/>
+        );
+      case "work":
+        return (
+          <AdminWork route={{type: route.type}}/>
+        );
+      case "article":
+         return (
+          <AdminArticle route={{type: route.type}}/>
+        );
+      case "performance":
+         if(route.type != 'custom') {
+          return (
+            <AdminPerformance route={{type: route.type}}/>
+          );
+         } else {
+          return (
+            <AdminPerformanceCustom />
+          );
+         }
+      case "topic":
+         return (
+          <AdminTopic route={{type: route.type}}/>
+        );
+      case "feedback":
+         return (
+          <AdminWork route={{type: route.type}}/>
+        );
+      case "contact":
+         return (
+          <AdminWork route={{type: route.type}}/>
+        );
+      case "legal":
+         return (
+          <AdminLegal route={{type: route.type}}/>
+        );
+    }
+  };
+
   return (
     <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
       <SidebarContent
-        onClose={() => onClose}
         display={{ base: "none", md: "block" }}
+        current={current}
+        setCurrent={(value) => setCurrent(value)}
       />
-      <Drawer
-        isOpen={isOpen}
-        placement="left"
-        onClose={onClose}
-        returnFocusOnClose={false}
-        onOverlayClick={onClose}
-        size="full"
-      >
-        <DrawerContent>
-          <SidebarContent onClose={onClose} />
-        </DrawerContent>
-      </Drawer>
-      {/* mobilenav */}
+
       <Box ml={{ base: 0, md: 60 }} p="4">
-        {/* Content */}
+        {View()}
       </Box>
     </Box>
   );
 }
-
-interface SidebarProps extends BoxProps {
-  onClose: () => void;
-}
-
-const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
-  return (
-    <Box
-      bg={useColorModeValue("white", "gray.900")}
-      borderRight="1px"
-      borderRightColor={useColorModeValue("gray.200", "gray.700")}
-      w={{ base: "full", md: 60 }}
-      pos="fixed"
-      h="full"
-      {...rest}
-    >
-      <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
-        </Text>
-        <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
-      </Flex>
-      {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
-          {link.name}
-        </NavItem>
-      ))}
-    </Box>
-  );
-};
-interface NavItemProps extends FlexProps {
-  icon: IconType;
-  children: ReactText;
-}
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
-  return (
-    <Box
-      as="a"
-      href="#"
-      style={{ textDecoration: "none" }}
-      _focus={{ boxShadow: "none" }}
-    >
-      <Flex
-        align="center"
-        p="4"
-        mx="4"
-        borderRadius="lg"
-        role="group"
-        cursor="pointer"
-        _hover={{
-          bg: "cyan.400",
-          color: "white",
-        }}
-        {...rest}
-      >
-        {icon && (
-          <Icon
-            mr="4"
-            fontSize="16"
-            _groupHover={{
-              color: "white",
-            }}
-            as={icon}
-          />
-        )}
-        {children}
-      </Flex>
-    </Box>
-  );
-};

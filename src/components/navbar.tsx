@@ -21,7 +21,7 @@ import {
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState, FC } from "react";
-type NavItemType = {
+export type NavItemType = {
   name: string;
   value: string;
 };
