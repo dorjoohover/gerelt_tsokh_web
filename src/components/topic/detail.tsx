@@ -3,6 +3,7 @@ import {
   PerformanceQuestion,
 } from "@/model/performance.model";
 import {
+  Box,
   Heading,
   ListItem,
   OrderedList,
@@ -26,7 +27,11 @@ const TopicDetailWidget = ({ data }: { data: TopicModel }) => {
         {data.title}
       </Heading>
 
-      <Text>{data.text}</Text>
+      <Box
+        dangerouslySetInnerHTML={{
+          __html: data?.text?.replaceAll('"', "") ?? "",
+        }}
+      ></Box>
     </VStack>
   );
 };

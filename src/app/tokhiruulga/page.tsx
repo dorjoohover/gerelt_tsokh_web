@@ -24,6 +24,7 @@ import { tokhiruulgaTags } from "@/values/tags";
 import { PerformanceModel } from "@/model/performance.model";
 
 import {
+  Box,
   Button,
   Grid,
   GridItem,
@@ -41,7 +42,7 @@ import { LegalModel } from "@/model/legal.model";
 import { legalData } from "@/data/legal.data";
 import { TopicModel } from "@/model/topic.model";
 import { topicData } from "@/data/topic.data";
-
+import axios from "axios";
 const TokhiruulgaPage = () => {
   const params = useSearchParams();
   const [page, setPage] = useState(0);
@@ -70,30 +71,30 @@ const TokhiruulgaPage = () => {
           setDataCount(filtered.length ?? 0);
           break;
         case TokhiruulgaTypes.legal:
-          let res = await fetch(
+          let legalRes = await fetch(
             `${api}legal/type/${params.get("type")?.toUpperCase()}`,
             {
               method: "POST",
             }
           ).then((d) => d.json());
-          setData(res);
+          setData(legalRes);
 
           setLimit(1);
 
           setDataCount(0);
           break;
         case TokhiruulgaTypes.topic:
-          let filteredTopic = topicData.filter(
-            (d) => d.type == tokhiruulgaTags[4].sub![sub!].value
-          );
+          await axios
+            .post(`${api}topic/type/${params.get("type")?.toUpperCase()}`, {
+              limit: 10,
+              page: page,
+            })
+            .then((d) => {
+              setLimit(d.data.length == 0 ? 10 : d.data.length);
+              setData(d.data);
+              setDataCount(d.data.length ?? 0);
+            });
 
-          setLimit(filteredTopic.length == 0 ? 10 : filteredTopic.length);
-          setData(
-            filteredTopic.filter(
-              (d, i) => i >= page * 10 && i < (page + 1) * 10
-            )
-          );
-          setDataCount(filteredTopic.length ?? 0);
           break;
       }
     } catch (error) {}
@@ -104,7 +105,7 @@ const TokhiruulgaPage = () => {
       setType(name ?? TokhiruulgaTypes.gratitude);
       setValue(filterName(name, tokhiruulgaTags));
     }
-    getData()
+    getData();
   }, []);
   useEffect(() => {
     getData();
@@ -191,9 +192,13 @@ const TokhiruulgaPage = () => {
                     {v.title}
                   </Heading>
 
-                  <Text mb={{ md: 0, base: 4 }} noOfLines={{ md: 3, base: 4 }}>
-                    {v.text}
-                  </Text>
+                  <Box
+                    mb={{ md: 0, base: 4 }}
+                    noOfLines={{ md: 3, base: 4 }}
+                    dangerouslySetInnerHTML={{
+                      __html: d?.text?.replaceAll('"', "") ?? "",
+                    }}
+                  ></Box>
                   <Link href={`/${type}?id=${v._id}`}>
                     <Text textDecor={"underline"}>{more}</Text>
                   </Link>

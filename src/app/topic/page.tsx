@@ -12,11 +12,12 @@ import { filterName } from "@/global/functions";
 import { hotTopics, more, tokhiruulga, tokhiruulgaMn } from "@/global/string";
 import { TopicModel } from "@/model/topic.model";
 import { tokhiruulgaTags } from "@/values/tags";
+import { api } from "@/values/values";
 
-import { Button, HStack, Heading, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, HStack, Heading, Text, VStack } from "@chakra-ui/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-
+import axios from "axios";
 const TopicPage = () => {
   const params = useSearchParams();
   const [page, setPage] = useState(0);
@@ -27,22 +28,29 @@ const TopicPage = () => {
   const [selected, setSelected] = useState<TopicModel | null>(null);
   const getData = async (t: TopicTypes) => {
     try {
-      let filtered = topicData.filter((d) => d.type == t);
-      setCount(filtered.length);
-      setData(filtered.filter((d, i) => i >= page * 10 && i < (page + 1) * 10));
+      await axios
+        .post(`${api}topic/type/${t?.toUpperCase()}`, {
+          limit: 10,
+          page: page,
+        })
+        .then((d) => {
+          setCount(d.data.length);
+          setData(d.data);
+        });
     } catch (error) {}
   };
-  const getDataById = (id: string) => {
+  const getDataById = async (id: string) => {
     try {
-      let filtered = topicData.filter((d) => d._id == id);
-      if (filtered.length > 0) {
-        setSelected(filtered[0]);
-      } else {
-        setSelected(null);
-      }
+      await fetch(`${api}topic/${id}`)
+        .then((d) => d.json())
+        .then((d) => setSelected(d));
     } catch (error) {}
   };
-
+  useEffect(() => {
+    if (params.get("id")) {
+      getDataById(params.get("id")!);
+    }
+  }, []);
   useEffect(() => {
     if (params.get("name")) {
       let name: any = params.get("name") as keyof typeof TopicTypes;
@@ -99,12 +107,13 @@ const TopicPage = () => {
                       {d.title}
                     </Heading>
 
-                    <Text
+                    <Box
                       mb={{ md: 0, base: 4 }}
                       noOfLines={{ md: 3, base: 4 }}
-                    >
-                      {d.text}
-                    </Text>
+                      dangerouslySetInnerHTML={{
+                        __html: d?.text?.replaceAll('"', "") ?? "",
+                      }}
+                    ></Box>
                     <Button
                       onClick={() => {
                         getDataById(d._id);

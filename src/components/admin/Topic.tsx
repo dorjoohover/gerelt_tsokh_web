@@ -7,24 +7,23 @@ import { FilterType, filterName } from "@/global/functions";
 import { ArticleTypes } from "@/global/enum";
 import { tokhiruulgaTags } from "@/values/tags";
 import { api } from "@/values/values";
-import axios from 'axios'
+import axios from "axios";
 import { getCookie } from "cookies-next";
 export default function AdminTopic({ route }: { route: { type: string } }) {
   const [data, setData] = useState({
     title: "",
     text: "",
   });
-  const token = getCookie('token')
-  const toast = useToast()
+  const token = getCookie("token");
+  const toast = useToast();
   const submit = async () => {
     try {
       await axios
         .post(
-          `${api}legal/create`,
+          `${api}topic/create`,
           {
             title: data.title,
             text: data.text,
-            types: route.type.toUpperCase(),
           },
           {
             headers: {
@@ -50,11 +49,12 @@ export default function AdminTopic({ route }: { route: { type: string } }) {
     <AdminForm
       onTitle={(e) => setData((prev) => ({ ...prev, title: e }))}
       onChange={(e) => setData((prev) => ({ ...prev, text: e }))}
-      title={`Халуун сэдэв > ${filterName(route.type, tokhiruulgaTags[4].sub!)}`}
+      title={`Халуун сэдэв > ${filterName(
+        route.type,
+        tokhiruulgaTags[4].sub!
+      )}`}
       text="Гарчиг"
       onSubmit={submit}
-    >
-      
-    </AdminForm>
+    ></AdminForm>
   );
 }
