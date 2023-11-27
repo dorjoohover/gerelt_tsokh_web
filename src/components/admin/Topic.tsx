@@ -2,19 +2,48 @@
 
 import { useState } from "react";
 import AdminForm from "./Form";
-import { Box, HStack, Input, Text } from "@chakra-ui/react";
+import { Box, HStack, Input, Text, useToast } from "@chakra-ui/react";
 import { FilterType, filterName } from "@/global/functions";
 import { ArticleTypes } from "@/global/enum";
 import { tokhiruulgaTags } from "@/values/tags";
-
+import { api } from "@/values/values";
+import axios from 'axios'
+import { getCookie } from "cookies-next";
 export default function AdminTopic({ route }: { route: { type: string } }) {
   const [data, setData] = useState({
     title: "",
     text: "",
   });
+  const token = getCookie('token')
+  const toast = useToast()
   const submit = async () => {
     try {
-    } catch (error) {}
+      await axios
+        .post(
+          `${api}legal/create`,
+          {
+            title: data.title,
+            text: data.text,
+            types: route.type.toUpperCase(),
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((d) =>
+          toast({
+            title: "Нэмэгдлээ.",
+
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+          })
+        );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

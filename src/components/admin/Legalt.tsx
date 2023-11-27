@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import AdminForm from "./Form";
-import { Box, HStack, Input, Text } from "@chakra-ui/react";
+import { Box, HStack, Input, Text, useToast } from "@chakra-ui/react";
 import { FilterType, filterName } from "@/global/functions";
 import { ArticleTypes } from "@/global/enum";
 import { tokhiruulgaTags } from "@/values/tags";
@@ -14,6 +14,7 @@ export default function AdminLegal({ route }: { route: { type: string } }) {
     title: "",
     text: "",
   });
+  const toast = useToast();
   const token = getCookie("token");
   const submit = async () => {
     try {
@@ -31,7 +32,15 @@ export default function AdminLegal({ route }: { route: { type: string } }) {
             },
           }
         )
-        .then((d) => console.log(d));
+        .then((d) =>
+          toast({
+            title: "Нэмэгдлээ.",
+
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+          })
+        );
     } catch (error) {
       console.log(error);
     }
