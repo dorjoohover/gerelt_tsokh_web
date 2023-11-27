@@ -123,6 +123,7 @@ export const Line: FC<Types> = ({
                         textTransform={"none"}
                         onClick={() => {
                           changeSub(index);
+                          router.push(`${pathname}?name=${params.get('name')}&type=${e.value}`)
                         }}
                         _hover={{
                           bg: "none",

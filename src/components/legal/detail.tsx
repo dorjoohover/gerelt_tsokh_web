@@ -1,4 +1,4 @@
-import { HStack, Heading, Text, VStack } from "@chakra-ui/react";
+import { Box, HStack, Heading, Text, VStack } from "@chakra-ui/react";
 import CustomAccordian from "../accordian";
 import { LegalModel } from "@/model/legal.model";
 
@@ -15,9 +15,9 @@ const LegalDetailWidget = ({ data }: { data: LegalModel }) => {
         </HStack>
       )}
 
-      {data.text && <Text>{data.text}</Text>}
+      {data.text && <Box dangerouslySetInnerHTML={{ __html: data?.text.replaceAll('"', "") ?? "" }}/>}
 
-      {data.details.map((detail, index) => {
+      {/* {data.details.map((detail, index) => {
         return (
           <VStack w={"full"} alignItems={"start"} key={index}>
             <Heading fontSize={"20px"} variant={"smallTitle"} color={"text"}>
@@ -31,7 +31,7 @@ const LegalDetailWidget = ({ data }: { data: LegalModel }) => {
         <HStack w={"full"} justifyContent={"end"}>
           <Text>{data.chief}</Text>
         </HStack>
-      )}
+      )} */}
     </VStack>
   );
 };

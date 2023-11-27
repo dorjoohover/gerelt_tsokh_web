@@ -6,6 +6,7 @@ import {
   Box,
   Button,
   HStack,
+  Image,
   Input,
   Modal,
   ModalBody,
@@ -22,6 +23,10 @@ import {
 import { FilterType, filterName } from "@/global/functions";
 import { ArticleTypes, MedicalTypes } from "@/global/enum";
 import { tokhiruulgaTags } from "@/values/tags";
+import { api } from "@/values/values";
+import { getCookie } from "cookies-next";
+import axios from "axios";
+import { headers } from "next/headers";
 
 export const medicalType: FilterType[] = [
   {
@@ -74,6 +79,7 @@ export default function AdminPerformance({
   const [conditions, setConditions] = useState<string[]>([]);
   const [condition, setCondition] = useState<string>("");
   const [view, setView] = useState(0);
+  const token = getCookie("token");
   const submit = async () => {
     try {
     } catch (error) {}
@@ -258,7 +264,7 @@ export default function AdminPerformance({
 type CustomDetailType = {
   title: string;
   text?: string;
-  img?: string;
+  img?: File;
 };
 type CustomType = {
   title: string;
@@ -271,11 +277,36 @@ export function AdminPerformanceCustom() {
   });
   const [detail, setDetail] = useState<CustomDetailType>({
     title: "",
-    img: "",
+    img: undefined,
     text: "",
   });
+  const token = getCookie("token");
   const submit = async () => {
     try {
+      let img = new FormData();
+      if (detail.img != undefined) img.set("file", detail.img);
+      let res = await fetch(`${api}`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+        body: img,
+      }).then((d) => d.json());
+      let body = {
+        title: detail.title,
+        img: res.file ?? "",
+        text: detail.text,
+      };
+      await axios
+        .post(`${api}medical/detail/create`, body, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((d) => console.log(d));
+      //   await fetch(`${api}medical/detail/create`, {
+      //     method: "POST",
+      //     headers: { Authorization: `Bearer ${token}` },
+      //     body: body,
+      //   }).then((d) => console.log(d));
     } catch (error) {}
   };
 
@@ -305,7 +336,7 @@ export function AdminPerformanceCustom() {
           </HStack>
         );
       })}
-      
+
       <VStack gap={4} alignItems={"start"} maxW={"500px"} mt={10}>
         <Input
           placeholder="Гарчиг"
@@ -326,7 +357,7 @@ export function AdminPerformanceCustom() {
           type="file"
           placeholder="Зураг"
           onChange={(e) =>
-            setDetail((prev) => ({ ...prev, img: e.target.value }))
+            setDetail((prev) => ({ ...prev, img: e.target.files?.[0] }))
           }
         />
         <Button

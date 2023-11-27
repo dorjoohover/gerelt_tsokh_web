@@ -12,6 +12,7 @@ import { FormTypes, TokhiruulgaTypes } from "@/global/enum";
 import { filterName } from "@/global/functions";
 import { feedback, more, send, tokhiruulga } from "@/global/string";
 import {
+  api,
   contactValues,
   feedbackValues,
   gratitudeValues,
@@ -48,6 +49,7 @@ const TokhiruulgaPage = () => {
     TokhiruulgaTypes.gratitude
   );
   const [data, setData] = useState<any[]>([]);
+
   const [value, setValue] = useState("");
   const [sub, setSub] = useState<number | null>(0);
   const [selected, setSelected] = useState<any | null>(null);
@@ -68,13 +70,17 @@ const TokhiruulgaPage = () => {
           setDataCount(filtered.length ?? 0);
           break;
         case TokhiruulgaTypes.legal:
-          let filteredLegal = legalData.filter(
-            (d) => d.type == tokhiruulgaTags[5].sub![sub!].value
-          );
+          let res = await fetch(
+            `${api}legal/type/${params.get("type")?.toUpperCase()}`,
+            {
+              method: "POST",
+            }
+          ).then((d) => d.json());
+          setData(res);
 
-          setLimit(filteredLegal.length == 0 ? 5 : filteredLegal.length);
-          setData(filteredLegal);
-          setDataCount(filteredLegal.length ?? 0);
+          setLimit(1);
+
+          setDataCount(0);
           break;
         case TokhiruulgaTypes.topic:
           let filteredTopic = topicData.filter(
@@ -98,6 +104,7 @@ const TokhiruulgaPage = () => {
       setType(name ?? TokhiruulgaTypes.gratitude);
       setValue(filterName(name, tokhiruulgaTags));
     }
+    getData()
   }, []);
   useEffect(() => {
     getData();

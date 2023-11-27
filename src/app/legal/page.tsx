@@ -22,6 +22,7 @@ import { legalData } from "@/data/legal.data";
 import { LegalTypes } from "@/global/enum";
 import { LegalModel } from "@/model/legal.model";
 import LegalDetailWidget from "@/components/legal/detail";
+import { api } from "@/values/values";
 
 const LegalPage = () => {
   const params = useSearchParams();
@@ -38,22 +39,17 @@ const LegalPage = () => {
       setData(filtered.filter((d, i) => i >= page * 10 && i < (page + 1) * 10));
     } catch (error) {}
   };
-  const getDataById = (id: string) => {
+  const getDataById = async (id: string) => {
     try {
-      let filtered = legalData.filter((d) => d._id == id);
-      if (filtered.length > 0) {
-        setSelected(filtered[0]);
-      } else {
-        setSelected(null);
-      }
+      await fetch(`${api}legal/${id}`)
+        .then((d) => d.json())
+        .then((d) => setSelected(d));
     } catch (error) {}
   };
 
   useEffect(() => {
-    if (params.get("name")) {
-      let name: any = params.get("name") as keyof typeof LegalTypes;
-      setType(name ?? LegalTypes.law);
-      setValue(filterName(name, tokhiruulgaTags[5].sub!));
+    if (params.get("id")) {
+      getDataById(params.get("id")!);
     }
   }, []);
   useEffect(() => {
@@ -103,7 +99,10 @@ const LegalPage = () => {
                       bg={"none"}
                       p={0}
                     >
-                      <Text textDecor={"underline"} textAlign={'start'}> {d.title}</Text>
+                      <Text textDecor={"underline"} textAlign={"start"}>
+                        {" "}
+                        {d.title}
+                      </Text>
                     </Button>
                   </VStack>
                 );
