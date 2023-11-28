@@ -22,6 +22,7 @@ import {
 import CustomAccordian from "../accordian";
 import { imgArticle1, imgDoneWork10 } from "@/global/assets";
 import { FC, useState } from "react";
+import Link from "next/link";
 type AccordianWidgetType = {
   fun: PerformanceFunction;
   length: number;
@@ -35,17 +36,19 @@ const AccordianWidget: FC<AccordianWidgetType> = ({ fun, length, onClick }) => {
       <UnorderedList>
         {fun.details.map((detail, i) => {
           return (
-            <ListItem py={4} pl={10} color={"text"} key={i}>
-              <VStack alignItems={"start"} w="full">
-                <Box
-                  cursor={"pointer"}
-                  onClick={() => onClick(detail.img ?? imgArticle1)}
-                >
-                  <Text color={"blue"}>{detail.title}</Text>
-                </Box>
-                {detail.text && <Text>{detail.text}</Text>}
-              </VStack>
-            </ListItem>
+            <Link key={i} href={"#detail"}>
+              <ListItem py={4} pl={10} color={"text"}>
+                <VStack alignItems={"start"} w="full">
+                  <Box
+                    cursor={"pointer"}
+                    onClick={() => onClick(detail.img ?? imgArticle1)}
+                  >
+                    <Text color={"blue"}>{detail.title}</Text>
+                  </Box>
+                  {detail.text && <Text>{detail.text}</Text>}
+                </VStack>
+              </ListItem>
+            </Link>
           );
         })}
       </UnorderedList>
@@ -100,17 +103,19 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
                 <UnorderedList>
                   {data.employerWarning?.map((detail, i) => {
                     return (
-                      <ListItem py={4} pl={10} color={"text"} key={i}>
-                        <VStack alignItems={"start"} w="full">
-                          <Box
-                            className="title"
-                            onClick={() => viewImg(detail.img ?? imgArticle1)}
-                          >
-                            <Text color={"blue"}>{detail.title}</Text>
-                          </Box>
-                          {detail.text && <Text>{detail.text}</Text>}
-                        </VStack>
-                      </ListItem>
+                      <Link key={i} href={"#detail"}>
+                        <ListItem py={4} pl={10} color={"text"}>
+                          <VStack alignItems={"start"} w="full">
+                            <Box
+                              className="title"
+                              onClick={() => viewImg(detail.img ?? imgArticle1)}
+                            >
+                              <Text color={"blue"}>{detail.title}</Text>
+                            </Box>
+                            {detail.text && <Text>{detail.text}</Text>}
+                          </VStack>
+                        </ListItem>
+                      </Link>
                     );
                   })}
                 </UnorderedList>
@@ -123,23 +128,27 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
                 ? "Ажил олгогчид өгөх бяцхан санамжууд"
                 : "",
             child: (
-              <VStack w={"full"} alignItems={"start"} gap={4}>
+              <VStack w={"full"} alignItems={"start"} gap={4} id="detail">
                 <UnorderedList>
                   {data.employerWarning?.map((detail, i) => {
                     return (
-                      <ListItem py={4} pl={10} color={"text"} key={i}>
-                        <VStack alignItems={"start"} w="full">
-                          <Box
-                            className="title"
-                            onClick={() => viewImg(detail.img ?? imgArticle1)}
-                          >
-                            <Heading fontSize={"16px"} color={"blue"}>
-                              {detail.title}
-                            </Heading>
-                          </Box>
-                          {detail.text && <Text>{detail.text}</Text>}
-                        </VStack>
-                      </ListItem>
+                      <Link key={i} href="#detail">
+                        <ListItem py={4} pl={10} color={"text"}>
+                          <VStack alignItems={"start"} w="full">
+                            <Box
+                              className="title"
+                              onClick={() => viewImg(detail.img ?? imgArticle1)}
+                            >
+                              {/* <Link key={i}> */}
+                              <Heading fontSize={"16px"} color={"blue"}>
+                                {detail.title}
+                              </Heading>
+                              {/* </Link> */}
+                            </Box>
+                            {detail.text && <Text>{detail.text}</Text>}
+                          </VStack>
+                        </ListItem>
+                      </Link>
                     );
                   })}
                 </UnorderedList>
@@ -172,10 +181,17 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
               <VStack w={"full"} alignItems={"start"} gap={8}>
                 {data.space?.map((fun, index) => {
                   return (
-                    <VStack key={index} w={"full"} alignItems={"start"} gap={4}>
-                      <Heading fontSize={'16px'}>{fun.title}</Heading>
-                      {fun.text && <Text>{fun.text}</Text>}
-                    </VStack>
+                    <Link key={index} href="#detail">
+                      <VStack
+                        key={index}
+                        w={"full"}
+                        alignItems={"start"}
+                        gap={4}
+                      >
+                        <Heading fontSize={"16px"}>{fun.title}</Heading>
+                        {fun.text && <Text>{fun.text}</Text>}
+                      </VStack>
+                    </Link>
                   );
                 })}
               </VStack>
@@ -190,10 +206,17 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
               <VStack w={"full"} alignItems={"start"} gap={8}>
                 {data.trigger?.map((fun, index) => {
                   return (
-                    <VStack key={index} w={"full"} alignItems={"start"} gap={4}>
-                      <Heading fontSize={'16px'}>{fun.title}</Heading>
-                      {fun.text && <Text>{fun.text}</Text>}
-                    </VStack>
+                    <Link key={index} href={"#detail"}>
+                      <VStack
+                        key={index}
+                        w={"full"}
+                        alignItems={"start"}
+                        gap={4}
+                      >
+                        <Heading fontSize={"16px"}>{fun.title}</Heading>
+                        {fun.text && <Text>{fun.text}</Text>}
+                      </VStack>
+                    </Link>
                   );
                 })}
               </VStack>
@@ -261,16 +284,18 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
             title: data.condition != undefined ? "Нөхцөл ба Шийдэл" : "",
             child: (
               <VStack w={"full"} alignItems={"start"} gap={4}>
-                <Heading fontSize={'16px'}>{data.condition?.title}</Heading>
+                <Heading fontSize={"16px"}>{data.condition?.title}</Heading>
                 <UnorderedList>
                   {data.condition?.details?.map((detail, i) => {
                     return (
-                      <ListItem py={4} pl={10} color={"text"} key={i}>
-                        <VStack alignItems={"start"} w="full">
-                          {/* <Box className='title'><Text color={"blue"} >{detail.title}</Text></Box> */}
-                          {detail.text && <Text>{detail.text}</Text>}
-                        </VStack>
-                      </ListItem>
+                      <Link key={i} href={"#detail"}>
+                        <ListItem py={4} pl={10} color={"text"}>
+                          <VStack alignItems={"start"} w="full">
+                            {/* <Box className='title'><Text color={"blue"} >{detail.title}</Text></Box> */}
+                            {detail.text && <Text>{detail.text}</Text>}
+                          </VStack>
+                        </ListItem>
+                      </Link>
                     );
                   })}
                 </UnorderedList>
