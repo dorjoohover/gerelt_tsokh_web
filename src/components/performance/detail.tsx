@@ -140,9 +140,9 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
                               onClick={() => viewImg(detail.img ?? imgArticle1)}
                             >
                               {/* <Link key={i}> */}
-                              <Heading fontSize={"16px"} color={"blue"}>
+                              <Text color={"blue"}>
                                 {detail.title}
-                              </Heading>
+                              </Text>
                               {/* </Link> */}
                             </Box>
                             {detail.text && <Text>{detail.text}</Text>}
