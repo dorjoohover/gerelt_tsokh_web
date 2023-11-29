@@ -1,3 +1,47 @@
+import {
+  adjustableDraftingTable,
+  aerialLift,
+  antivibrationGloves,
+  assistiveListeningDeviceAndSoundFieldSystem,
+  augmentativeAlternativeComuunicationDevice,
+  autoDialer,
+  automaticDoorOpener,
+  boneConductionTechnology,
+  brailleTty,
+  cakeDecoratingAndBaking,
+  captionedTelephoneCall,
+  cartService,
+  cellularTelephoneTechnology,
+  compactMobileCrane,
+  deberringTools,
+  electricScissors,
+  electricStapler,
+  electronicOrganizer,
+  ergonomicallyPneumaticTool,
+  externaleComputerScreenMagnification,
+  eyeControlledAlternativeComputerInputDevice,
+  flourescentWhiteTubeCover,
+  foldingSteps,
+  gripAid,
+  hairScissors,
+  headControlledAlternativeComputerInputDevice,
+  heightAdjustableTable,
+  keyguard,
+  largeVisualDisplayTelephone,
+  ledLightFilter,
+  mechanicSeatAndCreeper,
+  neckLoops,
+  oneHandedKeyboard,
+  pipette,
+  professionalOrganizer,
+  rollingSafetyLadder,
+  talkingTelephone,
+  teleCoilCompatible,
+  telephoneAmplication,
+  voiceAmplification,
+  voiceCarryoverTelephone,
+  walker,
+} from "@/global/assets";
 import { PerformanceFunction } from "@/model/performance.model";
 
 export const PerformanceDetailData: PerformanceFunction[] = [
@@ -30,7 +74,7 @@ export const PerformanceDetailData: PerformanceFunction[] = [
       },
       {
         title: "Алхагч /Walkers/",
-        text: "",
+        img: walker,
       },
     ],
   },
@@ -52,18 +96,22 @@ export const PerformanceDetailData: PerformanceFunction[] = [
         title:
           "Сонсох туслах төхөөрөмж /Assistive Listening Devices and Sound Field System/",
         text: "Орчны шуугианыг багасгаж дамжуулах гол мэдээллийг хүлээн авч буй хүний чихэнд шууд хүргэдэг.",
+        img: assistiveListeningDeviceAndSoundFieldSystem,
       },
       {
         title:
           "Өсгөгчтэй харилцааны төхөөрөмжүүд Augmentative and Alternative Communication Device/",
+        img: augmentativeAlternativeComuunicationDevice,
       },
       {
         title: "Чихний ясаар дамжуулах технологи Bone Conduction Technology/",
         text: "Зарим сонсголын бэрхшээлийн хувьд агаараар дамжиж байгаа дуу авиаг хүлээн авч чаддаггүй учраас ясанд чичрэлт өгөх замаар дуу авиаг сонсгодог төхөөрөмж.",
+        img: boneConductionTechnology
       },
       {
         title: "Шууд дамжуулах үйлчилгээ /CART Services/",
         text: "Дуут мэдээлэл хүлээн авч ойлгох чадвар нь муу хүний хувьд шууд дамжуулах төхөөрөмж ашиглан дэлгэцэн дээр текст хэлбэрээр мэдээллийг хүлээн авч үйл ажиллагаанд идэвхтэй оролцох боломж. Энэ төхөөрөмжийг ашиглан зайнаас үйлчилгээ үзүүлэх боломжтой.",
+        img: cartService
       },
       {
         title: "Хөрвүүлэгч",
@@ -71,6 +119,7 @@ export const PerformanceDetailData: PerformanceFunction[] = [
       {
         title: "Хүзүүний утас /Neck loops/",
         text: "Дуу авиа хүзүүнд зүүсэн утсаар дамжуулан сонсголын туслах төхөөрөмжид очиж сонсогдог. ",
+        img: neckLoops
       },
       {
         title: "Оюун санааны зөвлөх /On-site Mentoring/",
@@ -102,14 +151,17 @@ export const PerformanceDetailData: PerformanceFunction[] = [
       {
         title: "Брайл TTY Braille TTY/",
         text: "Хараагүй болон сул хараатай хүмүүс бичгийн харилцаагаар мэдээлэл дамжуулах төхөөрөмж.",
+        img: brailleTty
       },
       {
         title: "Дэлгэцтэй утаа /Captioned Telephone Calls/",
         text: "Сонсголын бэрхшээлтэй хүмүүст аман яриаг текст болгон булгаж дэлгэцэн дээр харуулдаг арга. Бэлтгэгдсэн хөрвүүлэгч хүнтэй давхар холбогддог.",
+        img: captionedTelephoneCall
       },
       {
         title:
           "Сонсголын бэрхшээлтэй хүнд зориулсан үүрэн харилцааны утас /Cellular Telephone Technology/",
+          img: cellularTelephoneTechnology
       },
       {
         title: "Гарын оролцоогүй утас /Hands-free Telephones/",
@@ -122,6 +174,7 @@ export const PerformanceDetailData: PerformanceFunction[] = [
       {
         title:
           "Сонсголын төхөөрөмжийг өсгөгч болон микрофонтой чихэвчинд холбож хэрэглэдэг /Headsets - Hearing Aid Compatible, Amplification/",
+          img: headControlledAlternativeComputerInputDevice
       },
       {
         title:
@@ -139,13 +192,16 @@ export const PerformanceDetailData: PerformanceFunction[] = [
         title:
           "Телекойлд тохиромжтой микрофонтой чихэвч /Telecoil Compatible Headsets/",
         text: "Дуу авиаг утас зэрэг гарч буй эх сурвалжаас сонсголын туслах төхөөрөмжид шууд дамжуулахдаа өсгөгчийн чанга сулыг автоматаар тохируулна. Мөн орчны дуу чимээг намсгаж гол мэдээллийг тод цэвэр дамжуулна.",
+        img: teleCoilCompatible
       },
       {
         title: "Ярьдаг утас /Talking Telephones/",
+        img: talkingTelephone
       },
       {
         title: "Утасны өсгөгч /Telephone Amplification/",
         text: "Утсанд холбогдог жижиг оврын өсгөгч нь дуу авиаг цэвэр тод дамжуулдаг.",
+        img: telephoneAmplication
       },
       {
         title:
@@ -154,10 +210,12 @@ export const PerformanceDetailData: PerformanceFunction[] = [
       {
         title: "Дуу хоолойг өсгөгч /Voice Amplification/",
         text: "Харилцаж буй хүндээ сонсогдохоор чанга ярьж чадахгүй байгаа тохиолдолд хэрэглэх ба дуу хоолойн хязгаарлалт эсвэл хэл ярианы согог эсвэл сонсголын бэрхшээлтэй хүн хэрэглэхэд тохиромжтой. Овор хэмжээ, зориулалтаараа хувийн хэрэглээ эсвэл нийтийн үйл ажиллагааны гэсэн төрөлтэй.",
+        img: voiceAmplification
       },
       {
         title: "Дуу авиа дамжуулах утас /Voice-Carry-Over Telephones/",
         text: "Өөрөө ярьж өөрийнхөө дуу хоолойг сонсож чадах боловч цаанаас ирж буй яриаг сонсож чаддаггүй сонсголын бэрхшээлийн төрөлд зориулсан утас. Утсан харилцааны дамжуулагчтай холбогдож ашигладаг ба цаад хүний яриаг дамжуулагч шивж буулгаад текстээр харуулдаг.",
+        img: voiceCarryoverTelephone
       },
       {
         title: "Дүрст дамжуулалттай үйлчилгээ /Video Relay Services/",
@@ -201,14 +259,17 @@ export const PerformanceDetailData: PerformanceFunction[] = [
       {
         title:
           "Нүдээр удирддаг компьютерын оролттой төхөөрөмж /Eye Controlled Alternative Computer Input Devices/",
+        img: eyeControlledAlternativeComputerInputDevice,
       },
       {
         title:
           "Толгойгоор удирддаг компьютерын оролттой төхөөрөмж /Head Controlled Alternative Computer Input Devices/",
+        img: headControlledAlternativeComputerInputDevice,
       },
       {
         title: "Тусгаарлагчтай компьютерын гар /Keyguards/",
         text: "Богино саваа эсвэл өөр ямар нэг туслах хэрэгслээр шивдэг хүнд зориулж компьютерын гарын товчуудыг тусгаарлаж өгдөг",
+        img: keyguard,
       },
 
       {
@@ -216,6 +277,7 @@ export const PerformanceDetailData: PerformanceFunction[] = [
       },
       {
         title: "Нэг гарын гар /One-Handed Keyboards/",
+        img: oneHandedKeyboard,
       },
       {
         title: "Призм нүдний шил /prism Glasses/Bed Spectacles/",
@@ -232,7 +294,7 @@ export const PerformanceDetailData: PerformanceFunction[] = [
     details: [
       {
         title: "Тохиргоотой зураг, бичгийн ширээ /Adjustable Drafting Tables/",
-        text: "",
+        img: adjustableDraftingTable
       },
       {
         title: "Тохиргоотой массажны ширээ /Adjustable Massage Tables/",
@@ -240,11 +302,11 @@ export const PerformanceDetailData: PerformanceFunction[] = [
       },
       {
         title: "Агаарын задгай өргөгч/лифт /Aerial Lifts/",
-        text: "",
+        img: aerialLift,
       },
       {
         title: "Чичрэлт багасгах зориулалттай бээлий /Anti-vibration Gloves/",
-        text: "",
+        img: antivibrationGloves,
       },
       {
         title:
@@ -253,7 +315,7 @@ export const PerformanceDetailData: PerformanceFunction[] = [
       },
       {
         title: "Автомат дуудлага хийгч программ /Auto-dialers/",
-        text: "",
+        img: autoDialer,
       },
       {
         title: "Бичиг хэрэг эмхлэгч автомат систем /Automated Filing Systems/",
@@ -261,41 +323,41 @@ export const PerformanceDetailData: PerformanceFunction[] = [
       },
       {
         title: "Автомат хаалга онгойлгогч /Automatic Door Openers/ ",
-        text: "",
+        img: automaticDoorOpener
       },
       {
         title:
           "Бялуу чимэглэх, гурилан бүтээгдэхүүн хийх төхөөрөмж /Cake Decorating and Baking Equipment/",
-        text: "",
+        img: cakeDecoratingAndBaking,
       },
       {
         title:
           "Хүнд объект өргөх зөөврийн өргөгч цамхаг /Compact Mobile Cranes/",
-        text: "",
+        img: compactMobileCrane,
       },
       {
         title: "Хатуу гадаргуу өнгөлөгч багаж /Deburring Tools/ ",
-        text: "",
+        img: deberringTools,
       },
       {
         title: "Цахилгаан хайч /Electric Scissors/",
-        text: "",
+        img: electricScissors,
       },
       {
         title: "Цахилгаан цаас үдэгч /Electric Stapler/",
-        text: "",
+        img: electricStapler,
       },
       {
         title: "Эргиномик хийн багаж /Ergonomic and Pneumatic Tools/",
-        text: "",
+        img: ergonomicallyPneumaticTool,
       },
       {
         title: "Цахилгаан зохион байгуулагч төхөөрөмж /Electronic Organizers/ ",
-        text: "",
+        img: electronicOrganizer,
       },
       {
         title: "Эвхдэг гишгүүр /Folding Steps/",
-        text: "",
+        img: foldingSteps
       },
       {
         title: "График дизайны программ /Graphics Design Software/",
@@ -303,15 +365,15 @@ export const PerformanceDetailData: PerformanceFunction[] = [
       },
       {
         title: "Бариулын наалт /Grip Aids/",
-        text: "",
+        img: gripAid
       },
       {
         title: "Үсний хайч /Hair Scissors/",
-        text: "",
+        img: hairScissors,
       },
       {
         title: "Өндөрсгөж намсгадаг ширээ /Height Adjustable Table Legs/",
-        text: "",
+        img: heightAdjustableTable
       },
       {
         title: "Өргөн, нам гишгүүртэй шат /Large-Rated Small Step Ladders/",
@@ -324,19 +386,20 @@ export const PerformanceDetailData: PerformanceFunction[] = [
       },
       {
         title: "Механик суудал ба мөлхөвч /Mechanic's Seats and Creepers/",
+        img: mechanicSeatAndCreeper,
         text: "Өргөгч, хусагчтай хүнд оврын тоног төхөөрөмж /Pickups, Semis, and Heavy Equipment/",
       },
       {
         title: "Дусаагуур /Pipettes/",
-        text: "",
+        img: pipette
       },
       {
         title: "Мэргэжлийн зохион байгуулагч /Professional Organizers/",
-        text: "",
+        img: professionalOrganizer
       },
       {
         title: "Дугуйтай өнхөрдөг шат /Rolling Safety Ladders/",
-        text: "",
+        img: rollingSafetyLadder
       },
       {
         title:
@@ -380,10 +443,7 @@ export const PerformanceDetailData: PerformanceFunction[] = [
         title: "Тэргэнцэрт угсардаг тавцан ширээ /Wheelchair Trays/ ",
         text: "",
       },
-      {
-        title: "",
-        text: "",
-      },
+
     ],
   },
   {
@@ -593,7 +653,7 @@ export const PerformanceDetailData: PerformanceFunction[] = [
       },
       {
         title: "Автомат хаалга онгойлгогч ;Automatic Door Openers/",
-        text: "",
+        img: automaticDoorOpener
       },
       {
         title: "Boat Access",
@@ -673,7 +733,7 @@ export const PerformanceDetailData: PerformanceFunction[] = [
       },
       {
         title: "Алхагч /Walkers/",
-        text: "",
+        img: walker
       },
       {
         title:
@@ -741,7 +801,7 @@ export const PerformanceDetailData: PerformanceFunction[] = [
       },
       {
         title: "Автомат хаалга онгойлгогч /Automatic Door Openers/",
-        text: "",
+        img: automaticDoorOpener,
       },
       {
         title: "Гулсахаас хамгаалсан шалны дэвсгэр /Chair Mats/",
@@ -942,6 +1002,7 @@ export const PerformanceDetailData: PerformanceFunction[] = [
       {
         title:
           "Компьютерын дэлгэц томруулагч /External Computer Screen Magnification/",
+        img: externaleComputerScreenMagnification,
       },
       {
         title:
@@ -962,6 +1023,7 @@ export const PerformanceDetailData: PerformanceFunction[] = [
       {
         title:
           "Утсанд холбодог том дэлгэц /Large Visual Display for Telephone/",
+        img: largeVisualDisplayTelephone,
       },
     ],
   },
@@ -986,6 +1048,7 @@ export const PerformanceDetailData: PerformanceFunction[] = [
       {
         title: "Өдрийн чийдэнгийн бүрхүүл /Fluorescent Light Tube Covers/ ",
         text: "Чийдэнгээс цацрах гэрлийн хурцыг бууруулна. Гэрэл унтрааж асаахад цочмог гялбахаас сэргийлнэ.",
+        img: flourescentWhiteTubeCover,
       },
       {
         title:
@@ -994,6 +1057,7 @@ export const PerformanceDetailData: PerformanceFunction[] = [
       },
       {
         title: "Лед гэрлийн шүүлтүүр /LED Light Filters/",
+        img: ledLightFilter,
       },
       {
         title: "Гелэн бүрхүүл /Lighting Gel Filters/",
@@ -1148,8 +1212,7 @@ export const PerformanceDetailData: PerformanceFunction[] = [
     title: "Мэдээллийн хүртээмж ",
     details: [
       {
-        title:
-          "Сургаалтанд нэмэлт цаг гаргах/ сургалтын дундуурх завсарлага ",
+        title: "Сургаалтанд нэмэлт цаг гаргах/ сургалтын дундуурх завсарлага ",
       },
       {
         title:
@@ -1172,224 +1235,247 @@ export const PerformanceDetailData: PerformanceFunction[] = [
           "Чичрэлт намсгагчтай хувилбарт хулгана /Alternative Mice - Limiting Tremors/өсгөгчтэй stethoscope ба ижил төстэй бүтээгдэхүүн /Amplified Stethoscopes and Related products  ",
       },
       {
-        title: "Сонсголын туслах төхөөрөмж (хувийн) /Assistive Listening Devices (personal)/",
-        text: ""
+        title:
+          "Сонсголын туслах төхөөрөмж (хувийн) /Assistive Listening Devices (personal)/",
+        text: "",
       },
       {
-        title: "Гаднын дуу чимээ шүүлтүүртэй сонсголын туслах төхөөрөмж /Assistive Listening Devices and Sound Field System/",
-        text: ""
+        title:
+          "Гаднын дуу чимээ шүүлтүүртэй сонсголын туслах төхөөрөмж /Assistive Listening Devices and Sound Field System/",
+        img: assistiveListeningDeviceAndSoundFieldSystem,
       },
       {
         title: "Дуут мэдээллийг бичгийн тайлбартайгаар буулгах үйлчилгээ ",
-        text: ""
+        text: "",
       },
       {
-        title: "Харилцааны нэмэлт төхөөрөмж /Augmentative and Alternative Communication Device/",
-        text: ""
+        title:
+          "Харилцааны нэмэлт төхөөрөмж /Augmentative and Alternative Communication Device/",
+        img: augmentativeAlternativeComuunicationDevice,
       },
       {
-        title: "Бичиг хэрэг зохион байгуулах автомат систем /Automated Filing Systems/",
-        text: ""
+        title:
+          "Бичиг хэрэг зохион байгуулах автомат систем /Automated Filing Systems/",
+        text: "",
       },
       {
         title: "Ясаар дамжуулах технологи /Bone Conduction Technology/",
-        text: ""
+        img: boneConductionTechnology
       },
       {
         title: "Брайл бичигч /Braille Notetakers/ ",
-        text: ""
+        text: "",
       },
       {
         title: "Брайл хэвлэгч машин /Braille Printers/",
-        text: ""
+        text: "",
       },
       {
-        title: "Ам болон амьсгалаар удирддаг хувилбарт оролттой төхөөрөмж /Breath and Mouth Controlled Alternative Computer Input Devices/",
-        text: ""
+        title:
+          "Ам болон амьсгалаар удирддаг хувилбарт оролттой төхөөрөмж /Breath and Mouth Controlled Alternative Computer Input Devices/",
+        text: "",
       },
       {
         title: "CART үйлчилгээ /CART Services/",
-        text: "Сонсголын бэрхшээлтэй болон аман яриаг хурдан хүлээн авч ойлгох чадвар муутай хүмүүст зориулсан үйлчилгээ ба газар дээр шууд дамжуулах боломжгүй бол зайнаас зохион байгуулж болно."
+        text: "Сонсголын бэрхшээлтэй болон аман яриаг хурдан хүлээн авч ойлгох чадвар муутай хүмүүст зориулсан үйлчилгээ ба газар дээр шууд дамжуулах боломжгүй бол зайнаас зохион байгуулж болно.",
+        img: cartService
       },
       {
         title: "Богино хэлхээний зурагт /Closed Circuit TV (CCTV)/",
-        text: "Харааны асуудалтай хүмүүс мэдээллийг томруулах, өнгөний сонголттойгоор харах, дэлгэцийг хуваан ашиглах зориулалтаар ийм дэлгэц ашиглах нь гар томруулагч хэрэглэснээс хамаагүй илүү тод харуулдаг."
+        text: "Харааны асуудалтай хүмүүс мэдээллийг томруулах, өнгөний сонголттойгоор харах, дэлгэцийг хуваан ашиглах зориулалтаар ийм дэлгэц ашиглах нь гар томруулагч хэрэглэснээс хамаагүй илүү тод харуулдаг.",
       },
       {
         title: "Өнгөний эсрэгцэлтэй хавтас /Color Contrast Overlays/",
-        text: "Цаасан хэвлэмэл дээр өөрийн тан харах хэмжээг дэмжиж өгдөг өнгийг сонгон хуулга тавьж илүү тод харж болдог."
+        text: "Цаасан хэвлэмэл дээр өөрийн тан харах хэмжээг дэмжиж өгдөг өнгийг сонгон хуулга тавьж илүү тод харж болдог.",
       },
       {
         title: "Өнгө танигч программ эсвэл төхөөрөмж ",
-        text: "Өнгөний сохор хүмүүст зориулсан бүтээгдэхүүн хэрэглэх, улаан өнгөний шүүлтүүртэй линз нүдэнд зүүх эсвэл нүдний шилэнд наах эсвэл өнгө танигч ярьдаг программ ашиглах аргууд бий."
+        text: "Өнгөний сохор хүмүүст зориулсан бүтээгдэхүүн хэрэглэх, улаан өнгөний шүүлтүүртэй линз нүдэнд зүүх эсвэл нүдний шилэнд наах эсвэл өнгө танигч ярьдаг программ ашиглах аргууд бий.",
       },
       {
         title: "Өнгөөр кодчилох ",
-        text: "Гарын авлага, газрын зураг зэрэг олон янзын мэдээлэл агуулсан материалын доторх агуулгыг өнгөөр ангилах нь сурах төрлийн бэрхшээлтэй хүмүүст хэрэгтэй чухал мэдээллээ олж ойлгоход нь дэмтэй байх болно."
+        text: "Гарын авлага, газрын зураг зэрэг олон янзын мэдээлэл агуулсан материалын доторх агуулгыг өнгөөр ангилах нь сурах төрлийн бэрхшээлтэй хүмүүст хэрэгтэй чухал мэдээллээ олж ойлгоход нь дэмтэй байх болно.",
       },
       {
         title: "Компютерын Брайл дэлгэц /Coomputer Braille Display/",
-        text: ""
+        text: "",
       },
       {
         title: "Цахим зохион байгуулагч /Electronic Organizers/",
-        text: "Нэр, утасны дугаар, цахим шуудангийн хаяг зэрэг богино чухал мэдээллийг татаж авдаг мөн сануулга тэмдэглэл хийж, сэрүүлэг тавьж болдог программ."
+        text: "Нэр, утасны дугаар, цахим шуудангийн хаяг зэрэг богино чухал мэдээллийг татаж авдаг мөн сануулга тэмдэглэл хийж, сэрүүлэг тавьж болдог программ.",
+        img: electronicOrganizer
       },
       {
-        title: "Компьютерын гарын үсэг хоорондын зай тусгаарлагч нэвт харагддаг бүрхүүл /keyguards/",
-        text: ""
+        title:
+          "Компьютерын гарын үсэг хоорондын зай тусгаарлагч нэвт харагддаг бүрхүүл /keyguards/",
+        img: keyguard,
       },
       {
-        title: "Компьютерын дэлгэц томруулагч /External Computer Screen Magnification/",
-        text: "Нэмэлтээр холбож дэлгэцийн өөдөөс харуулж тавина."
+        title:
+          "Компьютерын дэлгэц томруулагч /External Computer Screen Magnification/",
+        text: "Нэмэлтээр холбож дэлгэцийн өөдөөс харуулж тавина.",
       },
       {
-        title: "Нүдээр удирддаг, хувилбарт оролттой компьютерт залгадаг төхөөрөмж /Eye Controlled Alternative Computer Input Devices/",
-        text: ""
+        title:
+          "Нүдээр удирддаг, хувилбарт оролттой компьютерт залгадаг төхөөрөмж /Eye Controlled Alternative Computer Input Devices/",
+        img: eyeControlledAlternativeComputerInputDevice,
       },
       {
         title: "Эвхдэг шат ",
-        text: ""
+        text: "",
       },
       {
-        title: "Толгойгоор удирддаг, хувилбарт оролттой компьютерт залгадаг төхөөрөмж /Head Controlled Alternative Computer Input Devices/",
-        text: ""
+        title:
+          "Толгойгоор удирддаг, хувилбарт оролттой компьютерт залгадаг төхөөрөмж /Head Controlled Alternative Computer Input Devices/",
+        img: headControlledAlternativeComputerInputDevice,
       },
       {
         title: "Том товчтой утас /Large Button Phones/",
-        text: ""
+        text: "",
       },
       {
         title: "Утсанд холбодог дэлгэц /Large Visual Display for Telephone/",
-        text: ""
+        text: "",
       },
       {
-        title: "Аман яриаг бичгээр буулгагчид холбодог том дэлгэц /Large Visual Display for TTY/",
-        text: ""
+        title:
+          "Аман яриаг бичгээр буулгагчид холбодог том дэлгэц /Large Visual Display for TTY/",
+        text: "",
       },
       {
         title: "Том ойрхон гишгүүртэй шат /Large-Rated Small Step Ladders",
-        text: ""
+        text: "",
       },
       {
-        title: "Мэдээллийг дэлгэцэн дээр үзгээр гаргаж LCD руу шилжүүлэх /Pen Tablet LCD Displays/",
-        text: ""
+        title:
+          "Мэдээллийг дэлгэцэн дээр үзгээр гаргаж LCD руу шилжүүлэх /Pen Tablet LCD Displays/",
+        text: "",
       },
       {
         title: "Тод мөртэй гэрэлтдэг хуулга /Line Guides/",
-        text: ""
+        text: "",
       },
       {
-        title: "Уншиж бичих чадвар сайжруулах бүтээгдэхүүн эсвэл программ /Literacy Skills Development/",
-        text: ""
+        title:
+          "Уншиж бичих чадвар сайжруулах бүтээгдэхүүн эсвэл программ /Literacy Skills Development/",
+        text: "",
       },
       {
         title: "Гарт барьж эсвэл зогсоон байрлуулж хэрэглэх томруулах шил",
-        text: ""
+        text: "",
       },
       {
         title: "Дэлгэцэн дээрх компьютерын гар ",
-        text: ""
+        text: "",
       },
       {
         title: "Нэг гарын компьютерын гар /One-Handed Keyboards/",
-        text: ""
+        img: oneHandedKeyboard,
       },
       {
         title: "Өсгөгчтэй утас /outgoing Voice Amplification – Telephone/",
-        text: ""
+        text: "",
       },
       {
-        title: "Хувийн хэрэглээний дохионы төхөөрөмж /Personal On-Site Paging Devices/",
-        text: "Тодорхой зайнд чичиргээ эсвэл кодоор дохио өгдөг."
+        title:
+          "Хувийн хэрэглээний дохионы төхөөрөмж /Personal On-Site Paging Devices/",
+        text: "Тодорхой зайнд чичиргээ эсвэл кодоор дохио өгдөг.",
       },
       {
-        title: "Зөөврийн эсвэл гараар барьж хэрэглэдэг уншигч /Portable or Handheld Readers/",
-        text: ""
+        title:
+          "Зөөврийн эсвэл гараар барьж хэрэглэдэг уншигч /Portable or Handheld Readers/",
+        text: "",
       },
       {
-        title: "Призм буюу хэвтэж уншдаг нүдний шил Prism Glasses/Bed Spectacles/",
-        text: "Хажуу тийш харж хэвтэж байхдаа урагш харж байгаа мэт уншиж болдог харааны өнцгийг тааруулдаг нүдний шил"
+        title:
+          "Призм буюу хэвтэж уншдаг нүдний шил Prism Glasses/Bed Spectacles/",
+        text: "Хажуу тийш харж хэвтэж байхдаа урагш харж байгаа мэт уншиж болдог харааны өнцгийг тааруулдаг нүдний шил",
       },
       {
         title: "Мэргэжлийн зохион байгуулагч /Professional Organizers/",
-        text: ""
+        img: professionalOrganizer
       },
       {
-        title: "Зохион байгуулах буюу байгуулагд ажиллах ур чадварыг хөгжүүлэхэд туслах бэлтгэгдсэн хүн.",
-        text: ""
+        title:
+          "Зохион байгуулах буюу байгуулагд ажиллах ур чадварыг хөгжүүлэхэд туслах бэлтгэгдсэн хүн.",
+        text: "",
       },
       {
-        title: "Нээлттэй ба хаалттай хөрвүүлэг /Real-time and Off-line Captioning Services/",
-        text: "Сонсголын бэрхшээлтэй хүнд зориулж дуут мэдээллийг текстэд буулган бүрэн хэмжээгээр нээлттэй оруулах эсвэл гол хэсгийг оруулаад дэлгэрэнгүйг бүрэн эхээр нь өөр сувгаар хүлээн авч унших гэсэн 2 төрөлтэй байдаг."
+        title:
+          "Нээлттэй ба хаалттай хөрвүүлэг /Real-time and Off-line Captioning Services/",
+        text: "Сонсголын бэрхшээлтэй хүнд зориулж дуут мэдээллийг текстэд буулган бүрэн хэмжээгээр нээлттэй оруулах эсвэл гол хэсгийг оруулаад дэлгэрэнгүйг бүрэн эхээр нь өөр сувгаар хүлээн авч унших гэсэн 2 төрөлтэй байдаг.",
       },
       {
         title: "Мэдээллийг дуут бичлэг болгон сонсох ",
-        text: "Мэдээллийг уншин хүлээн авч тогтоохдоо муу хүн бичлэг хийж аваад сонсдог байвал мартахгүй илүү сайн санадаг."
+        text: "Мэдээллийг уншин хүлээн авч тогтоохдоо муу хүн бичлэг хийж аваад сонсдог байвал мартахгүй илүү сайн санадаг.",
       },
       {
         title: "Дугуйтай намхан шат /Rolling Safety Ladders/",
-        text: "Бариултай шатнаас харьцангуй нам гишгүүртэй учраас аюулгүй байдаг."
+        text: "Бариултай шатнаас харьцангуй нам гишгүүртэй учраас аюулгүй байдаг.",
       },
       {
         title: "Дэлгэц томруулагч программ /Screen Magnification Software/",
-        text: ""
+        text: "",
       },
       {
-        title: "Дэлгэц уншигч программ, дагалдах сургалт /Screen Reading Software and Training/",
-        text: ""
+        title:
+          "Дэлгэц уншигч программ, дагалдах сургалт /Screen Reading Software and Training/",
+        text: "",
       },
       {
         title: "Хэл яриа танигч программ ",
-        text: ""
+        text: "",
       },
       {
         title: "Тийрэлтэт түлхэгчтэй тэрэг /Spring-Loaded Carts/",
-        text: "Хүнд оврын зүйлийг доороос нь түлхэж дээш гаргадаг пүрштэй тэрэг."
+        text: "Хүнд оврын зүйлийг доороос нь түлхэж дээш гаргадаг пүрштэй тэрэг.",
       },
       {
         title: "Шатны туслах хэрэгсэл /Stair Assists/",
-        text: "Шатаар авирахдаа тэнцвэр алдахгүй байхад хэрэглэдэг."
+        text: "Шатаар авирахдаа тэнцвэр алдахгүй байхад хэрэглэдэг.",
       },
       {
-        title: "Бар код танин уншигч программ /Talking Bar Code Scanner/Reader/",
-        text: ""
+        title:
+          "Бар код танин уншигч программ /Talking Bar Code Scanner/Reader/",
+        text: "",
       },
       {
         title: "Зоосон мөнгө танин ангилагч /Talking Coin Counter/Sorter/",
-        text: ""
+        text: "",
       },
       {
-        title: "Өнгө ялгаж яригч төхөөрөмж эсвэл программ /Talking Color Detector/",
-        text: ""
+        title:
+          "Өнгө ялгаж яригч төхөөрөмж эсвэл программ /Talking Color Detector/",
+        text: "",
       },
       {
-        title: "Зүг чиг зааж яригч программ, газрын зураг /Talking Global Positioning Systems (GPS) and Maps/",
-        text: ""
+        title:
+          "Зүг чиг зааж яригч программ, газрын зураг /Talking Global Positioning Systems (GPS) and Maps/",
+        text: "",
       },
       {
         title: "Ярьдаг мөнгө танигч /Talking Money Identifier/",
-        text: ""
+        text: "",
       },
       {
         title: "Ярьдаг жин хэмжигч /Talking  Scales/",
-        text: ""
+        text: "",
       },
       {
         title: "Ярьдаг халуун хэмжигч шил /Talking Thermometers/",
-        text: ""
+        text: "",
       },
       {
         title: "Телескопын камер /Telescoping Cameras/",
-        text: "Харааны түвшний өндөр намд тааруулан харуулдаг дэлгэц."
+        text: "Харааны түвшний өндөр намд тааруулан харуулдаг дэлгэц.",
       },
       {
         title: "Сургалтад агуулгын өөрчлөлт хийх ",
-        text: ""
+        text: "",
       },
       {
         title: "Дуу яриа өсгөгч /Voice Amplification/",
-        text: ""
+        img: voiceAmplification
       },
     ],
   },
@@ -1397,1078 +1483,1121 @@ export const PerformanceDetailData: PerformanceFunction[] = [
     id: 15,
     title: "Бусадтай харилцах ",
     details: [
-        {
-            title: "Оюун санааны зөвлөх /On-site Mentoring/",
-            text: ""
-        },
-        {
-            title: "Аман харилцаа ",
-            text: "Бичгээр хариулах шаардлагатай байсан ч утсаар холбогдож хариулах нь зарим хүнд хялбар байдаг."
-        },
-        {
-            title: "Туслах хүн ",
-            text: ""
-        },
-        {
-            title: "Зан үйл өөрчлөх техник ",
-            text: ""
-        },
-        {
-            title: "Сургуультай туслах амьтан",
-            text: ""
-        },
-        {
-            title: "Төлөвлөгөөнд өөрчлөлт оруулах зохицуулалт",
-            text: ""
-        },
-    ]
+      {
+        title: "Оюун санааны зөвлөх /On-site Mentoring/",
+        text: "",
+      },
+      {
+        title: "Аман харилцаа ",
+        text: "Бичгээр хариулах шаардлагатай байсан ч утсаар холбогдож хариулах нь зарим хүнд хялбар байдаг.",
+      },
+      {
+        title: "Туслах хүн ",
+        text: "",
+      },
+      {
+        title: "Зан үйл өөрчлөх техник ",
+        text: "",
+      },
+      {
+        title: "Сургуультай туслах амьтан",
+        text: "",
+      },
+      {
+        title: "Төлөвлөгөөнд өөрчлөлт оруулах зохицуулалт",
+        text: "",
+      },
+    ],
   },
   {
     id: 16,
     title: "Дуу чимээ",
     details: [
-        {
-            title: "Тусгаарлалтын хана, хаалт гэх мэт",
-            text: ""
-        },
-        {
-            title: "Орчны дуу чимээ намсгагч машин /Environmental Sound Machines / Tinnitus Maskers / White Noise Machines/",
-            text: ""
-        },
-        {
-            title: "Сэнс /Fans/",
-            text: ""
-        },
-        {
-            title: "Уян хатан ажлын цаг ",
-            text: ""
-        },
-        {
-            title: "Өрөөг ханаар тусгаарлах ",
-            text: ""
-        },
-        {
-            title: "Дуу чимээ багасгагч чихэвч ",
-            text: ""
-        },
-        {
-            title: "Нэмэлт гэрэл /Strobe Lights/",
-            text: ""
-        },
-    ]
+      {
+        title: "Тусгаарлалтын хана, хаалт гэх мэт",
+        text: "",
+      },
+      {
+        title:
+          "Орчны дуу чимээ намсгагч машин /Environmental Sound Machines / Tinnitus Maskers / White Noise Machines/",
+        text: "",
+      },
+      {
+        title: "Сэнс /Fans/",
+        text: "",
+      },
+      {
+        title: "Уян хатан ажлын цаг ",
+        text: "",
+      },
+      {
+        title: "Өрөөг ханаар тусгаарлах ",
+        text: "",
+      },
+      {
+        title: "Дуу чимээ багасгагч чихэвч ",
+        text: "",
+      },
+      {
+        title: "Нэмэлт гэрэл /Strobe Lights/",
+        text: "",
+      },
+    ],
   },
   {
     id: 17,
     title: "Бодлого журмаар  зохицуулах",
     details: [
-        {
-            title: "Сургалтын цаг сунгах, илүү олон богино завсарлага авах боломж олгох ",
-            text: ""
-        },
-        {
-            title: "Уян хатан ажлын хуваарь",
-            text: ""
-        },
-        {
-            title: "Зайлшгүй гүйцэтгэх шаардлагагүй үүрэг даалгаврыг өөр ажлын байранд шилжүүлэн томилох",
-            text: ""
-        },
-        {
-            title: "Цайны цагийн хуваарийг өөрчлөх",
-            text: ""
-        },
-        {
-            title: "Богино завсарлага авч амрах ",
-            text: ""
-        },
-        {
-            title: "Зай барих тэмдэглэгээ байрлуулах",
-            text: ""
-        },
-        {
-            title: "Бодлого журамдаа өөрчлөлт оруулах",
-            text: ""
-        },
-        {
-            title: "Өөр ажилд томилох ",
-            text: ""
-        },
-        {
-            title: "Сургуультай туслах амьтан ",
-            text: ""
-        },
-        {
-            title: "Нойр сэргээх сэрүүлэг төхөөрөмж /Sleep Alerting Devices/",
-            text: ""
-        },
-        {
-            title: "Холын тусгалтай нэмэлт гэрэл /Strobe Lights/",
-            text: ""
-        },
-        {
-            title: "Ойр ойрхон хяналт удирдлагаар хангах ",
-            text: ""
-        },
-        {
-            title: "Сэтгэл зүйн дэмжлэг амьтан ",
-            text: ""
-        },
-        {
-            title: "Зайнаас ажиллах, гэрээс ажиллах",
-            text: ""
-        },
-        {
-            title: "Мэдрэгчтэй усны хаалт /Touchless Faucets/",
-            text: ""
-        },
-    ]
+      {
+        title:
+          "Сургалтын цаг сунгах, илүү олон богино завсарлага авах боломж олгох ",
+        text: "",
+      },
+      {
+        title: "Уян хатан ажлын хуваарь",
+        text: "",
+      },
+      {
+        title:
+          "Зайлшгүй гүйцэтгэх шаардлагагүй үүрэг даалгаврыг өөр ажлын байранд шилжүүлэн томилох",
+        text: "",
+      },
+      {
+        title: "Цайны цагийн хуваарийг өөрчлөх",
+        text: "",
+      },
+      {
+        title: "Богино завсарлага авч амрах ",
+        text: "",
+      },
+      {
+        title: "Зай барих тэмдэглэгээ байрлуулах",
+        text: "",
+      },
+      {
+        title: "Бодлого журамдаа өөрчлөлт оруулах",
+        text: "",
+      },
+      {
+        title: "Өөр ажилд томилох ",
+        text: "",
+      },
+      {
+        title: "Сургуультай туслах амьтан ",
+        text: "",
+      },
+      {
+        title: "Нойр сэргээх сэрүүлэг төхөөрөмж /Sleep Alerting Devices/",
+        text: "",
+      },
+      {
+        title: "Холын тусгалтай нэмэлт гэрэл /Strobe Lights/",
+        text: "",
+      },
+      {
+        title: "Ойр ойрхон хяналт удирдлагаар хангах ",
+        text: "",
+      },
+      {
+        title: "Сэтгэл зүйн дэмжлэг амьтан ",
+        text: "",
+      },
+      {
+        title: "Зайнаас ажиллах, гэрээс ажиллах",
+        text: "",
+      },
+      {
+        title: "Мэдрэгчтэй усны хаалт /Touchless Faucets/",
+        text: "",
+      },
+    ],
   },
   {
     id: 18,
     title: "Гадаад орчны хэм",
     details: [
-        
-        {
-            title: "",
-            text: ""
-        },
-    ]
+      {
+        title: "",
+        text: "",
+      },
+    ],
   },
   {
     id: 19,
     title: "Хүйтэнд мэдрэмтгий байх",
     details: [
-        {
-            title: "Агааржуулагчийн урсгалын чиглэл өөрчлөгч /Air Deflectors/",
-            text: ""
-        },
-        {
-            title: "Хүйтнээс хамгаалах бээлий",
-            text: "Дотроо дулаалгатай бээлий. Хүйтэн зүйл барихдаа өмсөнө."
-        },
-        {
-            title: "Сэрүүцүүлэгч хувцас /Cooling Clothing/",
-            text: ""
-        },
-        {
-            title: "Уян хатан цагийн хуваарь",
-            text: ""
-        },
-        {
-            title: "Хөл дулаацуулагч өмсгөл",
-            text: "Хөлийн дотроо дулаалгатай өмсгөл."
-        },
-        {
-            title: "Халуунаас хамгаалагчтай бээлий",
-            text: ""
-        },
-        {
-            title: "Хэт халсан төмөр эд зүйл барихдаа өмсвөл эт халуун мэдэрч хямрахаас хамгаална.",
-            text: ""
-        },
-        {
-            title: "Цахилгаанаар халаасан хувцас /Heated Clothing/",
-            text: ""
-        },
-        {
-            title: "Компьютерын халаалттай хэрэгслүүд",
-            text: "Гар, хулгана, бугуйны эвээс зэрэг хэрэгслүүд халаалттай байдаг."
-        },
-        {
-            title: "Цахилгаанаар халаадаг бээлий",
-            text: ""
-        },
-        {
-            title: "Хоолны цаг зэрэг завсарлага авах цагуудыг уян хатнаар ашиглахыг зөвшөөрөх",
-            text: ""
-        },
-        {
-            title: "Зайнаас эсвэл гэрээс ажиллах",
-            text: ""
-        },
-        {
-            title: "Агааржуулагчийн хаалт",
-            text: "Өрөөний хэмийг тохируулах зорилгоор агаарын урсгалын чиглэлийг өөрчилж эсвэл түр хугацаагаар бүр мөсөн хаана. "
-        },
-        {
-            title: "Ажлын байрны халаалт /Workstation Space Heaters/",
-            text: ""
-        },
-      
-    ]
+      {
+        title: "Агааржуулагчийн урсгалын чиглэл өөрчлөгч /Air Deflectors/",
+        text: "",
+      },
+      {
+        title: "Хүйтнээс хамгаалах бээлий",
+        text: "Дотроо дулаалгатай бээлий. Хүйтэн зүйл барихдаа өмсөнө.",
+      },
+      {
+        title: "Сэрүүцүүлэгч хувцас /Cooling Clothing/",
+        text: "",
+      },
+      {
+        title: "Уян хатан цагийн хуваарь",
+        text: "",
+      },
+      {
+        title: "Хөл дулаацуулагч өмсгөл",
+        text: "Хөлийн дотроо дулаалгатай өмсгөл.",
+      },
+      {
+        title: "Халуунаас хамгаалагчтай бээлий",
+        text: "",
+      },
+      {
+        title:
+          "Хэт халсан төмөр эд зүйл барихдаа өмсвөл эт халуун мэдэрч хямрахаас хамгаална.",
+        text: "",
+      },
+      {
+        title: "Цахилгаанаар халаасан хувцас /Heated Clothing/",
+        text: "",
+      },
+      {
+        title: "Компьютерын халаалттай хэрэгслүүд",
+        text: "Гар, хулгана, бугуйны эвээс зэрэг хэрэгслүүд халаалттай байдаг.",
+      },
+      {
+        title: "Цахилгаанаар халаадаг бээлий",
+        text: "",
+      },
+      {
+        title:
+          "Хоолны цаг зэрэг завсарлага авах цагуудыг уян хатнаар ашиглахыг зөвшөөрөх",
+        text: "",
+      },
+      {
+        title: "Зайнаас эсвэл гэрээс ажиллах",
+        text: "",
+      },
+      {
+        title: "Агааржуулагчийн хаалт",
+        text: "Өрөөний хэмийг тохируулах зорилгоор агаарын урсгалын чиглэлийг өөрчилж эсвэл түр хугацаагаар бүр мөсөн хаана. ",
+      },
+      {
+        title: "Ажлын байрны халаалт /Workstation Space Heaters/",
+        text: "",
+      },
+    ],
   },
   {
     id: 20,
     title: "Халуунд мэдрэмтгий байх",
     details: [
-        {
-            title: "Агааржуулагчийн урсгалын чиглэл өөрчлөгч /Air Deflectors",
-            text: ""
-        },
-        {
-            title: "Сэнс ",
-            text: ""
-        },
-        {
-            title: "Цахилгаанаар хөргөдөг хувцас ",
-            text: ""
-        },
-        {
-            title: "Уян хатан цагийн хуваарь",
-            text: "Хоолны цаг зэрэг завсарлага авах цагуудыг уян хатнаар ашиглахыг зөвшөөрөх"
-        },
-        {
-            title: "Зайнаас эсвэл гэрээс ажиллах",
-            text: ""
-        },
-        {
-            title: "Агааржуулагчийн хаалт",
-            text: "Өрөөний хэмийг тохируулах зорилгоор агаарын урсгалын чиглэлийг өөрчилж эсвэл түр хугацаагаар бүр мөсөн хаана. "
-        },
-       
-    ]
+      {
+        title: "Агааржуулагчийн урсгалын чиглэл өөрчлөгч /Air Deflectors",
+        text: "",
+      },
+      {
+        title: "Сэнс ",
+        text: "",
+      },
+      {
+        title: "Цахилгаанаар хөргөдөг хувцас ",
+        text: "",
+      },
+      {
+        title: "Уян хатан цагийн хуваарь",
+        text: "Хоолны цаг зэрэг завсарлага авах цагуудыг уян хатнаар ашиглахыг зөвшөөрөх",
+      },
+      {
+        title: "Зайнаас эсвэл гэрээс ажиллах",
+        text: "",
+      },
+      {
+        title: "Агааржуулагчийн хаалт",
+        text: "Өрөөний хэмийг тохируулах зорилгоор агаарын урсгалын чиглэлийг өөрчилж эсвэл түр хугацаагаар бүр мөсөн хаана. ",
+      },
+    ],
   },
   {
     id: 21,
     title: "Эд юмс хөдөлгөх, зөөх /хүн/",
     details: [
-        {
-            title: "Агаарын задгай өргөгч/лифт /Aerial Lifts/",
-            text: ""
-        },
-        {
-            title: "Тохиргоотой шалгалтын ширээ /Adjustable Exam Tables/",
-            text: ""
-        },
-        {
-            title: "Амьтан өргөгч ширээ /Animal Lift Tables/",
-            text: "Аюулгүй байдлын үүднээс амьтанд эмнэлгийн үзлэг, эмчилгээ хийхдээ хэрэглэдэг."
-        },
-        {
-            title: "Олон зүгт өнхрүүлэгч ширээ /Ball Transfer Tables/",
-            text: "Баглаа савлагаа хийхэд ашиглана."
-        },
-        {
-            title: "Зайгаар ажилладаг өргөгч ширээ / Battery Powered Lift Tables",
-            text: "Цахилгаанд залгуураас хамаарахгүйгээр хүссэн газраа байрлуулан олон зүгт хөдөлгөөн хийдэг өргөгч ширээ. /"
-        },
-        {
-            title: "Бялуу чимэглэгч/гурилан бүтээгдэхүүн хийх төхөөрөмж /Cake Decorating and / ",
-            text: ""
-        },
-        {
-            title: "Түрдэг тэрэг /Carts/",
-            text: "Моторт, шулуун зэрэг олон төрөлтэй."
-        },
-        {
-            title: "Бага оврын зөөврийн өргөгч, зөөгч /Compact Mobile Cranes/ ",
-            text: "Зайн тэжээлээр, хөл насосоор даралт шахаж тавцанг өндөрт гарган эд зүйлсийг байрлуулна. Зүрх судас, хүзүү мөр зэрэг төрөл бүрийн шалтгаанаар түлхэх, татах хүч гаргахад асуудалтай хүмүүст зориулсан туслах төхөөрөмж/"
-        },
-        {
-            title: "Хөдөлгүүр өргөгч автомат ажиллагаатай тавцан /Engine Lifts and Lift Plates/",
-            text: " Хөдөлгүүрийг төхөөрөмжөөс салган зөөхөд ашиглана."
-        },
-        {
-            title: "Эргиномик хийн багаж /Ergonomic and Pneumatic Tools/",
-            text: "Мөр, нуруу, хүзүүний асуудалтай хүмүүст зориулсан бугуйн хөдөлгөөнийг багасгаж хүнд хөнгөн жинтэй объекттой ажиллахад ашиглана"
-        },
-        {
-            title: "Хоёр үет бариултай гарын түшүүр /Grab Bars - Toilet Hinged Arm Support/",
-            text: ""
-        },
-        {
-            title: "Үсний хайч /Hair Scissors/ ",
-            text: ""
-        },
-        {
-            title: "Өргөн, нам гишгүүрт шат /Large-Rated Small Step Ladders/",
-            text: ""
-        },
-        {
-            title: "Туслах өргөх хэрэгсэл /Lifting Aids/ ",
-            text: ""
-        },
-        {
-            title: "Сунадаг гартай чийдэнгийн унтраагуур /Light Switch Extension Handles/",
-            text: ""
-        },
-        {
-            title: "Муу усны нүхний таг өргөгч/онгойлгогч /• Manhole Cover Lifts/",
-            text: ""
-        },
-        {
-            title: "Олон үйлдэлт түрдэг тэрэг /Multi-Purpose Carts/",
-            text: ""
-        },
-        {
-            title: "Вакум өргөгч /Pickups, Semis, and Heavy Equipment/",
-            text: "Объектыг сорж өргөн баруулах ба өнцөг хазайлт зэргийг тааруулах Тохиргоотой төхөөрөмж."
-        },
-        {
-            title: "Дусаагуур /Pipettes/",
-            text: ""
-        },
-        {
-            title: "Усан сангийн өргөгч/лифт /Pool Lifts/",
-            text: ""
-        },
-        {
-            title: "Хүнд объект өргөх зөв техник заах /Proper Lifting Techniques/",
-            text: "Багийн хүчийг ашиглаж болон. "
-        },
-        {
-            title: "Дугуйтай өнхөрдөг шат /Rolling Safety Ladders/",
-            text: ""
-        },
-        {
-            title: "Тийрэлтэт ачааны тавцан /Spring-Loaded Carts/",
-            text: ""
-        },
-        {
-            title: "Зэвэрдэггүй гангаар хийсэн хоол бэлтгэх ширээ/Тавцан /Stainless Steel Carts and Worktables/ ",
-            text: ""
-        },
-        {
-            title: "Жорлонгийн цаас тогтоогчтой хоёр гарын бариул /Swing Away Grab Bars/",
-            text: ""
-        },
-        {
-            title: "Дугуй янзлагч /Tire Handling/",
-            text: "Тоног төхөөрөмжийн дугуй янзлагч туслах төхөөрөмж."
-        },
-        {
-            title: "Нэг газраас нөгөө рүү шилжихэд туслах хэрэгсэл /Transfer Aids/",
-            text: "Эд юмс түүн авч шилжүүлэн зөөх хуудас цаас /Transfer Sheets/"
-        },
-        {
-            title: "Хогийн сав /Trashcans/",
-            text: "Аюулгүй ажиллагаа ба эрүүл ахуйн шаардлага хангасан."
-        },
-        {
-            title: "Вакум өргөгч /Vacuum Lifts/ ",
-            text: ""
-        },
-        {
-            title: "Вакум түүгч багаж /Vacuum Pickup Tools/",
-            text: ""
-        },
-        {
-            title: "Гишгүүртэй ширээ /Walk-up Changing Tables/",
-            text: "Хүүхдийг гишгүүр дээр гарган ширээн дээр суулган асрах"
-        },
-    ]
+      {
+        title: "Агаарын задгай өргөгч/лифт /Aerial Lifts/",
+        img: aerialLift,
+      },
+      {
+        title: "Тохиргоотой шалгалтын ширээ /Adjustable Exam Tables/",
+        text: "",
+      },
+      {
+        title: "Амьтан өргөгч ширээ /Animal Lift Tables/",
+        text: "Аюулгүй байдлын үүднээс амьтанд эмнэлгийн үзлэг, эмчилгээ хийхдээ хэрэглэдэг.",
+      },
+      {
+        title: "Олон зүгт өнхрүүлэгч ширээ /Ball Transfer Tables/",
+        text: "Баглаа савлагаа хийхэд ашиглана.",
+      },
+      {
+        title: "Зайгаар ажилладаг өргөгч ширээ / Battery Powered Lift Tables",
+        text: "Цахилгаанд залгуураас хамаарахгүйгээр хүссэн газраа байрлуулан олон зүгт хөдөлгөөн хийдэг өргөгч ширээ. /",
+      },
+      {
+        title:
+          "Бялуу чимэглэгч/гурилан бүтээгдэхүүн хийх төхөөрөмж /Cake Decorating and / ",
+        img: cakeDecoratingAndBaking,
+      },
+      {
+        title: "Түрдэг тэрэг /Carts/",
+        text: "Моторт, шулуун зэрэг олон төрөлтэй.",
+      },
+      {
+        title: "Бага оврын зөөврийн өргөгч, зөөгч /Compact Mobile Cranes/ ",
+        text: "Зайн тэжээлээр, хөл насосоор даралт шахаж тавцанг өндөрт гарган эд зүйлсийг байрлуулна. Зүрх судас, хүзүү мөр зэрэг төрөл бүрийн шалтгаанаар түлхэх, татах хүч гаргахад асуудалтай хүмүүст зориулсан туслах төхөөрөмж/",
+        img: compactMobileCrane
+      },
+      {
+        title:
+          "Хөдөлгүүр өргөгч автомат ажиллагаатай тавцан /Engine Lifts and Lift Plates/",
+        text: " Хөдөлгүүрийг төхөөрөмжөөс салган зөөхөд ашиглана.",
+      },
+      {
+        title: "Эргиномик хийн багаж /Ergonomic and Pneumatic Tools/",
+        text: "Мөр, нуруу, хүзүүний асуудалтай хүмүүст зориулсан бугуйн хөдөлгөөнийг багасгаж хүнд хөнгөн жинтэй объекттой ажиллахад ашиглана",
+        img: ergonomicallyPneumaticTool
+      },
+      {
+        title:
+          "Хоёр үет бариултай гарын түшүүр /Grab Bars - Toilet Hinged Arm Support/",
+        text: "",
+      },
+      {
+        title: "Үсний хайч /Hair Scissors/ ",
+        text: "",
+      },
+      {
+        title: "Өргөн, нам гишгүүрт шат /Large-Rated Small Step Ladders/",
+        text: "",
+      },
+      {
+        title: "Туслах өргөх хэрэгсэл /Lifting Aids/ ",
+        text: "",
+      },
+      {
+        title:
+          "Сунадаг гартай чийдэнгийн унтраагуур /Light Switch Extension Handles/",
+        text: "",
+      },
+      {
+        title: "Муу усны нүхний таг өргөгч/онгойлгогч /• Manhole Cover Lifts/",
+        text: "",
+      },
+      {
+        title: "Олон үйлдэлт түрдэг тэрэг /Multi-Purpose Carts/",
+        text: "",
+      },
+      {
+        title: "Вакум өргөгч /Pickups, Semis, and Heavy Equipment/",
+        text: "Объектыг сорж өргөн баруулах ба өнцөг хазайлт зэргийг тааруулах Тохиргоотой төхөөрөмж.",
+      },
+      {
+        title: "Дусаагуур /Pipettes/",
+        text: "",
+      },
+      {
+        title: "Усан сангийн өргөгч/лифт /Pool Lifts/",
+        text: "",
+      },
+      {
+        title: "Хүнд объект өргөх зөв техник заах /Proper Lifting Techniques/",
+        text: "Багийн хүчийг ашиглаж болон. ",
+      },
+      {
+        title: "Дугуйтай өнхөрдөг шат /Rolling Safety Ladders/",
+        text: "",
+      },
+      {
+        title: "Тийрэлтэт ачааны тавцан /Spring-Loaded Carts/",
+        text: "",
+      },
+      {
+        title:
+          "Зэвэрдэггүй гангаар хийсэн хоол бэлтгэх ширээ/Тавцан /Stainless Steel Carts and Worktables/ ",
+        text: "",
+      },
+      {
+        title:
+          "Жорлонгийн цаас тогтоогчтой хоёр гарын бариул /Swing Away Grab Bars/",
+        text: "",
+      },
+      {
+        title: "Дугуй янзлагч /Tire Handling/",
+        text: "Тоног төхөөрөмжийн дугуй янзлагч туслах төхөөрөмж.",
+      },
+      {
+        title: "Нэг газраас нөгөө рүү шилжихэд туслах хэрэгсэл /Transfer Aids/",
+        text: "Эд юмс түүн авч шилжүүлэн зөөх хуудас цаас /Transfer Sheets/",
+      },
+      {
+        title: "Хогийн сав /Trashcans/",
+        text: "Аюулгүй ажиллагаа ба эрүүл ахуйн шаардлага хангасан.",
+      },
+      {
+        title: "Вакум өргөгч /Vacuum Lifts/ ",
+        text: "",
+      },
+      {
+        title: "Вакум түүгч багаж /Vacuum Pickup Tools/",
+        text: "",
+      },
+      {
+        title: "Гишгүүртэй ширээ /Walk-up Changing Tables/",
+        text: "Хүүхдийг гишгүүр дээр гарган ширээн дээр суулган асрах",
+      },
+    ],
   },
   {
     id: 22,
     title: "Ажлын байрны гадаад орчны хүртээмж",
     details: [
-        {
-            title: "Хүртээмжтэй тэврийн хэрэгсэл ",
-            text: ""
-        },
-        {
-            title: "Скүүтрийн дагалдах хэрэгсэл",
-            text: ""
-        },
-        {
-            title: "Бартаар замын скүүтэр /All-Terrain scooter/",
-            text: ""
-        },
-        {
-            title: "Бартаар замын тэргэнцэр /All-Terrain Wheelchairs/",
-            text: ""
-        },
-        {
-            title: "Үзлэг ба хагалгааны сандал /Examination and Procedures Chair/",
-            text: ""
-        },
-        {
-            title: "Уян хатан цагийн хуваарь",
-            text: ""
-        },
-        {
-            title: "Тэргэнцэрт зориулсан толгойны дэмжлэг түшлэг /Head Support for Wheelchairs/",
-            text: ""
-        },
-        {
-            title: "Нам дор сууж ажиллахад зориулсан сандал /Low Task Chair/",
-            text: ""
-        },
-        {
-            title: "Хувийн хэрэглээний скүүтэр /Personal Transportation and Mobility Products/",
-            text: ""
-        },
-        {
-            title: "Шатны туслах хэрэгсэл /Stair Assists/",
-            text: ""
-        },
-        {
-            title: "Гэрээс/ зайнаас ажиллах",
-            text: ""
-        },
-        {
-            title: "Тээврийн хэрэгслийн дагалдах туслах хэрэгсэл /Transportation Assistance/",
-            text: ""
-        },
-        {
-            title: "Тээврийн хэрэгслийг хүртээмжтэй болгон өөрчлөх/Van Conversion/",
-            text: ""
-        },
-        {
-            title: "Тэргэнцэртэй нь хамт биеийн жинг хэмжих боломжтой тавцан /Wheelchair Accessible Scales/",
-            text: ""
-        },
-        {
-            title: "Тэргэнцэрт холбодог чиргүүл /Wheelchair Carts/Trailers/",
-            text: "Гар утас зэрэг зүйл хийх зориулалттай тэргэнцрийн дагалдах хэрэгсэл /wheelchair mounts/"
-        },
-        
-    ]
+      {
+        title: "Хүртээмжтэй тэврийн хэрэгсэл ",
+        text: "",
+      },
+      {
+        title: "Скүүтрийн дагалдах хэрэгсэл",
+        text: "",
+      },
+      {
+        title: "Бартаар замын скүүтэр /All-Terrain scooter/",
+        text: "",
+      },
+      {
+        title: "Бартаар замын тэргэнцэр /All-Terrain Wheelchairs/",
+        text: "",
+      },
+      {
+        title: "Үзлэг ба хагалгааны сандал /Examination and Procedures Chair/",
+        text: "",
+      },
+      {
+        title: "Уян хатан цагийн хуваарь",
+        text: "",
+      },
+      {
+        title:
+          "Тэргэнцэрт зориулсан толгойны дэмжлэг түшлэг /Head Support for Wheelchairs/",
+        text: "",
+      },
+      {
+        title: "Нам дор сууж ажиллахад зориулсан сандал /Low Task Chair/",
+        text: "",
+      },
+      {
+        title:
+          "Хувийн хэрэглээний скүүтэр /Personal Transportation and Mobility Products/",
+        text: "",
+      },
+      {
+        title: "Шатны туслах хэрэгсэл /Stair Assists/",
+        text: "",
+      },
+      {
+        title: "Гэрээс/ зайнаас ажиллах",
+        text: "",
+      },
+      {
+        title:
+          "Тээврийн хэрэгслийн дагалдах туслах хэрэгсэл /Transportation Assistance/",
+        text: "",
+      },
+      {
+        title: "Тээврийн хэрэгслийг хүртээмжтэй болгон өөрчлөх/Van Conversion/",
+        text: "",
+      },
+      {
+        title:
+          "Тэргэнцэртэй нь хамт биеийн жинг хэмжих боломжтой тавцан /Wheelchair Accessible Scales/",
+        text: "",
+      },
+      {
+        title: "Тэргэнцэрт холбодог чиргүүл /Wheelchair Carts/Trailers/",
+        text: "Гар утас зэрэг зүйл хийх зориулалттай тэргэнцрийн дагалдах хэрэгсэл /wheelchair mounts/",
+      },
+    ],
   },
   {
     id: 23,
     title: "Мэдээллийн хүртээмж ",
     details: [
-        {
-            title: "Хувилбарт оролттой төхөөрөмж",
-            text: ""
-        },
-        {
-            title: "Хувилбарт компьютерын гар",
-            text: ""
-        },
-        {
-            title: "Хувилбарт хулгана",
-            text: "Гарын чичрэх, салганах хөдөлгөөнийг багасгах зориулалттай хулгана"
-        },
-        {
-            title: "Дэлгэцэн дээрх гар",
-            text: ""
-        },
-        {
-            title: "Тод үсэгтэй, том товчтой компьютерын гар",
-            text: ""
-        },
-    ]
+      {
+        title: "Хувилбарт оролттой төхөөрөмж",
+        text: "",
+      },
+      {
+        title: "Хувилбарт компьютерын гар",
+        text: "",
+      },
+      {
+        title: "Хувилбарт хулгана",
+        text: "Гарын чичрэх, салганах хөдөлгөөнийг багасгах зориулалттай хулгана",
+      },
+      {
+        title: "Дэлгэцэн дээрх гар",
+        text: "",
+      },
+      {
+        title: "Тод үсэгтэй, том товчтой компьютерын гар",
+        text: "",
+      },
+    ],
   },
   {
     id: 24,
     title: "Бусадтай харилцах ",
     details: [
-        {
-            title: "Туслах хүн",
-            text: ""
-        },
-        {
-            title: "Зан үйл засах техникт суралцах",
-            text: ""
-        },
-        {
-            title: "Оюун санааны зөвлөх ",
-            text: ""
-        },
-        {
-            title: "Сургуультай туслах амьтан ",
-            text: ""
-        },
-        {
-            title: "Аман харилцаа",
-            text: "Бичгээр хариулах шаардлагатай байсан ч утсаар холбогдож хариулах нь зарим хүнд хялбар байдаг."
-        },
-        {
-          title:"Бичиж засварладаг программ ",
-          text: "Бичсэн зүйлийг найруулга дүрмийн хувьд засварлаж сайжруул"
-        }
-    ]
+      {
+        title: "Туслах хүн",
+        text: "",
+      },
+      {
+        title: "Зан үйл засах техникт суралцах",
+        text: "",
+      },
+      {
+        title: "Оюун санааны зөвлөх ",
+        text: "",
+      },
+      {
+        title: "Сургуультай туслах амьтан ",
+        text: "",
+      },
+      {
+        title: "Аман харилцаа",
+        text: "Бичгээр хариулах шаардлагатай байсан ч утсаар холбогдож хариулах нь зарим хүнд хялбар байдаг.",
+      },
+      {
+        title: "Бичиж засварладаг программ ",
+        text: "Бичсэн зүйлийг найруулга дүрмийн хувьд засварлаж сайжруул",
+      },
+    ],
   },
   {
     id: 25,
     title: "Эд юмс хөдөлгөх ",
     details: [
-        {
-            title: "Амьтан өргөгч ширээ /Animal Lift Tables/",
-            text: ""
-        },
-        {
-            title: "Түрдэг тэрэг /Carts/",
-            text: ""
-        },
-        {
-            title: "Хүнд объект өргөх зөөврийн өргөгч цамхаг /Compact Mobile Cranes",
-            text: ""
-        },
-    ]
+      {
+        title: "Амьтан өргөгч ширээ /Animal Lift Tables/",
+        text: "",
+      },
+      {
+        title: "Түрдэг тэрэг /Carts/",
+        text: "",
+      },
+      {
+        title:
+          "Хүнд объект өргөх зөөврийн өргөгч цамхаг /Compact Mobile Cranes",
+        img: compactMobileCrane
+      },
+    ],
   },
   {
     id: 26,
     title: "Аюулгүй ажиллагааны хэм хэмжээ ",
     details: [
-        {
-            title: "Сургаалтад нэмэлт цаг өгh/ сургалтын дундуур нойр сэргээх ",
-            text: ""
-        },
-        {
-            title: "Агаарын задгай өргөгч /Aerial Lifts/",
-            text: ""
-        },
-        {
-            title: "Дохиоллын төхөөрөмж /Alerting Devices/",
-            text: ""
-        },
-        {
-            title: "Биеийн хамгаалалт /Body Protection/",
-            text: ""
-        },
-        {
-            title: "Завсарлага авахыг сануулагч программ /Break Reminder Software/",
-            text: ""
-        },
-        {
-            title: "Хурц үзүүр, ирмэгт тэсвэртэй бээлий, ханцуй ",
-            text: ""
-        },
-        {
-            title: "Зохистой хариу арга хэмжээ авах хүн /Designated Responders/",
-            text: ""
-        },
-        {
-            title: "Тухайн ажилтанд хэрэгтэй тусламжийг зөв үзүүлж чадах хүн хэн байхыг олж тодорхойлно. Гэр бүлийн хүн, түргэн тусламж эсвэл эмнэлгийн тусламж иртэл анхааралтай ажиглаж харж байх хүн хамт ажилладаг хэн нэгэн байх гэх мэтээр.",
-            text: ""
-        },
-        {
-            title: "Унахаас урьдчилан сэргийлэх хамгаалалт /Fall Protection/",
-            text: ""
-        },
-        {
-            title: "Шалан дээр тод өнгийн наалт наах эсвэл тод өнгөөр будах ",
-            text: ""
-        },
-        {
-            title: "Машины түгжээ ба хаалт /Machine Guards and Shields/",
-            text: ""
-        },
-        {
-            title: "Машин, тоног төхөөрөмжийг зогсоох янз бүрийн арга бий. Автомат мэдрэгч ажиллуулах, хаалт хаагдаж шууд зогсоох гэх мэт. ",
-            text: ""
-        },
-        {
-            title: "Аюулгүй ажиллагааны өнхөрдөг шат /Rolling Safety Ladders/",
-            text: ""
-        },
-        {
-            title: "Суудлын бүс ба уртасгагч /Seat Belts & Seat Belt Extenders/",
-            text: ""
-        },
-        {
-            title: "Хальтаач унахаас сэргийлэх зорилгоор шатны гишгүүрт наадаг наалт. Гулсахгүй материалтай байна.",
-            text: ""
-        },
-        {
-            title: "Унахдаа тусламж дуудах хувийн хэрэглээний төхөөрөмж /Personal Safety and Fall Alert Devices/",
-            text: ""
-        },
-        {
-            title: "Эргиномик үнэлгээ ",
-            text: ""
-        },
-        {
-            title: "Эргиномик тоног төхөөрөмж ",
-            text: ""
-        },
-        {
-            title: "Одой хүнд зориулсан аюулгүй ажиллагааны төхөөрөмж",
-            text: ""
-        },
-        {
-            title: "Ажлын байран дээрх аюулгүй ажиллагаа",
-            text: ""
-        },
-        {
-            title: "Нүүлгэн шилжүүлэх төхөөрөмж ",
-            text: ""
-        },
-    ]
+      {
+        title: "Сургаалтад нэмэлт цаг өгh/ сургалтын дундуур нойр сэргээх ",
+        text: "",
+      },
+      {
+        title: "Агаарын задгай өргөгч /Aerial Lifts/",
+        img: aerialLift,
+      },
+      {
+        title: "Дохиоллын төхөөрөмж /Alerting Devices/",
+        text: "",
+      },
+      {
+        title: "Биеийн хамгаалалт /Body Protection/",
+        text: "",
+      },
+      {
+        title: "Завсарлага авахыг сануулагч программ /Break Reminder Software/",
+        text: "",
+      },
+      {
+        title: "Хурц үзүүр, ирмэгт тэсвэртэй бээлий, ханцуй ",
+        text: "",
+      },
+      {
+        title: "Зохистой хариу арга хэмжээ авах хүн /Designated Responders/",
+        text: "",
+      },
+      {
+        title:
+          "Тухайн ажилтанд хэрэгтэй тусламжийг зөв үзүүлж чадах хүн хэн байхыг олж тодорхойлно. Гэр бүлийн хүн, түргэн тусламж эсвэл эмнэлгийн тусламж иртэл анхааралтай ажиглаж харж байх хүн хамт ажилладаг хэн нэгэн байх гэх мэтээр.",
+        text: "",
+      },
+      {
+        title: "Унахаас урьдчилан сэргийлэх хамгаалалт /Fall Protection/",
+        text: "",
+      },
+      {
+        title: "Шалан дээр тод өнгийн наалт наах эсвэл тод өнгөөр будах ",
+        text: "",
+      },
+      {
+        title: "Машины түгжээ ба хаалт /Machine Guards and Shields/",
+        text: "",
+      },
+      {
+        title:
+          "Машин, тоног төхөөрөмжийг зогсоох янз бүрийн арга бий. Автомат мэдрэгч ажиллуулах, хаалт хаагдаж шууд зогсоох гэх мэт. ",
+        text: "",
+      },
+      {
+        title: "Аюулгүй ажиллагааны өнхөрдөг шат /Rolling Safety Ladders/",
+        text: "",
+      },
+      {
+        title: "Суудлын бүс ба уртасгагч /Seat Belts & Seat Belt Extenders/",
+        text: "",
+      },
+      {
+        title:
+          "Хальтаач унахаас сэргийлэх зорилгоор шатны гишгүүрт наадаг наалт. Гулсахгүй материалтай байна.",
+        text: "",
+      },
+      {
+        title:
+          "Унахдаа тусламж дуудах хувийн хэрэглээний төхөөрөмж /Personal Safety and Fall Alert Devices/",
+        text: "",
+      },
+      {
+        title: "Эргиномик үнэлгээ ",
+        text: "",
+      },
+      {
+        title: "Эргиномик тоног төхөөрөмж ",
+        text: "",
+      },
+      {
+        title: "Одой хүнд зориулсан аюулгүй ажиллагааны төхөөрөмж",
+        text: "",
+      },
+      {
+        title: "Ажлын байран дээрх аюулгүй ажиллагаа",
+        text: "",
+      },
+      {
+        title: "Нүүлгэн шилжүүлэх төхөөрөмж ",
+        text: "",
+      },
+    ],
   },
   {
     id: 27,
     title: "Мэдээллийн хүртээмж ",
     details: [
-        {
-            title: "Хүртээмжтэй гар утас ",
-            text: ""
-        },
-        {
-            title: "Дэмжин туслах хүн",
-            text: ""
-        },
-        {
-            title: "Сургаалтанд нэмэлт цаг гаргаж өгөх/ завсарлага авах",
-            text: ""
-        },
-        {
-            title: "Өнгөний эсрэгцэл бүхий гэрэлтдэг хуулга наах ",
-            text: ""
-        },
-        {
-            title: "Өнгө таних бүтээгдэхүүнүүдийн талаар мэдээлэл өгөх ",
-            text: ""
-        },
-        {
-            title: "Том товчтой суурин утас /Large Button Phones/",
-            text: ""
-        },
-    ]
+      {
+        title: "Хүртээмжтэй гар утас ",
+        text: "",
+      },
+      {
+        title: "Дэмжин туслах хүн",
+        text: "",
+      },
+      {
+        title: "Сургаалтанд нэмэлт цаг гаргаж өгөх/ завсарлага авах",
+        text: "",
+      },
+      {
+        title: "Өнгөний эсрэгцэл бүхий гэрэлтдэг хуулга наах ",
+        text: "",
+      },
+      {
+        title: "Өнгө таних бүтээгдэхүүнүүдийн талаар мэдээлэл өгөх ",
+        text: "",
+      },
+      {
+        title: "Том товчтой суурин утас /Large Button Phones/",
+        text: "",
+      },
+    ],
   },
   {
     id: 28,
     title: "Тоног төхөөрөмж  тээврийн хэрэгсэл ажиллуулах ",
     details: [
-        {
-            title: "Дохиоллын төхөөрөмж /Alerting Devices/",
-            text: ""
-        },
-        {
-            title: "Том оврын тоног төхөөрөмж, тээврийн хэрэгсэл явуулах зам гаргах",
-            text: ""
-        },
-        {
-            title: "Холын тусгалтай гэрэл /Strobe Lights/",
-            text: ""
-        },
-        {
-            title: "Тээврийн хэрэгслийн хойд хэсгийн орчныг харах систем ",
-            text: ""
-        },
-        {
-            title: "Машины арын толиноос хамаагүй өргөн талбайг тооцоолол сайтайгаар дэлгэцэн дээр харуулдаг. Машин дотор ухаалаг дэлгэц суулгасан байх ба дэлгэцэн дээр машиныхаа арны хэсгийн орчныг нарийвчлалтай харна.",
-            text: ""
-        },
-    ]
+      {
+        title: "Дохиоллын төхөөрөмж /Alerting Devices/",
+        text: "",
+      },
+      {
+        title:
+          "Том оврын тоног төхөөрөмж, тээврийн хэрэгсэл явуулах зам гаргах",
+        text: "",
+      },
+      {
+        title: "Холын тусгалтай гэрэл /Strobe Lights/",
+        text: "",
+      },
+      {
+        title: "Тээврийн хэрэгслийн хойд хэсгийн орчныг харах систем ",
+        text: "",
+      },
+      {
+        title:
+          "Машины арын толиноос хамаагүй өргөн талбайг тооцоолол сайтайгаар дэлгэцэн дээр харуулдаг. Машин дотор ухаалаг дэлгэц суулгасан байх ба дэлгэцэн дээр машиныхаа арны хэсгийн орчныг нарийвчлалтай харна.",
+        text: "",
+      },
+    ],
   },
   {
     id: 29,
     title: "Машин зогсоолд байрлуулах ",
     details: [
-        {
-            title: "Уян хатан хуваарь ",
-            text: ""
-        },
-        {
-            title: "Зайнаас ажиллах, гэрээс ажиллах",
-            text: ""
-        },
-    ]
+      {
+        title: "Уян хатан хуваарь ",
+        text: "",
+      },
+      {
+        title: "Зайнаас ажиллах, гэрээс ажиллах",
+        text: "",
+      },
+    ],
   },
   {
     id: 30,
     title: "Бусадтай харилцах ",
     details: [
-        {
-            title: "Зөв зан үйлд суралцах ",
-            text: ""
-        },
-        {
-            title: "Сургалтад нэмэлт цаг гаргаж өгөх ",
-            text: ""
-        },
-    ]
+      {
+        title: "Зөв зан үйлд суралцах ",
+        text: "",
+      },
+      {
+        title: "Сургалтад нэмэлт цаг гаргаж өгөх ",
+        text: "",
+      },
+    ],
   },
   {
     id: 31,
     title: "Тоног төхөөрөмж  тээврийн хэрэгсэл ажиллуулах",
     details: [
-        {
-            title: "гар удирдлага /Hand Controls/",
-            text: ""
-        },
-        {
-            title: "нугастай эргэдэг сандал ба сандал уртасгагч /Swivel Seats and Seat Extenders/",
-            text: ""
-        },
-        {
-            title: "тэргэнцэр өргөгч /Wheelchair Lifts/",
-            text: ""
-        },
-    ]
+      {
+        title: "гар удирдлага /Hand Controls/",
+        text: "",
+      },
+      {
+        title:
+          "нугастай эргэдэг сандал ба сандал уртасгагч /Swivel Seats and Seat Extenders/",
+        text: "",
+      },
+      {
+        title: "тэргэнцэр өргөгч /Wheelchair Lifts/",
+        text: "",
+      },
+    ],
   },
   {
     id: 32,
     title: "Бусад боломжит хувилбар ",
     details: [
-        {
-            title: "Скүүтэрийн тоноглол /Accessories for Scooters/",
-            text: ""
-        },
-        {
-            title: "Ядралтыг багасгах хөлийн дэвсгэр /Anti-fatigue Matting/",
-            text: ""
-        },
-        {
-            title: "Өнцөг, байрлал, өндөр, намын хэмжээг өөрчлөх боломжтой компьютерын гар /Articulating Keyboard Trays/",
-            text: ""
-        },
-        {
-            title: "Босоход дэмжих поршинтой олбог эсвэл суудал /Assist Lift Cushions/",
-            text: ""
-        },
-        {
-            title: "Автомат хаалга онгойлгогч /Automatic Door Openers/",
-            text: ""
-        },
-        {
-            title: "Хос дэлгэц /Dual Monitors/",
-            text: ""
-        },
-        {
-            title: "Компьютерын өргөн гар /Expanded Keyboards/",
-            text: "Ихэнхдээ усны хамгаалалттай, том товчнуудтай өнгөөр ялгасан, өргөн хавтгай байдаг"
-        },
-        {
-            title: "Гарын урд хэсгийн түшлэг /Forearm Supports/",
-            text: "Хүзүү, мөрд очих ачааллыг багсгах ба гар ядрахаас сэргийлэх түшлэг. Ажлын ширээ юмуу ажлын байрны аль тохиромжтой гадаргад тогтооно."
-        },
-        {
-            title: "Тэргэнцрийн толгойны түшлэг /Head Support for Wheelchairs/",
-            text: ""
-        },
-        {
-            title: "Хүндийн даацтай өргөн том сандал /Large-Rated Chairs/",
-            text: "136 кг-аас дээш жинтэй хүнд зориулсан."
-        },
-        {
-            title: "Тонгойж бөхийх ажлын сандал /Low Task Chair/",
-            text: ""
-        },
-        {
-            title: "Хяналтын толь /Monitor Mirrors/",
-            text: "Өргөн задгай орчинд компьютер дээр ажиллах хүнд ардаа болж буй үйл ажиллагааг харж хянах боломж бүрдүүлнэ."
-        },
-        {
-            title: "Дэлгэц өргөгч /Monitor Risers/",
-            text: "Суугаа, босоо байрлалд ажилла боломж бүрдүүлнэ. Компьютерын гар холбох боломжтой."
-        },
-        {
-            title: "Компьютерын хулганын тавир /Mousing Surfaces/",
-            text: "Гарын сунах хэмжээгээр эсвэл мөр хүзүүнд даралт өгөхгүйгээр тохиромжтой байрлалд хулгана ашиглах боломж бүрдүүлнэ."
-        },
-        {
-            title: "Шатны туслах хэрэгсэл /Stair Assists/",
-            text: "Шат өөд гарах болон шатан дээр тэнцвэрээ олж зогсоход туслах зориулалттай."
-        },
-        {
-            title: "Тээврийн хэрэгслийн тохиргоо /Van Conversion/",
-            text: ""
-        },
-        {
-            title: "Тэргэнцэрт хүртээмжтэй жин /Wheelchair Accessible Scales/",
-            text: "Тэргэнцэртэй нь хамт биеийн жинг хэмжих боломжтой жин."
-        },
-        {
-            title: "Тэргэнцрийн чиргүүл тэрэг /Wheelchair Carts/Trailers/",
-            text: ""
-        },
-        {
-            title: "Тэргэнцэрт холбож юм зөөх тэрэг.",
-            text: ""
-        },
-    ]
+      {
+        title: "Скүүтэрийн тоноглол /Accessories for Scooters/",
+        text: "",
+      },
+      {
+        title: "Ядралтыг багасгах хөлийн дэвсгэр /Anti-fatigue Matting/",
+        text: "",
+      },
+      {
+        title:
+          "Өнцөг, байрлал, өндөр, намын хэмжээг өөрчлөх боломжтой компьютерын гар /Articulating Keyboard Trays/",
+        text: "",
+      },
+      {
+        title:
+          "Босоход дэмжих поршинтой олбог эсвэл суудал /Assist Lift Cushions/",
+        text: "",
+      },
+      {
+        title: "Автомат хаалга онгойлгогч /Automatic Door Openers/",
+        img: automaticDoorOpener,
+      },
+      {
+        title: "Хос дэлгэц /Dual Monitors/",
+        text: "",
+      },
+      {
+        title: "Компьютерын өргөн гар /Expanded Keyboards/",
+        text: "Ихэнхдээ усны хамгаалалттай, том товчнуудтай өнгөөр ялгасан, өргөн хавтгай байдаг",
+      },
+      {
+        title: "Гарын урд хэсгийн түшлэг /Forearm Supports/",
+        text: "Хүзүү, мөрд очих ачааллыг багсгах ба гар ядрахаас сэргийлэх түшлэг. Ажлын ширээ юмуу ажлын байрны аль тохиромжтой гадаргад тогтооно.",
+      },
+      {
+        title: "Тэргэнцрийн толгойны түшлэг /Head Support for Wheelchairs/",
+        text: "",
+      },
+      {
+        title: "Хүндийн даацтай өргөн том сандал /Large-Rated Chairs/",
+        text: "136 кг-аас дээш жинтэй хүнд зориулсан.",
+      },
+      {
+        title: "Тонгойж бөхийх ажлын сандал /Low Task Chair/",
+        text: "",
+      },
+      {
+        title: "Хяналтын толь /Monitor Mirrors/",
+        text: "Өргөн задгай орчинд компьютер дээр ажиллах хүнд ардаа болж буй үйл ажиллагааг харж хянах боломж бүрдүүлнэ.",
+      },
+      {
+        title: "Дэлгэц өргөгч /Monitor Risers/",
+        text: "Суугаа, босоо байрлалд ажилла боломж бүрдүүлнэ. Компьютерын гар холбох боломжтой.",
+      },
+      {
+        title: "Компьютерын хулганын тавир /Mousing Surfaces/",
+        text: "Гарын сунах хэмжээгээр эсвэл мөр хүзүүнд даралт өгөхгүйгээр тохиромжтой байрлалд хулгана ашиглах боломж бүрдүүлнэ.",
+      },
+      {
+        title: "Шатны туслах хэрэгсэл /Stair Assists/",
+        text: "Шат өөд гарах болон шатан дээр тэнцвэрээ олж зогсоход туслах зориулалттай.",
+      },
+      {
+        title: "Тээврийн хэрэгслийн тохиргоо /Van Conversion/",
+        text: "",
+      },
+      {
+        title: "Тэргэнцэрт хүртээмжтэй жин /Wheelchair Accessible Scales/",
+        text: "Тэргэнцэртэй нь хамт биеийн жинг хэмжих боломжтой жин.",
+      },
+      {
+        title: "Тэргэнцрийн чиргүүл тэрэг /Wheelchair Carts/Trailers/",
+        text: "",
+      },
+      {
+        title: "Тэргэнцэрт холбож юм зөөх тэрэг.",
+        text: "",
+      },
+    ],
   },
   {
     id: 33,
     title: "Бусад боломжит хувилбар ",
     details: [
       {
-        title: "Сургалтын материал, байгууллагын дотоод мэдээллийг хувилбарт хүртээмжтэй форматаар бэлтгэх. Жишээлбэл Брайл, том үсэг, дуут гэх мэт."
+        title:
+          "Сургалтын материал, байгууллагын дотоод мэдээллийг хувилбарт хүртээмжтэй форматаар бэлтгэх. Жишээлбэл Брайл, том үсэг, дуут гэх мэт.",
       },
       {
-        title: "Орон зайн баримжаа олгох сургалт, хөтөч нохойн сургалт зэрэг дасан зохицож мэргэжлийн туслах төхөөрөмж, технологи, сургуультай амьтан ашиглаж сурах сургалтуудад цалинтай чөлөө олгох.   "
+        title:
+          "Орон зайн баримжаа олгох сургалт, хөтөч нохойн сургалт зэрэг дасан зохицож мэргэжлийн туслах төхөөрөмж, технологи, сургуультай амьтан ашиглаж сурах сургалтуудад цалинтай чөлөө олгох.   ",
       },
       {
-        title: "Нийт ажилтныг сурган дадлагажуулдгаас илүүтэйгээр анхаарал тавьж сургах. "
+        title:
+          "Нийт ажилтныг сурган дадлагажуулдгаас илүүтэйгээр анхаарал тавьж сургах. ",
       },
       {
-        title: "Ажилтнуудын ихээр нэвтэрдэг цахим хуудас болон бусад цахим системийг хүртээмжтэй болгох."
+        title:
+          "Ажилтнуудын ихээр нэвтэрдэг цахим хуудас болон бусад цахим системийг хүртээмжтэй болгох.",
       },
-    ]
+    ],
   },
   {
     id: 34,
     title: "Бусад боломжит хувилбар ",
     details: [
       {
-        title: "Аравтын бутархай, статистик тоон мэдээ гаргадаг эсвэл шинжлэх ухааны бодолт хийдэг тооны машин ашиглах "
+        title:
+          "Аравтын бутархай, статистик тоон мэдээ гаргадаг эсвэл шинжлэх ухааны бодолт хийдэг тооны машин ашиглах ",
       },
       {
-        title: "Завсарлага авах цагийг уян хатнаар зохицуулан ашиглах "
+        title: "Завсарлага авах цагийг уян хатнаар зохицуулан ашиглах ",
       },
       {
-        title: "Хувийн хэрэглээний дохио өгөгч төхөөрөмж "
+        title: "Хувийн хэрэглээний дохио өгөгч төхөөрөмж ",
       },
       {
-        title: "Мэргэжлийн зохион байгуулагч "
+        title: "Мэргэжлийн зохион байгуулагч ",
       },
       {
-        title: "Сургуультай бэлтгэгдсэн амьтан "
+        title: "Сургуультай бэлтгэгдсэн амьтан ",
       },
       {
-        title: "Нийгэмтэй харилцах ур чадвар суралцах аппликайшн гэх мэт  "
+        title: "Нийгэмтэй харилцах ур чадвар суралцах аппликайшн гэх мэт  ",
       },
-    ]
+    ],
   },
   {
     id: 35,
     title: "Бусад боломжит хувилбар ",
     details: [
       {
-        title: "Уян хатан ажлын хуваарь "
+        title: "Уян хатан ажлын хуваарь ",
       },
       {
-        title: "Эмнэлэгт үзүүлэх цаг гаргаж өгөх—эмнэлгүүд ажлын өдөр өдрийн цагаар үзлэг хийдэг"
+        title:
+          "Эмнэлэгт үзүүлэх цаг гаргаж өгөх—эмнэлгүүд ажлын өдөр өдрийн цагаар үзлэг хийдэг",
       },
       {
-        title: "Дахин томилгоо хийх "
+        title: "Дахин томилгоо хийх ",
       },
       {
-        title: "Эрүүл мэндийн даатгалын багц сонгохдоо өмнө нь илэрсэн байсан асуудлыг хамардаг байхад анхаарах  "
+        title:
+          "Эрүүл мэндийн даатгалын багц сонгохдоо өмнө нь илэрсэн байсан асуудлыг хамардаг байхад анхаарах  ",
       },
       {
-        title: "ДОХ вирусийг хасдаггүй эрүүл мэндийн даатгал сонгох "
+        title: "ДОХ вирусийг хасдаггүй эрүүл мэндийн даатгал сонгох ",
       },
-
-    ]
+    ],
   },
   {
     id: 36,
     title: "Бусад боломжит хувилбар",
     details: [
-        {
-            title: "Гэрээс ажиллах ",
-            text: ""
-        },
-        {
-            title: "Дахин томилгоо хийх—ажилтан албан тушаалынхаа зайлшгүй чухал үүрэг даалгаврыг тохируулга хэрэглээд ч гүйцэтгэж чадахгүй болсон тохиолдолд хийдэг. ",
-            text: ""
-        },
-    ]
+      {
+        title: "Гэрээс ажиллах ",
+        text: "",
+      },
+      {
+        title:
+          "Дахин томилгоо хийх—ажилтан албан тушаалынхаа зайлшгүй чухал үүрэг даалгаврыг тохируулга хэрэглээд ч гүйцэтгэж чадахгүй болсон тохиолдолд хийдэг. ",
+        text: "",
+      },
+    ],
   },
   {
     id: 37,
     title: "Бодлого журмаар зохицуулах ",
     details: [
-        {
-            title: "Уян хатан ажлын хуваарь",
-            text: ""
-        },
-        {
-            title: "Зайлшгүй гүйцэтгэх шаардлагагүй үүрэг даалгаврыг өөр ажлын байранд шилжүүлэн томилох",
-            text: ""
-        },
-        {
-            title: "Цайны цагийн хуваарийг өөрчлөх",
-            text: ""
-        },
-    ]
+      {
+        title: "Уян хатан ажлын хуваарь",
+        text: "",
+      },
+      {
+        title:
+          "Зайлшгүй гүйцэтгэх шаардлагагүй үүрэг даалгаврыг өөр ажлын байранд шилжүүлэн томилох",
+        text: "",
+      },
+      {
+        title: "Цайны цагийн хуваарийг өөрчлөх",
+        text: "",
+      },
+    ],
   },
   {
     id: 38,
     title: "Богино завсарлага авч амрах",
     details: [
-        {
-            title: "Дотоод бодлого журамдаа өөрчлөлт оруулах",
-            text: ""
-        },
-        {
-            title: "Өөр ажилд томилох",
-            text: ""
-        },
-        {
-            title: "Гэрээс буюу зайнаас ажиллахыг зөвшөөрөх ",
-            text: ""
-        },
-
-    ]
+      {
+        title: "Дотоод бодлого журамдаа өөрчлөлт оруулах",
+        text: "",
+      },
+      {
+        title: "Өөр ажилд томилох",
+        text: "",
+      },
+      {
+        title: "Гэрээс буюу зайнаас ажиллахыг зөвшөөрөх ",
+        text: "",
+      },
+    ],
   },
   {
     id: 39,
     title: "Эд юмс хөдөлгөх  ",
     details: [
-        {
-            title: "Ажлын байранд бүтцийн зохион байгуулалт хийх замаар өргөх, гар сунгаж хүрэх, түлхэх, татах үйлдэл хийх үүргүүдийг багасгах эсвэл хасах",
-            text: ""
-        },
-        {
-            title: "Ажилтанд тохиромжтой өргөх техник сонгон ашиглуулах",
-            text: ""
-        },
-        {
-            title: "Өргөх үүрэг даалгавар тухайн ажлын байрны үндсэн хэсэг биш бол шилжүүлэн хуваарилах",
-            text: ""
-        },
-        {
-            title: "Хүнд объект өргөхөд ажилтан очих хүндийн жинг багасгаж туслах",
-            text: ""
-        },
-        {
-            title: "Ажилтны хэрэглэдэг объектуудыг олон дахин өргөх, зөөх шаардлагагүйгээр зохион байгуулах",
-            text: ""
-        },
-        {
-            title: "Өргөх шаардлагатай зүйлсийг жижиг хэсгүүдэд хувааж хүндийн жинг багасгах",
-            text: ""
-        },
-        {
-            title: "Ажилтны хариуцах үүрэг хариуцлагын хувьд өөр ажилд томилох эсвэл одоогийн ажлынх нь ажил үүргийн хуваарьт өөрчлөлт хийж өргөх үйлдэл шаардсан үүргүүдийг хасах",
-            text: ""
-        },
-        {
-            title: "Ойр ойрхон богино завсарлага авч ойр хавьдаа хөдөлгөөн хийх боломжоор хангах.",
-            text: ""
-        },
-        {
-            title: "Хөлөө тэнийлгэж хөдлөх боломжтойгоор завсарлага авах",
-            text: ""
-        },
-        {
-            title: "Босож ойр хавьдаа хөдөлгөөн хийхийг мартахгүйн тулд сануулах аппликэйшн ашиглах",
-            text: ""
-        },
-        {
-            title: "Суугаа ба босоо байрлалын аль алинаар нь ажиллах боломжтой ширээ эсвэл тавиур ашиглаж зогсох, суух ээлжлэн ажиллах",
-            text: ""
-        },
-        {
-            title: "Тохиргоотой ажлын сандал хэрэглэх",
-            text: ""
-        },
-        {
-            title: "Шаардлагатай үед хэвтэх, суух, чөлөөтэй хөдлөх боломжийг хангаж гэрээс ажиллуулах",
-            text: ""
-        },
-    ]
+      {
+        title:
+          "Ажлын байранд бүтцийн зохион байгуулалт хийх замаар өргөх, гар сунгаж хүрэх, түлхэх, татах үйлдэл хийх үүргүүдийг багасгах эсвэл хасах",
+        text: "",
+      },
+      {
+        title: "Ажилтанд тохиромжтой өргөх техник сонгон ашиглуулах",
+        text: "",
+      },
+      {
+        title:
+          "Өргөх үүрэг даалгавар тухайн ажлын байрны үндсэн хэсэг биш бол шилжүүлэн хуваарилах",
+        text: "",
+      },
+      {
+        title: "Хүнд объект өргөхөд ажилтан очих хүндийн жинг багасгаж туслах",
+        text: "",
+      },
+      {
+        title:
+          "Ажилтны хэрэглэдэг объектуудыг олон дахин өргөх, зөөх шаардлагагүйгээр зохион байгуулах",
+        text: "",
+      },
+      {
+        title:
+          "Өргөх шаардлагатай зүйлсийг жижиг хэсгүүдэд хувааж хүндийн жинг багасгах",
+        text: "",
+      },
+      {
+        title:
+          "Ажилтны хариуцах үүрэг хариуцлагын хувьд өөр ажилд томилох эсвэл одоогийн ажлынх нь ажил үүргийн хуваарьт өөрчлөлт хийж өргөх үйлдэл шаардсан үүргүүдийг хасах",
+        text: "",
+      },
+      {
+        title:
+          "Ойр ойрхон богино завсарлага авч ойр хавьдаа хөдөлгөөн хийх боломжоор хангах.",
+        text: "",
+      },
+      {
+        title: "Хөлөө тэнийлгэж хөдлөх боломжтойгоор завсарлага авах",
+        text: "",
+      },
+      {
+        title:
+          "Босож ойр хавьдаа хөдөлгөөн хийхийг мартахгүйн тулд сануулах аппликэйшн ашиглах",
+        text: "",
+      },
+      {
+        title:
+          "Суугаа ба босоо байрлалын аль алинаар нь ажиллах боломжтой ширээ эсвэл тавиур ашиглаж зогсох, суух ээлжлэн ажиллах",
+        text: "",
+      },
+      {
+        title: "Тохиргоотой ажлын сандал хэрэглэх",
+        text: "",
+      },
+      {
+        title:
+          "Шаардлагатай үед хэвтэх, суух, чөлөөтэй хөдлөх боломжийг хангаж гэрээс ажиллуулах",
+        text: "",
+      },
+    ],
   },
   {
     id: 40,
     title: "Тоног Төхөөрөмж/тээврийн хэрэгсэл ажиллуулах",
     details: [
-        {
-            title: "Хүртээмжтэй программ хангамж /Accessible Software for Webbing/",
-            text: ""
-        },
-        {
-            title: "Тохиргоотой зураг/бичгийн ширээ /Adjustable Drafting Tables/",
-            text: ""
-        },
-        {
-            title: "Тохиргоотой массажны ширээ /Adjustable Massage Tables/",
-            text: ""
-        },
-        {
-            title: "Чичрэлт багасгах бээлий /Anti-vibration Gloves/",
-            text: ""
-        },
-        {
-            title: "Чичрэлт намсгагчтай суудал /Anti-vibration Seats/",
-            text: ""
-        },
-        {
-            title: "Чичрэлт багасгах зориулалттай багажийн ороолт /Anti-vibration Tool Wraps/",
-            text: ""
-        },
-        {
-            title: "Ам болон амьсгал мэдэрдэг компьютерын оролттой төхөөрөмж /Breath and Mouth Controlled Alternative Computer Input Devices/",
-            text: ""
-        },
-        {
-            title: "Гүдгэр/товгор толь /Convex Mirrors/",
-            text: ""
-        },
-        {
-            title: "Хатуу гадаргуу өнгөлөгч багаж /Deburring Tools/",
-            text: ""
-        },
-        {
-            title: "Эргиномик хийн багаж /Ergonomic and Pneumatic Tools/ ",
-            text: ""
-        },
-        {
-            title: "Эргиномик тоног төхөөрөмж /Ergonomic Equipment/",
-            text: ""
-        },
-        {
-            title: "Араа шилжүүлэгч /Gear Shift Adapter/Extension/",
-            text: "Машины араа шилжүүлэгчид суулгах туслах хэрэгсэл."
-        },
-        {
-            title: "Гар удирдлага /Hand Controls/",
-            text: ""
-        },
-        {
-            title: "Хөлийг нь өндөрсгөж/намсгаж болдог ширээ /Height Adjustable Table/",
-            text: ""
-        },
-        {
-            title: "Жолоодлогын цахим гар удирдлага /Joystick Driving Systems/",
-            text: ""
-        },
-        {
-            title: "Урт бариултай толь /Long-Handled Mirrors/",
-            text: "Томруулагчтай толиор хүрч чадахгүй байгаа биеийн хэсгээ харахад ашигладаг."
-        },
-        {
-            title: "Механик суудал ба мөлхөвч /Mechanic's Seats and Creepers/",
-            text: ""
-        },
-        {
-            title: "Хүнд объект өргөгч / Pickups, Semis, and Heavy Equipment/",
-            text: "Өргөж өнцөг булангийн хазайлтыг тохируулан байрлуулахад ашигладаг. "
-        },
-        {
-            title: "Суудлын бүс сунгагС /Seat Belts & Seat Belt Extenders/",
-            text: ""
-        },
-        {
-            title: "Нугасан эргэлттэй суудал /Swivel Seats and Seat Extenders/",
-            text: "Суудлыг машинаас гаргаж суугаад машиндаа буцан орох боломжтой."
-        },
-        {
-            title: "Ярьдаг мөнгөний машин/касс /Talking Cash Register//",
-            text: ""
-        },
-        {
-            title: "Ярьдаг төмөр мөнгө танигч /Talking Coin Counter/Sorter/",
-            text: ""
-        },
-        {
-            title: "Ярьдаг зээлийн карт уншигч /Talking Credit Card Terminal/",
-            text: ""
-        },
-        {
-            title: "Утсанд дуудлага ирэхэд асдаг гэрэл /Telephone Flasher/",
-            text: "Аналоги ба дижитал утасны аль алинд ажиллана."
-        },
-        {
-            title: "Телескоптой камер /Telescoping Cameras/",
-            text: ""
-        },
-        {
-            title: " Тээврийн хэрэгсэл дотор тохируулга өөрчлөлт хийх /Van Conversion/",
-            text: ""
-        },
-        {
-            title: "Тээврийн хэрэгсэлд арын толь нэмэлтээр суулгах /Vehicle Rear Vision System/",
-            text: ""
-        },
-       
-    ]
+      {
+        title: "Хүртээмжтэй программ хангамж /Accessible Software for Webbing/",
+        text: "",
+      },
+      {
+        title: "Тохиргоотой зураг/бичгийн ширээ /Adjustable Drafting Tables/",
+        img: adjustableDraftingTable,
+      },
+      {
+        title: "Тохиргоотой массажны ширээ /Adjustable Massage Tables/",
+        text: "",
+      },
+      {
+        title: "Чичрэлт багасгах бээлий /Anti-vibration Gloves/",
+        img: antivibrationGloves,
+      },
+      {
+        title: "Чичрэлт намсгагчтай суудал /Anti-vibration Seats/",
+        text: "",
+      },
+      {
+        title:
+          "Чичрэлт багасгах зориулалттай багажийн ороолт /Anti-vibration Tool Wraps/",
+        text: "",
+      },
+      {
+        title:
+          "Ам болон амьсгал мэдэрдэг компьютерын оролттой төхөөрөмж /Breath and Mouth Controlled Alternative Computer Input Devices/",
+        text: "",
+      },
+      {
+        title: "Гүдгэр/товгор толь /Convex Mirrors/",
+        text: "",
+      },
+      {
+        title: "Хатуу гадаргуу өнгөлөгч багаж /Deburring Tools/",
+        img: deberringTools,
+      },
+      {
+        title: "Эргиномик хийн багаж /Ergonomic and Pneumatic Tools/ ",
+        img: ergonomicallyPneumaticTool,
+      },
+      {
+        title: "Эргиномик тоног төхөөрөмж /Ergonomic Equipment/",
+        text: "",
+      },
+      {
+        title: "Араа шилжүүлэгч /Gear Shift Adapter/Extension/",
+        text: "Машины араа шилжүүлэгчид суулгах туслах хэрэгсэл.",
+      },
+      {
+        title: "Гар удирдлага /Hand Controls/",
+        text: "",
+      },
+      {
+        title:
+          "Хөлийг нь өндөрсгөж/намсгаж болдог ширээ /Height Adjustable Table/",
+        img: heightAdjustableTable
+      },
+      {
+        title: "Жолоодлогын цахим гар удирдлага /Joystick Driving Systems/",
+        text: "",
+      },
+      {
+        title: "Урт бариултай толь /Long-Handled Mirrors/",
+        text: "Томруулагчтай толиор хүрч чадахгүй байгаа биеийн хэсгээ харахад ашигладаг.",
+      },
+      {
+        title: "Механик суудал ба мөлхөвч /Mechanic's Seats and Creepers/",
+        img: mechanicSeatAndCreeper
+      },
+      {
+        title: "Хүнд объект өргөгч / Pickups, Semis, and Heavy Equipment/",
+        text: "Өргөж өнцөг булангийн хазайлтыг тохируулан байрлуулахад ашигладаг. ",
+      },
+      {
+        title: "Суудлын бүс сунгагС /Seat Belts & Seat Belt Extenders/",
+        text: "",
+      },
+      {
+        title: "Нугасан эргэлттэй суудал /Swivel Seats and Seat Extenders/",
+        text: "Суудлыг машинаас гаргаж суугаад машиндаа буцан орох боломжтой.",
+      },
+      {
+        title: "Ярьдаг мөнгөний машин/касс /Talking Cash Register//",
+        text: "",
+      },
+      {
+        title: "Ярьдаг төмөр мөнгө танигч /Talking Coin Counter/Sorter/",
+        text: "",
+      },
+      {
+        title: "Ярьдаг зээлийн карт уншигч /Talking Credit Card Terminal/",
+        text: "",
+      },
+      {
+        title: "Утсанд дуудлага ирэхэд асдаг гэрэл /Telephone Flasher/",
+        text: "Аналоги ба дижитал утасны аль алинд ажиллана.",
+      },
+      {
+        title: "Телескоптой камер /Telescoping Cameras/",
+        text: "",
+      },
+      {
+        title:
+          " Тээврийн хэрэгсэл дотор тохируулга өөрчлөлт хийх /Van Conversion/",
+        text: "",
+      },
+      {
+        title:
+          "Тээврийн хэрэгсэлд арын толь нэмэлтээр суулгах /Vehicle Rear Vision System/",
+        text: "",
+      },
+    ],
   },
   {
     id: 40,
     title: "",
     details: [
-        {
-            title: "",
-            text: ""
-        },
-    ]
+      {
+        title: "",
+        text: "",
+      },
+    ],
   },
 ];

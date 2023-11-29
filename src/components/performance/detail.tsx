@@ -36,12 +36,16 @@ const AccordianWidget: FC<AccordianWidgetType> = ({ fun, length, onClick }) => {
       <UnorderedList>
         {fun.details.map((detail, i) => {
           return (
-            <Link key={i} href={"#detail"}>
+            <Link key={i} href={""} onClick={(e) => e.preventDefault()}>
               <ListItem py={4} pl={10} color={"text"}>
                 <VStack alignItems={"start"} w="full">
                   <Box
                     cursor={"pointer"}
-                    onClick={() => onClick(detail.img ?? imgArticle1)}
+                    onClick={() => {
+                      if (detail.img != undefined && detail.img != "") {
+                        onClick(detail.img);
+                      }
+                    }}
                   >
                     <Text color={"blue"}>{detail.title}</Text>
                   </Box>
@@ -103,12 +107,19 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
                 <UnorderedList>
                   {data.employerWarning?.map((detail, i) => {
                     return (
-                      <Link key={i} href={"#detail"}>
+                      <Link key={i} href={""} onClick={(e) => e.preventDefault()}>
                         <ListItem py={4} pl={10} color={"text"}>
                           <VStack alignItems={"start"} w="full">
                             <Box
                               className="title"
-                              onClick={() => viewImg(detail.img ?? imgArticle1)}
+                              onClick={() => {
+                                if (
+                                  detail.img != undefined &&
+                                  detail.img != ""
+                                ) {
+                                  viewImg(detail.img);
+                                }
+                              }}
                             >
                               <Text color={"blue"}>{detail.title}</Text>
                             </Box>
@@ -132,17 +143,22 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
                 <UnorderedList>
                   {data.employerWarning?.map((detail, i) => {
                     return (
-                      <Link key={i} href="#detail">
+                      <Link key={i} href={""} onClick={(e) => e.preventDefault()}>
                         <ListItem py={4} pl={10} color={"text"}>
                           <VStack alignItems={"start"} w="full">
                             <Box
                               className="title"
-                              onClick={() => viewImg(detail.img ?? imgArticle1)}
+                              onClick={() => {
+                                if (
+                                  detail.img != undefined &&
+                                  detail.img != ""
+                                ) {
+                                  viewImg(detail.img);
+                                }
+                              }}
                             >
                               {/* <Link key={i}> */}
-                              <Text color={"blue"}>
-                                {detail.title}
-                              </Text>
+                              <Text color={"blue"}>{detail.title}</Text>
                               {/* </Link> */}
                             </Box>
                             {detail.text && <Text>{detail.text}</Text>}
@@ -288,7 +304,7 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
                 <UnorderedList>
                   {data.condition?.details?.map((detail, i) => {
                     return (
-                      <Link key={i} href={"#detail"}>
+                      <Link key={i} href={""} onClick={(e) => e.preventDefault()}>
                         <ListItem py={4} pl={10} color={"text"}>
                           <VStack alignItems={"start"} w="full">
                             {/* <Box className='title'><Text color={"blue"} >{detail.title}</Text></Box> */}
