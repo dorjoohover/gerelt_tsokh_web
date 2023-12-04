@@ -1,3 +1,4 @@
+import { MedicalTypes } from "./enum";
 import {
   aboutUs,
   additionInfo,
@@ -19,6 +20,27 @@ export function filterName(value: string, arr: FilterType[]): string {
     return res[0].name;
   } else {
     return "";
+  }
+}
+
+export function MedicalTitle(value: MedicalTypes) {
+  switch (value) {
+    case MedicalTypes.EMPLOYER:
+      return "Ажилтанд өгөх бяцхан санамжууд";
+    case MedicalTypes.EMPLOYEE:
+      return "Ажил олгогчид өгөх бяцхан санамжууд";
+    case MedicalTypes.SETUP:
+      return "Гол тохируулгууд ";
+    case MedicalTypes.SPACE:
+      return "Амрах хувийн орон зай";
+    case MedicalTypes.TRIGGER:
+      return "Сэдрээгч хүчин зүйлсийг илрүүлж багасгах";
+    case MedicalTypes.POSSIBLE:
+      return "Боломжит тохируулгууд";
+    case MedicalTypes.FUNCTIONS:
+      return "Ажил үүргийн функцээр";
+    case MedicalTypes.KEYS:
+      return "Түлхүү хэрэглэгддэг тохируулгууд";
   }
 }
 

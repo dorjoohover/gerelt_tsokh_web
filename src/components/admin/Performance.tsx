@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AdminForm from "./Form";
 import {
   Box,
@@ -19,6 +19,7 @@ import {
   Textarea,
   VStack,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import { FilterType, filterName } from "@/global/functions";
 import { ArticleTypes, MedicalTypes } from "@/global/enum";
@@ -72,21 +73,99 @@ export default function AdminPerformance({
     title: "",
     text: "",
   });
-  const [details, setDetails] = useState<string[]>([]);
-  const [detail, setDetail] = useState<string>(medicalType[0].value);
-  const [values, setValues] = useState<string[]>([]);
-  const [value, setValue] = useState<string>("1");
+  const [details, setDetails] = useState<
+    {
+      type: string;
+      details: (string | undefined)[];
+    }[]
+  >([]);
+  const [detail, setDetail] = useState<{
+    type: string;
+    details: (string | undefined)[];
+  }>({
+    type: medicalType[0].value,
+    details: [],
+  });
+  const [values, setValues] = useState<(string | undefined)[]>([]);
+  const [value, setValue] = useState<string | undefined>();
   const [conditions, setConditions] = useState<string[]>([]);
   const [condition, setCondition] = useState<string>("");
   const [view, setView] = useState(0);
+  const [current, setCurrent] = useState<string>("");
+  const [getValues, setGetValues] = useState<(CustomType | undefined)[]>([]);
   const token = getCookie("token");
+  const toast = useToast();
   const submit = async () => {
     try {
+      await axios
+        .post(
+          `${api}medical/create`,
+          {
+            title: data.title,
+            text: data.text,
+
+            details: details,
+            condition: conditions,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then(() =>
+          toast({
+            title: "Нэмэгдлээ.",
+
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+          })
+        )
+        .then(() => {
+          setData({
+            text: "",
+            title: "",
+          });
+          setDetails([]);
+        });
     } catch (error) {}
   };
+  const getDetails = async () => {
+    try {
+      await fetch(`${api}medical/details`)
+        .then((d) => d.json())
+        .then((d) => setGetValues(d));
+    } catch (error) {}
+  };
+  useEffect(() => {
+    getDetails();
+  }, []);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const add = () => {
+    if (view == 1) {
+      setDetail((prev) => ({ ...prev, details: values }));
+
+      if (details.find((d) => d.type == detail.type) == undefined) {
+        setDetails((prev) => [
+          ...prev,
+          {
+            type: detail.type,
+            details: values,
+          },
+        ]);
+      }
+      setValues([]);
+      setDetail({
+        type: medicalType[0].value,
+        details: [],
+      });
+    }
+    onClose();
+  };
   return (
     <AdminForm
+      value={data.title}
       onTitle={(e) => setData((prev) => ({ ...prev, title: e }))}
       onChange={(e) => setData((prev) => ({ ...prev, text: e }))}
       title={`Үйлдэл гүйцэтгэх чадвар алдалт > ${filterName(
@@ -99,7 +178,7 @@ export default function AdminPerformance({
       <VStack alignItems={"start"} my={4} gap={3}>
         <Button
           onClick={() => {
-            setView(1);
+            setView(0);
             onOpen();
           }}
         >
@@ -109,10 +188,11 @@ export default function AdminPerformance({
         {details.map((d, i) => {
           return (
             <HStack key={i}>
-              <Text>{filterName(d, medicalType)}</Text>
+              <Text>{filterName(d.type, medicalType)}</Text>
               <Button
                 onClick={() => {
                   onOpen();
+                  setCurrent(d.type);
                 }}
                 bg={"yellow"}
               >
@@ -132,7 +212,7 @@ export default function AdminPerformance({
         <HStack>
           <Select
             onChange={(e) => {
-              setDetail(e.target.value);
+              setDetail((prev) => ({ ...prev, type: e.target.value }));
             }}
           >
             {medicalType.map((medical, i) => {
@@ -146,7 +226,7 @@ export default function AdminPerformance({
           <Button
             onClick={() => {
               onOpen();
-              setDetails((prev) => [...prev, detail]);
+              setView(1);
             }}
           >
             Add
@@ -161,18 +241,21 @@ export default function AdminPerformance({
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>
-              {view == 0 ? filterName(detail, medicalType) : "Нөхцөл ба шийдэл"}
+              {view == 1
+                ? filterName(detail.type, medicalType)
+                : "Нөхцөл ба шийдэл"}
             </ModalHeader>
             <ModalCloseButton
               onClick={() => {
-                onClose();
+                add();
               }}
             />
             <ModalBody>
-              {(view == 0 ? values : conditions).map((v, i) => {
-                return (
-                  <HStack>
-                    {view == 0 ? (
+              {current != "" &&
+                details
+                  .filter((d) => d.type == current)[0]
+                  ?.details.map((d, i) => {
+                    return (
                       <Select
                         onChange={(e) => {
                           setValues((prev) => [
@@ -181,50 +264,83 @@ export default function AdminPerformance({
                             ...prev.slice(i + 1),
                           ]);
                         }}
-                        defaultValue={v}
+                        key={i}
+                        defaultValue={d}
                       >
-                        <option value={"1"}>1</option>
-                        <option value={"2"}>2</option>
-                        <option value={"3"}>3</option>
-                        <option value={"4"}>4</option>
+                        {getValues.map((v, i) => {
+                          return (
+                            <option value={v?._id} key={i}>
+                              {" "}
+                              {`${v?.title}(${v?.detail.length})`}{" "}
+                            </option>
+                          );
+                        })}
                       </Select>
-                    ) : (
-                      <Input
-                        value={v}
-                        onChange={(e) => {
-                          setValues((prev) => [
-                            ...prev.slice(0, i),
-                            e.target.value,
-                            ...prev.slice(i + 1),
-                          ]);
+                    );
+                  })}
+              <Text>{view}</Text>
+              {current == "" &&
+                (view == 1 ? values : conditions).map((v, i) => {
+                  return (
+                    <HStack>
+                      {view == 1 ? (
+                        <Select
+                          onChange={(e) => {
+                            setValues((prev) => [
+                              ...prev.slice(0, i),
+                              e.target.value,
+                              ...prev.slice(i + 1),
+                            ]);
+                          }}
+                          defaultValue={v}
+                        >
+                          {getValues.map((v, i) => {
+                            return (
+                              <option value={v?._id} key={i}>
+                                {" "}
+                                {`${v?.title}(${v?.detail.length})`}{" "}
+                              </option>
+                            );
+                          })}
+                        </Select>
+                      ) : (
+                        <Input
+                          value={v}
+                          onChange={(e) => {
+                            setCondition(e.target.value);
+                          }}
+                        />
+                      )}
+                      <Button
+                        onClick={() => {
+                          if (view == 0) {
+                            setConditions(conditions.filter((con) => con != v));
+                          } else {
+                            setValues(values.filter((val) => val != v));
+                          }
                         }}
-                      />
-                    )}
-                    <Button
-                      onClick={() => {
-                        if (view == 0) {
-                          setValues(values.filter((val) => val != v));
-                        } else {
-                          setConditions(conditions.filter((con) => con != v));
-                        }
-                      }}
-                    >
-                      Delete
-                    </Button>
-                  </HStack>
-                );
-              })}
+                      >
+                        Delete
+                      </Button>
+                    </HStack>
+                  );
+                })}
               <HStack>
-                {view == 0 ? (
+                {view == 1 ? (
                   <Select
                     onChange={(e) => {
                       setValue(e.target.value);
                     }}
                   >
-                    <option value={"1"}>1</option>
-                    <option value={"2"}>2</option>
-                    <option value={"3"}>3</option>
-                    <option value={"4"}>4</option>
+                    <option value="">Сонгох</option>
+                    {getValues.map((v, i) => {
+                      return (
+                        <option value={v?._id} key={i}>
+                          {" "}
+                          {`${v?.title}(${v?.detail.length})`}{" "}
+                        </option>
+                      );
+                    })}
                   </Select>
                 ) : (
                   <Input
@@ -234,12 +350,17 @@ export default function AdminPerformance({
                 )}
                 <Button
                   onClick={() => {
-                    if (view == 0) {
-                      setValues((prev) => [...prev, value]);
-                      setValue("1");
+                    if (view == 1) {
+                      if (!values.includes(value) && value != "") {
+                        setValues((prev) => [...prev, value]);
+
+                        setValue(undefined);
+                      }
                     } else {
-                      setConditions((prev) => [...prev, condition]);
-                      setCondition("");
+                      if (!conditions.includes(condition) && condition != "") {
+                        setConditions((prev) => [...prev, condition]);
+                        setCondition("");
+                      }
                     }
                   }}
                 >
@@ -249,7 +370,7 @@ export default function AdminPerformance({
 
               <Button
                 onClick={() => {
-                  onClose();
+                  add();
                 }}
               >
                 Done
@@ -261,57 +382,136 @@ export default function AdminPerformance({
     </AdminForm>
   );
 }
-type CustomDetailType = {
+export type CustomDetailType = {
   title: string;
+  _id?: string;
   text?: string;
-  img?: File;
+  img?: File | string;
 };
-type CustomType = {
+export type CustomType = {
+  _id?: string;
   title: string;
-  details: CustomDetailType[];
+  detail: CustomDetailType[];
 };
 export function AdminPerformanceCustom() {
   const [data, setData] = useState<CustomType>({
     title: "",
-    details: [],
+    detail: [],
   });
   const [detail, setDetail] = useState<CustomDetailType>({
     title: "",
     img: undefined,
     text: "",
   });
+  const [selectedDetails, setSelectedDetails] = useState<
+    (CustomDetailType | undefined)[]
+  >([]);
+
+  const [selected, setSelected] = useState<CustomDetailType | undefined>();
+  const [details, setDetails] = useState<(CustomDetailType | undefined)[]>([]);
+  const toast = useToast();
   const token = getCookie("token");
   const submit = async () => {
     try {
-      let img = new FormData();
-      if (detail.img != undefined) img.set("file", detail.img);
-      let res = await fetch(`${api}`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
-        body: img,
-      }).then((d) => d.json());
-      let body = {
-        title: detail.title,
-        img: res.file ?? "",
-        text: detail.text,
-      };
-      await axios
-        .post(`${api}medical/detail/create`, body, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((d) => console.log(d));
-      //   await fetch(`${api}medical/detail/create`, {
-      //     method: "POST",
-      //     headers: { Authorization: `Bearer ${token}` },
-      //     body: body,
-      //   }).then((d) => console.log(d));
+      setData((prev) => ({
+        ...prev,
+        details: [...data.detail, detail],
+      }));
+
+      let body: string[] = [];
+      data.detail.map(async (b, i) => {
+        let img = new FormData();
+        let uploaded = "";
+        if (b.img != undefined) {
+          img.set("file", b.img);
+
+          await fetch(`${api}`, {
+            method: "POST",
+            headers: { Authorization: `Bearer ${token}` },
+            body: img,
+          })
+            .then((d) => d.json())
+            .then((d) => {
+              uploaded = d.file;
+            });
+        }
+        let bo =
+          uploaded != ""
+            ? {
+                title: b.title,
+                img: uploaded,
+                text: b.text,
+              }
+            : {
+                title: b.title,
+                text: b.text,
+              };
+        await axios
+          .post(`${api}medical/detail/create`, bo, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((d) => {
+            if (!body.includes(d.data)) body.push(d.data);
+            if (i == data.detail.length - 1) {
+              !body.includes(d.data) ? send([...body, d.data]) : send(body);
+            }
+          });
+      });
     } catch (error) {}
   };
+  const getDetails = async () => {
+    try {
+      await fetch(`${api}medical/detail`)
+        .then((d) => d.json())
+        .then((d) => setDetails(d));
+    } catch (error) {}
+  };
+  useEffect(() => {
+    getDetails();
+  }, []);
+  const send = async (body: string[]) => {
+    try {
+      let items = [];
+      if (selectedDetails.length > 0) {
+        items = body.concat(selectedDetails.map((s) => s!._id) as string[]);
+      } else {
+        items = body;
+      }
+      await axios
+        .post(
+          `${api}medical/details/create`,
+          {
+            title: data.title,
+            detail: items,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then(() =>
+          toast({
+            title: "Нэмэгдлээ.",
 
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+          })
+        )
+        .then(() => {
+          setData({
+            title: "",
+            detail: [],
+          });
+        });
+    } catch (error) {}
+  };
   return (
     <AdminForm
+      value={data.title}
       onTitle={(e) => setData((prev) => ({ ...prev, title: e }))}
       onChange={(e) => setData((prev) => ({ ...prev, text: e }))}
       title={`Үйлдэл гүйцэтгэх чадвар алдалт > Custom`}
@@ -319,7 +519,8 @@ export function AdminPerformanceCustom() {
       editor={false}
       onSubmit={submit}
     >
-      {data.details?.map((detail, i) => {
+      <p>{data.detail.length}</p>
+      {data.detail?.map((detail, i) => {
         return (
           <HStack key={i}>
             <Text>{detail.title}</Text>
@@ -327,7 +528,24 @@ export function AdminPerformanceCustom() {
               onClick={() => {
                 setData((prev) => ({
                   ...prev,
-                  details: data.details.filter((det, index) => index != i),
+                  details: data.detail.filter((det, index) => index != i),
+                }));
+              }}
+            >
+              Устгах
+            </Button>
+          </HStack>
+        );
+      })}
+      {selectedDetails?.map((detail, i) => {
+        return (
+          <HStack key={i}>
+            <Text>{detail?.title}</Text>
+            <Button
+              onClick={() => {
+                setSelectedDetails((prev) => ({
+                  ...prev,
+                  details: selectedDetails.filter((det, index) => index != i),
                 }));
               }}
             >
@@ -364,8 +582,43 @@ export function AdminPerformanceCustom() {
           onClick={() => {
             setData((prev) => ({
               ...prev,
-              details: [...data.details, detail],
+              detail: [...data.detail, detail],
             }));
+           
+          }}
+        >
+          Нэмэх
+        </Button>
+        {details != undefined && (
+          <Select
+            onChange={(e) => {
+              let item: CustomDetailType | undefined = details.filter(
+                (d) => d?._id == e.target.value
+              )[0];
+              if (item != undefined) {
+                setSelected({
+                  _id: item!._id,
+                  title: item!.title,
+                  text: item!.text,
+                  img: item!.img,
+                });
+              }
+            }}
+          >
+            <option value="">Сонгох</option>
+            {details.map((e) => {
+              return <option value={e?._id}>{e?.title}</option>;
+            })}
+          </Select>
+        )}
+        <Button
+          onClick={() => {
+            if (
+              !selectedDetails.includes(selected) &&
+              selected?._id != undefined
+            ) {
+              setSelectedDetails((prev) => [...prev, selected]);
+            }
           }}
         >
           Нэмэх

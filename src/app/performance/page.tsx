@@ -16,6 +16,8 @@ import { PerformanceModel } from "@/model/performance.model";
 import { Button, HStack, Heading, Text, VStack } from "@chakra-ui/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { api } from "@/values/values";
 
 const PerformancePage = () => {
   const params = useSearchParams();
@@ -26,22 +28,25 @@ const PerformancePage = () => {
   const [dataCount, setCount] = useState<number>(0);
   const [selected, setSelected] = useState<PerformanceModel | null>(null);
   const router = useRouter();
+
+
+
   const getData = async (t: PerformanceTypes) => {
     try {
-      let filtered = performanceData.filter((d) => d.type == t);
-      setCount(filtered.length);
-      setData(filtered.filter((d, i) => i >= page * 10 && i < (page + 1) * 10));
+      let res = await axios.post(`${api}medical/type/${t}`, {
+        limit: 10,
+        skip: page,
+      });
+      setCount(res.data.count);
+      setData(res.data.data);
     } catch (error) {}
   };
 
-  const getDataById = (id: string) => {
+  const getDataById = async (id: string) => {
     try {
-      let filtered = performanceData.filter((d) => d._id == id);
-      if (filtered.length > 0) {
-        setSelected(filtered[0]);
-      } else {
-        setSelected(null);
-      }
+      await fetch(`${api}medical/get/${id}`)
+      .then((d) => d.json())
+      .then((d) => setSelected(d));
     } catch (error) {}
   };
 

@@ -43,3 +43,11 @@
   width: 100% !important;
 }
 
+.audio {
+
+  max-width: 1240px;
+  padding: 0 40px;
+  width: 100%;
+  margin: auto;
+}
+

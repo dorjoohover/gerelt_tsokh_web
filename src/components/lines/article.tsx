@@ -1,5 +1,6 @@
 import { detail, more } from "@/global/string";
 import { Info } from "@/model/info.model";
+import { api } from "@/values/values";
 import {
   Box,
   Button,
@@ -44,7 +45,14 @@ export const LineWidget: FC<LineWidgetType> = ({
       flexDir={{ md: "row", base: "column" }}
     >
       <Box flex={1}>
-        <Image src={img} alt={id} />
+        <Image
+          src={`${api}${img}`}
+          alt={id}
+          height={"auto"}
+          maxH={200}
+          objectFit={"cover"}
+          w={"full"}
+        />
       </Box>
 
       <VStack
@@ -63,15 +71,19 @@ export const LineWidget: FC<LineWidgetType> = ({
         >
           {title}
         </Heading>
-        {semiTitle && (
+        {/* {semiTitle && (
           <Heading fontSize={"20px"} fontStyle={"italic"} color={"text"}>
             {semiTitle}
           </Heading>
-        )}
+        )} */}
 
-        <Text mb={{ md: 0, base: 4 }} noOfLines={{ md: 3, base: 4 }}>
-          {text}
-        </Text>
+        <Box
+          mb={{ md: 0, base: 4 }}
+          noOfLines={{ md: 3, base: 4 }}
+          dangerouslySetInnerHTML={{
+            __html: text?.replaceAll('"', "") ?? "",
+          }}
+        ></Box>
         <Link href={`/${type}?id=${id}`}>
           <Text textDecor={"underline"}>{more}</Text>
         </Link>
@@ -94,9 +106,21 @@ export const LineWidgetDetail: FC<LineWidgetDetailType> = ({
           {semiTitle}
         </Text>
       )}
-      <Image src={img} w={"full"} alt={id ?? ""} />
-      <VStack w={"full"} alignItems={{ base: "start", md: "center" }}>
-        <Text>{text}</Text>
+      <Image
+        src={`${api}${img}`}
+        w={"full"}
+        maxH={400}
+        objectFit={"cover"}
+        alt={id ?? ""}
+      />
+      <VStack w={"full"} alignItems={"start"}>
+        <Box
+          mb={{ md: 0, base: 4 }}
+          noOfLines={{ md: 3, base: 4 }}
+          dangerouslySetInnerHTML={{
+            __html: text?.replaceAll('"', "") ?? "",
+          }}
+        ></Box>
       </VStack>
     </VStack>
   );

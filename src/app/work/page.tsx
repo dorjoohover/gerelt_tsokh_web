@@ -14,6 +14,8 @@ import { Work } from "@/model/work.model";
 import { HStack } from "@chakra-ui/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { api } from "@/values/values";
 
 const WorkPage = () => {
   const params = useSearchParams();
@@ -25,9 +27,21 @@ const WorkPage = () => {
   const [dataCount, setCount] = useState<number>(0);
   const getData = async (t: WorkTypes) => {
     try {
-      let filtered = workData.filter((d) => d.type == t);
-      setCount(filtered.length);
-      setData(filtered.filter((d, i) => i >= page * 10 && i < (page + 1) * 10));
+      let res = await axios.post(`${api}work/type/${t}`, {
+        page: page,
+        limit: 10,
+      });
+
+      setCount(res.data.count);
+      setData(res.data.data);
+    } catch (error) {}
+  };
+
+  const getDataById = async (id: string) => {
+    try {
+      let res = await fetch(`${api}work/${id}`).then((d) => d.json());
+
+      setSelected(res);
     } catch (error) {}
   };
   useEffect(() => {
@@ -37,6 +51,8 @@ const WorkPage = () => {
       setValue(filterName(name, workTags));
       console.log(name);
       getData(name);
+    } else {
+      getData(params.get("name") as WorkTypes);
     }
   }, []);
   useEffect(() => {
@@ -45,12 +61,7 @@ const WorkPage = () => {
 
   useEffect(() => {
     if (params.get("id")) {
-      let filtered = workData.filter((d) => d._id == params.get("id"));
-      if (filtered.length > 0) {
-        setSelected(filtered[0]);
-      } else {
-        setSelected(null);
-      }
+      getDataById(params.get("id") as string);
     }
     if (params.get("name")) {
       let name: any = params.get("name") as keyof typeof WorkTypes;
@@ -61,7 +72,6 @@ const WorkPage = () => {
       setSelected(null);
     }
   }, [params]);
-
 
   return (
     <VStackContainer>
@@ -121,9 +131,7 @@ const WorkPage = () => {
         value={value}
         length={selected ? 1 : dataCount}
         changePage={(value) => setPage(value)}
-        changeType={(value) => {
-       
-        }}
+        changeType={(value) => {}}
         changeSub={() => {}}
       />
     </VStackContainer>

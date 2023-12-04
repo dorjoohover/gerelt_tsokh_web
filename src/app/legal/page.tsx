@@ -23,6 +23,7 @@ import { LegalTypes } from "@/global/enum";
 import { LegalModel } from "@/model/legal.model";
 import LegalDetailWidget from "@/components/legal/detail";
 import { api } from "@/values/values";
+import axios from "axios";
 
 const LegalPage = () => {
   const params = useSearchParams();
@@ -34,9 +35,12 @@ const LegalPage = () => {
   const [selected, setSelected] = useState<LegalModel | null>(null);
   const getData = async (t: LegalTypes) => {
     try {
-      let filtered = legalData.filter((d) => d.type == t);
-      setCount(filtered.length);
-      setData(filtered.filter((d, i) => i >= page * 10 && i < (page + 1) * 10));
+      let res = await axios.post(`${api}legal/type/${t}`, {
+        limit: 10,
+        skip: page,
+      });
+      setCount(res.data.length);
+      setData(res.data);
     } catch (error) {}
   };
   const getDataById = async (id: string) => {

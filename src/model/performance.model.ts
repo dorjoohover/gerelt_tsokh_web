@@ -1,4 +1,4 @@
-import { PerformanceTypes, } from "@/global/enum";
+import { MedicalTypes, PerformanceTypes, } from "@/global/enum";
 
 export interface PerformanceQuestion  {
     number: number,
@@ -12,8 +12,13 @@ export interface PerformanceFunctionDetail {
 
 export interface PerformanceFunction {
     id?: number
-    title: string
-    details: PerformanceFunctionDetail[]
+    title?: string
+    detail: PerformanceFunctionDetail[]
+}
+export interface MedicalDetail {
+ 
+    type?: MedicalTypes
+    details?: PerformanceFunction[]
 }
 
 export  interface PerformanceModel {
@@ -30,6 +35,7 @@ export  interface PerformanceModel {
     key?: PerformanceFunction[],
     space?: PerformanceFunctionDetail[],
     trigger?: PerformanceFunctionDetail[],
-    condition?: PerformanceFunction,
+    condition?: string[],
+    details: MedicalDetail[]
 
 }

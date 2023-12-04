@@ -48,6 +48,7 @@ export default function AdminLegal({ route }: { route: { type: string } }) {
 
   return (
     <AdminForm
+      value={data.title}
       onTitle={(e) => setData((prev) => ({ ...prev, title: e }))}
       onChange={(e) => setData((prev) => ({ ...prev, text: e }))}
       title={`Хуулийн мэдээллийн булан > ${filterName(

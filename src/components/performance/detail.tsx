@@ -13,15 +13,16 @@ import {
   ModalCloseButton,
   ModalContent,
   ModalOverlay,
-  OrderedList,
   Text,
   UnorderedList,
   VStack,
   useDisclosure,
 } from "@chakra-ui/react";
 import CustomAccordian from "../accordian";
-import { imgArticle1, imgDoneWork10 } from "@/global/assets";
+
 import { FC, useState } from "react";
+import { MedicalTitle } from "@/global/functions";
+import { api } from "@/values/values";
 type AccordianWidgetType = {
   fun: PerformanceFunction;
   length: number;
@@ -31,15 +32,19 @@ type AccordianWidgetType = {
 const AccordianWidget: FC<AccordianWidgetType> = ({ fun, length, onClick }) => {
   return (
     <VStack w={"full"} alignItems={"start"} gap={4}>
-      <Heading fontSize={"16px"}>{fun.title}</Heading>
+      {fun.title && <Heading fontSize={"16px"}>{fun.title}</Heading>}
       <UnorderedList>
-        {fun.details.map((detail, i) => {
+        {fun?.detail?.map((detail, i) => {
           return (
             <ListItem py={4} pl={10} color={"text"} key={i}>
               <VStack alignItems={"start"} w="full">
                 <Box
                   cursor={"pointer"}
-                  onClick={() => onClick(detail.img ?? imgArticle1)}
+                  onClick={() => {
+                    if (detail.img != "" && detail.img != undefined) {
+                      onClick(detail.img);
+                    }
+                  }}
                 >
                   <Text color={"blue"}>{detail.title}</Text>
                 </Box>
@@ -76,199 +81,49 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
         {data.title}
       </Heading>
 
-      <VStack w={"full"} alignItems={{ base: "start", md: "center" }}>
-        <Text>{data.text}</Text>
+      <VStack w={"full"} alignItems={"start"}>
+        <Box
+          mb={{ md: 0, base: 4 }}
+          noOfLines={{ md: 3, base: 4 }}
+          dangerouslySetInnerHTML={{
+            __html: data?.text?.replaceAll('"', "") ?? "",
+          }}
+        ></Box>
       </VStack>
-      {/* <OrderedList ml={6}>
-        {data.questions?.map((question, index) => {
-          return (
-            <ListItem fontSize={20} py={4} color={"text"} pl={10} key={index}>
-              {question.text}
-            </ListItem>
-          );
-        })}
-      </OrderedList> */}
+
       <CustomAccordian
         data={[
-          {
-            title:
-              data.employerWarning != undefined
-                ? "Ажилтанд өгөх бяцхан санамжууд"
-                : "",
-            child: (
-              <VStack w={"full"} alignItems={"start"} gap={4}>
-                <UnorderedList>
-                  {data.employerWarning?.map((detail, i) => {
+          ...data.details.map((e) => {
+            return {
+              title: MedicalTitle(e.type!),
+              child: (
+                <VStack w={"full"} alignItems={"start"} gap={8}>
+                  {e.details?.map((detail, i) => {
                     return (
-                      <ListItem py={4} pl={10} color={"text"} key={i}>
-                        <VStack alignItems={"start"} w="full">
-                          <Box
-                            className="title"
-                            onClick={() => viewImg(detail.img ?? imgArticle1)}
-                          >
-                            <Text color={"blue"}>{detail.title}</Text>
-                          </Box>
-                          {detail.text && <Text>{detail.text}</Text>}
-                        </VStack>
-                      </ListItem>
+                      <AccordianWidget
+                        onClick={(value: string) => {
+                          viewImg(value);
+                        }}
+                        key={i}
+                        fun={detail}
+                        length={e.details!.length}
+                      />
                     );
                   })}
-                </UnorderedList>
-              </VStack>
-            ),
-          },
+                </VStack>
+              ),
+            };
+          }),
           {
-            title:
-              data.employerWarning != undefined
-                ? "Ажил олгогчид өгөх бяцхан санамжууд"
-                : "",
+            title: "Нөхцөл ба Шийдэл",
             child: (
               <VStack w={"full"} alignItems={"start"} gap={4}>
                 <UnorderedList>
-                  {data.employerWarning?.map((detail, i) => {
+                  {data.condition?.map((detail, i) => {
                     return (
                       <ListItem py={4} pl={10} color={"text"} key={i}>
                         <VStack alignItems={"start"} w="full">
-                          <Box
-                            className="title"
-                            onClick={() => viewImg(detail.img ?? imgArticle1)}
-                          >
-                            <Heading fontSize={"16px"} color={"blue"}>
-                              {detail.title}
-                            </Heading>
-                          </Box>
-                          {detail.text && <Text>{detail.text}</Text>}
-                        </VStack>
-                      </ListItem>
-                    );
-                  })}
-                </UnorderedList>
-              </VStack>
-            ),
-          },
-          {
-            title: data.setup != undefined ? "Гол тохируулгууд " : "",
-            child: (
-              <VStack w={"full"} alignItems={"start"} gap={8}>
-                {data.setup?.map((fun, index) => {
-                  return (
-                    <AccordianWidget
-                      onClick={(value: string) => {
-                        viewImg(value);
-                      }}
-                      key={index}
-                      fun={fun}
-                      length={data.setup!.length}
-                    />
-                  );
-                })}
-              </VStack>
-            ),
-          },
-
-          {
-            title: data.space != undefined ? "Амрах хувийн орон зай" : "",
-            child: (
-              <VStack w={"full"} alignItems={"start"} gap={8}>
-                {data.space?.map((fun, index) => {
-                  return (
-                    <VStack key={index} w={"full"} alignItems={"start"} gap={4}>
-                      <Heading fontSize={'16px'}>{fun.title}</Heading>
-                      {fun.text && <Text>{fun.text}</Text>}
-                    </VStack>
-                  );
-                })}
-              </VStack>
-            ),
-          },
-          {
-            title:
-              data.trigger != undefined
-                ? "Сэдрээгч хүчин зүйлсийг илрүүлж багасгах"
-                : "",
-            child: (
-              <VStack w={"full"} alignItems={"start"} gap={8}>
-                {data.trigger?.map((fun, index) => {
-                  return (
-                    <VStack key={index} w={"full"} alignItems={"start"} gap={4}>
-                      <Heading fontSize={'16px'}>{fun.title}</Heading>
-                      {fun.text && <Text>{fun.text}</Text>}
-                    </VStack>
-                  );
-                })}
-              </VStack>
-            ),
-          },
-          {
-            title: data.possible != undefined ? "Боломжит тохируулгууд" : "",
-            child: (
-              <VStack w={"full"} alignItems={"start"} gap={8}>
-                {data.possible?.map((fun, index) => {
-                  return (
-                    <AccordianWidget
-                      onClick={(value: string) => {
-                        viewImg(value);
-                      }}
-                      fun={fun}
-                      key={index}
-                      length={data.possible!.length}
-                    />
-                  );
-                })}
-              </VStack>
-            ),
-          },
-          {
-            title: data.functions != undefined ? "Ажил үүргийн функцээр" : "",
-            child: (
-              <VStack w={"full"} alignItems={"start"} gap={8}>
-                {data.functions?.map((fun, index) => {
-                  return (
-                    <AccordianWidget
-                      onClick={(value: string) => {
-                        viewImg(value);
-                      }}
-                      fun={fun}
-                      key={index}
-                      length={data.functions!.length}
-                    />
-                  );
-                })}
-              </VStack>
-            ),
-          },
-          {
-            title:
-              data.key != undefined ? "Түлхүү хэрэглэгддэг тохируулгууд:" : "",
-            child: (
-              <VStack w={"full"} alignItems={"start"} gap={8}>
-                {data.key?.map((fun, index) => {
-                  return (
-                    <AccordianWidget
-                      onClick={(value: string) => {
-                        viewImg(value);
-                      }}
-                      fun={fun}
-                      key={index}
-                      length={data.key!.length}
-                    />
-                  );
-                })}
-              </VStack>
-            ),
-          },
-          {
-            title: data.condition != undefined ? "Нөхцөл ба Шийдэл" : "",
-            child: (
-              <VStack w={"full"} alignItems={"start"} gap={4}>
-                <Heading fontSize={'16px'}>{data.condition?.title}</Heading>
-                <UnorderedList>
-                  {data.condition?.details?.map((detail, i) => {
-                    return (
-                      <ListItem py={4} pl={10} color={"text"} key={i}>
-                        <VStack alignItems={"start"} w="full">
-                          {/* <Box className='title'><Text color={"blue"} >{detail.title}</Text></Box> */}
-                          {detail.text && <Text>{detail.text}</Text>}
+                          <Text>{detail}</Text>
                         </VStack>
                       </ListItem>
                     );
@@ -279,12 +134,13 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
           },
         ]}
       />
+
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
           <ModalBody p={4} mt={10}>
-            <Image src={img} w={"full"} alt="img" />
+            <Image src={`${api}${img}`} w={"full"} alt="img" />
           </ModalBody>
         </ModalContent>
       </Modal>

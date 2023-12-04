@@ -9,7 +9,8 @@ type AdminFormType = {
   onChange: (e: string) => void;
   onTitle: (e: string) => void;
   onSubmit: () => void;
-  editor?: boolean
+  editor?: boolean,
+  value: string
 };
 export default function AdminForm({
   text,
@@ -19,19 +20,22 @@ export default function AdminForm({
   onChange,
   onTitle,
   onSubmit,
-  editor = true
+  editor = true,
+  value,
+
 }: AdminFormType) {
   return (
     <FormControl w={"full"} alignItems={"start"} onSubmit={onSubmit}>
       <Heading variant={'smallTitle'} color={'text'}>{title}</Heading>
       <Input
         placeholder={text}
+        value={value}
         onChange={(e) => onTitle(e.target.value)}
         maxW={"500px"}
         mt={10}
         mb={10}
       />
-      {editor && <CustomEditor initialData={ph ?? ""} onChange={onChange} />}
+      {editor && <CustomEditor  initialData={ph ?? ""} onChange={onChange} />}
       {children}
       <Button my={4} onClick={onSubmit}>
         Илгээх

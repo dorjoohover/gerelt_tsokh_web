@@ -7,14 +7,13 @@ import { getCookie } from "cookies-next";
 
 import SidebarContent from "@/components/admin/Navbar";
 
-import CustomEditor from "@/components/custom-editor";
-import AdminForm from "@/components/admin/Form";
+
 import AdminInfo from "@/components/admin/Info";
 import AdminWork from "@/components/admin/Work";
 import AdminArticle from "@/components/admin/Article";
 import AdminPerformance, { AdminPerformanceCustom } from "@/components/admin/Performance";
 import AdminTopic from "@/components/admin/Topic";
-import AdminLegal from "@/components/admin/Legalt";
+import AdminLegal from "@/components/admin/Legal";
 
 export default function AdminPage() {
   const token = getCookie("token");

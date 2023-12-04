@@ -13,6 +13,8 @@ import { Article } from "@/model/article.model";
 import { HStack } from "@chakra-ui/react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { api } from "@/values/values";
 
 const ArticlePage = () => {
   const params = useSearchParams();
@@ -20,13 +22,37 @@ const ArticlePage = () => {
   const [type, setType] = useState<ArticleTypes>(ArticleTypes.article);
   const [data, setData] = useState<Article[]>([]);
   const [value, setValue] = useState("");
+  const [dataCount, setCount] = useState<number>(0);
   const [selected, setSelected] = useState<Article | null>(null);
-  const getData = async () => {
+  const getData = async (t: ArticleTypes) => {
     try {
-      let filtered = articleData.filter((d) => d.type == type);
-      setData(filtered.filter((d, i) => i >= page * 10 && i < (page + 1) * 10));
+      let res = await axios.post(`${api}article/type/${t}`, {
+        limit: 10,
+        page: page,
+      });
+      setCount(res.data.length);
+      setData(res.data);
     } catch (error) {}
   };
+  const getDataById = async (id: string) => {
+    try {
+      await fetch(`${api}article/${id}`)
+        .then((d) => d.json())
+        .then((d) => setSelected(d));
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    if (params.get("id")) {
+      getDataById(params.get("id")!);
+    } else {
+      getData(params.get("name") as ArticleTypes);
+    }
+  }, []);
+  useEffect(() => {
+    getData(type);
+  }, [page]);
+
   useEffect(() => {
     if (params.get("name") != "") {
       let name: any = params.get("name") as keyof typeof ArticleTypes;
@@ -35,7 +61,7 @@ const ArticlePage = () => {
     }
   }, []);
   useEffect(() => {
-    getData();
+    getData(type);
     setValue(filterName(type, articleTags));
   }, [type, page]);
   useEffect(() => {
@@ -103,11 +129,11 @@ const ArticlePage = () => {
           )
         }
         filter={articleTags}
-        limit={5}
+        limit={dataCount}
         page={page}
         type={type}
         value={value}
-        length={selected ? 1 : 10}
+        length={selected ? 1 : dataCount}
         changePage={(value) => setPage(value)}
         changeType={(value) => {
           setType(value);

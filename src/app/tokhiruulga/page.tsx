@@ -60,15 +60,17 @@ const TokhiruulgaPage = () => {
     try {
       switch (type) {
         case TokhiruulgaTypes.performance:
-          let filtered = performanceData.filter(
-            (d) => d.type == tokhiruulgaTags[3].sub![sub!].value
+          let performanceRes = await axios.post(
+            `${api}medical/type/${params.get("type")?.toUpperCase()}`,
+            {
+              limit: limit,
+              page: page,
+            }
           );
-          setLimit(10);
+          setData(performanceRes.data.data);
 
-          setData(
-            filtered.filter((d, i) => i >= page * 10 && i < (page + 1) * 10)
-          );
-          setDataCount(filtered.length ?? 0);
+          setDataCount(performanceRes.data.count);
+          console.log(performanceRes);
           break;
         case TokhiruulgaTypes.legal:
           let legalRes = await fetch(
@@ -163,9 +165,13 @@ const TokhiruulgaPage = () => {
                     {v.title}
                   </Heading>
 
-                  <Text mb={{ md: 0, base: 4 }} noOfLines={{ md: 3, base: 4 }}>
-                    {v.text}
-                  </Text>
+                  <Box
+                    mb={{ md: 0, base: 4 }}
+                    noOfLines={{ md: 3, base: 4 }}
+                    dangerouslySetInnerHTML={{
+                      __html: d?.text?.replaceAll('"', "") ?? "",
+                    }}
+                  ></Box>
                   <Link href={`/${type}?id=${v._id}`}>
                     <Text textDecor={"underline"}>{more}</Text>
                   </Link>

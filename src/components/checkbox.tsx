@@ -9,9 +9,15 @@ export type InputTypes = {
   question: string;
   number: number;
   options?: OptionType[];
+  onChange?: (e: string | number) => void;
 };
 
-const CustomCheckBox: FC<InputTypes> = ({ question, number, options }) => {
+const CustomCheckBox: FC<InputTypes> = ({
+  question,
+  number,
+  options,
+  onChange,
+}) => {
   const [selected, setSelected] = useState<(string | number)[]>([]);
   return (
     <VStack w={"full"} gap={6} alignItems={"start"}>
@@ -25,6 +31,7 @@ const CustomCheckBox: FC<InputTypes> = ({ question, number, options }) => {
         colorScheme="red"
         onChange={(e) => {
           setSelected(e);
+          onChange(e);
         }}
       >
         <VStack alignItems={"start"}>
@@ -33,8 +40,7 @@ const CustomCheckBox: FC<InputTypes> = ({ question, number, options }) => {
               <Checkbox
                 borderColor={"prime.default"}
                 size={"lg"}
-                
-                iconColor={'prime.default'}
+                iconColor={"prime.default"}
                 value={option.value}
                 isChecked={selected.includes(option.value)}
                 key={i}
