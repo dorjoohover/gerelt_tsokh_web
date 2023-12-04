@@ -7,11 +7,11 @@ import { LinkTitle } from "@/components/link";
 import GratitudeWidget from "@/components/tokhiruulga/gratitude";
 import OverviewWidget from "@/components/tokhiruulga/overview";
 import { performanceData } from "@/data/performance.data";
-import { imgFoundation } from "@/global/assets";
+import { imgAdvice, imgFoundation } from "@/global/assets";
 import { FormTypes, TokhiruulgaTypes } from "@/global/enum";
 import { filterName } from "@/global/functions";
-import { feedback, more, send, tokhiruulga } from "@/global/string";
 import {
+  advice,
   api,
   contactValues,
   feedbackValues,
@@ -30,19 +30,39 @@ import {
   GridItem,
   HStack,
   Heading,
+  Icon,
+  Image,
   Input,
   Text,
   Textarea,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, ReactNode } from "react";
 import { LegalModel } from "@/model/legal.model";
 import { legalData } from "@/data/legal.data";
 import { TopicModel } from "@/model/topic.model";
 import { topicData } from "@/data/topic.data";
 import axios from "axios";
+import { feedback, more, send, tokhiruulga } from "@/global/string";
+import RadioBox from "@/components/radiobox";
+import { FaPlay } from "react-icons/fa";
+
+type FeedbackType = {
+  number: number;
+  value: string;
+  text: string;
+  question: string;
+};
+type ContactType = {
+  firstname: string;
+  email: string;
+  lastname: string;
+  title: string;
+  text: string;
+};
 const TokhiruulgaPage = () => {
   const params = useSearchParams();
   const [page, setPage] = useState(0);
@@ -56,6 +76,63 @@ const TokhiruulgaPage = () => {
   const [selected, setSelected] = useState<any | null>(null);
   const [dataCount, setDataCount] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
+  const [ct, setCt] = useState<ContactType>({
+    email: "",
+    firstname: "",
+    lastname: "",
+    text: "",
+    title: "",
+  });
+  const [fb, setFb] = useState<FeedbackType[]>([
+    {
+      number: 0,
+      question: "",
+      text: "emp",
+      value: "",
+    },
+    {
+      number: 1,
+      question: "",
+      text: "",
+      value: "",
+    },
+    {
+      number: 2,
+      question: "",
+      text: "",
+      value: "",
+    },
+    {
+      number: 3,
+      question: "",
+      text: "",
+      value: "",
+    },
+    {
+      number: 4,
+      question: "",
+      text: "",
+      value: "",
+    },
+    {
+      number: 5,
+      question: "",
+      text: "",
+      value: "",
+    },
+    {
+      number: 6,
+      question: "",
+      text: "",
+      value: "",
+    },
+    {
+      number: 7,
+      question: "",
+      text: "",
+      value: "",
+    },
+  ]);
   const getData = async () => {
     try {
       switch (type) {
@@ -101,6 +178,8 @@ const TokhiruulgaPage = () => {
       }
     } catch (error) {}
   };
+  const router = useRouter();
+  const toast = useToast();
   useEffect(() => {
     if (params.get("name")) {
       let name: any = params.get("name") as keyof typeof TokhiruulgaTypes;
@@ -123,8 +202,65 @@ const TokhiruulgaPage = () => {
       setValue(filterName(name, tokhiruulgaTags));
     }
   }, [params]);
-  const feedbackSend = () => {};
-  const contactSend = () => {};
+  const feedbackSend = async () => {
+    try {
+      if (fb.find((f) => f.text == "") == undefined) {
+        await axios.post(`${api}feedback/create`, fb.slice(1)).then((d) => {
+          toast({
+            duration: 3000,
+            title: "Амжилттай илгээлээ.",
+            status: "success",
+          });
+          location.reload();
+        });
+      } else {
+        toast({
+          duration: 3000,
+          title: "Талбарыг бүрэн бөглөнө үү.",
+          status: "warning",
+        });
+      }
+    } catch (error) {}
+  };
+  const contactSend = async () => {
+    try {
+      if (
+        ct.email != "" &&
+        ct.firstname != "" &&
+        ct.lastname != "" &&
+        ct.text != "" &&
+        ct.title != "" &&
+        ct.email
+          .toLowerCase()
+          .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          )
+      ) {
+        await axios
+          .post(`${api}contact/create`, {
+            firstname: ct.firstname,
+            lastname: ct.lastname,
+            email: ct.email,
+            title: ct.title,
+            text: ct.text,
+          })
+          .then((d) => {
+            toast({
+              duration: 3000,
+              title: "Амжилттай илгээлээ.",
+              status: "success",
+            });
+            location.reload();
+          });
+      } else {
+        toast({
+          duration: 3000,
+          title: "Талбарыг бүрэн бөглөнө үү.",
+          status: "warning",
+        });
+      }
+    } catch (error) {}
+  };
   const changePage = (): ReactNode => {
     switch (type) {
       case TokhiruulgaTypes.gratitude:
@@ -146,7 +282,11 @@ const TokhiruulgaPage = () => {
           />
         );
       case TokhiruulgaTypes.notice:
-        return <Text>{noticeValue}</Text>;
+        return (
+          <Heading fontSize={"20px"} color={"text"} lineHeight={1.5}>
+            {noticeValue}
+          </Heading>
+        );
       case TokhiruulgaTypes.performance:
         return (
           <VStack w={"full"} alignItems={"start"} gap={{ lg: 78, base: 10 }}>
@@ -228,6 +368,30 @@ const TokhiruulgaPage = () => {
             })}
           </VStack>
         );
+      case TokhiruulgaTypes.advice:
+        return (
+          <Box pos={"relative"} w={"full"}>
+            <Link href={advice} target="_blank">
+              <Image src={imgAdvice} alt={""} w={"full"} />
+              <Box
+                pos={"absolute"}
+                zIndex={5}
+                top={"50%"}
+                left={"50%"}
+                transform={"translate(-50%, -50%)"}
+                display={"flex"}
+                bg={"red"}
+                borderRadius={"100%"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                w={16}
+                h={16}
+              >
+                <Icon as={FaPlay} boxSize={25} color={"white"} />
+              </Box>
+            </Link>
+          </Box>
+        );
       case TokhiruulgaTypes.feedback:
         return (
           <VStack w={"full"} gap={10} alignItems={"start"}>
@@ -242,11 +406,24 @@ const TokhiruulgaPage = () => {
               switch (feed.type) {
                 case FormTypes.checkbox:
                   return (
-                    <CustomCheckBox
+                    <RadioBox
                       number={feed.number}
                       question={feed.question}
                       key={i}
                       options={feed.options}
+                      onChange={(e) => {
+                        const last = fb.slice(i + 2);
+                        setFb((prev) => [
+                          ...prev.slice(0, i + 1),
+                          {
+                            number: feed.number,
+                            question: feed.question,
+                            text: feed.options![e].text,
+                            value: feed.options![e].value,
+                          },
+                          ...last,
+                        ]);
+                      }}
                     />
                   );
                 case FormTypes.textarea:
@@ -258,6 +435,30 @@ const TokhiruulgaPage = () => {
                         color={"text"}
                       >{`${feed.number}. ${feed.question}`}</Text>
                       <Textarea
+                        onChange={(e) => {
+                          if (i != 6) {
+                            setFb((prev) => [
+                              ...prev.slice(0, i + 1),
+                              {
+                                number: feed.number,
+                                question: feed.question,
+                                text: e.target.value,
+                                value: "",
+                              },
+                              ...fb.slice(i + 2),
+                            ]);
+                          } else {
+                            setFb((prev) => [
+                              ...prev.slice(0, i + 1),
+                              {
+                                number: feed.number,
+                                question: feed.question,
+                                text: e.target.value,
+                                value: "",
+                              },
+                            ]);
+                          }
+                        }}
                         borderColor={"prime.default"}
                         borderRadius={2.25}
                         maxLength={feed.limit}
@@ -308,6 +509,12 @@ const TokhiruulgaPage = () => {
                         }}
                       >
                         <Input
+                          onChange={(e) => {
+                            setCt((prev) => ({
+                              ...prev,
+                              [contact.code]: e.target.value,
+                            }));
+                          }}
                           maxLength={contact.limit}
                           placeholder={contact.label}
                           borderColor={"prime.default"}
@@ -327,6 +534,12 @@ const TokhiruulgaPage = () => {
                         }}
                       >
                         <Textarea
+                          onChange={(e) => {
+                            setCt((prev) => ({
+                              ...prev,
+                              [contact.code]: e.target.value,
+                            }));
+                          }}
                           borderColor={"prime.default"}
                           borderRadius={9}
                           px={4}

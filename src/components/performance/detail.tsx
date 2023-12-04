@@ -23,6 +23,7 @@ import CustomAccordian from "../accordian";
 import { FC, useState } from "react";
 import { MedicalTitle } from "@/global/functions";
 import { api } from "@/values/values";
+import Link from "next/link";
 type AccordianWidgetType = {
   fun: PerformanceFunction;
   length: number;
@@ -36,21 +37,23 @@ const AccordianWidget: FC<AccordianWidgetType> = ({ fun, length, onClick }) => {
       <UnorderedList>
         {fun?.detail?.map((detail, i) => {
           return (
-            <ListItem py={4} pl={10} color={"text"} key={i}>
-              <VStack alignItems={"start"} w="full">
-                <Box
-                  cursor={"pointer"}
-                  onClick={() => {
-                    if (detail.img != "" && detail.img != undefined) {
-                      onClick(detail.img);
-                    }
-                  }}
-                >
-                  <Text color={"blue"}>{detail.title}</Text>
-                </Box>
-                {detail.text && <Text>{detail.text}</Text>}
-              </VStack>
-            </ListItem>
+            <Link key={i} href={""} onClick={(e) => e.preventDefault()}>
+              <ListItem py={4} pl={10} color={"text"}>
+                <VStack alignItems={"start"} w="full">
+                  <Box
+                    cursor={"pointer"}
+                    onClick={() => {
+                      if (detail.img != undefined && detail.img != "") {
+                        onClick(detail.img);
+                      }
+                    }}
+                  >
+                    <Text color={"blue"}>{detail.title}</Text>
+                  </Box>
+                  {detail.text && <Text>{detail.text}</Text>}
+                </VStack>
+              </ListItem>
+            </Link>
           );
         })}
       </UnorderedList>
@@ -117,7 +120,7 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
           {
             title: "Нөхцөл ба Шийдэл",
             child: (
-              <VStack w={"full"} alignItems={"start"} gap={4}>
+              <VStack w={"full"} alignItems={"start"} gap={4} id="detail">
                 <UnorderedList>
                   {data.condition?.map((detail, i) => {
                     return (

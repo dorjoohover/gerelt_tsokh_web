@@ -73,9 +73,25 @@ export default function InfoPage() {
         child={
           data?.map((d, i) => {
             if (type.toLowerCase() == InfoTypes.voice)
-              return <VoiceLine data={d} key={i} play={play} />;
+              return (
+                <SlideFade
+                  in={true}
+                  offsetX={"50px"}
+                  transition={{ enter: { delay: i * 0.3, duration: 0.3 } }}
+                >
+                  <VoiceLine data={d} key={i} play={play} />
+                </SlideFade>
+              );
             if (type.toLowerCase() == InfoTypes.text)
-              return <TextLine data={d} key={i} />;
+              return (
+                <SlideFade
+                  in={true}
+                  offsetX={"50px"}
+                  transition={{ enter: { delay: i * 0.3, duration: 0.3 } }}
+                >
+                  <TextLine data={d} key={i} />
+                </SlideFade>
+              );
           }) ?? <></>
         }
         filter={additionInfoTags}

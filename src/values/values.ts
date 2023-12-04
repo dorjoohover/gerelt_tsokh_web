@@ -48,12 +48,14 @@ import {
 import {
   FaFacebookF,
   FaFacebookSquare,
+  FaLinkedin,
+  FaLinkedinIn,
   FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
 
-// export const api = "http://139.162.40.225:5000/api/";
-export const api = "http://localhost:5000/api/";
+export const api = "http://139.162.40.225:5000/api/";
+// export const api = "http://localhost:5000/api/";
 export const url = "http://139.162.40.225";
 
 export const additionInfoValues = [
@@ -299,6 +301,7 @@ export const contactValues = [
     type: FormTypes.input,
     limit: 50,
     label: "Овог",
+    code: "firstname",
     flex: true,
   },
   {
@@ -306,18 +309,22 @@ export const contactValues = [
     limit: 50,
     label: "Нэр",
     flex: true,
+    code: "lastname",
   },
   {
     type: FormTypes.input,
     limit: 100,
     label: "И-мэйл *",
+    code: "email",
   },
   {
     type: FormTypes.input,
     limit: 100,
     label: "Гарчиг",
+    code: "title",
   },
   {
+    code: "text",
     type: FormTypes.textarea,
     limit: 500,
     label: "Зурвасаа бичнэ үү...",
@@ -334,11 +341,12 @@ export const socials = [
     uri: "www.twitter.com",
   },
   {
-    icon: FaYoutube,
+    icon: FaLinkedinIn,
     uri: "www.youtube.com",
   },
 ];
 
-
+export const advice =
+  "https://video.xx.fbcdn.net/v/t42.1790-2/275224204_340526124679485_2830403800762477984_n.mp4?_nc_cat=104&ccb=1-7&_nc_sid=55d0d3&efg=eyJ2ZW5jb2RlX3RhZyI6InN2ZV9zZCJ9&_nc_ohc=l7djPdU8Yl0AX97AEcm&_nc_rml=0&_nc_ht=scontent.fuln1-2.fna&oh=00_AfDcgiAtOriWULiON06U2W1Sd_CfyK3zhssRu0O5F06ueA&oe=656613AB";
 
 // about

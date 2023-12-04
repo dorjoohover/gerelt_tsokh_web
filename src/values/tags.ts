@@ -29,10 +29,10 @@ export const additionInfoTags: FilterType[] = [
     name: "Дуут мэдээллүүд",
     value: InfoTypes.voice,
   },
-  {
-    name: "Дүрст мэдээллүүд",
-    value: InfoTypes.video,
-  },
+  // {
+  //   name: "Дүрст мэдээллүүд",
+  //   value: InfoTypes.video,
+  // },
 ];
 export const articleTags: FilterType[] = [
   {
