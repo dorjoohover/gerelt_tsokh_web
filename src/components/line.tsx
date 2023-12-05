@@ -188,8 +188,11 @@ export const Line: FC<Types> = ({
           })}
         </Select>
         {child}
+        {length}
+        {limit}
+
         <HStack justifyContent={"center"} w={"full"} gap={0}>
-          {Math.ceil(length / limit) > 1 &&
+          {Math.ceil(length / (limit == 0 ? 1 : limit)) > 1 &&
             Array.from(Array(Math.ceil(length / limit)).keys()).map((i) => {
               return (
                 <Text
