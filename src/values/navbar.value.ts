@@ -117,11 +117,11 @@ export const tokhiruulgaNavValues: NavItemsTypes[] = [
       },
       {
         name: performance,
-        value: "/tokhiruulga?name=performance",
+        value: "/tokhiruulga?name=performance&type=ab",
       },
       {
         name: hotTopics,
-        value: "/tokhiruulga?name=topic",
+        value: "/tokhiruulga?name=topic&type=ab",
       },
       {
         name: legalInfo,

@@ -147,10 +147,9 @@ const TokhiruulgaPage = () => {
           setData(performanceRes.data.data);
 
           setDataCount(performanceRes.data.count);
-          console.log(performanceRes);
+
           break;
         case TokhiruulgaTypes.legal:
-          console.log(params.get("type"));
           let legalRes = await fetch(
             `${api}legal/type/${params.get("type")?.toUpperCase()}`,
             {
@@ -170,9 +169,9 @@ const TokhiruulgaPage = () => {
               page: page,
             })
             .then((d) => {
-              setLimit(d.data.length == 0 ? 10 : d.data.length);
-              setData(d.data);
-              setDataCount(d.data.length ?? 0);
+              setLimit(10);
+              setData(d.data.data);
+              setDataCount(d.data.count);
             });
 
           break;

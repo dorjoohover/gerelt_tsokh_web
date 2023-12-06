@@ -9,50 +9,23 @@ import {
   imgInfo1,
   imgMONESLogo,
   imgTAFLogo,
-  svgFb,
   svgText,
-  svgTwitter,
   svgVideo,
   svgVoice,
-  svgYt,
 } from "../global/assets";
-import {
-  ArticleTypes,
-  FormTypes,
-  InfoTypes,
-  PerformanceTypes,
-  TokhiruulgaTypes,
-  WorkTypes,
-} from "../global/enum";
-import { FilterType } from "../global/functions";
+import { FormTypes, InfoTypes } from "../global/enum";
+
 import {
   accessibleEmployment,
-  additionLearningAdvice,
   consistent,
-  contact,
-  copyrightNotice,
-  feedback,
-  gratitude,
-  hotTopics,
   inclusiveEducation,
   innovativeIdea,
-  legalInfo,
-  overview,
-  performance,
   professionalCooperation,
-  supplier,
   textInfo,
   videoInfo,
   voiceInfo,
 } from "../global/string";
-import {
-  FaFacebookF,
-  FaFacebookSquare,
-  FaLinkedin,
-  FaLinkedinIn,
-  FaTwitter,
-  FaYoutube,
-} from "react-icons/fa";
+import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 
 export const api = "http://139.162.40.225:5000/api/";
 // export const api = "http://localhost:5000/api/";

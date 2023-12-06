@@ -34,8 +34,8 @@ const TopicPage = () => {
           page: page,
         })
         .then((d) => {
-          setCount(d.data.length);
-          setData(d.data);
+          setCount(d.data.count);
+          setData(d.data.data);
         });
     } catch (error) {}
   };

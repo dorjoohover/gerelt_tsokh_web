@@ -7,11 +7,12 @@ import { getCookie } from "cookies-next";
 
 import SidebarContent from "@/components/admin/Navbar";
 
-
 import AdminInfo from "@/components/admin/Info";
 import AdminWork from "@/components/admin/Work";
 import AdminArticle from "@/components/admin/Article";
-import AdminPerformance, { AdminPerformanceCustom } from "@/components/admin/Performance";
+import AdminPerformance, {
+  AdminPerformanceCustom,
+} from "@/components/admin/Performance";
 import AdminTopic from "@/components/admin/Topic";
 import AdminLegal from "@/components/admin/Legal";
 
@@ -24,7 +25,7 @@ export default function AdminPage() {
     value: "",
     type: "",
   });
- 
+
   useEffect(() => {
     if (!token) {
       router.push("/admin/login");
@@ -41,43 +42,25 @@ export default function AdminPage() {
   const View = (): ReactNode => {
     switch (route.value) {
       case "info":
-        return (
-          <AdminInfo route={{type: route.type}}/>
-        );
+        return <AdminInfo route={{ type: route.type }} />;
       case "work":
-        return (
-          <AdminWork route={{type: route.type}}/>
-        );
+        return <AdminWork route={{ type: route.type }} />;
       case "article":
-         return (
-          <AdminArticle route={{type: route.type}}/>
-        );
+        return <AdminArticle route={{ type: route.type }} />;
       case "performance":
-         if(route.type != 'custom') {
-          return (
-            <AdminPerformance route={{type: route.type}}/>
-          );
-         } else {
-          return (
-            <AdminPerformanceCustom />
-          );
-         }
+        if (route.type != "custom") {
+          return <AdminPerformance route={{ type: route.type }} />;
+        } else {
+          return <AdminPerformanceCustom />;
+        }
       case "topic":
-         return (
-          <AdminTopic route={{type: route.type}}/>
-        );
+        return <AdminTopic route={{ type: route.type }} />;
       case "feedback":
-         return (
-          <AdminWork route={{type: route.type}}/>
-        );
+        return <AdminWork route={{ type: route.type }} />;
       case "contact":
-         return (
-          <AdminWork route={{type: route.type}}/>
-        );
+        return <AdminWork route={{ type: route.type }} />;
       case "legal":
-         return (
-          <AdminLegal route={{type: route.type}}/>
-        );
+        return <AdminLegal route={{ type: route.type }} />;
     }
   };
 

@@ -6,3 +6,4 @@ export interface TopicModel {
   title: string;
   text: string;
 }
+

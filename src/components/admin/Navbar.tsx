@@ -5,6 +5,7 @@ import { adminNavbarValue } from "@/values/navbar.value";
 import {
   Box,
   BoxProps,
+  Button,
   Flex,
   FlexProps,
   Image,
@@ -15,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { NavItemType, NavItemsTypes } from "../navbar";
 import { ReactNode, useState } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
+import { deleteCookie } from "cookies-next";
 
 interface SidebarProps extends BoxProps {
   current: number;
@@ -55,6 +57,14 @@ const SidebarContent = ({ current, setCurrent, ...rest }: SidebarProps) => {
           <Box w={"full"}>{link.title} </Box>
         </NavItem>
       ))}
+      <Box mx="auto" px={4}>
+        <Button w='full'  onClick={() => {
+          deleteCookie("token")
+          router.push('/admin/login')
+        }}>
+          Гарах
+        </Button>
+      </Box>
     </Box>
   );
 };
