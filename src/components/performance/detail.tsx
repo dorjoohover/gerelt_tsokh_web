@@ -121,6 +121,12 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
             title: "Нөхцөл ба Шийдэл",
             child: (
               <VStack w={"full"} alignItems={"start"} gap={4} id="detail">
+                <Text>
+                  Энд танилцуулж буй кэйсүүд амьдралд бодитой тохиолдсон боловч
+                  хүн хүний хувьд их, бага хэмжээгээр ялгаатай нөхцөл байдал
+                  үүсдэг учир эдгээрийг зөвхөн cсанаа авах зорилгоор ашиглахыг
+                  хүсэж байна.
+                </Text>
                 <UnorderedList>
                   {data.condition?.map((detail, i) => {
                     return (

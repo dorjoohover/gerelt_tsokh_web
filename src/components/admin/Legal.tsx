@@ -32,15 +32,19 @@ export default function AdminLegal({ route }: { route: { type: string } }) {
             },
           }
         )
-        .then((d) =>
+        .then(() => {
           toast({
             title: "Нэмэгдлээ.",
 
             status: "success",
             duration: 2000,
             isClosable: true,
-          })
-        );
+          });
+          setData({
+            title: "",
+            text: "",
+          });
+        });
     } catch (error) {
       console.log(error);
     }

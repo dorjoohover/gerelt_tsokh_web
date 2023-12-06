@@ -278,7 +278,7 @@ export default function AdminPerformance({
                       </Select>
                     );
                   })}
-              <Text>{view}</Text>
+
               {current == "" &&
                 (view == 1 ? values : conditions).map((v, i) => {
                   return (
@@ -419,47 +419,56 @@ export function AdminPerformanceCustom() {
       }));
 
       let body: string[] = [];
-      data.detail.map(async (b, i) => {
-        let img = new FormData();
-        let uploaded = "";
-        if (b.img != undefined) {
-          img.set("file", b.img);
+      let uploaded = "";
 
-          await fetch(`${api}`, {
-            method: "POST",
-            headers: { Authorization: `Bearer ${token}` },
-            body: img,
-          })
-            .then((d) => d.json())
+      if (data.detail.length > 0) {
+        data.detail.map(async (b, i) => {
+          let img = new FormData();
+
+          if (b.img != undefined) {
+            img.set("file", b.img);
+
+            await fetch(`${api}`, {
+              method: "POST",
+              headers: { Authorization: `Bearer ${token}` },
+              body: img,
+            })
+              .then((d) => d.json())
+              .then((d) => {
+                uploaded = d.file;
+              });
+          }
+          let bo =
+            uploaded != ""
+              ? {
+                  title: b.title,
+                  img: uploaded,
+                  text: b.text ?? "",
+                }
+              : {
+                  title: b.title,
+                  text: b.text ?? "",
+                };
+
+          await axios
+            .post(`${api}medical/detail/create`, bo, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            })
             .then((d) => {
-              uploaded = d.file;
-            });
-        }
-        let bo =
-          uploaded != ""
-            ? {
-                title: b.title,
-                img: uploaded,
-                text: b.text,
+              if (!body.includes(d.data)) body.push(d.data);
+              if (i == data.detail.length - 1) {
+                !body.includes(d.data) ? send([...body, d.data]) : send(body);
               }
-            : {
-                title: b.title,
-                text: b.text,
-              };
-        await axios
-          .post(`${api}medical/detail/create`, bo, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          })
-          .then((d) => {
-            if (!body.includes(d.data)) body.push(d.data);
-            if (i == data.detail.length - 1) {
-              !body.includes(d.data) ? send([...body, d.data]) : send(body);
-            }
-          });
-      });
-    } catch (error) {}
+            });
+        });
+      } else {
+        send([]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   const getDetails = async () => {
     try {
@@ -471,7 +480,7 @@ export function AdminPerformanceCustom() {
   useEffect(() => {
     getDetails();
   }, []);
-  const send = async (body: string[]) => {
+  const send = async (body: (string | undefined)[]) => {
     try {
       let items = [];
       if (selectedDetails.length > 0) {
@@ -519,16 +528,19 @@ export function AdminPerformanceCustom() {
       editor={false}
       onSubmit={submit}
     >
-      <p>{data.detail.length}</p>
       {data.detail?.map((detail, i) => {
         return (
           <HStack key={i}>
             <Text>{detail.title}</Text>
             <Button
               onClick={() => {
+                let det = data.detail.filter(
+                  (det, index) => det.title != detail.title
+                );
+
                 setData((prev) => ({
                   ...prev,
-                  details: data.detail.filter((det, index) => index != i),
+                  detail: det,
                 }));
               }}
             >
@@ -558,12 +570,14 @@ export function AdminPerformanceCustom() {
       <VStack gap={4} alignItems={"start"} maxW={"500px"} mt={10}>
         <Input
           placeholder="Гарчиг"
+          value={detail.title}
           onChange={(e) =>
             setDetail((prev) => ({ ...prev, title: e.target.value }))
           }
         />
 
         <Textarea
+          value={detail.text}
           onChange={(e) =>
             setDetail((prev) => ({ ...prev, text: e.target.value }))
           }
@@ -584,7 +598,9 @@ export function AdminPerformanceCustom() {
               ...prev,
               detail: [...data.detail, detail],
             }));
-           
+            setDetail({
+              title: "",
+            });
           }}
         >
           Нэмэх
