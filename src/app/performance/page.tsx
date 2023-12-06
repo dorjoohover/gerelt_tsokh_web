@@ -13,7 +13,7 @@ import { more, performance, tokhiruulga, tokhiruulgaMn } from "@/global/string";
 import { tokhiruulgaTags } from "@/values/tags";
 import { PerformanceModel } from "@/model/performance.model";
 
-import { Button, HStack, Heading, Text, VStack } from "@chakra-ui/react";
+import { Button, HStack, Heading, Text, VStack, Box } from "@chakra-ui/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -29,8 +29,6 @@ const PerformancePage = () => {
   const [selected, setSelected] = useState<PerformanceModel | null>(null);
   const router = useRouter();
 
-
-
   const getData = async (t: PerformanceTypes) => {
     try {
       let res = await axios.post(`${api}medical/type/${t}`, {
@@ -45,8 +43,8 @@ const PerformancePage = () => {
   const getDataById = async (id: string) => {
     try {
       await fetch(`${api}medical/get/${id}`)
-      .then((d) => d.json())
-      .then((d) => setSelected(d));
+        .then((d) => d.json())
+        .then((d) => setSelected(d));
     } catch (error) {}
   };
 
@@ -107,12 +105,13 @@ const PerformancePage = () => {
                       {d.title}
                     </Heading>
 
-                    <Text
+                    <Box
                       mb={{ md: 0, base: 4 }}
                       noOfLines={{ md: 3, base: 4 }}
-                    >
-                      {d.text}
-                    </Text>
+                      dangerouslySetInnerHTML={{
+                        __html: d?.text?.replaceAll('"', "") ?? "",
+                      }}
+                    ></Box>
                     <Button
                       onClick={() => {
                         getDataById(d._id);
