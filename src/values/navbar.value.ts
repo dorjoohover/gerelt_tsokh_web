@@ -95,7 +95,6 @@ export const gereltNavValues: NavItemsTypes[] = [
         name: "Мэдээ",
         value: "/article?name=info",
       },
-
     ],
   },
 ];
@@ -126,7 +125,7 @@ export const tokhiruulgaNavValues: NavItemsTypes[] = [
       },
       {
         name: legalInfo,
-        value: "/tokhiruulga?name=legal",
+        value: `/tokhiruulga?name=legal&type=law`,
       },
       {
         name: additionLearningAdvice,
@@ -268,7 +267,7 @@ export const adminNavbarValue = [
             value: `/admin?route=performance&name=${PerformanceTypes.ey}`,
           },
           {
-            name: 'Custom',
+            name: "Custom",
             value: `/admin?route=performance&name=custom`,
           },
         ],
