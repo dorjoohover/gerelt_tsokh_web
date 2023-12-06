@@ -150,6 +150,7 @@ const TokhiruulgaPage = () => {
           console.log(performanceRes);
           break;
         case TokhiruulgaTypes.legal:
+          console.log(params.get("type"));
           let legalRes = await fetch(
             `${api}legal/type/${params.get("type")?.toUpperCase()}`,
             {
@@ -180,14 +181,7 @@ const TokhiruulgaPage = () => {
   };
   const router = useRouter();
   const toast = useToast();
-  useEffect(() => {
-    if (params.get("name")) {
-      let name: any = params.get("name") as keyof typeof TokhiruulgaTypes;
-      setType(name ?? TokhiruulgaTypes.gratitude);
-      setValue(filterName(name, tokhiruulgaTags));
-    }
-    getData();
-  }, []);
+
   useEffect(() => {
     getData();
     setValue(filterName(type, tokhiruulgaTags));
@@ -201,6 +195,7 @@ const TokhiruulgaPage = () => {
       setType(name ?? TokhiruulgaTypes.gratitude);
       setValue(filterName(name, tokhiruulgaTags));
     }
+    getData();
   }, [params]);
   const feedbackSend = async () => {
     try {

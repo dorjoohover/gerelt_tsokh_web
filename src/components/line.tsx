@@ -68,8 +68,13 @@ export const Line: FC<Types> = ({
                 bg={"transparent"}
                 textTransform={"none"}
                 onClick={(e) => {
-                  router.push(`${pathname}?name=${tags.value}`);
-
+                  if (tags.sub != undefined && tags.sub.length > 0) {
+                    router.push(
+                      `${pathname}?name=${tags.value}&type=${tags.sub[0].value}`
+                    );
+                  } else {
+                    router.push(`${pathname}?name=${tags.value}`);
+                  }
                   changeType(tags.value, tags.sub != undefined);
                   if (tags.sub != undefined) {
                     if (current == i) {
@@ -123,7 +128,11 @@ export const Line: FC<Types> = ({
                         textTransform={"none"}
                         onClick={() => {
                           changeSub(index);
-                          router.push(`${pathname}?name=${params.get('name')}&type=${e.value}`)
+                          router.push(
+                            `${pathname}?name=${params.get("name")}&type=${
+                              e.value
+                            }`
+                          );
                         }}
                         _hover={{
                           bg: "none",
@@ -173,15 +182,26 @@ export const Line: FC<Types> = ({
           textTransform={"uppercase"}
           onChange={(e) => {
             e.stopPropagation();
-            setSelect(e.target.value);
-
-            router.push(`${pathname}?name=${e.target.value}`);
-            changeType(e.target.value);
+            let number = Number(e.target.value) ?? 0;
+            setSelect(filter[number].value);
+            if (
+              filter[number].sub != undefined &&
+              filter[number].sub!.length > 0
+            ) {
+              router.push(
+                `${pathname}?name=${filter[number].value}&type=${
+                  filter[number].sub![0].value
+                }`
+              );
+            } else {
+              router.push(`${pathname}?name=${filter[number].value}`);
+            }
+            changeType(filter[number].value);
           }}
         >
           {filter.map((tags, i) => {
             return (
-              <option value={tags.value} key={i}>
+              <option value={i} key={i}>
                 {tags.name}
               </option>
             );

@@ -35,10 +35,11 @@ const LegalPage = () => {
   const [selected, setSelected] = useState<LegalModel | null>(null);
   const getData = async (t: LegalTypes) => {
     try {
-      let res = await axios.post(`${api}legal/type/${t}`, {
+      let res = await axios.post(`${api}legal/type/${t?.toUpperCase()}`, {
         limit: 10,
         skip: page,
       });
+
       setCount(res.data.length);
       setData(res.data);
     } catch (error) {}
@@ -93,8 +94,9 @@ const LegalPage = () => {
             <VStack w={"full"} alignItems={"start"} gap={4}>
               {data?.map((d, i) => {
                 return (
-                  <VStack w={"full"} alignItems={"start"} key={i}>
+                  <VStack w={"full"} alignItems={"start"} key={i} gap={4}>
                     <Button
+                      height={"auto"}
                       onClick={() => {
                         getDataById(d._id);
                         router.push(`/legal?id=${d._id}`);
