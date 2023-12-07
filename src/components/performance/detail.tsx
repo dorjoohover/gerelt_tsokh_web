@@ -28,6 +28,7 @@ import { api } from "@/values/values";
 import Link from "next/link";
 import { getCookie } from "cookies-next";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 type AccordianWidgetType = {
   fun: PerformanceFunction;
   length: number;
@@ -70,7 +71,7 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
   const [img, setImg] = useState("");
   const toast = useToast();
   const token = getCookie("token");
-
+  const router = useRouter();
   const deletePerformance = async () => {
     try {
       await axios
@@ -83,6 +84,7 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
           toast({
             title: "Устгалаа.",
           });
+          router.refresh();
         });
     } catch (error) {}
   };
