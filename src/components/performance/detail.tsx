@@ -125,12 +125,14 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
                 : "",
             child: (
               <VStack w={"full"} alignItems={"start"} gap={4} id="detail">
-                <Box
-                  mb={{ md: 0, base: 4 }}
-                  dangerouslySetInnerHTML={{
-                    __html: data?.setup?.[0].replaceAll('"', "") ?? "",
-                  }}
-                ></Box>
+                {data.setup != undefined && data.setup.length > 0 && (
+                  <Box
+                    mb={{ md: 0, base: 4 }}
+                    dangerouslySetInnerHTML={{
+                      __html: data?.setup?.[0].replaceAll('"', "") ?? "",
+                    }}
+                  ></Box>
+                )}
               </VStack>
             ),
           },
