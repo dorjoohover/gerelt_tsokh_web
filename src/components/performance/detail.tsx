@@ -73,7 +73,7 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
   const deletePerformance = async () => {
     try {
       await axios
-        .delete(`${api}legal/${data._id}`, {
+        .delete(`${api}medical/${data._id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

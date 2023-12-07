@@ -135,7 +135,13 @@ export default function AdminPerformance({
     try {
       await fetch(`${api}medical/details`)
         .then((d) => d.json())
-        .then((d) => setGetValues(d));
+        .then((d) => {
+          setGetValues(
+            d.sort((a, b) =>
+              a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1
+            )
+          );
+        });
     } catch (error) {}
   };
   useEffect(() => {
@@ -622,9 +628,11 @@ export function AdminPerformanceCustom() {
             }}
           >
             <option value="">Сонгох</option>
-            {details.map((e) => {
-              return <option value={e?._id}>{e?.title}</option>;
-            })}
+            {details
+              .sort((a, b) => (a.title > b.title ? 1 : -1))
+              .map((e) => {
+                return <option value={e?._id}>{e?.title}</option>;
+              })}
           </Select>
         )}
         <Button
