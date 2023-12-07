@@ -109,7 +109,6 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
       <VStack w={"full"} alignItems={"start"}>
         <Box
           mb={{ md: 0, base: 4 }}
-          noOfLines={{ md: 3, base: 4 }}
           dangerouslySetInnerHTML={{
             __html: data?.text?.replaceAll('"', "") ?? "",
           }}
