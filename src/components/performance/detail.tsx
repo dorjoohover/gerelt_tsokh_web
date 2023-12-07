@@ -70,6 +70,7 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
   const [img, setImg] = useState("");
   const toast = useToast();
   const token = getCookie("token");
+  
   const deletePerformance = async () => {
     try {
       await axios
@@ -117,9 +118,23 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
 
       <CustomAccordian
         data={[
+          {
+            title: "Гол тохирлууд",
+            child: (
+              <VStack w={"full"} alignItems={"start"} gap={4} id="detail">
+                <Box
+                  mb={{ md: 0, base: 4 }}
+                  dangerouslySetInnerHTML={{
+                    __html: data?.setup?.[0].replaceAll('"', "") ?? "",
+                  }}
+                ></Box>
+              </VStack>
+            ),
+          },
           ...data.details.map((e) => {
             return {
               title: MedicalTitle(e.type!),
+
               child: (
                 <VStack w={"full"} alignItems={"start"} gap={8}>
                   {e.details?.map((detail, i) => {
@@ -139,7 +154,10 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
             };
           }),
           {
-            title: "Нөхцөл ба Шийдэл",
+            title:
+              data.condition != undefined && data.condition?.length > 0
+                ? "Нөхцөл ба Шийдэл"
+                : "",
             child: (
               <VStack w={"full"} alignItems={"start"} gap={4} id="detail">
                 <Text>

@@ -41,6 +41,8 @@ export function MedicalTitle(value: MedicalTypes) {
       return "Ажил үүргийн функцээр";
     case MedicalTypes.KEYS:
       return "Түлхүү хэрэглэгддэг тохируулгууд";
+    default:
+      return "Боломжит тохируулгууд"
   }
 }
 

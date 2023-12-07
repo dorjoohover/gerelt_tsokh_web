@@ -100,6 +100,7 @@ export default function AdminPerformance({
   const [getValues, setGetValues] = useState<(CustomType | undefined)[]>([]);
   const token = getCookie("token");
   const toast = useToast();
+  const [setup, setSetup] = useState<string | undefined>();
   const submit = async () => {
     try {
       await axios
@@ -108,7 +109,7 @@ export default function AdminPerformance({
           {
             title: data.title,
             text: data.text,
-
+            setup: [setup],
             details: details,
             condition: conditions,
           },
@@ -154,10 +155,9 @@ export default function AdminPerformance({
   }, []);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const add = () => {
-    console.log(value);
     if (view == 1) {
       if (detail.type == MedicalTypes.SETUP) {
-        setDetail((prev) => ({ ...prev, details: [value] }));
+        setSetup(value);
       } else {
         setDetail((prev) => ({ ...prev, details: values }));
       }
@@ -177,7 +177,7 @@ export default function AdminPerformance({
         details: [],
       });
     }
-    console.log(details);
+
     onClose();
   };
   return (
