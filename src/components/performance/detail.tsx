@@ -70,7 +70,7 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
   const [img, setImg] = useState("");
   const toast = useToast();
   const token = getCookie("token");
-  
+
   const deletePerformance = async () => {
     try {
       await axios
@@ -119,7 +119,10 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
       <CustomAccordian
         data={[
           {
-            title: "Гол тохирлууд",
+            title:
+              data.setup != undefined && data.setup.length > 0
+                ? "Гол тохирлууд"
+                : "",
             child: (
               <VStack w={"full"} alignItems={"start"} gap={4} id="detail">
                 <Box
