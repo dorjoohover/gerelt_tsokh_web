@@ -28,6 +28,7 @@ import { api } from "@/values/values";
 import { getCookie } from "cookies-next";
 import axios from "axios";
 import { headers } from "next/headers";
+import CustomEditor from "../custom-editor";
 
 export const medicalType: FilterType[] = [
   {
@@ -61,6 +62,10 @@ export const medicalType: FilterType[] = [
   {
     name: "Түлхүү хэрэглэгддэг тохируулгууд",
     value: MedicalTypes.KEYS,
+  },
+  {
+    name: "Бусад боломжит тохирлууд",
+    value: MedicalTypes.OTHER,
   },
 ];
 
@@ -137,7 +142,7 @@ export default function AdminPerformance({
         .then((d) => d.json())
         .then((d) => {
           setGetValues(
-            d.sort((a, b) =>
+            d.sort((a: any, b: any) =>
               a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1
             )
           );
@@ -149,15 +154,20 @@ export default function AdminPerformance({
   }, []);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const add = () => {
+    console.log(value);
     if (view == 1) {
-      setDetail((prev) => ({ ...prev, details: values }));
+      if (detail.type == MedicalTypes.SETUP) {
+        setDetail((prev) => ({ ...prev, details: [value] }));
+      } else {
+        setDetail((prev) => ({ ...prev, details: values }));
+      }
 
       if (details.find((d) => d.type == detail.type) == undefined) {
         setDetails((prev) => [
           ...prev,
           {
             type: detail.type,
-            details: values,
+            details: detail.type == MedicalTypes.SETUP ? [value] : values,
           },
         ]);
       }
@@ -167,6 +177,7 @@ export default function AdminPerformance({
         details: [],
       });
     }
+    console.log(details);
     onClose();
   };
   return (
@@ -333,45 +344,57 @@ export default function AdminPerformance({
                 })}
               <HStack>
                 {view == 1 ? (
-                  <Select
-                    onChange={(e) => {
-                      setValue(e.target.value);
-                    }}
-                  >
-                    <option value="">Сонгох</option>
-                    {getValues.map((v, i) => {
-                      return (
-                        <option value={v?._id} key={i}>
-                          {" "}
-                          {`${v?.title}(${v?.detail.length})`}{" "}
-                        </option>
-                      );
-                    })}
-                  </Select>
+                  detail.type == MedicalTypes.SETUP ? (
+                    <CustomEditor
+                      initialData={""}
+                      onChange={(e) => setValue(e)}
+                    />
+                  ) : (
+                    <Select
+                      onChange={(e) => {
+                        setValue(e.target.value);
+                      }}
+                    >
+                      <option value="">Сонгох</option>
+                      {getValues.map((v, i) => {
+                        return (
+                          <option value={v?._id} key={i}>
+                            {" "}
+                            {`${v?.title}(${v?.detail.length})`}{" "}
+                          </option>
+                        );
+                      })}
+                    </Select>
+                  )
                 ) : (
                   <Input
                     value={condition}
                     onChange={(e) => setCondition(e.target.value)}
                   />
                 )}
-                <Button
-                  onClick={() => {
-                    if (view == 1) {
-                      if (!values.includes(value) && value != "") {
-                        setValues((prev) => [...prev, value]);
+                {detail.type != MedicalTypes.SETUP && (
+                  <Button
+                    onClick={() => {
+                      if (view == 1) {
+                        if (!values.includes(value) && value != "") {
+                          setValues((prev) => [...prev, value]);
 
-                        setValue(undefined);
+                          setValue(undefined);
+                        }
+                      } else {
+                        if (
+                          !conditions.includes(condition) &&
+                          condition != ""
+                        ) {
+                          setConditions((prev) => [...prev, condition]);
+                          setCondition("");
+                        }
                       }
-                    } else {
-                      if (!conditions.includes(condition) && condition != "") {
-                        setConditions((prev) => [...prev, condition]);
-                        setCondition("");
-                      }
-                    }
-                  }}
-                >
-                  Add
-                </Button>
+                    }}
+                  >
+                    Add
+                  </Button>
+                )}
               </HStack>
 
               <Button
@@ -399,6 +422,7 @@ export type CustomType = {
   title: string;
   detail: CustomDetailType[];
 };
+
 export function AdminPerformanceCustom() {
   const [data, setData] = useState<CustomType>({
     title: "",
@@ -629,7 +653,7 @@ export function AdminPerformanceCustom() {
           >
             <option value="">Сонгох</option>
             {details
-              .sort((a, b) => (a.title > b.title ? 1 : -1))
+              .sort((a: any, b: any) => (a.title > b.title ? 1 : -1))
               .map((e) => {
                 return <option value={e?._id}>{e?.title}</option>;
               })}

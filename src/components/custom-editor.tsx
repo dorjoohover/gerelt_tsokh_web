@@ -19,7 +19,6 @@ const editorConfiguration = {
     "|",
     "blockQuote",
 
-
     "undo",
     "redo",
   ],
