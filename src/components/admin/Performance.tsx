@@ -160,16 +160,16 @@ export default function AdminPerformance({
         setSetup(value);
       } else {
         setDetail((prev) => ({ ...prev, details: values }));
-      }
 
-      if (details.find((d) => d.type == detail.type) == undefined) {
-        setDetails((prev) => [
-          ...prev,
-          {
-            type: detail.type,
-            details: detail.type == MedicalTypes.SETUP ? [value] : values,
-          },
-        ]);
+        if (details.find((d) => d.type == detail.type) == undefined) {
+          setDetails((prev) => [
+            ...prev,
+            {
+              type: detail.type,
+              details: detail.type == MedicalTypes.SETUP ? [value] : values,
+            },
+          ]);
+        }
       }
       setValues([]);
       setDetail({
