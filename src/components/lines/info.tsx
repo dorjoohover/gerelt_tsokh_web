@@ -1,4 +1,6 @@
+"use client";
 import { Info } from "@/model/info.model";
+import { api } from "@/values/values";
 import {
   Box,
   Button,
@@ -8,7 +10,10 @@ import {
   Image,
   Text,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
+import axios from "axios";
+import { getCookie } from "cookies-next";
 import Link from "next/link";
 import { FC } from "react";
 import { FaPlay } from "react-icons/fa";
@@ -16,7 +21,23 @@ type InfoType = {
   data: Info;
 };
 export const TextLine: FC<InfoType> = ({ data }) => {
-  console.log(data);
+  const toast = useToast();
+  const token = getCookie("token");
+  const deleteInfo = async () => {
+    try {
+      await axios
+        .delete(`${api}info/${data._id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((d) => {
+          toast({
+            title: "Устгалаа.",
+          });
+        });
+    } catch (error) {}
+  };
   return (
     <VStack w={"full"} alignItems={"start"}>
       <Heading
@@ -51,6 +72,9 @@ export const TextLine: FC<InfoType> = ({ data }) => {
         variant={"normal"}
         display={{ base: "inline-block", md: "none" }}
       >{`${data.date} | ${data.duration} мин`}</Text> */}
+      {token && token != "" && data._id != "" && (
+        <Button onClick={deleteInfo}>Устгах</Button>
+      )}
     </VStack>
   );
 };
@@ -61,6 +85,23 @@ export const VoiceLine = ({
   data: Info;
   play: (title: string, value: string) => void;
 }) => {
+  const toast = useToast();
+  const token = getCookie("token");
+  const deleteInfo = async () => {
+    try {
+      await axios
+        .delete(`${api}info/${data._id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((d) => {
+          toast({
+            title: "Устгалаа.",
+          });
+        });
+    } catch (error) {}
+  };
   return (
     <HStack alignItems={"start"} w={"full"}>
       <Button
@@ -113,6 +154,9 @@ export const VoiceLine = ({
           variant={"normal"}
           display={{ base: "inline-block", md: "none" }}
         >{`${data.date} | ${data.duration} мин`}</Text> */}
+        {token && token != "" && data._id != "" && (
+          <Button onClick={deleteInfo}>Устгах</Button>
+        )}
       </VStack>
     </HStack>
   );

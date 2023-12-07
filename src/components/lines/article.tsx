@@ -1,19 +1,22 @@
+"use client";
 import { detail, more } from "@/global/string";
-import { Info } from "@/model/info.model";
+
 import { api } from "@/values/values";
 import {
   Box,
   Button,
   HStack,
   Heading,
-  Icon,
   Image,
   Text,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
+import axios from "axios";
+import { getCookie } from "cookies-next";
 import Link from "next/link";
 import { FC } from "react";
-import { FaPlay } from "react-icons/fa";
+
 type LineWidgetType = {
   img: string;
   title: string;
@@ -28,6 +31,7 @@ type LineWidgetDetailType = {
   text: string;
   id?: string;
   semiTitle?: string;
+  type?: string;
 };
 export const LineWidget: FC<LineWidgetType> = ({
   img,
@@ -97,7 +101,25 @@ export const LineWidgetDetail: FC<LineWidgetDetailType> = ({
   id,
   text,
   semiTitle,
+  type,
 }) => {
+  const toast = useToast();
+  const token = getCookie("token");
+  const deleteItem = async () => {
+    try {
+      await axios
+        .delete(`${api}${type}/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((d) => {
+          toast({
+            title: "Устгалаа.",
+          });
+        });
+    } catch (error) {}
+  };
   return (
     <VStack alignItems={"start"} w={"full"} gap={5}>
       <Heading variant={"title"}>{title}</Heading>
@@ -122,6 +144,7 @@ export const LineWidgetDetail: FC<LineWidgetDetailType> = ({
           }}
         ></Box>
       </VStack>
+      {token && id != "" && <Button onClick={deleteItem}>Устгах</Button>}
     </VStack>
   );
 };

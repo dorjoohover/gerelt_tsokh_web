@@ -87,6 +87,7 @@ const WorkPage = () => {
         child={
           selected != null ? (
             <LineWidgetDetail
+              type={"work"}
               text={selected.text}
               title={selected.title}
               img={selected.img}

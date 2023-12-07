@@ -4,7 +4,6 @@ import { Line } from "@/components/line";
 
 import { LineWidget, LineWidgetDetail } from "@/components/lines/article";
 import { LinkTitle } from "@/components/link";
-import { articleData } from "@/data/article.data";
 import { ArticleTypes } from "@/global/enum";
 import { filterName } from "@/global/functions";
 import { article } from "@/global/string";
@@ -30,8 +29,8 @@ const ArticlePage = () => {
         limit: 10,
         page: page,
       });
-      setCount(res.data.length);
-      setData(res.data);
+      setCount(res.data.count);
+      setData(res.data.data);
     } catch (error) {}
   };
   const getDataById = async (id: string) => {
@@ -43,42 +42,26 @@ const ArticlePage = () => {
   };
 
   useEffect(() => {
-    if (params.get("id")) {
-      getDataById(params.get("id")!);
-    } else {
-      getData(params.get("name") as ArticleTypes);
-    }
-  }, []);
-  useEffect(() => {
     getData(type);
   }, [page]);
 
-  useEffect(() => {
-    if (params.get("name") != "") {
-      let name: any = params.get("name") as keyof typeof ArticleTypes;
-      setType(name ?? ArticleTypes.article);
-      setValue(filterName(name, articleTags));
-    }
-  }, []);
   useEffect(() => {
     getData(type);
     setValue(filterName(type, articleTags));
   }, [type, page]);
   useEffect(() => {
     if (params.get("id")) {
-      let filtered = articleData.filter((d) => d._id == params.get("id"));
-      if (filtered.length > 0) {
-        setSelected(filtered[0]);
-      } else {
-        setSelected(null);
-      }
+      getDataById(params.get("id")!);
+    } else {
+      getData(params.get("name") as ArticleTypes);
     }
+
     if (params.get("name")) {
       let name: any = params.get("name") as keyof typeof ArticleTypes;
       setType(name ?? ArticleTypes.article);
       setValue(filterName(name, articleTags));
     }
-  }, [params.get("id"), params.get("name")]);
+  }, [params]);
 
   return (
     <VStackContainer>
@@ -98,6 +81,7 @@ const ArticlePage = () => {
               title={selected.title}
               img={selected.img}
               id={selected._id}
+              type="article"
             />
           ) : (
             data?.map((d, i) => {

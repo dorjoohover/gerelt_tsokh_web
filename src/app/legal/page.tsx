@@ -2,28 +2,21 @@
 import { VStackContainer } from "@/components/container";
 import { Line } from "@/components/line";
 
-import { LineWidget, LineWidgetDetail } from "@/components/lines/article";
 import { LinkTitle } from "@/components/link";
 
 import { filterName } from "@/global/functions";
-import {
-  legalInfo,
-  more,
-  performance,
-  tokhiruulga,
-  tokhiruulgaMn,
-} from "@/global/string";
+import { legalInfo, tokhiruulga } from "@/global/string";
 import { tokhiruulgaTags } from "@/values/tags";
 
 import { Button, HStack, Text, VStack } from "@chakra-ui/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { legalData } from "@/data/legal.data";
 import { LegalTypes } from "@/global/enum";
 import { LegalModel } from "@/model/legal.model";
 import LegalDetailWidget from "@/components/legal/detail";
 import { api } from "@/values/values";
 import axios from "axios";
+import { getCookie } from "cookies-next";
 
 const LegalPage = () => {
   const params = useSearchParams();
@@ -32,6 +25,7 @@ const LegalPage = () => {
   const [data, setData] = useState<LegalModel[]>([]);
   const [value, setValue] = useState("");
   const [dataCount, setCount] = useState<number>(0);
+  const token = getCookie("token");
   const [selected, setSelected] = useState<LegalModel | null>(null);
   const getData = async (t: LegalTypes) => {
     try {
@@ -44,6 +38,7 @@ const LegalPage = () => {
       setData(res.data);
     } catch (error) {}
   };
+
   const getDataById = async (id: string) => {
     try {
       await fetch(`${api}legal/${id}`)
@@ -52,11 +47,6 @@ const LegalPage = () => {
     } catch (error) {}
   };
 
-  useEffect(() => {
-    if (params.get("id")) {
-      getDataById(params.get("id")!);
-    }
-  }, []);
   useEffect(() => {
     getData(type);
   }, [page]);
@@ -73,6 +63,7 @@ const LegalPage = () => {
       setSelected(null);
     }
   }, [params]);
+
   const router = useRouter();
   return (
     <VStackContainer>

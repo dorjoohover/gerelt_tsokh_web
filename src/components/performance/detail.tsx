@@ -5,6 +5,7 @@ import {
 } from "@/model/performance.model";
 import {
   Box,
+  Button,
   Heading,
   Image,
   ListItem,
@@ -17,6 +18,7 @@ import {
   UnorderedList,
   VStack,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import CustomAccordian from "../accordian";
 
@@ -24,6 +26,8 @@ import { FC, useState } from "react";
 import { MedicalTitle } from "@/global/functions";
 import { api } from "@/values/values";
 import Link from "next/link";
+import { getCookie } from "cookies-next";
+import axios from "axios";
 type AccordianWidgetType = {
   fun: PerformanceFunction;
   length: number;
@@ -64,6 +68,23 @@ const AccordianWidget: FC<AccordianWidgetType> = ({ fun, length, onClick }) => {
 const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [img, setImg] = useState("");
+  const toast = useToast();
+  const token = getCookie("token");
+  const deletePerformance = async () => {
+    try {
+      await axios
+        .delete(`${api}legal/${data._id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((d) => {
+          toast({
+            title: "Устгалаа.",
+          });
+        });
+    } catch (error) {}
+  };
   const viewImg = (value: string) => {
     {
       setImg(value);
@@ -143,6 +164,9 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
           },
         ]}
       />
+      {token && data._id != "" && (
+        <Button onClick={deletePerformance}>Устгах</Button>
+      )}
 
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
