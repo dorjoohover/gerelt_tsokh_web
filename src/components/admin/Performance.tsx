@@ -55,13 +55,7 @@ export default function AdminPerformance() {
   const [setup, setSetup] = useState<string | undefined>();
   const submit = async () => {
     try {
-      console.log({
-        title: data.title,
-        text: data.text,
-        setup: [setup],
-        details: details,
-        condition: conditions,
-      });
+ 
       await axios
         .post(
           `${api}medical/create`,
