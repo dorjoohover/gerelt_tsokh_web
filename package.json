@@ -25,7 +25,6 @@
     "react-slick": "^0.29.0"
   },
   "devDependencies": {
-    "@types/ckeditor__ckeditor5-build-classic": "^37.0.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
