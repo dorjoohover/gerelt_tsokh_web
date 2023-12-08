@@ -7,8 +7,8 @@ import { getCookie } from "cookies-next";
 
 import SidebarContent from "@/components/admin/Navbar";
 
-import AdminInfo from "@/components/admin/Info";
-import AdminWork from "@/components/admin/Work";
+// import AdminInfo from "@/components/admin/Info";
+// import AdminWork from "@/components/admin/Work";
 // import AdminArticle from "@/components/admin/Article";
 // import AdminPerformance from "@/components/admin/Performance";
 // import AdminTopic from "@/components/admin/Topic";
@@ -38,10 +38,10 @@ export default function AdminPage() {
     }));
   }, [params]);
 
-  const View = (): ReactNode => {
-    switch (route.value) {
-      case "info":
-        return <AdminInfo  />;
+  // const View = (): ReactNode => {
+    // switch (route.value) {
+    //   case "info":
+    //     return <AdminInfo  />;
       // case "work":
       //   return <AdminWork route={{ type: route.type }} />;
   //     case "article":
@@ -60,8 +60,8 @@ export default function AdminPage() {
   //       return <AdminWork route={{ type: route.type }} />;
   //     case "legal":
   //       return <AdminLegal route={{ type: route.type }} />;
-    }
-  };
+    // }
+  // };
 
   return (
     <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
@@ -72,7 +72,7 @@ export default function AdminPage() {
       />
 
       <Box ml={{ base: 0, md: 60 }} p="4">
-        {View()}
+        {/* {View()} */}
       </Box>
     </Box>
   );
