@@ -54,7 +54,7 @@ export default function AdminWork({ route }: { route: { type: string } }) {
     }
     const type = route.type.toUpperCase();
     if (data.img == undefined) {
-      warning(Messages.requiredImg);
+      warning(Messages.requiredFile);
       return;
     }
     submit(type);

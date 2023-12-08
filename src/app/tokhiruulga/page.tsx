@@ -1,12 +1,12 @@
 "use client";
-import CustomCheckBox from "@/components/checkbox";
+
 import { VStackContainer } from "@/components/container";
 import { Line } from "@/components/line";
 import { LineWidget, LineWidgetDetail } from "@/components/lines/article";
 import { LinkTitle } from "@/components/link";
 import GratitudeWidget from "@/components/tokhiruulga/gratitude";
 import OverviewWidget from "@/components/tokhiruulga/overview";
-import { performanceData } from "@/data/performance.data";
+
 import { imgAdvice, imgFoundation } from "@/global/assets";
 import { FormTypes, TokhiruulgaTypes } from "@/global/enum";
 import { filterName } from "@/global/functions";

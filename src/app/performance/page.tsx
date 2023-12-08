@@ -5,7 +5,7 @@ import { Line } from "@/components/line";
 import { LineWidget, LineWidgetDetail } from "@/components/lines/article";
 import { LinkTitle } from "@/components/link";
 import PerformanceDetailWidget from "@/components/performance/detail";
-import { performanceData } from "@/data/performance.data";
+
 import { PerformanceTypes } from "@/global/enum";
 
 import { filterName } from "@/global/functions";
