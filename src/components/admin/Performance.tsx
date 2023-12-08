@@ -55,7 +55,6 @@ export default function AdminPerformance() {
   const [setup, setSetup] = useState<string | undefined>();
   const submit = async () => {
     try {
- 
       await axios
         .post(
           `${api}medical/create`,
@@ -149,6 +148,7 @@ export default function AdminPerformance() {
       title={`Үйлдэл гүйцэтгэх чадвар алдалт > Мэдээлэл оруулах`}
       text="Үндсэн гарчиг"
       onSubmit={submit}
+      editorText={data.text}
     >
       <VStack alignItems={"start"} my={4} gap={3}>
         <Button

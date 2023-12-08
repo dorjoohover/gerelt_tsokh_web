@@ -67,7 +67,7 @@ export default function AdminForm({
       setWarning((prev) =>
         prev != undefined
           ? [...prev, Messages.requiredText]
-          : [Messages.requiredTitle]
+          : [Messages.requiredText]
       );
     }
   };
