@@ -16,7 +16,6 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "axios": "^1.6.2",
-    "ckeditor5-custom-build": "^0.0.6",
     "cookies-next": "^4.1.0",
     "framer-motion": "^10.16.5",
     "next": "14.0.2",
@@ -26,6 +25,7 @@
     "react-slick": "^0.29.0"
   },
   "devDependencies": {
+    "@types/ckeditor__ckeditor5-build-classic": "^37.0.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

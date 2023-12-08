@@ -6,16 +6,26 @@ import { Box, HStack, Input, Text, useToast } from "@chakra-ui/react";
 import { FilterType, filterName } from "@/global/functions";
 import { ArticleTypes } from "@/global/enum";
 import { tokhiruulgaTags } from "@/values/tags";
-import { api } from "@/values/values";
+import { Messages, api } from "@/values/values";
 import axios from "axios";
 import { getCookie } from "cookies-next";
-export default function AdminTopic({ route }: { route: { type: string } }) {
+import { useRouter } from "next/navigation";
+export default function AdminTopic() {
   const [data, setData] = useState({
     title: "",
     text: "",
   });
   const token = getCookie("token");
   const toast = useToast();
+  const router = useRouter();
+  const checker = () => {
+    if (token == "" || token == undefined) {
+      router.push("/admin/login");
+      return;
+    }
+
+    submit();
+  };
   const submit = async () => {
     try {
       await axios
@@ -42,19 +52,24 @@ export default function AdminTopic({ route }: { route: { type: string } }) {
         );
     } catch (error) {
       console.log(error);
+      toast({
+        title: Messages.occured,
+        status: "warning",
+        duration: 2000,
+        isClosable: true,
+      });
     }
   };
 
   return (
     <AdminForm
+      value={data.title}
+      editorText={data.text}
       onTitle={(e) => setData((prev) => ({ ...prev, title: e }))}
       onChange={(e) => setData((prev) => ({ ...prev, text: e }))}
-      title={`Халуун сэдэв > ${filterName(
-        route.type,
-        tokhiruulgaTags[4].sub!
-      )}`}
+      title={`Халуун сэдэв `}
       text="Гарчиг"
-      onSubmit={submit}
+      onSubmit={checker}
     ></AdminForm>
   );
 }

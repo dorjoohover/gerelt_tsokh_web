@@ -24,19 +24,18 @@ import { useState, FC } from "react";
 export type NavItemType = {
   name: string;
   value: string;
+  uri?: string;
 };
 
 export type NavItemsTypes = {
+  uri?: string;
   title: string;
   link: NavItemType[];
   onClick?: () => void;
 };
 const NavItem: FC<NavItemsTypes> = ({ title, link, onClick }) => {
   return (
-    <VStack
-      w={"full"}
-      alignItems={"start" }
-    >
+    <VStack w={"full"} alignItems={"start"}>
       <Heading
         w={{ base: "full", sm: "auto" }}
         variant={"smallTitle"}
@@ -173,7 +172,7 @@ const Navbar = () => {
                 display={!search ? "flex" : "none"}
                 animation={!search ? iconAnimation : iconEndAnimation}
               >
-                <Image src={svgSearch} w={22} h={22} mx={"auto"} alt="search"/>
+                <Image src={svgSearch} w={22} h={22} mx={"auto"} alt="search" />
               </Box>
             </Button>
           </HStack>
@@ -202,14 +201,14 @@ const Navbar = () => {
                 animation={!gerelt ? iconAnimation : iconEndAnimation}
                 display={!gerelt ? "flex" : "none"}
               >
-                <Image src={svgMenu} w={22} h={22} mr={4.5} alt={'menu'}/>
+                <Image src={svgMenu} w={22} h={22} mr={4.5} alt={"menu"} />
               </Box>
               <Box
                 as={motion.div}
                 animation={gerelt ? iconAnimation : iconEndAnimation}
                 display={gerelt ? "flex" : "none"}
               >
-                <Image src={svgCancel} w={22} h={22} mr={4.5} alt="cancel"/>
+                <Image src={svgCancel} w={22} h={22} mr={4.5} alt="cancel" />
               </Box>
               <Text color={gerelt ? "white" : "prime.default"}>
                 {gereltTokh}
@@ -243,14 +242,14 @@ const Navbar = () => {
                 }
                 display={!tokhiruulgaActive ? "flex" : "none"}
               >
-                <Image src={svgMenu} w={22} h={22} mr={4.5} alt="menu"/>
+                <Image src={svgMenu} w={22} h={22} mr={4.5} alt="menu" />
               </Box>
               <Box
                 as={motion.div}
                 animation={tokhiruulgaActive ? iconAnimation : iconEndAnimation}
                 display={tokhiruulgaActive ? "flex" : "none"}
               >
-                <Image src={svgCancel} w={22} h={22} mr={4.5} alt="cancel"/>
+                <Image src={svgCancel} w={22} h={22} mr={4.5} alt="cancel" />
               </Box>
               <Text color={tokhiruulgaActive ? "white" : "prime.default"}>
                 {tokhiruulga}
@@ -280,14 +279,14 @@ const Navbar = () => {
                 animation={!active ? iconAnimation : iconEndAnimation}
                 display={!active ? "flex" : "none"}
               >
-                <Image src={svgMenu} w={22} h={22} mr={4.5} alt="menu"/>
+                <Image src={svgMenu} w={22} h={22} mr={4.5} alt="menu" />
               </Box>
               <Box
                 as={motion.div}
                 animation={active ? iconAnimation : iconEndAnimation}
                 display={active ? "flex" : "none"}
               >
-                <Image src={svgCancel} w={22} h={22} mr={4.5} alt="cancel"/>
+                <Image src={svgCancel} w={22} h={22} mr={4.5} alt="cancel" />
               </Box>
               <Text color={active ? "white" : "prime.default"}>{menu}</Text>
             </HStack>
@@ -311,7 +310,6 @@ const Navbar = () => {
               gap={10}
               px={6}
               gridTemplateColumns={{
-               
                 md: "repeat(2, 1fr)",
                 base: "repeat(1, 1fr)",
               }}
@@ -338,7 +336,6 @@ const Navbar = () => {
               mt={90}
               px={6}
               gridTemplateColumns={{
-            
                 md: "repeat(2, 1fr)",
                 base: "repeat(1, 1fr)",
               }}
@@ -365,7 +362,6 @@ const Navbar = () => {
               mt={90}
               px={6}
               gridTemplateColumns={{
-      
                 md: "repeat(2, 1fr)",
                 base: "repeat(1, 1fr)",
               }}

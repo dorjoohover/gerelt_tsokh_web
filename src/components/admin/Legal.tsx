@@ -6,9 +6,10 @@ import { Box, HStack, Input, Text, useToast } from "@chakra-ui/react";
 import { FilterType, filterName } from "@/global/functions";
 import { ArticleTypes } from "@/global/enum";
 import { tokhiruulgaTags } from "@/values/tags";
-import { api } from "@/values/values";
+import { Messages, api } from "@/values/values";
 import { getCookie } from "cookies-next";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 export default function AdminLegal({ route }: { route: { type: string } }) {
   const [data, setData] = useState({
     title: "",
@@ -16,7 +17,17 @@ export default function AdminLegal({ route }: { route: { type: string } }) {
   });
   const toast = useToast();
   const token = getCookie("token");
-  const submit = async () => {
+  const router = useRouter();
+  const checker = () => {
+    if (token == "" || token == undefined) {
+      router.push("/admin/login");
+      return;
+    }
+    const type = route.type.toUpperCase();
+
+    submit(type);
+  };
+  const submit = async (type: string) => {
     try {
       await axios
         .post(
@@ -24,7 +35,7 @@ export default function AdminLegal({ route }: { route: { type: string } }) {
           {
             title: data.title,
             text: data.text,
-            types: route.type.toUpperCase(),
+            types: type,
           },
           {
             headers: {
@@ -35,7 +46,6 @@ export default function AdminLegal({ route }: { route: { type: string } }) {
         .then(() => {
           toast({
             title: "Нэмэгдлээ.",
-
             status: "success",
             duration: 2000,
             isClosable: true,
@@ -47,6 +57,12 @@ export default function AdminLegal({ route }: { route: { type: string } }) {
         });
     } catch (error) {
       console.log(error);
+      toast({
+        title: Messages.occured,
+        status: "warning",
+        duration: 2000,
+        isClosable: true,
+      });
     }
   };
 
@@ -60,7 +76,8 @@ export default function AdminLegal({ route }: { route: { type: string } }) {
         tokhiruulgaTags[5].sub!
       )}`}
       text="Гарчиг"
-      onSubmit={submit}
+      onSubmit={checker}
+      editorText={data.text}
     ></AdminForm>
   );
 }

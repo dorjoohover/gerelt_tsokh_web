@@ -6,9 +6,11 @@ import { Box, HStack, Input, Text, useToast } from "@chakra-ui/react";
 import { FilterType, filterName } from "@/global/functions";
 import { WorkTypes } from "@/global/enum";
 import { getCookie } from "cookies-next";
-import { api } from "@/values/values";
+import { Messages, api } from "@/values/values";
 import axios from "axios";
 import { CustomDetailType } from "./Performance";
+import { useRouter } from "next/navigation";
+import { uploader } from "./Info";
 const workType: FilterType[] = [
   {
     value: WorkTypes.research,
@@ -31,35 +33,48 @@ export default function AdminWork({ route }: { route: { type: string } }) {
   const [data, setData] = useState<CustomDetailType>({
     title: "",
     text: "",
-
     img: undefined,
   });
   const token = getCookie("token");
   const toast = useToast();
-  const submit = async () => {
+  const router = useRouter();
+  const warning = (value: string) => {
+    toast({
+      title: value,
+      status: "warning",
+      duration: 2000,
+      isClosable: true,
+    });
+    return;
+  };
+  const checker = () => {
+    if (token == "" || token == undefined) {
+      router.push("/admin/login");
+      return;
+    }
+    const type = route.type.toUpperCase();
+    if (data.img == undefined) {
+      warning(Messages.requiredImg);
+      return;
+    }
+    submit(type);
+  };
+  const submit = async (type: string) => {
     try {
-      let img = "";
+      let img: string | undefined = undefined;
 
-      if (data.img != undefined) {
-        let file = new FormData();
-        file.set("file", data.img);
-        await fetch(`${api}`, {
-          method: "POST",
-          headers: { Authorization: `Bearer ${token}` },
-          body: file,
-        })
-          .then((d) => d.json())
-          .then((d) => (img = d.file));
+      img = await uploader(data.img!, token!);
+      if (!img) {
+        warning(Messages.occured);
+        return;
       }
-
-      let body = {
+      const body = {
         title: data.title,
-
         img: img,
-
         text: data.text,
-        types: route.type.toUpperCase(),
+        types: type,
       };
+
       await axios
         .post(`${api}work/create`, body, {
           headers: {
@@ -69,7 +84,6 @@ export default function AdminWork({ route }: { route: { type: string } }) {
         .then(() =>
           toast({
             title: "Нэмэгдлээ.",
-
             status: "success",
             duration: 2000,
             isClosable: true,
@@ -79,11 +93,14 @@ export default function AdminWork({ route }: { route: { type: string } }) {
           setData({
             title: "",
             text: "",
-            // thumbnail: undefined,
+
             img: undefined,
           });
         });
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      warning(Messages.occured);
+    }
   };
 
   return (
@@ -93,13 +110,15 @@ export default function AdminWork({ route }: { route: { type: string } }) {
       onChange={(e) => setData((prev) => ({ ...prev, text: e }))}
       title={`Хийгдсэн ажлууд > ${filterName(route.type, workType)}`}
       text="Гарчиг"
-      ph={data.title}
-      onSubmit={submit}
+      ph={""}
+      editorText={data.text}
+      onSubmit={checker}
     >
       <Box w={"full"}>
         <HStack my={4}>
           <Text>Зураг:</Text>{" "}
           <Input
+            accept="image/*"
             border={"none"}
             type="file"
             width={"auto"}

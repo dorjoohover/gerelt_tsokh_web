@@ -6,9 +6,11 @@ import { Box, HStack, Input, Text, useToast } from "@chakra-ui/react";
 import { FilterType, filterName } from "@/global/functions";
 import { ArticleTypes } from "@/global/enum";
 import axios from "axios";
-import { api } from "@/values/values";
+import { Messages, api } from "@/values/values";
 import { getCookie } from "cookies-next";
 import { CustomDetailType } from "./Performance";
+import { useRouter } from "next/navigation";
+import { uploader } from "./Info";
 const articleType: FilterType[] = [
   {
     value: ArticleTypes.article,
@@ -20,7 +22,6 @@ const articleType: FilterType[] = [
   },
 ];
 
-
 export default function AdminArticle({ route }: { route: { type: string } }) {
   const [data, setData] = useState<CustomDetailType>({
     title: "",
@@ -29,22 +30,40 @@ export default function AdminArticle({ route }: { route: { type: string } }) {
   });
   const token = getCookie("token");
   const toast = useToast();
-  const submit = async () => {
+  const router = useRouter();
+  const warning = (value: string) => {
+    toast({
+      title: value,
+      status: "warning",
+      duration: 2000,
+      isClosable: true,
+    });
+    return;
+  };
+  const checker = () => {
+    if (token == "" || token == undefined) {
+      router.push("/admin/login");
+      return;
+    }
+    const type = route.type.toUpperCase();
+    if (data.img == undefined) {
+      warning(Messages.requiredImg);
+      return;
+    }
+    submit(type);
+  };
+  const submit = async (type: string) => {
     try {
-      let img = new FormData();
-      if (data.img != undefined) img.set("file", data.img);
-      let res = await fetch(`${api}`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
-        body: img,
-      }).then((d) => d.json());
-
+      const img = await uploader(data.img!, token!);
+      if (!img) {
+        warning(Messages.occured);
+        return;
+      }
       let body = {
         title: data.title,
-        img: res.file ?? "",
-
+        img: img,
         text: data.text,
-        types: route.type.toUpperCase(),
+        types: type,
       };
       await axios
         .post(`${api}article/create`, body, {
@@ -64,7 +83,10 @@ export default function AdminArticle({ route }: { route: { type: string } }) {
         .then(() => {
           setData({ title: "", text: "", img: undefined });
         });
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      warning(Messages.occured);
+    }
   };
 
   return (
@@ -73,7 +95,9 @@ export default function AdminArticle({ route }: { route: { type: string } }) {
       onChange={(e) => setData((prev) => ({ ...prev, text: e }))}
       title={`Нийтлэл > ${filterName(route.type, articleType)}`}
       text="Гарчиг"
-      onSubmit={submit}
+      onSubmit={checker}
+      value={data.title}
+      editorText={data.text}
     >
       <Box w={"full"}>
         <HStack my={4}>
@@ -82,6 +106,7 @@ export default function AdminArticle({ route }: { route: { type: string } }) {
             border={"none"}
             type="file"
             width={"auto"}
+            accept="image/*"
             height={"auto"}
             onChange={(e) =>
               setData((prev) => ({ ...prev, img: e.target.files?.[0] }))

@@ -1,27 +1,28 @@
 "use client";
 import React from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import Editor from "ckeditor5-custom-build";
+
 import { useState } from "react";
 import { Box } from "@chakra-ui/react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { Heading } from "@ckeditor/ckeditor5-heading";
 const editorConfiguration = {
   toolbar: [
-    "heading",
-    "|",
+    // "heading",
+    // "|",
     "bold",
     "italic",
     "link",
     "bulletedList",
-    "numberedList",
     "|",
-    "outdent",
-    "indent",
-    "|",
+    // "outdent",
+    // "indent",
+    // "|",
     "blockQuote",
-
     "undo",
     "redo",
   ],
+
 };
 
 type EditorType = {
@@ -33,13 +34,12 @@ function CustomEditor({ initialData, onChange }: EditorType) {
   return (
     <>
       <CKEditor
-        editor={Editor}
+      
+        onError={(e) => console.log(e)}
+        editor={ClassicEditor}
         config={editorConfiguration}
         data={initialData}
-        onChange={(
-          event: any,
-          editor: { getData: () => React.SetStateAction<string | undefined> }
-        ) => {
+        onChange={(event: any, editor: any) => {
           onChange(editor.getData() as string);
         }}
       />

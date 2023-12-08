@@ -78,10 +78,6 @@ export const gereltNavValues: NavItemsTypes[] = [
         name: "Дуут мэдээлэл",
         value: "/info?name=voice",
       },
-      // {
-      //   name: "Дүрст мэдээлэл",
-      //   value: "/info?name=video",
-      // },
     ],
   },
   {
@@ -144,6 +140,7 @@ export const tokhiruulgaNavValues: NavItemsTypes[] = [
         value: "/tokhiruulga?name=contact",
       },
     ],
+    uri: "/",
   },
 ];
 
@@ -151,6 +148,7 @@ export const adminNavbarValue = [
   {
     title: "Home page удирдах",
     links: [],
+    uri: "/admin",
   },
   {
     title: "Гэрэлт Цох удирдах",
@@ -211,127 +209,20 @@ export const adminNavbarValue = [
         title: performance,
         link: [
           {
-            name: filterName(PerformanceTypes.ab, tokhiruulgaTags[3].sub!),
-            value: `/admin?route=performance&name=${PerformanceTypes.ab}`,
+            name: "Үндсэн мэдээлэл оруулах",
+            value: `/admin?route=performance`,
           },
+
           {
-            name: filterName(PerformanceTypes.vg, tokhiruulgaTags[3].sub!),
-            value: `/admin?route=performance&name=${PerformanceTypes.vg}`,
-          },
-          {
-            name: filterName(PerformanceTypes.ej, tokhiruulgaTags[3].sub!),
-            value: `/admin?route=performance&name=${PerformanceTypes.ej}`,
-          },
-          {
-            name: filterName(PerformanceTypes.zi, tokhiruulgaTags[3].sub!),
-            value: `/admin?route=performance&name=${PerformanceTypes.zi}`,
-          },
-          {
-            name: filterName(PerformanceTypes.kl, tokhiruulgaTags[3].sub!),
-            value: `/admin?route=performance&name=${PerformanceTypes.kl}`,
-          },
-          {
-            name: filterName(PerformanceTypes.mn, tokhiruulgaTags[3].sub!),
-            value: `/admin?route=performance&name=${PerformanceTypes.mn}`,
-          },
-          {
-            name: filterName(PerformanceTypes.ou, tokhiruulgaTags[3].sub!),
-            value: `/admin?route=performance&name=${PerformanceTypes.ou}`,
-          },
-          {
-            name: filterName(PerformanceTypes.pr, tokhiruulgaTags[3].sub!),
-            value: `/admin?route=performance&name=${PerformanceTypes.pr}`,
-          },
-          {
-            name: filterName(PerformanceTypes.st, tokhiruulgaTags[3].sub!),
-            value: `/admin?route=performance&name=${PerformanceTypes.st}`,
-          },
-          {
-            name: filterName(PerformanceTypes.uv, tokhiruulgaTags[3].sub!),
-            value: `/admin?route=performance&name=${PerformanceTypes.uv}`,
-          },
-          {
-            name: filterName(PerformanceTypes.ph, tokhiruulgaTags[3].sub!),
-            value: `/admin?route=performance&name=${PerformanceTypes.ph}`,
-          },
-          {
-            name: filterName(PerformanceTypes.tsch, tokhiruulgaTags[3].sub!),
-            value: `/admin?route=performance&name=${PerformanceTypes.tsch}`,
-          },
-          {
-            name: filterName(PerformanceTypes.shshch, tokhiruulgaTags[3].sub!),
-            value: `/admin?route=performance&name=${PerformanceTypes.shshch}`,
-          },
-          {
-            name: filterName(PerformanceTypes.ey, tokhiruulgaTags[3].sub!),
-            value: `/admin?route=performance&name=${PerformanceTypes.ey}`,
-          },
-          {
-            name: "Custom",
+            name: "Дэлгэрэнгүй мэдээлэл оруулах",
             value: `/admin?route=performance&name=custom`,
           },
         ],
       },
       {
         title: hotTopics,
-        link: [
-          {
-            name: filterName(TopicTypes.ab, tokhiruulgaTags[4].sub!),
-            value: `/admin?route=topic&name=${TopicTypes.ab}`,
-          },
-          {
-            name: filterName(TopicTypes.vg, tokhiruulgaTags[4].sub!),
-            value: `/admin?route=topic&name=${TopicTypes.vg}`,
-          },
-          {
-            name: filterName(TopicTypes.ej, tokhiruulgaTags[4].sub!),
-            value: `/admin?route=topic&name=${TopicTypes.ej}`,
-          },
-          {
-            name: filterName(TopicTypes.zi, tokhiruulgaTags[4].sub!),
-            value: `/admin?route=topic&name=${TopicTypes.zi}`,
-          },
-          {
-            name: filterName(TopicTypes.kl, tokhiruulgaTags[4].sub!),
-            value: `/admin?route=topic&name=${TopicTypes.kl}`,
-          },
-          {
-            name: filterName(TopicTypes.mn, tokhiruulgaTags[4].sub!),
-            value: `/admin?route=topic&name=${TopicTypes.mn}`,
-          },
-          {
-            name: filterName(TopicTypes.ou, tokhiruulgaTags[4].sub!),
-            value: `/admin?route=topic&name=${TopicTypes.ou}`,
-          },
-          {
-            name: filterName(TopicTypes.pr, tokhiruulgaTags[4].sub!),
-            value: `/admin?route=topic&name=${TopicTypes.pr}`,
-          },
-          {
-            name: filterName(TopicTypes.st, tokhiruulgaTags[4].sub!),
-            value: `/admin?route=topic&name=${TopicTypes.st}`,
-          },
-          {
-            name: filterName(TopicTypes.uv, tokhiruulgaTags[4].sub!),
-            value: `/admin?route=topic&name=${TopicTypes.uv}`,
-          },
-          {
-            name: filterName(TopicTypes.ph, tokhiruulgaTags[4].sub!),
-            value: `/admin?route=topic&name=${TopicTypes.ph}`,
-          },
-          {
-            name: filterName(TopicTypes.tsch, tokhiruulgaTags[4].sub!),
-            value: `/admin?route=topic&name=${TopicTypes.tsch}`,
-          },
-          {
-            name: filterName(TopicTypes.shshch, tokhiruulgaTags[4].sub!),
-            value: `/admin?route=topic&name=${TopicTypes.shshch}`,
-          },
-          {
-            name: filterName(TopicTypes.ey, tokhiruulgaTags[4].sub!),
-            value: `/admin?route=topic&name=${TopicTypes.ey}`,
-          },
-        ],
+        uri: "/admin?route=topic",
+        link: [],
       },
       {
         title: legalInfo,

@@ -1,3 +1,4 @@
+import { FilterType } from "@/global/functions";
 import {
   imgCCRLogo,
   imgEULogo,
@@ -13,7 +14,7 @@ import {
   svgVideo,
   svgVoice,
 } from "../global/assets";
-import { FormTypes, InfoTypes } from "../global/enum";
+import { FormTypes, InfoTypes, MedicalTypes } from "../global/enum";
 
 import {
   accessibleEmployment,
@@ -42,13 +43,52 @@ export const additionInfoValues = [
     text: voiceInfo,
     value: InfoTypes.voice,
   },
-  {
-    icon: svgVideo,
-    text: videoInfo,
-    value: InfoTypes.video,
-  },
 ];
 
+export class Messages {
+  static requiredFile = "Файл оруулна уу.";
+  static requiredTitle = "Гарчиг оруулна уу.";
+  static requiredText = "Мэдээллээ оруулна уу.";
+  static occured = "Алдаа гарлаа.";
+}
+export const medicalType: FilterType[] = [
+  {
+    name: "Ажилтанд өгөх бяцхан санамжууд",
+    value: MedicalTypes.EMPLOYEE,
+  },
+  {
+    name: "Ажил олгогчид өгөх бяцхан санамжууд",
+    value: MedicalTypes.EMPLOYER,
+  },
+  {
+    name: "Гол тохируулгууд",
+    value: MedicalTypes.SETUP,
+  },
+  {
+    name: "Амрах хувийн орон зай",
+    value: MedicalTypes.SPACE,
+  },
+  {
+    name: "Сэдрээгч хүчин зүйлсийг илрүүлж багасгах",
+    value: MedicalTypes.TRIGGER,
+  },
+  {
+    name: "Боломжит тохируулгууд",
+    value: MedicalTypes.POSSIBLE,
+  },
+  {
+    name: "Ажил үүргийн функцээр",
+    value: MedicalTypes.FUNCTIONS,
+  },
+  {
+    name: "Түлхүү хэрэглэгддэг тохируулгууд",
+    value: MedicalTypes.KEYS,
+  },
+  {
+    name: "Бусад боломжит тохирлууд",
+    value: MedicalTypes.OTHER,
+  },
+];
 export const partnerValues = [
   imgCCRLogo,
   imgGACLogo,

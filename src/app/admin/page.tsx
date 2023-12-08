@@ -10,11 +10,10 @@ import SidebarContent from "@/components/admin/Navbar";
 import AdminInfo from "@/components/admin/Info";
 import AdminWork from "@/components/admin/Work";
 import AdminArticle from "@/components/admin/Article";
-import AdminPerformance, {
-  AdminPerformanceCustom,
-} from "@/components/admin/Performance";
+import AdminPerformance from "@/components/admin/Performance";
 import AdminTopic from "@/components/admin/Topic";
 import AdminLegal from "@/components/admin/Legal";
+import AdminPerformanceCustom from "@/components/admin/Custom";
 
 export default function AdminPage() {
   const token = getCookie("token");
@@ -49,12 +48,12 @@ export default function AdminPage() {
         return <AdminArticle route={{ type: route.type }} />;
       case "performance":
         if (route.type != "custom") {
-          return <AdminPerformance route={{ type: route.type }} />;
+          return <AdminPerformance />;
         } else {
           return <AdminPerformanceCustom />;
         }
       case "topic":
-        return <AdminTopic route={{ type: route.type }} />;
+        return <AdminTopic />;
       case "feedback":
         return <AdminWork route={{ type: route.type }} />;
       case "contact":

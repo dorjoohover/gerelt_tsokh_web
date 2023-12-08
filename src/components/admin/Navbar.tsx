@@ -48,7 +48,7 @@ const SidebarContent = ({ current, setCurrent, ...rest }: SidebarProps) => {
             if (link.links.length > 0) {
               router.push(link.links[0].link[0].value);
             } else {
-              router.push("/admin");
+              router.push(link.uri ?? "/admin");
             }
           }}
           active={current == index}
@@ -58,10 +58,13 @@ const SidebarContent = ({ current, setCurrent, ...rest }: SidebarProps) => {
         </NavItem>
       ))}
       <Box mx="auto" px={4}>
-        <Button w='full'  onClick={() => {
-          deleteCookie("token")
-          router.push('/admin/login')
-        }}>
+        <Button
+          w="full"
+          onClick={() => {
+            deleteCookie("token");
+            router.push("/admin/login");
+          }}
+        >
           Гарах
         </Button>
       </Box>
@@ -152,7 +155,9 @@ const NavItem = ({
                 child={l.link}
                 onClick={() => {
                   setCurrent(index);
-                  router.push(l.link[0].value);
+                  router.push(
+                    l.link.length > 0 ? l.link[0].value : (l.uri ?? "/admin")
+                  );
                 }}
                 key={index}
                 ml={8}
