@@ -42,7 +42,7 @@ const PerformancePage = () => {
 
   const getDataById = async (id: string) => {
     try {
-      await fetch(`${api}medical/get/${id}`)
+      await fetch(`${api}medical/get/${id}`, { cache: "no-store" })
         .then((d) => d.json())
         .then((d) => setSelected(d));
     } catch (error) {}

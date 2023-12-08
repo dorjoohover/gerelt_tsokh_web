@@ -29,6 +29,7 @@ export default function AdminLoginPage() {
           username: payload.username.toLowerCase(),
           password: payload.password,
         }),
+         cache: 'no-store' 
       });
       let data = await res.json();
       if (data["access_token"] != null) {

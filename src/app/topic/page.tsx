@@ -41,7 +41,7 @@ const TopicPage = () => {
   };
   const getDataById = async (id: string) => {
     try {
-      await fetch(`${api}topic/${id}`)
+      await fetch(`${api}topic/${id}`, { cache: "no-store" })
         .then((d) => d.json())
         .then((d) => setSelected(d));
     } catch (error) {}

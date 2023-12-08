@@ -30,18 +30,18 @@ const LegalPage = () => {
   const getData = async (t: LegalTypes) => {
     try {
       let res = await axios.post(`${api}legal/type/${t?.toUpperCase()}`, {
-        limit: 10,
+        limit: 20,
         skip: page,
       });
 
-      setCount(res.data.length);
-      setData(res.data);
+      setCount(res.data.count);
+      setData(res.data.data);
     } catch (error) {}
   };
 
   const getDataById = async (id: string) => {
     try {
-      await fetch(`${api}legal/${id}`)
+      await fetch(`${api}legal/${id}`, { cache: "no-store" })
         .then((d) => d.json())
         .then((d) => setSelected(d));
     } catch (error) {}

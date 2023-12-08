@@ -35,7 +35,7 @@ const ArticlePage = () => {
   };
   const getDataById = async (id: string) => {
     try {
-      await fetch(`${api}article/${id}`)
+      await fetch(`${api}article/${id}`, { cache: "no-store" })
         .then((d) => d.json())
         .then((d) => setSelected(d));
     } catch (error) {}

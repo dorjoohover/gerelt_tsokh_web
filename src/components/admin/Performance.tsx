@@ -98,7 +98,7 @@ export default function AdminPerformance() {
   };
   const getDetails = async () => {
     try {
-      await fetch(`${api}medical/details`)
+      await fetch(`${api}medical/details`, { cache: "no-store" })
         .then((d) => d.json())
         .then((d) => {
           setGetValues(

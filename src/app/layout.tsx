@@ -11,6 +11,7 @@ import { imgMiniLogo } from "@/global/assets";
 import { usePathname } from "next/navigation";
 
 import { findTitle } from "@/global/functions";
+import { Suspense } from "react";
 
 export default function RootLayout({
   children,
@@ -35,7 +36,9 @@ export default function RootLayout({
               <Box h={20} />
             </>
           )}
+          <Suspense fallback={<></>}>
           {children}
+          </Suspense>
 
           {!pathname.includes("admin") && (
             <>

@@ -33,6 +33,7 @@ export const uploader = async (data: File | string, token: string) => {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
       body: file,
+      cache: "no-store",
     }).then((d) => d.json());
     return res.file as string;
   } catch (error) {

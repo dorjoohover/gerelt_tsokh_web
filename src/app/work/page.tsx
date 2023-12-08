@@ -39,7 +39,9 @@ const WorkPage = () => {
 
   const getDataById = async (id: string) => {
     try {
-      let res = await fetch(`${api}work/${id}`).then((d) => d.json());
+      let res = await fetch(`${api}work/${id}`, { cache: "no-store" }).then(
+        (d) => d.json()
+      );
 
       setSelected(res);
     } catch (error) {}
