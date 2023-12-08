@@ -68,7 +68,7 @@ export const Line: FC<Types> = ({
         {filter.map((tags, i) => {
           return (
             <VStack w="full" alignItems={"start"} key={i}>
-              <Button
+              <Link
                 key={i}
                 p={0}
                 h={"auto"}
@@ -122,7 +122,7 @@ export const Line: FC<Types> = ({
                     </Box>
                   )}
                 </HStack>
-              </Button>
+              </Link>
               {tags.sub && active && tags.value == type && (
                 <VStack w="full" alignItems={"start"} pl={16}>
                   {tags.sub.map((e, index) => {
