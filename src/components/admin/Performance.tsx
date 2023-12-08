@@ -65,13 +65,21 @@ export default function AdminPerformance() {
       await axios
         .post(
           `${api}medical/create`,
-          {
-            title: data.title,
-            text: data.text,
-            setup: [setup],
-            details: details,
-            condition: conditions,
-          },
+          setup != null && setup != undefined
+            ? {
+                title: data.title,
+                text: data.text,
+                setup: [setup],
+                details: details,
+                condition: conditions,
+              }
+            : {
+                title: data.title,
+                text: data.text,
+
+                details: details,
+                condition: conditions,
+              },
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -125,7 +133,7 @@ export default function AdminPerformance() {
             ...prev,
             {
               type: detail.type,
-              details: detail.type == MedicalTypes.SETUP ? [value] : values,
+              details: values,
             },
           ]);
         }
@@ -332,8 +340,6 @@ export default function AdminPerformance() {
                 {detail.type != MedicalTypes.SETUP && (
                   <Button
                     onClick={() => {
-                      console.log("click");
-                      console.log(values);
                       if (view == 1) {
                         if (!values.includes(value) && value != "") {
                           setValues((prev) => [...prev, value]);

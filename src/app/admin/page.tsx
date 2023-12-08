@@ -7,13 +7,13 @@ import { getCookie } from "cookies-next";
 
 import SidebarContent from "@/components/admin/Navbar";
 
-// import AdminInfo from "@/components/admin/Info";
-// import AdminWork from "@/components/admin/Work";
-// import AdminArticle from "@/components/admin/Article";
-// import AdminPerformance from "@/components/admin/Performance";
-// import AdminTopic from "@/components/admin/Topic";
-// import AdminLegal from "@/components/admin/Legal";
-// import AdminPerformanceCustom from "@/components/admin/Custom";
+import AdminInfo from "@/components/admin/Info";
+import AdminWork from "@/components/admin/Work";
+import AdminArticle from "@/components/admin/Article";
+import AdminPerformance from "@/components/admin/Performance";
+import AdminTopic from "@/components/admin/Topic";
+import AdminLegal from "@/components/admin/Legal";
+import AdminPerformanceCustom from "@/components/admin/Custom";
 
 export default function AdminPage() {
   const token = getCookie("token");
@@ -38,30 +38,30 @@ export default function AdminPage() {
     }));
   }, [params]);
 
-  // const View = (): ReactNode => {
-    // switch (route.value) {
-    //   case "info":
-    //     return <AdminInfo  />;
-      // case "work":
-      //   return <AdminWork route={{ type: route.type }} />;
-  //     case "article":
-  //       return <AdminArticle route={{ type: route.type }} />;
-  //     case "performance":
-  //       if (route.type != "custom") {
-  //         return <AdminPerformance />;
-  //       } else {
-  //         return <AdminPerformanceCustom />;
-  //       }
-  //     case "topic":
-  //       return <AdminTopic />;
-  //     case "feedback":
-  //       return <AdminWork route={{ type: route.type }} />;
-  //     case "contact":
-  //       return <AdminWork route={{ type: route.type }} />;
-  //     case "legal":
-  //       return <AdminLegal route={{ type: route.type }} />;
-    // }
-  // };
+  const View = (): ReactNode => {
+    switch (route.value) {
+      case "info":
+        return <AdminInfo />;
+      case "work":
+        return <AdminWork route={{ type: route.type }} />;
+      case "article":
+        return <AdminArticle route={{ type: route.type }} />;
+      case "performance":
+        if (route.type != "custom") {
+          return <AdminPerformance />;
+        } else {
+          return <AdminPerformanceCustom />;
+        }
+      case "topic":
+        return <AdminTopic />;
+      case "feedback":
+        return <AdminWork route={{ type: route.type }} />;
+      case "contact":
+        return <AdminWork route={{ type: route.type }} />;
+      case "legal":
+        return <AdminLegal route={{ type: route.type }} />;
+    }
+  };
 
   return (
     <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
@@ -72,7 +72,7 @@ export default function AdminPage() {
       />
 
       <Box ml={{ base: 0, md: 60 }} p="4">
-        {/* {View()} */}
+        {View()}
       </Box>
     </Box>
   );
