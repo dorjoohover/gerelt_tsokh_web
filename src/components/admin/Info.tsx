@@ -51,11 +51,10 @@ const AdminInfo = () => {
   const toast = useToast();
   const router = useRouter();
   const params = useSearchParams();
-  const [type, setType] = useState<string>('');
+  const [type, setType] = useState<string>("");
   useEffect(() => {
     if (params.get("name") != null) {
-      const t = params.get("name")?.toString() as String
-      setType(t);
+      setType(params.get("name")?.toString() ?? "");
     }
   }, [params]);
   const checker = () => {
@@ -68,7 +67,7 @@ const AdminInfo = () => {
       router.push("/admin/login");
       return;
     }
-    const type = params.get("name")!.toUpperCase();
+    
 
     if (data.voice == undefined && type == InfoTypes.voice) {
       toast({
@@ -79,10 +78,10 @@ const AdminInfo = () => {
       });
       return;
     }
-    submit(type);
+    submit();
   };
 
-  const submit = async (type: string) => {
+  const submit = async () => {
     try {
       let voice: string | undefined = undefined;
 
@@ -94,7 +93,7 @@ const AdminInfo = () => {
         title: data.title,
         voice: voice,
         text: data.text,
-        types: type,
+        types: type.toUpperCase(),
       };
       await axios
         .post(`${api}info/create`, body, {

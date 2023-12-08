@@ -3,7 +3,15 @@
 import { FilterType } from "@/global/functions";
 
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-import { Box, Button, HStack, Select, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  HStack,
+  Link,
+  Select,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FC, ReactNode, useState, useEffect } from "react";
 
@@ -119,7 +127,10 @@ export const Line: FC<Types> = ({
                 <VStack w="full" alignItems={"start"} pl={16}>
                   {tags.sub.map((e, index) => {
                     return (
-                      <Button
+                      <Link
+                        href={`${pathname}?name=${params.get("name")}&type=${
+                          e.value
+                        }`}
                         key={index}
                         p={0}
                         h={"auto"}
@@ -128,11 +139,6 @@ export const Line: FC<Types> = ({
                         textTransform={"none"}
                         onClick={() => {
                           changeSub(index);
-                          router.push(
-                            `${pathname}?name=${params.get("name")}&type=${
-                              e.value
-                            }`
-                          );
                         }}
                         _hover={{
                           bg: "none",
@@ -150,7 +156,7 @@ export const Line: FC<Types> = ({
                             {e.name}
                           </Text>
                         </HStack>
-                      </Button>
+                      </Link>
                     );
                   })}
                 </VStack>
@@ -215,7 +221,7 @@ export const Line: FC<Types> = ({
           {Math.ceil(length / (limit == 0 ? 1 : limit)) > 1 &&
             Array.from(Array(Math.ceil(length / limit)).keys()).map((i) => {
               return (
-                <Text
+                <Link
                   key={i}
                   cursor={"pointer"}
                   px={4}
@@ -225,7 +231,7 @@ export const Line: FC<Types> = ({
                   onClick={() => changePage(i)}
                 >
                   {i + 1}
-                </Text>
+                </Link>
               );
             })}
         </HStack>
