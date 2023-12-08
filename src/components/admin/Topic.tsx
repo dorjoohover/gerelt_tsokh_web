@@ -2,10 +2,8 @@
 
 import { useState } from "react";
 import AdminForm from "./Form";
-import { Box, HStack, Input, Text, useToast } from "@chakra-ui/react";
-import { FilterType, filterName } from "@/global/functions";
-import { ArticleTypes } from "@/global/enum";
-import { tokhiruulgaTags } from "@/values/tags";
+import { useToast } from "@chakra-ui/react";
+
 import { Messages, api } from "@/values/values";
 import axios from "axios";
 import { getCookie } from "cookies-next";

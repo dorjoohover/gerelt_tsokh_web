@@ -140,27 +140,29 @@ const TokhiruulgaPage = () => {
           let performanceRes = await axios.post(
             `${api}medical/type/${params.get("type")?.toUpperCase()}`,
             {
-              limit: limit,
+              limit: 10,
               page: page,
             }
           );
           setData(performanceRes.data.data);
+          setLimit(10);
 
           setDataCount(performanceRes.data.count);
 
           break;
         case TokhiruulgaTypes.legal:
-          let legalRes = await fetch(
-            `${api}legal/type/${params.get("type")?.toUpperCase()}`,
-            {
-              method: "POST",
-            }
-          ).then((d) => d.json());
-          setData(legalRes);
+          await axios
+            .post(`${api}legal/type/${params.get("type")?.toUpperCase()}`, {
+              page: page,
+              limit: 20,
+            })
+            .then((d) => {
+              setData(d.data.data);
 
-          setLimit(1);
+              setLimit(20);
 
-          setDataCount(0);
+              setDataCount(d.data.count);
+            });
           break;
         case TokhiruulgaTypes.topic:
           await axios

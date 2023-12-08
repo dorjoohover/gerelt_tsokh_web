@@ -23,6 +23,7 @@ import { MedicalTypes } from "@/global/enum";
 import { api, medicalType } from "@/values/values";
 import { getCookie } from "cookies-next";
 import CustomEditor from "../custom-editor";
+import axios from "axios";
 
 export default function AdminPerformance() {
   const [data, setData] = useState({
