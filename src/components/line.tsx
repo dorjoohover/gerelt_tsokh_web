@@ -128,9 +128,6 @@ export const Line: FC<Types> = ({
                   {tags.sub.map((e, index) => {
                     return (
                       <Link
-                        href={`${pathname}?name=${params.get("name")}&type=${
-                          e.value
-                        }`}
                         key={index}
                         p={0}
                         h={"auto"}
@@ -138,6 +135,11 @@ export const Line: FC<Types> = ({
                         bg={"transparent"}
                         textTransform={"none"}
                         onClick={() => {
+                          router.push(
+                            `${pathname}?name=${params.get("name")}&type=${
+                              e.value
+                            }`
+                          );
                           changeSub(index);
                         }}
                         _hover={{
