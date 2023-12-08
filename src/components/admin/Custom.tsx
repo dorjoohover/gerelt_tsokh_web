@@ -48,7 +48,7 @@ export default function AdminPerformanceCustom() {
   const router = useRouter();
   const submit = async () => {
     try {
-      if (token != undefined || token != "") {
+      if (token == undefined || token == "") {
         router.push("/admin/login");
         return;
       }
