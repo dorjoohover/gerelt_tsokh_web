@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AdminForm from "./Form";
 import { Box, HStack, Input, Text, useToast } from "@chakra-ui/react";
 import { FilterType, filterName } from "@/global/functions";
@@ -8,7 +8,7 @@ import { Messages, api } from "@/values/values";
 import { getCookie } from "cookies-next";
 import axios from "axios";
 import { InfoTypes } from "@/global/enum";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 const infoType: FilterType[] = [
   {
     value: "text",
@@ -40,7 +40,8 @@ export const uploader = async (data: File | string, token: string) => {
     console.log(error);
   }
 };
-export default function AdminInfo({ route }: { route: { type: string } }) {
+
+const AdminInfo = () => {
   const [data, setData] = useState<CustomDetailType>({
     title: "",
     text: "",
@@ -49,12 +50,26 @@ export default function AdminInfo({ route }: { route: { type: string } }) {
   const token = getCookie("token");
   const toast = useToast();
   const router = useRouter();
+  const params = useSearchParams();
+  const [type, setType] = useState<string>('');
+  useEffect(() => {
+    if (params.get("name") != null) {
+      const t = params.get("name")?.toString() as String
+      setType(t);
+    }
+  }, [params]);
   const checker = () => {
     if (token == "" || token == undefined) {
       router.push("/admin/login");
       return;
     }
-    const type = route.type.toUpperCase();
+
+    if (params.get("name") == null) {
+      router.push("/admin/login");
+      return;
+    }
+    const type = params.get("name")!.toUpperCase();
+
     if (data.voice == undefined && type == InfoTypes.voice) {
       toast({
         title: Messages.requiredFile,
@@ -120,13 +135,13 @@ export default function AdminInfo({ route }: { route: { type: string } }) {
       value={data.title}
       onTitle={(e) => setData((prev) => ({ ...prev, title: e }))}
       onChange={(e) => setData((prev) => ({ ...prev, text: e }))}
-      title={`Нэмэлт нэдээллүүд > ${filterName(route.type, infoType)}`}
+      title={`Нэмэлт нэдээллүүд > ${filterName(params.get("name")!, infoType)}`}
       text="Гарчиг"
       editorText={data.text}
       onSubmit={checker}
     >
       <Box w={"full"}>
-        {route.type == "voice" && (
+        {params.get("name") == "voice" && (
           <HStack my={4}>
             <Text>Дуу:</Text>{" "}
             <Input
@@ -144,4 +159,6 @@ export default function AdminInfo({ route }: { route: { type: string } }) {
       </Box>
     </AdminForm>
   );
-}
+};
+
+export default AdminInfo;

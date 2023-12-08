@@ -204,6 +204,7 @@ const TokhiruulgaPage = () => {
         await axios.post(`${api}feedback/create`, fb.slice(1)).then((d) => {
           toast({
             duration: 3000,
+            position: 'top',
             title: "Амжилттай илгээлээ.",
             status: "success",
           });
@@ -212,6 +213,7 @@ const TokhiruulgaPage = () => {
       } else {
         toast({
           duration: 3000,
+          position: 'top',
           title: "Талбарыг бүрэн бөглөнө үү.",
           status: "warning",
         });
@@ -242,6 +244,7 @@ const TokhiruulgaPage = () => {
           })
           .then((d) => {
             toast({
+              position: 'top',
               duration: 3000,
               title: "Амжилттай илгээлээ.",
               status: "success",

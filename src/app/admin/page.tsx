@@ -41,7 +41,7 @@ export default function AdminPage() {
   const View = (): ReactNode => {
     switch (route.value) {
       case "info":
-        return <AdminInfo route={{ type: route.type }} />;
+        return <AdminInfo  />;
       // case "work":
       //   return <AdminWork route={{ type: route.type }} />;
   //     case "article":
