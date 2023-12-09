@@ -28,6 +28,7 @@ type Types = {
   bg?: string;
   bodyBg?: string;
   current?: number;
+  fit?: string
 };
 type AdditionType = {
   icon: string;
@@ -82,7 +83,7 @@ export const AdditionCard: FC<AdditionType> = ({ icon, text, onClick }) => {
   );
 };
 
-export const SliderCard: FC<Types> = ({ body, footer, bg, current }) => {
+export const SliderCard: FC<Types> = ({ body, footer, fit = 'cover',  bg, current }) => {
   return (
     <Box
       w={"full"}
@@ -95,7 +96,8 @@ export const SliderCard: FC<Types> = ({ body, footer, bg, current }) => {
         md: bg,
         base: "none",
       }}
-      bgSize={"cover"}
+      bgSize={fit}
+      bgPos={'right'}
       bgRepeat={"no-repeat"}
       overflow={"hidden"}
     >

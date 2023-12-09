@@ -153,6 +153,7 @@ export default function Home() {
                   />
                 </VStack>
               }
+              fit={'contain'}
               footer={<Box />}
               bg={imgHeader1}
               current={current}

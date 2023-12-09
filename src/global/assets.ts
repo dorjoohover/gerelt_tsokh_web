@@ -56,7 +56,7 @@ export const imgArticle10 = `${article}10.jpg`;
 
 // header
 export const imgHeader = `${img}header.png`;
-export const imgHeader1 = `${img}header1.png`;
+export const imgHeader1 = `${img}bg.jpg`;
 
 // info
 export const imgInfo = `${info}info.png`;
