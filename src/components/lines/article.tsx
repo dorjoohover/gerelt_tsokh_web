@@ -1,4 +1,6 @@
 "use client";
+import { noImage } from "@/global/assets";
+import { dateFormater } from "@/global/functions";
 import { detail, more } from "@/global/string";
 
 import { api } from "@/values/values";
@@ -32,6 +34,7 @@ type LineWidgetDetailType = {
   id?: string;
   semiTitle?: string;
   type?: string;
+  date?: string;
 };
 export const LineWidget: FC<LineWidgetType> = ({
   img,
@@ -50,7 +53,7 @@ export const LineWidget: FC<LineWidgetType> = ({
     >
       <Box flex={1}>
         <Image
-          src={`${api}${img}`}
+          src={img != undefined && img != "" ? `${api}${img}` : noImage}
           alt={id}
           height={"auto"}
           maxH={200}
@@ -83,6 +86,7 @@ export const LineWidget: FC<LineWidgetType> = ({
 
         <Box
           mb={{ md: 0, base: 4 }}
+          maxW={{ md: "35vw", base: "auto" }}
           noOfLines={{ md: 3, base: 4 }}
           dangerouslySetInnerHTML={{
             __html: text?.replaceAll('"', "") ?? "",
@@ -102,6 +106,7 @@ export const LineWidgetDetail: FC<LineWidgetDetailType> = ({
   text,
   semiTitle,
   type,
+  date,
 }) => {
   const toast = useToast();
   const token = getCookie("token");
@@ -128,13 +133,15 @@ export const LineWidgetDetail: FC<LineWidgetDetailType> = ({
           {semiTitle}
         </Text>
       )}
-      <Image
-        src={`${api}${img}`}
-        w={"full"}
-        maxH={400}
-        objectFit={"cover"}
-        alt={id ?? ""}
-      />
+      {img && img != "" && (
+        <Image
+          src={`${api}${img}`}
+          w={"full"}
+          maxH={400}
+          objectFit={"cover"}
+          alt={id ?? ""}
+        />
+      )}
       <VStack w={"full"} alignItems={"start"}>
         <Box
           mb={{ md: 0, base: 4 }}
@@ -144,6 +151,12 @@ export const LineWidgetDetail: FC<LineWidgetDetailType> = ({
           }}
         ></Box>
       </VStack>
+      <HStack w={"full"}>
+        <Text variant={"normal"} fontWeight={"bold"}>
+          Оруулсан огноо:{" "}
+          <span className="font-normal">{dateFormater(date ?? "")}</span>
+        </Text>
+      </HStack>
       {token && id != "" && <Button onClick={deleteItem}>Устгах</Button>}
     </VStack>
   );

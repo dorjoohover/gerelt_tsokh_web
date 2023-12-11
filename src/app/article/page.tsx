@@ -79,8 +79,9 @@ const ArticlePage = () => {
             <LineWidgetDetail
               text={selected.text}
               title={selected.title}
-              img={selected.img}
+              img={selected.img ?? ''}
               id={selected._id}
+              date={selected.postDate ?? selected.createdAt}
               type="article"
             />
           ) : (
@@ -89,7 +90,7 @@ const ArticlePage = () => {
                 case ArticleTypes.info:
                   return (
                     <LineWidget
-                      img={d.img!}
+                      img={d.img ?? ''}
                       id={d._id}
                       text={d.text}
                       title={d.title}

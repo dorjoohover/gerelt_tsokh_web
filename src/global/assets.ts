@@ -19,6 +19,7 @@ export const imgMiniLogo = `${assets}miniLogo.png`;
 export const imgLogoWhite = `${assets}logo white.png`;
 export const imgGereltTsokh = `${img}gerelt_tsokh.png`;
 export const imgTokhiruulga = `${img}tokhiruulga.png`;
+export const noImage = `${img}noImage.jpg`;
 
 // about
 export const imgGratitude = `${about}gratitude.jpg`;

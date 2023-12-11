@@ -98,32 +98,17 @@ const WorkPage = () => {
             />
           ) : (
             data?.map((d, i) => {
-              switch (d.type) {
-                case WorkTypes.research:
-                  return (
-                    <LineWidget
-                      img={d.img!}
-                      id={d._id}
-                      text={d.text}
-                      semiTitle={d.semiTitle}
-                      title={d.title}
-                      key={i}
-                      type="work"
-                    />
-                  );
-                default:
-                  return (
-                    <LineWidget
-                      img={d.img!}
-                      id={d._id}
-                      text={d.text}
-                      title={d.title}
-                      semiTitle={d.semiTitle}
-                      key={i}
-                      type="work"
-                    />
-                  );
-              }
+              return (
+                <LineWidget
+                  img={d.img ?? ""}
+                  id={d._id}
+                  text={d.text}
+                  semiTitle={d.semiTitle}
+                  title={d.title}
+                  key={i}
+                  type="work"
+                />
+              );
             }) ?? <></>
           )
         }

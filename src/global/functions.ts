@@ -42,7 +42,7 @@ export function MedicalTitle(value: MedicalTypes) {
     case MedicalTypes.KEYS:
       return "Түлхүү хэрэглэгддэг тохируулгууд";
     default:
-      return "Боломжит тохируулгууд"
+      return "Боломжит тохируулгууд";
   }
 }
 
@@ -65,4 +65,11 @@ export function findTitle(value: string) {
     default:
       return gereltTokh;
   }
+}
+
+export function dateFormater(value: string) {
+  if (value.length >= 10) {
+    return value.substring(0, 10).replaceAll("-", ".");
+  }
+  return value.replaceAll("-", ".");
 }

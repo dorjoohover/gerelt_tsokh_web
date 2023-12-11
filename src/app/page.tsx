@@ -23,7 +23,7 @@ import {
   tokhiruulgaMn,
   watchOtherArticle,
 } from "@/global/string";
-import { additionInfoValues, partnerValues } from "@/values/values";
+import { additionInfoValues, api, partnerValues } from "@/values/values";
 import {
   Box,
   Button,
@@ -37,9 +37,12 @@ import {
 } from "@chakra-ui/react";
 import Slider from "react-slick";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Head from "next/head";
+import axios from "axios";
+import { Article } from "@/model/article.model";
+import { dateFormater } from "@/global/functions";
 
 const settings = {
   dots: true,
@@ -56,10 +59,25 @@ export default function Home() {
   const [slider, setSlider] = useState<Slider | null>(null);
   const [current, setCurrent] = useState(0);
   const router = useRouter();
+  const [article, setArticle] = useState<Article[]>([]);
+  const getData = async () => {
+    try {
+      await axios
+        .post(`${api}article/type/all`, {
+          limit: 2,
+          page: 0,
+        })
+        .then((d) => {
+          setArticle(d.data.data);
+        });
+    } catch (error) {}
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <>
       <Box maxW={"auto"}>
-  
         <Box
           position={"relative"}
           height={{
@@ -140,7 +158,7 @@ export default function Home() {
                   justifyContent={"center"}
                   alignItems={"start"}
                 >
-                  <Image src={imgLogoWhite} w={252} alt="logo"/>
+                  <Image src={imgLogoWhite} w={252} alt="logo" />
                   <Text variant={"smallTitle"} as={"i"}>
                     {slogan}
                   </Text>
@@ -153,7 +171,7 @@ export default function Home() {
                   />
                 </VStack>
               }
-              fit={'contain'}
+              fit={"contain"}
               footer={<Box />}
               bg={imgHeader1}
               current={current}
@@ -172,7 +190,7 @@ export default function Home() {
           >
             <Link href={"/about"}>
               <CustomCard
-                body={<Image src={imgGereltTsokh} alt={gereltTokh}/>}
+                body={<Image src={imgGereltTsokh} alt={gereltTokh} />}
                 footer={
                   <Heading
                     variant={"title"}
@@ -190,7 +208,7 @@ export default function Home() {
 
             <Link href={"/tokhiruulga?name=gratitude"}>
               <CustomCard
-                body={<Image src={imgTokhiruulga} alt={tokhiruulga}/>}
+                body={<Image src={imgTokhiruulga} alt={tokhiruulga} />}
                 footer={
                   <Heading
                     variant={"title"}
@@ -280,64 +298,54 @@ export default function Home() {
             margin={{ lg: "0 40px 0 40px", base: "0 24px 0 24px" }}
             w="auto"
           >
-            <CustomCard
-              body={<Image src={imgInfo} w={"full"} alt={`info 0`}/>}
-              footer={
-                <VStack gap={7}>
-                  <Heading
-                    fontSize={{
-                      md: "22px",
-                      base: "16px",
-                    }}
-                    variant={"title"}
-                    mb={1}
-                    color={"prime.default"}
-                  >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Asperiores, delectus?
-                  </Heading>
-                  <Text>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Voluptates, inventore...
-                  </Text>
-                  <HStack w={"full"} justifyContent={"space-between"}>
-                    <Link href={"/"}>
-                      <Text>{more}</Text>
-                    </Link>
-                    <Text>2023.10.30</Text>
-                  </HStack>
-                </VStack>
-              }
-            />
-            <CustomCard
-              body={<Image src={imgInfo} w={"full"} alt={`info 0`}/>}
-              footer={
-                <VStack gap={7}>
-                  <Heading
-                    fontSize={{
-                      md: "22px",
-                      base: "16px",
-                    }}
-                    variant={"title"}
-                    mb={1}
-                    color={"prime.default"}
-                  >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Asperiores, delectus?
-                  </Heading>
-                  <Text>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Voluptates, inventore...
-                  </Text>
-                  <HStack w={"full"} justifyContent={"space-between"}>
-                    <Link href={"/"}>
-                      <Text>{more}</Text>
-                    </Link>
-                    <Text>2023.10.30</Text>
-                  </HStack>
-                </VStack>
-              }
-            />
+            {article?.map((article, i) => {
+              return (
+                <Box key={i} flex={1}>
+                  <CustomCard
+                    body={
+                      <Box height={300}>
+                        <Image
+                          src={`${api}${article.img}`}
+                          w={"full"}
+                          height={"full"}
+                          objectFit={"cover"}
+                          alt={`info 0`}
+                        />
+                      </Box>
+                    }
+                    footer={
+                      <VStack gap={7}>
+                        <Heading
+                          fontSize={{
+                            md: "22px",
+                            base: "16px",
+                          }}
+                          variant={"title"}
+                          mb={1}
+                          noOfLines={{ md: 3, base: 4 }}
+                          color={"prime.default"}
+                        >
+                          {article.title}
+                        </Heading>
+                        <Box
+                          mb={{ md: 0, base: 4 }}
+                          noOfLines={{ md: 3, base: 4 }}
+                          dangerouslySetInnerHTML={{
+                            __html: article?.text?.replaceAll('"', "") ?? "",
+                          }}
+                        ></Box>
+                        <HStack w={"full"} justifyContent={"space-between"}>
+                          <Link href={"/"}>
+                            <Text>{more}</Text>
+                          </Link>
+                          <Text>{dateFormater(article.postDate ?? "")}</Text>
+                        </HStack>
+                      </VStack>
+                    }
+                  />
+                </Box>
+              );
+            })}
           </HStackContainer>
           <Button
             onClick={() => {
@@ -404,7 +412,13 @@ export default function Home() {
                   justifyContent={"center"}
                   key={index}
                 >
-                  <Image src={partner} key={index} mx={"auto"} h={"100%"} alt={`partner ${index}`}/>
+                  <Image
+                    src={partner}
+                    key={index}
+                    mx={"auto"}
+                    h={"100%"}
+                    alt={`partner ${index}`}
+                  />
                 </GridItem>
               );
             })}

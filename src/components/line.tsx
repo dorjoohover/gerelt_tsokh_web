@@ -59,11 +59,11 @@ export const Line: FC<Types> = ({
   return (
     <HStack w={"full"} alignItems={"start"}>
       <VStack
-        w={{ lg: "300px" }}
+        w={{ lg: "205px" }}
+        mr={{ lg: 94, base: 0 }}
         display={{ lg: "flex", base: "none" }}
         gap={0}
         alignItems={"start"}
-        mr={94}
       >
         {filter.map((tags, i) => {
           return (
@@ -99,10 +99,10 @@ export const Line: FC<Types> = ({
                 }}
               >
                 <HStack
-                  w={"full"}
                   justifyContent={"space-between"}
                   borderTop={i != 0 ? "1px solid #00BCA9" : ""}
                   borderColor={"prime.default"}
+                  w={"205px"}
                 >
                   <Text
                     w={"full"}

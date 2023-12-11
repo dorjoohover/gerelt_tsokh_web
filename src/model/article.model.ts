@@ -9,4 +9,5 @@ export  interface Article {
 	fb?: string
 	twitter?: string
     img?: string
+	createdAt?: string
 }
