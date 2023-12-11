@@ -336,7 +336,7 @@ export default function Home() {
                           }}
                         ></Box>
                         <HStack w={"full"} justifyContent={"space-between"}>
-                          <Link href={"/"}>
+                          <Link href={`/article?id=${article._id}`}>
                             <Text>{more}</Text>
                           </Link>
                           <Text>{dateFormater(article.postDate ?? "")}</Text>
