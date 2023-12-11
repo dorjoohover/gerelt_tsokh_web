@@ -95,6 +95,7 @@ const WorkPage = () => {
               img={selected.img}
               id={selected._id}
               semiTitle={selected.semiTitle}
+              date={selected.postDate ?? selected.createdAt}
             />
           ) : (
             data?.map((d, i) => {

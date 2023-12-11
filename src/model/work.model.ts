@@ -11,4 +11,5 @@ export interface Work {
   img?: string;
   semiTitle?: string;
   uri?: string
+  createdAt?: string
 }
