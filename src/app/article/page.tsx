@@ -50,17 +50,18 @@ const ArticlePage = () => {
     setValue(filterName(type, articleTags));
   }, [type, page]);
   useEffect(() => {
+    if (params.get("name")) {
+      let name: any = params.get("name") as keyof typeof ArticleTypes;
+      setType(name ?? ArticleTypes.article);
+      setValue(filterName(name, articleTags));
+      setPage(0)
+    }
     if (params.get("id")) {
       getDataById(params.get("id")!);
     } else {
       getData(params.get("name") as ArticleTypes);
     }
 
-    if (params.get("name")) {
-      let name: any = params.get("name") as keyof typeof ArticleTypes;
-      setType(name ?? ArticleTypes.article);
-      setValue(filterName(name, articleTags));
-    }
   }, [params]);
 
   return (

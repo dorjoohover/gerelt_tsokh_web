@@ -195,6 +195,7 @@ const TokhiruulgaPage = () => {
       let name: any = params.get("name") as keyof typeof TokhiruulgaTypes;
       setType(name ?? TokhiruulgaTypes.gratitude);
       setValue(filterName(name, tokhiruulgaTags));
+      setPage(0)
     }
     getData();
   }, [params]);
