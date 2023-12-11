@@ -28,8 +28,8 @@ import {
 } from "../global/string";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 
-// export const api = "http://139.162.40.225:5000/api/";
-export const api = "http://localhost:5000/api/";
+export const api = "http://139.162.40.225:5000/api/";
+// export const api = "http://localhost:5000/api/";
 export const url = "http://139.162.40.225";
 
 export const additionInfoValues = [

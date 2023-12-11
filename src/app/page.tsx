@@ -68,6 +68,7 @@ export default function Home() {
           page: 0,
         })
         .then((d) => {
+          console.log(d);
           setArticle(d.data.data);
         });
     } catch (error) {}
