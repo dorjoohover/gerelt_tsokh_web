@@ -53,21 +53,23 @@ export default function AdminWork({ route }: { route: { type: string } }) {
       return;
     }
     const type = route.type.toUpperCase();
-    if (data.img == undefined) {
-      warning(Messages.requiredFile);
-      return;
-    }
+    // if (data.img == undefined) {
+    //   warning(Messages.requiredFile);
+    //   return;
+    // }
     submit(type);
   };
   const submit = async (type: string) => {
     try {
       let img: string | undefined = undefined;
 
-      img = await uploader(data.img!, token!);
-      if (!img) {
-        warning(Messages.occured);
-        return;
+      if (data.img) {
+        img = await uploader(data.img!, token!);
       }
+      // if (!img) {
+      //   warning(Messages.occured);
+      //   return;
+      // }
       const body = {
         title: data.title,
         img: img,

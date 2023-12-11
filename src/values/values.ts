@@ -47,6 +47,7 @@ export const additionInfoValues = [
 
 export class Messages {
   static requiredFile = "Файл оруулна уу.";
+  static requiredDate = "Огноо оруулна уу";
   static requiredTitle = "Гарчиг оруулна уу.";
   static requiredText = "Мэдээллээ оруулна уу.";
   static occured = "Алдаа гарлаа.";

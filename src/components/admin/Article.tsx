@@ -27,6 +27,7 @@ export default function AdminArticle({ route }: { route: { type: string } }) {
     title: "",
     text: "",
     img: undefined,
+    date: "",
   });
   const token = getCookie("token");
   const toast = useToast();
@@ -46,24 +47,25 @@ export default function AdminArticle({ route }: { route: { type: string } }) {
       return;
     }
     const type = route.type.toUpperCase();
-    if (data.img == undefined) {
-      warning(Messages.requiredFile);
+    if (data.date == undefined || data.date == "") {
+      warning(Messages.requiredDate);
       return;
     }
     submit(type);
   };
   const submit = async (type: string) => {
     try {
-      const img = await uploader(data.img!, token!);
-      if (!img) {
-        warning(Messages.occured);
-        return;
+      let img: undefined | string = undefined;
+      if (data.img && data.img != undefined) {
+        img = await uploader(data.img!, token!);
       }
+     
       let body = {
         title: data.title,
         img: img,
         text: data.text,
         types: type,
+        postDate: data.date,
       };
       await axios
         .post(`${api}article/create`, body, {
@@ -110,6 +112,18 @@ export default function AdminArticle({ route }: { route: { type: string } }) {
             height={"auto"}
             onChange={(e) =>
               setData((prev) => ({ ...prev, img: e.target.files?.[0] }))
+            }
+          />
+        </HStack>
+        <HStack my={4}>
+          <Text>Оруулсан огноо:</Text>{" "}
+          <Input
+            border={"none"}
+            type="date"
+            width={"auto"}
+            height={"auto"}
+            onChange={(e) =>
+              setData((prev) => ({ ...prev, date: e.target.value }))
             }
           />
         </HStack>

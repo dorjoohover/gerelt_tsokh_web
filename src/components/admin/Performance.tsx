@@ -375,6 +375,7 @@ export type CustomDetailType = {
   _id?: string;
   text?: string;
   img?: File;
+  date?: string
 };
 export type CustomType = {
   _id?: string;
