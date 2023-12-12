@@ -7,7 +7,7 @@ export interface PerformanceQuestion {
 export interface PerformanceFunctionDetail {
   title: string;
   text?: string;
-  img?: string;
+  img?: string[];
 }
 
 export interface PerformanceFunction {

@@ -21,7 +21,10 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import CustomAccordian from "../accordian";
-
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 import { FC, useState } from "react";
 import { MedicalTitle } from "@/global/functions";
 import { api } from "@/values/values";
@@ -29,10 +32,14 @@ import Link from "next/link";
 import { getCookie } from "cookies-next";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Slider from "react-slick";
+import { settings } from "@/app/page";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { A11y, Navigation, Pagination, Scrollbar } from "swiper/modules";
 type AccordianWidgetType = {
   fun: PerformanceFunction;
   length: number;
-  onClick: (value: string) => void;
+  onClick: (value: string[]) => void;
 };
 
 const AccordianWidget: FC<AccordianWidgetType> = ({ fun, length, onClick }) => {
@@ -48,7 +55,7 @@ const AccordianWidget: FC<AccordianWidgetType> = ({ fun, length, onClick }) => {
                   <Box
                     cursor={"pointer"}
                     onClick={() => {
-                      if (detail.img != undefined && detail.img != "") {
+                      if (detail.img != undefined && detail.img.length > 0) {
                         onClick(detail.img);
                       }
                     }}
@@ -68,7 +75,7 @@ const AccordianWidget: FC<AccordianWidgetType> = ({ fun, length, onClick }) => {
 
 const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [img, setImg] = useState("");
+  const [img, setImg] = useState<(string | undefined)[]>([]);
   const toast = useToast();
   const token = getCookie("token");
   const router = useRouter();
@@ -88,14 +95,15 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
         });
     } catch (error) {}
   };
-  const viewImg = (value: string) => {
+  const viewImg = (value: string[]) => {
     {
       setImg(value);
-      if (value != "") {
+      if (value.length > 0) {
         onOpen();
       }
     }
   };
+  const [slider, setSlider] = useState<Slider | null>(null);
   return (
     <VStack alignItems={"start"} w={"full"} gap={5}>
       <Heading
@@ -148,7 +156,7 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
                   {e.details?.map((detail, i) => {
                     return (
                       <AccordianWidget
-                        onClick={(value: string) => {
+                        onClick={(value: string[]) => {
                           viewImg(value);
                         }}
                         key={i}
@@ -194,12 +202,29 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
         <Button onClick={deletePerformance}>Устгах</Button>
       )}
 
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered size={"xl"}>
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
           <ModalBody p={4} mt={10}>
-            <Image src={`${api}${img}`} w={"full"} alt="img" />
+            <Swiper
+              modules={[Navigation, Pagination, Scrollbar, A11y]}
+              spaceBetween={50}
+              slidesPerView={1}
+              navigation
+              pagination={{ clickable: true }}
+              scrollbar={{ draggable: true }}
+              onSwiper={(swiper) => console.log(swiper)}
+              onSlideChange={() => console.log("slide change")}
+            >
+              {img?.map((image, i) => {
+                return (
+                  <SwiperSlide key={i}>
+                    <Image src={`${api}${image}`} w={"full"} alt="img" />
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
           </ModalBody>
         </ModalContent>
       </Modal>
