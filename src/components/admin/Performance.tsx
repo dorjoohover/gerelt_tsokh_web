@@ -375,7 +375,9 @@ export type CustomDetailType = {
   _id?: string;
   text?: string;
   img?: File;
+  imgs?: FileList | null;
   date?: string
+  imgUrl?: string
 };
 export type CustomType = {
   _id?: string;

@@ -27,7 +27,7 @@ export default function AdminPerformanceCustom() {
   });
   const [detail, setDetail] = useState<CustomDetailType>({
     title: "",
-    img: undefined,
+    imgs: null,
     text: "",
   });
   const [selectedDetails, setSelectedDetails] = useState<
@@ -46,6 +46,32 @@ export default function AdminPerformanceCustom() {
     });
   };
   const router = useRouter();
+  const edit = async (id: string) => {
+    try {
+      let uploaded: string | undefined = undefined;
+
+      if (detail.img != undefined) {
+        uploaded = await uploader(detail.img!, token!);
+      } else {
+        warning(Messages.occured);
+        return;
+      }
+      const body = {
+        title: detail.title,
+        img: uploaded,
+        text: detail.text ?? "",
+      };
+      await axios
+        .put(`${api}medical/detail/${id}`, body, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((d) => console.log(d));
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const submit = async () => {
     try {
       if (token == undefined || token == "") {
@@ -65,10 +91,12 @@ export default function AdminPerformanceCustom() {
 
           if (b.img != undefined) {
             uploaded = await uploader(b.img!, token!);
-          } else {
-            warning(Messages.occured);
-            return;
-          }
+          } 
+          // else {
+            
+          //   warning(Messages.occured);
+          //   return;
+          // }
           await axios
             .post(
               `${api}medical/detail/create`,
@@ -103,7 +131,9 @@ export default function AdminPerformanceCustom() {
       await fetch(`${api}medical/detail`, { cache: "no-store" })
         .then((d) => d.json())
         .then((d) => setDetails(d));
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     getDetails();
@@ -223,24 +253,34 @@ export default function AdminPerformanceCustom() {
           accept="image/*"
           border={"none"}
           type="file"
+          multiple
           placeholder="Зураг"
           onChange={(e) => {
-            setDetail((prev) => ({ ...prev, img: e.target.files?.[0] }));
+            setDetail((prev) => ({ ...prev, imgs: e.target.files}));
           }}
         />
-        <Button
-          onClick={() => {
-            setData((prev) => ({
-              ...prev,
-              detail: [...data.detail, detail],
-            }));
-            setDetail({
-              title: "",
-            });
-          }}
-        >
-          Нэмэх
-        </Button>
+        <HStack gap={4}>
+          <Button
+            onClick={() => {
+              setData((prev) => ({
+                ...prev,
+                detail: [...data.detail, detail],
+              }));
+              setDetail({
+                title: "",
+              });
+            }}
+          >
+            Нэмэх
+          </Button>
+          <Button
+            onClick={() => {
+              edit(detail._id ?? "");
+            }}
+          >
+            Засах
+          </Button>
+        </HStack>
         {details != undefined && (
           <VStack w={"full"} mt={4} alignItems={"start"}>
             <Text mb={2}>Өмнөх өгөгдөл</Text>
@@ -272,18 +312,32 @@ export default function AdminPerformanceCustom() {
             </Select>
           </VStack>
         )}
-        <Button
-          onClick={() => {
-            if (
-              !selectedDetails.includes(selected) &&
-              selected?._id != undefined
-            ) {
-              setSelectedDetails((prev) => [...prev, selected]);
-            }
-          }}
-        >
-          Нэмэх
-        </Button>
+        <HStack gap={4}>
+          <Button
+            onClick={() => {
+              if (
+                !selectedDetails.includes(selected) &&
+                selected?._id != undefined
+              ) {
+                setSelectedDetails((prev) => [...prev, selected]);
+              }
+            }}
+          >
+            Нэмэх
+          </Button>
+          <Button
+            onClick={() => {
+              setDetail({
+                title: selected?.title ?? "",
+                _id: selected?._id,
+                img: selected?.img,
+              });
+              setSelected(undefined);
+            }}
+          >
+            Засах
+          </Button>
+        </HStack>
       </VStack>
     </AdminForm>
   );

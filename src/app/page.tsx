@@ -41,7 +41,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Head from "next/head";
 
-const settings = {
+export const settings = {
   dots: true,
   fade: true,
   infinite: true,

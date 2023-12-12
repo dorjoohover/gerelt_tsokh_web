@@ -1,11 +1,15 @@
 export enum InfoTypes {
   text = "text",
   voice = "voice",
-
 }
 export enum ArticleTypes {
   article = "article",
   info = "info",
+}
+export enum HomeTypes {
+  HEADER = "HEADER",
+  PROTOTYPE = "PROTOTYPE",
+  PARTNER = "PARTNER",
 }
 export enum WorkTypes {
   research = "research",
@@ -17,7 +21,6 @@ export enum FormTypes {
   checkbox = "checkbox",
   input = "input",
   textarea = "textarea",
-
 }
 export enum TokhiruulgaTypes {
   gratitude = "gratitude",
@@ -33,15 +36,15 @@ export enum TokhiruulgaTypes {
 }
 
 export enum MedicalTypes {
-  EMPLOYER = 'EMPLOYER',
-  EMPLOYEE = 'EMPLOYEE',
-  SETUP = 'SETUP',
-  SPACE = 'SPACE',
-  TRIGGER = 'TRIGGER',
-  POSSIBLE = 'POSSIBLE',
-  FUNCTIONS = 'FUNCTIONS',
-  KEYS = 'KEYS',
-  OTHER = 'OTHER',
+  EMPLOYER = "EMPLOYER",
+  EMPLOYEE = "EMPLOYEE",
+  SETUP = "SETUP",
+  SPACE = "SPACE",
+  TRIGGER = "TRIGGER",
+  POSSIBLE = "POSSIBLE",
+  FUNCTIONS = "FUNCTIONS",
+  KEYS = "KEYS",
+  OTHER = "OTHER",
   // CONDITION = 'CONDITION',
 }
 export enum PerformanceTypes {
@@ -82,5 +85,4 @@ export enum LegalTypes {
   law = "law",
   decree = "decree",
   regulation = "regulation",
-
 }

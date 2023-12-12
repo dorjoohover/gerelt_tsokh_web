@@ -1,16 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdminForm from "./Form";
-import { Box, HStack, Input, Text, useToast } from "@chakra-ui/react";
+import { Box, HStack, Image, Input, Text, useToast } from "@chakra-ui/react";
 import { FilterType, filterName } from "@/global/functions";
 import { ArticleTypes } from "@/global/enum";
 import axios from "axios";
 import { Messages, api } from "@/values/values";
 import { getCookie } from "cookies-next";
 import { CustomDetailType } from "./Performance";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { uploader } from "./Info";
+import { Work } from "@/model/work.model";
 const articleType: FilterType[] = [
   {
     value: ArticleTypes.article,
@@ -28,10 +29,12 @@ export default function AdminArticle({ route }: { route: { type: string } }) {
     text: "",
     img: undefined,
     date: "",
+    _id: "",
   });
   const token = getCookie("token");
   const toast = useToast();
   const router = useRouter();
+  const params = useSearchParams();
   const warning = (value: string) => {
     toast({
       title: value,
@@ -41,6 +44,28 @@ export default function AdminArticle({ route }: { route: { type: string } }) {
     });
     return;
   };
+  const getData = async (id: string) => {
+    try {
+      await fetch(`${api}work/${id}`)
+        .then((d) => d.json())
+        .then((d: Work) =>
+          setData((prev) => ({
+            ...prev,
+            _id: d._id,
+            date: d.postDate,
+            imgUrl: d.img,
+            text: d.text,
+            title: d.title,
+          }))
+        );
+    } catch (error) {}
+  };
+  useEffect(() => {
+    const id = params.get("id");
+    if (id != undefined) {
+      getData(id);
+    }
+  }, []);
   const checker = () => {
     if (token == "" || token == undefined) {
       router.push("/admin/login");
@@ -59,7 +84,7 @@ export default function AdminArticle({ route }: { route: { type: string } }) {
       if (data.img && data.img != undefined) {
         img = await uploader(data.img!, token!);
       }
-     
+
       let body = {
         title: data.title,
         img: img,
@@ -67,24 +92,43 @@ export default function AdminArticle({ route }: { route: { type: string } }) {
         types: type,
         postDate: data.date,
       };
-      await axios
-        .post(`${api}article/create`, body, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then(() =>
-          toast({
-            title: "Нэмэгдлээ.",
+      data._id == ""
+        ? await axios
+            .post(`${api}article/create`, body, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            })
+            .then(() =>
+              toast({
+                title: "Нэмэгдлээ.",
 
-            status: "success",
-            duration: 2000,
-            isClosable: true,
-          })
-        )
-        .then(() => {
-          setData({ title: "", text: "", img: undefined });
-        });
+                status: "success",
+                duration: 2000,
+                isClosable: true,
+              })
+            )
+            .then(() => {
+              setData({ title: "", text: "", img: undefined });
+            })
+        : await axios
+            .put(`${api}article/${data._id}`, body, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            })
+            .then(() =>
+              toast({
+                title: "Заслаа.",
+
+                status: "success",
+                duration: 2000,
+                isClosable: true,
+              })
+            )
+            .then(() => {
+              setData({ title: "", text: "", img: undefined, _id: "" });
+            });
     } catch (error) {
       console.log(error);
       warning(Messages.occured);
@@ -98,10 +142,17 @@ export default function AdminArticle({ route }: { route: { type: string } }) {
       title={`Нийтлэл > ${filterName(route.type, articleType)}`}
       text="Гарчиг"
       onSubmit={checker}
+      ph={data.text}
       value={data.title}
       editorText={data.text}
     >
       <Box w={"full"}>
+        {data.imgUrl && (
+          <>
+            <Text>Оруулсан зураг:</Text> <Image src={data.imgUrl} maxW={500} />
+          </>
+        )}
+
         <HStack my={4}>
           <Text>Зураг:</Text>{" "}
           <Input
@@ -122,6 +173,7 @@ export default function AdminArticle({ route }: { route: { type: string } }) {
             type="date"
             width={"auto"}
             height={"auto"}
+            value={data.date}
             onChange={(e) =>
               setData((prev) => ({ ...prev, date: e.target.value }))
             }

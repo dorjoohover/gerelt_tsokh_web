@@ -13,6 +13,8 @@ import { LegalModel } from "@/model/legal.model";
 import axios from "axios";
 import { api } from "@/values/values";
 import { getCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
+import { LegalTypes } from "@/global/enum";
 
 const LegalDetailWidget = ({ data }: { data: LegalModel }) => {
   const toast = useToast();
@@ -32,6 +34,7 @@ const LegalDetailWidget = ({ data }: { data: LegalModel }) => {
         });
     } catch (error) {}
   };
+  const router = useRouter();
   return (
     <VStack alignItems={"start"} w={"full"} gap={4}>
       <Text variant={"smallTitle"} color={"text"}>
@@ -68,7 +71,20 @@ const LegalDetailWidget = ({ data }: { data: LegalModel }) => {
         </HStack>
       )} */}
       {token && token != "" && data._id != "" && (
-        <Button onClick={deleteLegal}>Устгах</Button>
+        <HStack gap={4}>
+          <Button onClick={deleteLegal} bg={"red"}>
+            Устгах
+          </Button>
+          <Button
+            onClick={() => {
+              router.push(
+                `/admin?route=legal&name=${data.type}&id=${data._id}`
+              );
+            }}
+          >
+            Засах
+          </Button>
+        </HStack>
       )}
     </VStack>
   );

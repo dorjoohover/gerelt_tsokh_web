@@ -16,5 +16,5 @@ export  interface LegalModel {
     chief? : string
     location?: string
     number? : string
-    details: PerformanceFunctionDetail[],
+    details?: PerformanceFunctionDetail[],
 }

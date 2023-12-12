@@ -85,30 +85,16 @@ const ArticlePage = () => {
             />
           ) : (
             data?.map((d, i) => {
-              switch (d.type) {
-                case ArticleTypes.info:
-                  return (
-                    <LineWidget
-                      img={d.img!}
-                      id={d._id}
-                      text={d.text}
-                      title={d.title}
-                      key={i}
-                      type="article"
-                    />
-                  );
-                default:
-                  return (
-                    <LineWidget
-                      img={d.img!}
-                      id={d._id}
-                      text={d.text}
-                      title={d.title}
-                      key={i}
-                      type="article"
-                    />
-                  );
-              }
+              return (
+                <LineWidget
+                  img={d.img!}
+                  id={d._id}
+                  text={d.text}
+                  title={d.title}
+                  key={i}
+                  type="article"
+                />
+              );
             }) ?? <></>
           )
         }

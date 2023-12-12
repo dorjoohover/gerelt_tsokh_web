@@ -5,6 +5,7 @@ import {
 import {
   Box,
   Button,
+  HStack,
   Heading,
   ListItem,
   OrderedList,
@@ -18,10 +19,12 @@ import { TopicModel } from "@/model/topic.model";
 import { getCookie } from "cookies-next";
 import axios from "axios";
 import { api } from "@/values/values";
+import { useRouter } from "next/navigation";
 
 const TopicDetailWidget = ({ data }: { data: TopicModel }) => {
   const toast = useToast();
   const token = getCookie("token");
+  const router = useRouter();
   const deleteTopic = async () => {
     try {
       await axios
@@ -54,7 +57,20 @@ const TopicDetailWidget = ({ data }: { data: TopicModel }) => {
           __html: data?.text?.replaceAll('"', "") ?? "",
         }}
       ></Box>
-      {token && token != '' && data._id != "" && <Button onClick={deleteTopic}>Устгах</Button>}
+      {token && token != "" && data._id != "" && (
+        <HStack gap={4}>
+          <Button onClick={deleteTopic} bg={"red"}>
+            Устгах
+          </Button>
+          <Button
+            onClick={() => {
+              router.push(`/admin?route=topic&id=${data._id}`);
+            }}
+          >
+            Засах
+          </Button>
+        </HStack>
+      )}
     </VStack>
   );
 };

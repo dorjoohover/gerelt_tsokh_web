@@ -15,6 +15,7 @@ import {
 import axios from "axios";
 import { getCookie } from "cookies-next";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FC } from "react";
 import { FaPlay } from "react-icons/fa";
 type InfoType = {
@@ -23,6 +24,7 @@ type InfoType = {
 export const TextLine: FC<InfoType> = ({ data }) => {
   const toast = useToast();
   const token = getCookie("token");
+  const router = useRouter();
   const deleteInfo = async () => {
     try {
       await axios
@@ -73,7 +75,16 @@ export const TextLine: FC<InfoType> = ({ data }) => {
         display={{ base: "inline-block", md: "none" }}
       >{`${data.date} | ${data.duration} мин`}</Text> */}
       {token && token != "" && data._id != "" && (
-        <Button onClick={deleteInfo}>Устгах</Button>
+        <HStack gap={4}>
+          <Button onClick={deleteInfo}>Устгах</Button>
+          <Button
+            onClick={() => {
+              router.push(`/admin?route=info&id=${data._id}`);
+            }}
+          >
+            Засах
+          </Button>
+        </HStack>
       )}
     </VStack>
   );
@@ -102,6 +113,7 @@ export const VoiceLine = ({
         });
     } catch (error) {}
   };
+  const router = useRouter();
   return (
     <HStack alignItems={"start"} w={"full"}>
       <Button
@@ -155,7 +167,18 @@ export const VoiceLine = ({
           display={{ base: "inline-block", md: "none" }}
         >{`${data.date} | ${data.duration} мин`}</Text> */}
         {token && token != "" && data._id != "" && (
-          <Button onClick={deleteInfo}>Устгах</Button>
+          <HStack gap={4}>
+            <Button onClick={deleteInfo} background={"red"}>
+              Устгах
+            </Button>
+            <Button
+              onClick={() => {
+                router.push(`/admin?route=info&name=text&id=${data._id}`);
+              }}
+            >
+              Засах
+            </Button>
+          </HStack>
         )}
       </VStack>
     </HStack>

@@ -15,6 +15,7 @@ import {
 import axios from "axios";
 import { getCookie } from "cookies-next";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FC } from "react";
 
 type LineWidgetType = {
@@ -120,6 +121,7 @@ export const LineWidgetDetail: FC<LineWidgetDetailType> = ({
         });
     } catch (error) {}
   };
+  const router = useRouter();
   return (
     <VStack alignItems={"start"} w={"full"} gap={5}>
       <Heading variant={"title"}>{title}</Heading>
@@ -144,7 +146,18 @@ export const LineWidgetDetail: FC<LineWidgetDetailType> = ({
           }}
         ></Box>
       </VStack>
-      {token && id != "" && <Button onClick={deleteItem}>Устгах</Button>}
+      {token && id != "" && (
+        <HStack gap={4}>
+          <Button onClick={deleteItem} bg={'red'}>Устгах</Button>
+          <Button
+            onClick={() => {
+              router.push(`/admin?route=work&name=${type}&id=${id}`);
+            }}
+          >
+            Засах
+          </Button>
+        </HStack>
+      )}
     </VStack>
   );
 };

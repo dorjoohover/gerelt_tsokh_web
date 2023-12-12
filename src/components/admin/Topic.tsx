@@ -1,21 +1,45 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdminForm from "./Form";
 import { useToast } from "@chakra-ui/react";
 
 import { Messages, api } from "@/values/values";
 import axios from "axios";
 import { getCookie } from "cookies-next";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { TopicModel } from "@/model/topic.model";
+import { TopicTypes } from "@/global/enum";
 export default function AdminTopic() {
-  const [data, setData] = useState({
+  const [data, setData] = useState<TopicModel>({
     title: "",
     text: "",
+    _id: "",
   });
   const token = getCookie("token");
   const toast = useToast();
   const router = useRouter();
+  const params = useSearchParams();
+  const getData = async (id: string) => {
+    try {
+      await fetch(`${api}topic/${id}`)
+        .then((d) => d.json())
+        .then((d: TopicModel) =>
+          setData((prev) => ({
+            ...prev,
+            _id: d._id,
+            text: d.text,
+            title: d.title,
+          }))
+        );
+    } catch (error) {}
+  };
+  useEffect(() => {
+    const id = params.get("id");
+    if (id != undefined) {
+      getData(id);
+    }
+  }, []);
   const checker = () => {
     if (token == "" || token == undefined) {
       router.push("/admin/login");
@@ -26,28 +50,51 @@ export default function AdminTopic() {
   };
   const submit = async () => {
     try {
-      await axios
-        .post(
-          `${api}topic/create`,
-          {
-            title: data.title,
-            text: data.text,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
-        .then((d) =>
-          toast({
-            title: "Нэмэгдлээ.",
+      data._id == ""
+        ? await axios
+            .post(
+              `${api}topic/create`,
+              {
+                title: data.title,
+                text: data.text,
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            )
+            .then((d) =>
+              toast({
+                title: "Нэмэгдлээ.",
 
-            status: "success",
-            duration: 2000,
-            isClosable: true,
-          })
-        );
+                status: "success",
+                duration: 2000,
+                isClosable: true,
+              })
+            )
+        : await axios
+            .put(
+              `${api}topic/${data._id}`,
+              {
+                title: data.title,
+                text: data.text,
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            )
+            .then((d) =>
+              toast({
+                title: "Нэмэгдлээ.",
+
+                status: "success",
+                duration: 2000,
+                isClosable: true,
+              })
+            );
     } catch (error) {
       console.log(error);
       toast({
@@ -63,6 +110,7 @@ export default function AdminTopic() {
     <AdminForm
       value={data.title}
       editorText={data.text}
+      ph={data.text}
       onTitle={(e) => setData((prev) => ({ ...prev, title: e }))}
       onChange={(e) => setData((prev) => ({ ...prev, text: e }))}
       title={`Халуун сэдэв `}

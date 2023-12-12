@@ -29,6 +29,8 @@ import Link from "next/link";
 import { getCookie } from "cookies-next";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Slider from "react-slick";
+import { settings } from "@/app/page";
 type AccordianWidgetType = {
   fun: PerformanceFunction;
   length: number;
@@ -96,6 +98,7 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
       }
     }
   };
+  const [slider, setSlider] = useState<Slider | null>(null);
   return (
     <VStack alignItems={"start"} w={"full"} gap={5}>
       <Heading
@@ -199,7 +202,40 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
         <ModalContent>
           <ModalCloseButton />
           <ModalBody p={4} mt={10}>
-            <Image src={`${api}${img}`} w={"full"} alt="img" />
+            <Box
+              position={"relative"}
+              height={{
+                md: "600px",
+                base: "90vh",
+              }}
+              width={"full"}
+              overflow={"hidden"}
+            >
+              <link
+                rel="stylesheet"
+                type="text/css"
+                href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+              />
+              <link
+                rel="stylesheet"
+                type="text/css"
+                href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+              />
+
+              <Slider
+                {...settings}
+                ref={(slider) => {
+                  setSlider(slider);
+                }}
+                beforeChange={() => {
+                  // setCurrent(current == 0 ? 1 : 0);
+                }}
+              >
+                {" "}
+                <Image src={`${api}${img}`} w={"full"} alt="img" />
+                <Image src={`${api}${img}`} w={"full"} alt="img" />
+              </Slider>
+            </Box>
           </ModalBody>
         </ModalContent>
       </Modal>

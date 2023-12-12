@@ -14,6 +14,9 @@ import AdminPerformance from "@/components/admin/Performance";
 import AdminTopic from "@/components/admin/Topic";
 import AdminLegal from "@/components/admin/Legal";
 import AdminPerformanceCustom from "@/components/admin/Custom";
+import PartnerWidget from "@/components/admin/Partner";
+import PrototypeWidget from "@/components/admin/Prototype";
+import HeaderWidget from "@/components/admin/Header";
 
 export default function AdminPage() {
   const token = getCookie("token");
@@ -40,6 +43,12 @@ export default function AdminPage() {
 
   const View = (): ReactNode => {
     switch (route.value) {
+      case "partner":
+        return <PartnerWidget />;
+      case "prototype":
+        return <PrototypeWidget />;
+      case "header":
+        return <HeaderWidget />;
       case "info":
         return <AdminInfo />;
       case "work":

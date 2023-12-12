@@ -147,7 +147,23 @@ export const tokhiruulgaNavValues: NavItemsTypes[] = [
 export const adminNavbarValue = [
   {
     title: "Home page удирдах",
-    links: [],
+    links: [
+      {
+        title: 'Header',
+        uri: "/admin?route=header",
+        link: [],
+      },
+      {
+        title: "Prototype",
+        uri: "/admin?route=prototype",
+        link: [],
+      },
+      {
+        title: "Хамтрагчид",
+        uri: "/admin?route=partner",
+        link: [],
+      },
+    ],
     uri: "/admin",
   },
   {
