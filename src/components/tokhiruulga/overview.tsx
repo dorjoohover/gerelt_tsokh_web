@@ -1,3 +1,4 @@
+import { imgGereltTsokh, imgHeader1, imgLogo, imgTokhiruulga, videoIntro } from "@/global/assets";
 import {
   Box,
   HStack,
@@ -29,9 +30,12 @@ const OverviewWidget: FC<Types> = ({ img, text, uri, question, purpose }) => {
       >
         {text}
       </Heading>
-      <Box pos={"relative"} w={"full"}>
-        <Link href={uri} target="_blank">
-          <Image src={img} alt={""} w={"full"} />
+      <Box pos={"relative"} w={"full"} >
+        {/* <Link href={uri} target="_blank"> */}
+        <video src={'http://139.162.40.225:5000/api/1702395166679tokhiruulga.mp4'} poster={imgHeader1} width={'100%'} controls>
+          
+        </video>
+          {/* <Image src={img} alt={""} w={"full"} />
           <Box
             pos={"absolute"}
             zIndex={5}
@@ -47,8 +51,8 @@ const OverviewWidget: FC<Types> = ({ img, text, uri, question, purpose }) => {
             h={16}
           >
             <Icon as={FaPlay} boxSize={25} color={"white"} />
-          </Box>
-        </Link>
+          </Box> */}
+        {/* </Link> */}
       </Box>
       <Heading fontSize={"20px"} variant={"smallTitle"} color={"text"}>
         Зорилго

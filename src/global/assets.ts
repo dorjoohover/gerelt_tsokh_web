@@ -14,6 +14,12 @@ const svg = `${assets}svg/`;
 // voice
 const voice = `${assets}voice/`;
 
+// video
+const video = `${assets}video/`;
+
+
+export const videoIntro = `${video}ТОХИРУУЛГА.МН final.mp4`
+
 export const imgLogo = `${assets}logo.png`;
 export const imgMiniLogo = `${assets}miniLogo.png`;
 export const imgLogoWhite = `${assets}logo white.png`;
