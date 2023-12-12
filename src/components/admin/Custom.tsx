@@ -48,26 +48,46 @@ export default function AdminPerformanceCustom() {
   const router = useRouter();
   const edit = async (id: string) => {
     try {
-      let uploaded: string | undefined = undefined;
+      let uploaded: any[] = [];
 
-      if (detail.img != undefined) {
-        uploaded = await uploader(detail.img!, token!);
+      if (detail.imgs != null) {
+        for (let i = 0; i < detail.imgs.length; i++) {
+          let item = await uploader(detail.imgs[i], token!);
+          uploaded = [...uploaded, item];
+          if (i == detail.imgs.length - 1) {
+            const body = {
+              title: detail.title,
+              img: uploaded,
+              text: detail.text ?? "",
+            };
+            submitEdit(id, body);
+            // console.log(body);
+          }
+        }
       } else {
         warning(Messages.occured);
         return;
       }
-      const body = {
-        title: detail.title,
-        img: uploaded,
-        text: detail.text ?? "",
-      };
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const submitEdit = async (id: string, body: any) => {
+    try {
       await axios
-        .put(`${api}medical/detail/${id}`, body, {
+        .put(`${api}medical/edit/detail/${id}`, body, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
-        .then((d) => console.log(d));
+        .then((d) => {
+          console.log(d);
+          toast({
+            title: "Заслаа",
+            status: "success",
+            duration: 3000,
+          });
+        });
     } catch (error) {
       console.log(error);
     }
@@ -91,9 +111,9 @@ export default function AdminPerformanceCustom() {
 
           if (b.img != undefined) {
             uploaded = await uploader(b.img!, token!);
-          } 
+          }
           // else {
-            
+
           //   warning(Messages.occured);
           //   return;
           // }
@@ -130,7 +150,10 @@ export default function AdminPerformanceCustom() {
     try {
       await fetch(`${api}medical/detail`, { cache: "no-store" })
         .then((d) => d.json())
-        .then((d) => setDetails(d));
+        .then((d) => {
+        
+          setDetails(d)
+        });
     } catch (error) {
       console.log(error);
     }
@@ -256,7 +279,7 @@ export default function AdminPerformanceCustom() {
           multiple
           placeholder="Зураг"
           onChange={(e) => {
-            setDetail((prev) => ({ ...prev, imgs: e.target.files}));
+            setDetail((prev) => ({ ...prev, imgs: e.target.files }));
           }}
         />
         <HStack gap={4}>
@@ -331,6 +354,7 @@ export default function AdminPerformanceCustom() {
                 title: selected?.title ?? "",
                 _id: selected?._id,
                 img: selected?.img,
+                text: selected?.text
               });
               setSelected(undefined);
             }}
