@@ -44,7 +44,7 @@ import axios from "axios";
 import { Article } from "@/model/article.model";
 import { dateFormater } from "@/global/functions";
 
-export const settings = {
+const settings = {
   dots: true,
   fade: true,
   infinite: true,

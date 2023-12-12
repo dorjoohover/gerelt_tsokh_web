@@ -33,7 +33,7 @@ import { getCookie } from "cookies-next";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Slider from "react-slick";
-import { settings } from "@/app/page";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper/modules";
 type AccordianWidgetType = {
