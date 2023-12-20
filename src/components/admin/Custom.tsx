@@ -105,7 +105,7 @@ export default function AdminPerformanceCustom() {
       if (data.detail.length > 0) {
         data.detail.map(async (b, i) => {
           let uploaded: any[] = [];
-          for(let i = 0; i< b.imgs.lengt; i++) {
+          for(let i = 0; i< b.imgs.length; i++) {
             const item = await uploader(b.imgs[i]!, token!)
             uploaded = [...uploaded, item]
           }
