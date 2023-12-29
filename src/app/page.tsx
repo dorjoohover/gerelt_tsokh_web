@@ -60,15 +60,20 @@ export default function Home() {
   const [current, setCurrent] = useState(0);
   const router = useRouter();
   const [article, setArticle] = useState<Article[]>([]);
+  const [header, setHeader] = useState([]);
   const getData = async () => {
     try {
+      await fetch(`${api}home/HEADER`)
+        .then((d) => d.json())
+        .then((d: any) => {
+          setHeader(d.slice(-1)[0].imgs);
+        });
       await axios
         .post(`${api}article/type/all`, {
           limit: 2,
           page: 0,
         })
         .then((d) => {
-          console.log(d);
           setArticle(d.data.data);
         });
     } catch (error) {}
@@ -108,75 +113,82 @@ export default function Home() {
               setCurrent(current == 0 ? 1 : 0);
             }}
           >
-            <SliderCard
-              body={
-                <VStack
-                  w={{
-                    md: "40%",
-                    base: "100%",
-                  }}
-                  gap={8}
-                  py={{
-                    md: 0,
-                    base: 16,
-                  }}
-                  h={{
-                    md: "100%",
-                    base: "calc(90vh - 200px)",
-                  }}
-                  justifyContent={"center"}
-                  alignItems={"start"}
-                >
-                  <Heading variant={"display"} mt={6}>
-                    {tokhiruulga}
-                  </Heading>
-                  <Text variant={"smallTitle"}>{purpose}</Text>
-                  <Text color={"white"}>{purposeText}</Text>
-                  <Box
-                    h={{
-                      md: 120,
-                      base: 0,
-                    }}
+            {header &&
+              header.map((h, i) => {
+                return i == 0 ? (
+                  <SliderCard
+                    key={i}
+                    body={
+                      <VStack
+                        w={{
+                          md: "40%",
+                          base: "100%",
+                        }}
+                        gap={8}
+                        py={{
+                          md: 0,
+                          base: 16,
+                        }}
+                        h={{
+                          md: "100%",
+                          base: "calc(90vh - 200px)",
+                        }}
+                        justifyContent={"center"}
+                        alignItems={"start"}
+                      >
+                        <Heading variant={"display"} mt={6}>
+                          {tokhiruulga}
+                        </Heading>
+                        <Text variant={"smallTitle"}>{purpose}</Text>
+                        <Text color={"white"}>{purposeText}</Text>
+                        <Box
+                          h={{
+                            md: 120,
+                            base: 0,
+                          }}
+                        />
+                      </VStack>
+                    }
+                    footer={<Box />}
+                    bg={`${api}${h}`}
+                    current={current}
                   />
-                </VStack>
-              }
-              footer={<Box />}
-              bg={imgHeader}
-              current={current}
-            />
+                ) : (
+                  <SliderCard
+                    key={i}
+                    body={
+                      <VStack
+                        w={{
+                          md: "40%",
+                        }}
+                        gap={8}
+                        h={{
+                          md: "100%",
+                          base: "calc(90vh - 200px)",
+                        }}
+                        justifyContent={"center"}
+                        alignItems={"start"}
+                      >
+                        <Image src={imgLogoWhite} w={252} alt="logo" />
+                        <Text variant={"smallTitle"} as={"i"}>
+                          {slogan}
+                        </Text>
 
-            <SliderCard
-              body={
-                <VStack
-                  w={{
-                    md: "40%",
-                  }}
-                  gap={8}
-                  h={{
-                    md: "100%",
-                    base: "calc(90vh - 200px)",
-                  }}
-                  justifyContent={"center"}
-                  alignItems={"start"}
-                >
-                  <Image src={imgLogoWhite} w={252} alt="logo" />
-                  <Text variant={"smallTitle"} as={"i"}>
-                    {slogan}
-                  </Text>
-
-                  <Box
-                    h={{
-                      md: 150,
-                      base: 0,
-                    }}
+                        <Box
+                          h={{
+                            md: 150,
+                            base: 0,
+                          }}
+                        />
+                      </VStack>
+                    }
+                    fit={"contain"}
+                    footer={<Box />}
+                    bg={`${api}${h}`}
+                    current={current}
                   />
-                </VStack>
-              }
-              fit={"contain"}
-              footer={<Box />}
-              bg={imgHeader1}
-              current={current}
-            />
+                );
+              })}
           </Slider>
         </Box>
         <Box h={16} />
