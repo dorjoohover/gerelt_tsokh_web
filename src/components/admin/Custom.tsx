@@ -64,10 +64,7 @@ export default function AdminPerformanceCustom() {
             // console.log(body);
           }
         }
-      } else {
-        warning(Messages.occured);
-        return;
-      }
+      } 
     } catch (error) {
       console.log(error);
     }
@@ -107,11 +104,12 @@ export default function AdminPerformanceCustom() {
 
       if (data.detail.length > 0) {
         data.detail.map(async (b, i) => {
-          let uploaded: string | undefined = undefined;
-
-          if (b.img != undefined) {
-            uploaded = await uploader(b.img!, token!);
+          let uploaded: any[] = [];
+          for(let i = 0; i< b.imgs.length; i++) {
+            const item = await uploader(b.imgs[i]!, token!)
+            uploaded = [...uploaded, item]
           }
+      
           // else {
 
           //   warning(Messages.occured);
