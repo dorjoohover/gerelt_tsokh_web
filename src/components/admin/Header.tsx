@@ -25,7 +25,10 @@ export default function HeaderWidget() {
     try {
       await fetch(`${api}home/HEADER`)
         .then((d) => d.json())
-        .then((d) => setData(d));
+        .then((d) => {
+        
+          setData(d?.slice(-1)?.[0]);
+        });
     } catch (error) {}
   };
   useEffect(() => {
@@ -50,28 +53,46 @@ export default function HeaderWidget() {
     }
     submit();
   };
+
   const submit = async () => {
     try {
       let img = [];
       if (imgs != null) {
         for (let i = 0; i < imgs.length; i++) {
-          let image = await uploader(imgs[0], token!);
+          let image = await uploader(imgs[i], token!);
           img.push(image);
         }
       }
-      await axios.post(`${api}home`, {
-        type: HomeTypes.HEADER,
-        imgs: img,
-      });
+
+      await axios
+        .post(`${api}home`, {
+          type: HomeTypes.HEADER,
+          imgs: img.reverse(),
+        })
+        .then((d) =>
+          {
+            toast({
+              status: "success",
+              title: "Амжилттай",
+              duration: 3000,
+            });
+            router.refresh()
+          }
+        );
     } catch (error) {
-        console.log(error);
+      console.log(error);
+      toast({
+        status: "warning",
+        title: "Алдаа",
+        duration: 3000,
+      });
     }
   };
 
   return (
     <VStack w={"full"} alignItems={"start"}>
       <Heading mb={8}>Толгой</Heading>
-
+{JSON.stringify(data)}
       {data && data?.imgs?.length > 0 && (
         <Box mb={4}>
           <Heading>Оруулсан</Heading>

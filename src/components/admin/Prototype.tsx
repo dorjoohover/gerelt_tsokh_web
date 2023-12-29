@@ -25,7 +25,9 @@ export default function PrototypeWidget() {
     try {
       await fetch(`${api}home/PROTOTYPE`)
         .then((d) => d.json())
-        .then((d) => setData(d));
+        .then((d) => {
+          setData(d?.slice(-1)?.[0]);
+        });
     } catch (error) {}
   };
   useEffect(() => {
@@ -59,12 +61,26 @@ export default function PrototypeWidget() {
           img.push(image);
         }
       }
-      await axios.post(`${api}home`, {
-        type: HomeTypes.PROTOTYPE,
-        imgs: img,
-      });
+      await axios
+        .post(`${api}home`, {
+          type: HomeTypes.PROTOTYPE,
+          imgs: img.reverse(),
+        })
+        .then((d) => {
+          toast({
+            status: "success",
+            title: "Амжилттай",
+            duration: 3000,
+          });
+          router.refresh();
+        });
     } catch (error) {
-        console.log(error);
+      console.log(error);
+      toast({
+        status: "warning",
+        title: "Алдаа",
+        duration: 3000,
+      });
     }
   };
 

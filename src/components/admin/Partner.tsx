@@ -39,7 +39,7 @@ export default function PartnerWidget() {
       router.push("/admin/login");
       return;
     }
-    console.log(imgs);
+ 
     if (imgs == null || imgs?.length < 2) {
       toast({
         title: Messages.requiredFile,
@@ -55,17 +55,31 @@ export default function PartnerWidget() {
       let img = [];
       if (imgs != null) {
         for (let i = 0; i < imgs.length; i++) {
-          let image = await uploader(imgs[0], token!);
+          let image = await uploader(imgs[i], token!);
           img.push(image);
         }
       }
       await axios.post(`${api}home`, {
         type: HomeTypes.PARTNER,
-        imgs: img,
-      }).then((d) => console.log(d));
-    } catch (error) {
-        console.log(error);
-    }
+        imgs: img.reverse(),
+      }).then((d) =>
+      {
+        toast({
+          status: "success",
+          title: "Амжилттай",
+          duration: 3000,
+        });
+        router.refresh()
+      }
+    );
+} catch (error) {
+  console.log(error);
+  toast({
+    status: "warning",
+    title: "Алдаа",
+    duration: 3000,
+  });
+}
   };
 
   return (
