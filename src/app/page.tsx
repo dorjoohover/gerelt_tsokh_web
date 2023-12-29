@@ -61,12 +61,24 @@ export default function Home() {
   const router = useRouter();
   const [article, setArticle] = useState<Article[]>([]);
   const [header, setHeader] = useState([]);
+  const [partners, setPartner] = useState([]);
+  const [prototype, setPrototype] = useState([]);
   const getData = async () => {
     try {
       await fetch(`${api}home/HEADER`)
         .then((d) => d.json())
         .then((d: any) => {
           setHeader(d.slice(-1)[0].imgs);
+        });
+      await fetch(`${api}home/PARTNER`)
+        .then((d) => d.json())
+        .then((d: any) => {
+          setPartner(d.slice(-1)[0].imgs);
+        });
+      await fetch(`${api}home/PROTOTYPE`)
+        .then((d) => d.json())
+        .then((d: any) => {
+          setPrototype(d.slice(-1)[0].imgs);
         });
       await axios
         .post(`${api}article/type/all`, {
@@ -202,39 +214,47 @@ export default function Home() {
             p={0}
           >
             <Link href={"/about"}>
-              <CustomCard
-                body={<Image src={imgGereltTsokh} alt={gereltTokh} />}
-                footer={
-                  <Heading
-                    variant={"title"}
-                    fontSize={{
-                      md: "22px",
-                      base: "16px",
-                    }}
-                    color={"darkPrime"}
-                  >
-                    {gereltTokh}
-                  </Heading>
-                }
-              />
+              {prototype && (
+                <CustomCard
+                  body={
+                    <Image src={`${api}${prototype[0]}`} alt={gereltTokh} />
+                  }
+                  footer={
+                    <Heading
+                      variant={"title"}
+                      fontSize={{
+                        md: "22px",
+                        base: "16px",
+                      }}
+                      color={"darkPrime"}
+                    >
+                      {gereltTokh}
+                    </Heading>
+                  }
+                />
+              )}
             </Link>
 
             <Link href={"/tokhiruulga?name=gratitude"}>
-              <CustomCard
-                body={<Image src={imgTokhiruulga} alt={tokhiruulga} />}
-                footer={
-                  <Heading
-                    variant={"title"}
-                    fontSize={{
-                      md: "22px",
-                      base: "16px",
-                    }}
-                    color={"darkPrime"}
-                  >
-                    {tokhiruulgaMn}
-                  </Heading>
-                }
-              />
+              {prototype && (
+                <CustomCard
+                  body={
+                    <Image src={`${api}${prototype[1]}`} alt={tokhiruulga} />
+                  }
+                  footer={
+                    <Heading
+                      variant={"title"}
+                      fontSize={{
+                        md: "22px",
+                        base: "16px",
+                      }}
+                      color={"darkPrime"}
+                    >
+                      {tokhiruulgaMn}
+                    </Heading>
+                  }
+                />
+              )}
             </Link>
           </HStack>
           <Box h={4} />
@@ -397,7 +417,7 @@ export default function Home() {
             w={"full"}
             alignItems={"center"}
           >
-            {partnerValues.map((partner, index) => {
+            {partners?.map((partner, index) => {
               return (
                 <GridItem
                   h={{
@@ -411,7 +431,7 @@ export default function Home() {
                   borderBottom={{
                     md: "none",
                     base:
-                      index != partnerValues.length - 1
+                      index != partners.length - 1
                         ? "1px solid #00BCA9"
                         : "",
                   }}
@@ -426,7 +446,7 @@ export default function Home() {
                   key={index}
                 >
                   <Image
-                    src={partner}
+                    src={`${api}${partner}`}
                     key={index}
                     mx={"auto"}
                     h={"100%"}
