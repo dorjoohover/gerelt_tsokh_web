@@ -25,7 +25,7 @@ export default function PartnerWidget() {
     try {
       await fetch(`${api}home/PARTNER`)
         .then((d) => d.json())
-        .then((d) => setData(d));
+        .then((d) => setData(d.slice(-1)?.[0]));
     } catch (error) {}
   };
   useEffect(() => {
