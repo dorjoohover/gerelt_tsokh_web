@@ -61,7 +61,7 @@ export default function Home() {
   const router = useRouter();
   const [article, setArticle] = useState<Article[]>([]);
   const [header, setHeader] = useState([]);
-  const [partners, setPartner] = useState([]);
+  const [partnersImg, setPartner] = useState([]);
   const [prototype, setPrototype] = useState([]);
   const getData = async () => {
     try {
@@ -417,7 +417,7 @@ export default function Home() {
             w={"full"}
             alignItems={"center"}
           >
-            {partners?.map((partner, index) => {
+            {partnersImg?.map((partner, index) => {
               return (
                 <GridItem
                   h={{
