@@ -68,17 +68,17 @@ export default function Home() {
       await fetch(`${api}home/HEADER`)
         .then((d) => d.json())
         .then((d: any) => {
-          setHeader(d.slice(-1)[0].imgs);
+          setHeader(d.slice(-1)?.[0].imgs);
         });
       await fetch(`${api}home/PARTNER`)
         .then((d) => d.json())
         .then((d: any) => {
-          setPartner(d.slice(-1)[0].imgs);
+          setPartner(d.slice(-1)?.[0].imgs);
         });
       await fetch(`${api}home/PROTOTYPE`)
         .then((d) => d.json())
         .then((d: any) => {
-          setPrototype(d.slice(-1)[0].imgs);
+          setPrototype(d.slice(-1)?.[0].imgs);
         });
       await axios
         .post(`${api}article/type/all`, {
