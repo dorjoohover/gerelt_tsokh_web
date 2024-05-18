@@ -29,8 +29,8 @@ import {
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 
 // export const api = "http://139.162.40.225:5000/api/";
-export const api = "http://89.116.22.241:5000/api/";
-// export const api = "http://localhost:5000/api/";
+// export const api = "http://89.116.22.241:5000/api/";
+export const api = "http://localhost:5000/api/";
 // export const url = "http://139.162.40.225";
 export const url = "http://89.116.22.241";
 
