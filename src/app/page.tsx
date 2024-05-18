@@ -73,8 +73,6 @@ export default function Home() {
       await fetch(`${api}home/PARTNER`)
         .then((d) => d.json())
         .then((d: any) => {
-          console.log(d);
-          console.log(d?.[d.length - 1].imgs);
           setPartner(d?.[d.length - 1].imgs);
         });
       await fetch(`${api}home/PROTOTYPE`)
@@ -419,7 +417,6 @@ export default function Home() {
             w={"full"}
             alignItems={"center"}
           >
-            {JSON.stringify(partnersImg)}
             {partnersImg &&
               partnersImg?.map((partner, index) => {
               
