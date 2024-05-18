@@ -68,17 +68,19 @@ export default function Home() {
       await fetch(`${api}home/HEADER`)
         .then((d) => d.json())
         .then((d: any) => {
-          setHeader(d.slice(-1)?.[0].imgs);
+          setHeader(d?.[d.length - 1].imgs);
         });
       await fetch(`${api}home/PARTNER`)
         .then((d) => d.json())
         .then((d: any) => {
-          setPartner(d.slice(-1)?.[0].imgs);
+          console.log(d);
+          console.log(d?.[d.length - 1].imgs);
+          setPartner(d?.[d.length - 1].imgs);
         });
       await fetch(`${api}home/PROTOTYPE`)
         .then((d) => d.json())
         .then((d: any) => {
-          setPrototype(d.slice(-1)?.[0].imgs);
+          setPrototype(d?.[d.length - 1].imgs);
         });
       await axios
         .post(`${api}article/type/all`, {
@@ -417,44 +419,45 @@ export default function Home() {
             w={"full"}
             alignItems={"center"}
           >
-            {partnersImg?.map((partner, index) => {
-              return (
-                <GridItem
-                  h={{
-                    md: "auto",
-                    base: "133",
-                  }}
-                  borderTop={{
-                    md: "none",
-                    base: index == 0 ? "1px solid #00BCA9" : "",
-                  }}
-                  borderBottom={{
-                    md: "none",
-                    base:
-                      index != partners.length - 1
-                        ? "1px solid #00BCA9"
-                        : "",
-                  }}
-                  py={{ base: 6 }}
-                  borderColor={{
-                    md: "none",
-                    base: "prime.default",
-                  }}
-                  display={"flex"}
-                  alignItems={"center"}
-                  justifyContent={"center"}
-                  key={index}
-                >
-                  <Image
-                    src={`${api}${partner}`}
+            {JSON.stringify(partnersImg)}
+            {partnersImg &&
+              partnersImg?.map((partner, index) => {
+              
+                return (
+                  <GridItem
+                    h={{
+                      md: "auto",
+                      base: "133",
+                    }}
+                    borderTop={{
+                      md: "none",
+                      base: index == 0 ? "1px solid #00BCA9" : "",
+                    }}
+                    borderBottom={{
+                      md: "none",
+                      base:
+                        index != partners.length - 1 ? "1px solid #00BCA9" : "",
+                    }}
+                    py={{ base: 6 }}
+                    borderColor={{
+                      md: "none",
+                      base: "prime.default",
+                    }}
+                    display={"flex"}
+                    alignItems={"center"}
+                    justifyContent={"center"}
                     key={index}
-                    mx={"auto"}
-                    h={"100%"}
-                    alt={`partner ${index}`}
-                  />
-                </GridItem>
-              );
-            })}
+                  >
+                    <Image
+                      src={`${api}${partner}`}
+                      key={index}
+                      mx={"auto"}
+                      h={"100%"}
+                      alt={`partner ${index}`}
+                    />
+                  </GridItem>
+                );
+              })}
           </Grid>
         </VStackContainer>
         <Box mt={16} />
