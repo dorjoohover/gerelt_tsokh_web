@@ -29,10 +29,11 @@ import {
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 
 // export const api = "http://139.162.40.225:5000/api/";
-export const api = "http://89.116.22.241:5000/api/";
+export const api = "http://69.62.81.83:5000/api/";
+// export const api = "http://89.116.22.241:5000/api/";
 // export const api = "http://localhost:5000/api/";
 // export const url = "http://139.162.40.225";
-export const url = "http://89.116.22.241";
+export const url = "http://69.62.81.83";
 
 export const additionInfoValues = [
   {
