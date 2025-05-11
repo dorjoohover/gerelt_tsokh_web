@@ -1,4 +1,5 @@
 import { imgGereltTsokh, imgHeader1, imgLogo, imgTokhiruulga, videoIntro } from "@/global/assets";
+import { api } from "@/values/values";
 import {
   Box,
   HStack,
@@ -32,7 +33,7 @@ const OverviewWidget: FC<Types> = ({ img, text, uri, question, purpose }) => {
       </Heading>
       <Box pos={"relative"} w={"full"} >
         {/* <Link href={uri} target="_blank"> */}
-        <video src={'http://139.162.40.225:5000/api/1702395166679tokhiruulga.mp4'} poster={imgHeader1} width={'100%'} controls>
+        <video src={`${api}1746925127794ТОХИРУУЛГА.MN final new.mp4`} poster={imgHeader1} width={'100%'} controls>
           
         </video>
           {/* <Image src={img} alt={""} w={"full"} />
