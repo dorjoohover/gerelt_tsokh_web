@@ -67,7 +67,6 @@ const AdminInfo = () => {
       router.push("/admin/login");
       return;
     }
-    
 
     if (data.voice == undefined && type == InfoTypes.voice) {
       toast({
@@ -149,7 +148,7 @@ const AdminInfo = () => {
               height={"auto"}
               border={"none"}
               width={"auto"}
-              onChange={(e) =>
+              onChange={(e: any) =>
                 setData((prev) => ({ ...prev, voice: e.target.files?.[0] }))
               }
             />

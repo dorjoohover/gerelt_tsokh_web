@@ -30,7 +30,6 @@ import { getCookie } from "cookies-next";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Slider from "react-slick";
-import { settings } from "@/app/page";
 type AccordianWidgetType = {
   fun: PerformanceFunction;
   length: number;
@@ -197,7 +196,7 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
         <Button onClick={deletePerformance}>Устгах</Button>
       )}
 
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered={true}>
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
@@ -223,8 +222,15 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
               />
 
               <Slider
-                {...settings}
-                ref={(slider) => {
+                dots={true}
+                fade={true}
+                infinite={true}
+                autoplay={true}
+                speed={500}
+                autoplaySpeed={5000}
+                slidesToShow={1}
+                slidesToScroll={1}
+                ref={(slider: any) => {
                   setSlider(slider);
                 }}
                 beforeChange={() => {

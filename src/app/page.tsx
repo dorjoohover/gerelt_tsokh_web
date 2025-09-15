@@ -41,17 +41,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Head from "next/head";
 
-export const settings = {
-  dots: true,
-  fade: true,
-  infinite: true,
-  autoplay: true,
-  speed: 500,
-  autoplaySpeed: 5000,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-};
-
 export default function Home() {
   const [slider, setSlider] = useState<Slider | null>(null);
   const [current, setCurrent] = useState(0);
@@ -59,7 +48,6 @@ export default function Home() {
   return (
     <>
       <Box maxW={"auto"}>
-  
         <Box
           position={"relative"}
           height={{
@@ -81,7 +69,14 @@ export default function Home() {
           />
 
           <Slider
-            {...settings}
+            dots={true}
+            fade={true}
+            infinite={true}
+            autoplay={true}
+            speed={500}
+            autoplaySpeed={5000}
+            slidesToShow={1}
+            slidesToScroll={1}
             ref={(slider) => {
               setSlider(slider);
             }}
@@ -140,7 +135,7 @@ export default function Home() {
                   justifyContent={"center"}
                   alignItems={"start"}
                 >
-                  <Image src={imgLogoWhite} w={252} alt="logo"/>
+                  <Image src={imgLogoWhite} w={252} alt="logo" />
                   <Text variant={"smallTitle"} as={"i"}>
                     {slogan}
                   </Text>
@@ -171,7 +166,7 @@ export default function Home() {
           >
             <Link href={"/about"}>
               <CustomCard
-                body={<Image src={imgGereltTsokh} alt={gereltTokh}/>}
+                body={<Image src={imgGereltTsokh} alt={gereltTokh} />}
                 footer={
                   <Heading
                     variant={"title"}
@@ -189,7 +184,7 @@ export default function Home() {
 
             <Link href={"/tokhiruulga?name=gratitude"}>
               <CustomCard
-                body={<Image src={imgTokhiruulga} alt={tokhiruulga}/>}
+                body={<Image src={imgTokhiruulga} alt={tokhiruulga} />}
                 footer={
                   <Heading
                     variant={"title"}
@@ -280,7 +275,7 @@ export default function Home() {
             w="auto"
           >
             <CustomCard
-              body={<Image src={imgInfo} w={"full"} alt={`info 0`}/>}
+              body={<Image src={imgInfo} w={"full"} alt={`info 0`} />}
               footer={
                 <VStack gap={7}>
                   <Heading
@@ -309,7 +304,7 @@ export default function Home() {
               }
             />
             <CustomCard
-              body={<Image src={imgInfo} w={"full"} alt={`info 0`}/>}
+              body={<Image src={imgInfo} w={"full"} alt={`info 0`} />}
               footer={
                 <VStack gap={7}>
                   <Heading
@@ -403,7 +398,13 @@ export default function Home() {
                   justifyContent={"center"}
                   key={index}
                 >
-                  <Image src={partner} key={index} mx={"auto"} h={"100%"} alt={`partner ${index}`}/>
+                  <Image
+                    src={partner}
+                    key={index}
+                    mx={"auto"}
+                    h={"100%"}
+                    alt={`partner ${index}`}
+                  />
                 </GridItem>
               );
             })}

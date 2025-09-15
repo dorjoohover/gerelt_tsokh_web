@@ -7,10 +7,14 @@ import {
   VStack,
   useToast,
 } from "@chakra-ui/react";
-import CustomEditor from "../custom-editor";
+import dynamic from "next/dynamic";
+const Editor = dynamic(() => import("@/components/custom-editor"), {
+  ssr: false,
+});
 import { ReactNode, useState } from "react";
 import Alert from "../Alert";
 import { Messages } from "@/values/values";
+
 type AdminFormType = {
   title: string;
   text: string;
@@ -35,7 +39,7 @@ export default function AdminForm({
   editor = true,
   value,
   editorText,
-  warn
+  warn,
 }: AdminFormType) {
   const toast = useToast();
   const submit = () => {
@@ -75,7 +79,7 @@ export default function AdminForm({
     <FormControl
       w={"full"}
       alignItems={"start"}
-      onSubmit={(e) => {
+      onSubmit={() => {
         checker();
       }}
     >
@@ -88,11 +92,11 @@ export default function AdminForm({
       <Input
         placeholder={text}
         value={value}
-        onChange={(e) => onTitle(e.target.value)}
+        onChange={(e: any) => onTitle(e.target.value)}
         required
         mb={10}
       />
-      {editor && <CustomEditor initialData={ph ?? ""} onChange={onChange} />}
+      {editor && <Editor initialData={ph ?? ""} onChange={onChange} />}
       {children}
       <Button my={4} onClick={checker}>
         Илгээх

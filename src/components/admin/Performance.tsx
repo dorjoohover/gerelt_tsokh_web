@@ -22,8 +22,11 @@ import { FilterType, filterName } from "@/global/functions";
 import { MedicalTypes } from "@/global/enum";
 import { api, medicalType } from "@/values/values";
 import { getCookie } from "cookies-next";
-import CustomEditor from "../custom-editor";
+const Editor = dynamic(() => import("@/components/custom-editor"), {
+  ssr: false,
+});
 import axios from "axios";
+import dynamic from "next/dynamic";
 
 export default function AdminPerformance() {
   const [data, setData] = useState({
@@ -304,7 +307,7 @@ export default function AdminPerformance() {
               <HStack>
                 {view == 1 ? (
                   detail.type == MedicalTypes.SETUP ? (
-                    <CustomEditor
+                    <Editor
                       initialData={""}
                       onChange={(e) => setValue(e)}
                     />
@@ -376,8 +379,8 @@ export type CustomDetailType = {
   text?: string;
   img?: File;
   imgs?: FileList | null;
-  date?: string
-  imgUrl?: string
+  date?: string;
+  imgUrl?: string;
 };
 export type CustomType = {
   _id?: string;

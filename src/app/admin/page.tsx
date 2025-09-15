@@ -18,7 +18,7 @@ import PartnerWidget from "@/components/admin/Partner";
 import PrototypeWidget from "@/components/admin/Prototype";
 import HeaderWidget from "@/components/admin/Header";
 
-export default function AdminPage() {
+function Page() {
   const token = getCookie("token");
   const router = useRouter();
   const [current, setCurrent] = useState<number>(0);
@@ -86,3 +86,5 @@ export default function AdminPage() {
     </Box>
   );
 }
+
+export default Page;

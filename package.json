@@ -11,7 +11,7 @@
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.2",
-    "@ckeditor/ckeditor5-build-classic": "^40.1.0",
+    "@ckeditor/ckeditor5-build-classic": "^40.2.0",
     "@ckeditor/ckeditor5-react": "^6.2.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -25,10 +25,9 @@
     "react-slick": "^0.29.0"
   },
   "devDependencies": {
-    "@types/ckeditor__ckeditor5-build-classic": "^37.0.0",
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "^18.3.24",
+    "@types/react-dom": "^18.3.7",
     "@types/react-slick": "^0.23.12",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",

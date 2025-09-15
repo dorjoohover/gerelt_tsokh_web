@@ -64,7 +64,7 @@ export default function AdminPerformanceCustom() {
             // console.log(body);
           }
         }
-      } 
+      }
     } catch (error) {
       console.log(error);
     }
@@ -105,11 +105,12 @@ export default function AdminPerformanceCustom() {
       if (data.detail.length > 0) {
         data.detail.map(async (b, i) => {
           let uploaded: any[] = [];
-          for(let i = 0; i< b.imgs.length; i++) {
-            const item = await uploader(b.imgs[i]!, token!)
-            uploaded = [...uploaded, item]
+          const imgs = b.imgs ?? [];
+          for (let i = 0; i < imgs.length; i++) {
+            const item = await uploader(imgs[i]!, token!);
+            uploaded = [...uploaded, item];
           }
-      
+
           // else {
 
           //   warning(Messages.occured);
@@ -149,8 +150,7 @@ export default function AdminPerformanceCustom() {
       await fetch(`${api}medical/detail`, { cache: "no-store" })
         .then((d) => d.json())
         .then((d) => {
-        
-          setDetails(d)
+          setDetails(d);
         });
     } catch (error) {
       console.log(error);
@@ -352,7 +352,7 @@ export default function AdminPerformanceCustom() {
                 title: selected?.title ?? "",
                 _id: selected?._id,
                 img: selected?.img,
-                text: selected?.text
+                text: selected?.text,
               });
               setSelected(undefined);
             }}
