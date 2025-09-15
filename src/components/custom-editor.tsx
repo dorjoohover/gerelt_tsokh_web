@@ -21,8 +21,9 @@ const editorConfiguration = {
     "blockQuote",
     "undo",
     "redo",
+    "|",
+    "mediaEmbed",
   ],
-
 };
 
 type EditorType = {
@@ -34,7 +35,6 @@ function CustomEditor({ initialData, onChange }: EditorType) {
   return (
     <>
       <CKEditor
-      
         onError={(e) => console.log(e)}
         editor={ClassicEditor}
         config={editorConfiguration}
