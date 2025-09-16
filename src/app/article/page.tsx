@@ -14,6 +14,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { api } from "@/values/values";
+import { MetaOg } from "@/components/meta/home";
 
 const ArticlePage = () => {
   const params = useSearchParams();
@@ -54,81 +55,92 @@ const ArticlePage = () => {
       let name: any = params.get("name") as keyof typeof ArticleTypes;
       setType(name ?? ArticleTypes.article);
       setValue(filterName(name, articleTags));
-      setPage(0)
+      setPage(0);
     }
     if (params.get("id")) {
       getDataById(params.get("id")!);
     } else {
       getData(params.get("name") as ArticleTypes);
     }
-
   }, [params]);
 
   return (
-    <VStackContainer>
-      <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
-        <LinkTitle
-          title={article}
-          value={value}
-          detail={selected ? selected.title : ""}
-          current={selected == null ? 1 : 2}
-        />
-      </HStack>
-      <Line
-        child={
-          selected != null ? (
-            <LineWidgetDetail
-              text={selected.text}
-              title={selected.title}
-              img={selected.img ?? ''}
-              id={selected._id}
-              date={selected.postDate ?? selected.createdAt}
-              type="article"
-            />
-          ) : (
-            data?.map((d, i) => {
-              switch (d.type) {
-                case ArticleTypes.info:
-                  return (
-                    <LineWidget
-                      img={d.img ?? ''}
-                      id={d._id}
-                      text={d.text}
-                      title={d.title}
-                      key={i}
-                      type="article"
-                    />
-                  );
-                default:
-                  return (
-                    <LineWidget
-                      img={d.img!}
-                      id={d._id}
-                      text={d.text}
-                      title={d.title}
-                      key={i}
-                      type="article"
-                    />
-                  );
-              }
-            }) ?? <></>
-          )
+    <div>
+      {" "}
+      <MetaOg
+        title={
+          selected?.title ??
+          filterName(params.get("name") ?? "", articleTags) ??
+          "Нийтлэл"
         }
-        filter={articleTags}
-        limit={dataCount}
-        page={page}
-        type={type}
-        value={value}
-        length={selected ? 1 : dataCount}
-        changePage={(value) => setPage(value)}
-        changeType={(value) => {
-          setType(value);
-          setPage(0);
-          setSelected(null);
-        }}
-        changeSub={() => {}}
-      />
-    </VStackContainer>
+        bg={selected?.img ? `${api}${selected?.img}` : undefined}
+        description={selected?.text ?? "Нийтлэл"}
+      />{" "}
+      <VStackContainer>
+        <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
+          <LinkTitle
+            title={article}
+            value={value}
+            detail={selected ? selected.title : ""}
+            current={selected == null ? 1 : 2}
+          />
+        </HStack>
+        <Line
+          child={
+            selected != null ? (
+              <LineWidgetDetail
+                text={selected.text}
+                title={selected.title}
+                img={selected.img ?? ""}
+                id={selected._id}
+                date={selected.postDate ?? selected.createdAt}
+                type="article"
+              />
+            ) : (
+              data?.map((d, i) => {
+                switch (d.type) {
+                  case ArticleTypes.info:
+                    return (
+                      <LineWidget
+                        img={d.img ?? ""}
+                        id={d._id}
+                        text={d.text}
+                        title={d.title}
+                        key={i}
+                        type="article"
+                      />
+                    );
+                  default:
+                    return (
+                      <LineWidget
+                        img={d.img!}
+                        id={d._id}
+                        text={d.text}
+                        title={d.title}
+                        key={i}
+                        type="article"
+                      />
+                    );
+                }
+              }) ?? <></>
+            )
+          }
+          filter={articleTags}
+          limit={dataCount}
+          page={page}
+          type={type}
+          value={value}
+          length={selected ? 1 : dataCount}
+          changePage={(value) => setPage(value)}
+          changeType={(value) => {
+            setType(value);
+            setPage(0);
+            setSelected(null);
+          }}
+          changeSub={() => {}}
+        />
+      </VStackContainer>
+    </div>
   );
 };
 export default ArticlePage;

@@ -12,6 +12,7 @@ import { usePathname } from "next/navigation";
 
 import { findTitle } from "@/global/functions";
 import { Suspense } from "react";
+import { MetaOg } from "@/components/meta/home";
 
 export default function RootLayout({
   children,
@@ -28,6 +29,7 @@ export default function RootLayout({
         <title>{findTitle(pathname)}</title>
       </head>
       <body>
+        <MetaOg title={findTitle(pathname)} />
         <ChakraProvider theme={theme}>
           <Fonts />
           {!pathname.includes("admin") && (
@@ -36,9 +38,7 @@ export default function RootLayout({
               <Box h={20} />
             </>
           )}
-          <Suspense fallback={<></>}>
-          {children}
-          </Suspense>
+          <Suspense fallback={<></>}>{children}</Suspense>
 
           {!pathname.includes("admin") && (
             <>

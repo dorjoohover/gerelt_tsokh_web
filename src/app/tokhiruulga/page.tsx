@@ -49,6 +49,7 @@ import axios from "axios";
 import { feedback, more, send, tokhiruulga } from "@/global/string";
 import RadioBox from "@/components/radiobox";
 import { FaPlay } from "react-icons/fa";
+import { MetaOg } from "@/components/meta/home";
 
 type FeedbackType = {
   number: number;
@@ -195,7 +196,7 @@ const TokhiruulgaPage = () => {
       let name: any = params.get("name") as keyof typeof TokhiruulgaTypes;
       setType(name ?? TokhiruulgaTypes.gratitude);
       setValue(filterName(name, tokhiruulgaTags));
-      setPage(0)
+      setPage(0);
     }
     getData();
   }, [params]);
@@ -205,7 +206,7 @@ const TokhiruulgaPage = () => {
         await axios.post(`${api}feedback/create`, fb.slice(1)).then((d) => {
           toast({
             duration: 3000,
-            position: 'top',
+            position: "top",
             title: "Амжилттай илгээлээ.",
             status: "success",
           });
@@ -214,7 +215,7 @@ const TokhiruulgaPage = () => {
       } else {
         toast({
           duration: 3000,
-          position: 'top',
+          position: "top",
           title: "Талбарыг бүрэн бөглөнө үү.",
           status: "warning",
         });
@@ -245,7 +246,7 @@ const TokhiruulgaPage = () => {
           })
           .then((d) => {
             toast({
-              position: 'top',
+              position: "top",
               duration: 3000,
               title: "Амжилттай илгээлээ.",
               status: "success",
@@ -569,39 +570,50 @@ const TokhiruulgaPage = () => {
   };
 
   return (
-    <VStackContainer>
-      <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
-        <LinkTitle
-          title={value}
-          special={tokhiruulga}
-          value={value}
-          detail={selected ? selected.title : ""}
-          current={selected == null ? 1 : 2}
-        />
-      </HStack>
-      <Line
-        child={changePage()}
-        filter={tokhiruulgaTags}
-        limit={limit}
-        page={page}
-        type={type}
-        value={value}
-        length={selected || data?.length < 1 ? 1 : dataCount}
-        changePage={(value) => setPage(value)}
-        changeType={(value, s) => {
-          setType(value);
-          setPage(0);
-          if (s) {
-            setSub(0);
-          }
-          setSelected(null);
-        }}
-        sub={sub}
-        changeSub={(e) => {
-          setSub(e);
-        }}
+    <div>
+      <MetaOg
+        title={
+          selected?.title ??
+          filterName(params.get("name") ?? "", tokhiruulgaTags) ??
+          "ТОХИРУУЛГА.МН"
+        }
+        bg={selected?.img ? `${api}${selected?.img}` : undefined}
+        description={selected?.text ?? "ТОХИРУУЛГА.МН"}
       />
-    </VStackContainer>
+      <VStackContainer>
+        <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
+          <LinkTitle
+            title={value}
+            special={tokhiruulga}
+            value={value}
+            detail={selected ? selected.title : ""}
+            current={selected == null ? 1 : 2}
+          />
+        </HStack>
+        <Line
+          child={changePage()}
+          filter={tokhiruulgaTags}
+          limit={limit}
+          page={page}
+          type={type}
+          value={value}
+          length={selected || data?.length < 1 ? 1 : dataCount}
+          changePage={(value) => setPage(value)}
+          changeType={(value, s) => {
+            setType(value);
+            setPage(0);
+            if (s) {
+              setSub(0);
+            }
+            setSelected(null);
+          }}
+          sub={sub}
+          changeSub={(e) => {
+            setSub(e);
+          }}
+        />
+      </VStackContainer>
+    </div>
   );
 };
 export default TokhiruulgaPage;

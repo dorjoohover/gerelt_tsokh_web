@@ -3,26 +3,17 @@ import { VStackContainer } from "@/components/container";
 import { TextLine, VoiceLine } from "@/components/lines/info";
 import { Line } from "@/components/line";
 import { LinkTitle } from "@/components/link";
-import { additionInfoData } from "@/data/addition_info.data";
 import { InfoTypes } from "@/global/enum";
 import { filterName } from "@/global/functions";
 import { additionInfo } from "@/global/string";
 import { additionInfoTags } from "@/values/tags";
 import { Info } from "@/model/info.model";
-import {
-  Box,
-  Grid,
-  GridItem,
-  HStack,
-  Heading,
-  SlideFade,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { HStack, Heading, SlideFade, VStack } from "@chakra-ui/react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { api } from "@/values/values";
+import { MetaOg } from "@/components/meta/home";
 
 export default function InfoPage() {
   const params = useSearchParams();
@@ -64,67 +55,79 @@ export default function InfoPage() {
     setTitle(t);
   };
   return (
-    <VStackContainer>
-      <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
-        <LinkTitle title={additionInfo} value={value} current={1} />
-      </HStack>
-
-      <Line
-        child={
-          data?.map((d, i) => {
-            if (type.toLowerCase() == InfoTypes.voice)
-              return (
-                <SlideFade
-                  in={true}
-                  offsetX={"50px"}
-                  transition={{ enter: { delay: i * 0.3, duration: 0.3 } }}
-                >
-                  <VoiceLine data={d} key={i} play={play} />
-                </SlideFade>
-              );
-            if (type.toLowerCase() == InfoTypes.text)
-              return (
-                <SlideFade
-                  in={true}
-                  offsetX={"50px"}
-                  transition={{ enter: { delay: i * 0.3, duration: 0.3 } }}
-                >
-                  <TextLine data={d} key={i} />
-                </SlideFade>
-              );
-          }) ?? <></>
+    <div>
+      <MetaOg
+        title={
+          type
+            ? type.toLowerCase() == InfoTypes.voice
+              ? "Дуут мэдээллүүд"
+              : "Текст мэдээллүүд"
+            : "НЭМЭЛТ МЭДЭЭЛЛҮҮД"
         }
-        filter={additionInfoTags}
-        limit={5}
-        page={page}
-        type={type}
-        value={value}
-        length={dataCount}
-        changePage={(value) => setPage(value)}
-        changeType={(value) => {
-          setType(value);
-          setPage(0);
-          setAudio(undefined);
-          setTitle(undefined);
-        }}
-        changeSub={() => {}}
+        description="НЭМЭЛТ МЭДЭЭЛЛҮҮД"
       />
-      {audio != undefined && (
-        <VStack
-          w={"full"}
-          pos={"fixed"}
-          bottom={0}
-          left={0}
-          right={0}
-          bg={"white"}
-          py={6}
-        >
-          <Heading variant={"miniTitle"} color={"text"} mb={4}>
-            {title}
-          </Heading>
-          <audio controls autoPlay src={`${api}${audio}`} className="audio" />
-        </VStack>
-      )}
-    </VStackContainer>
+      <VStackContainer>
+        <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
+          <LinkTitle title={additionInfo} value={value} current={1} />
+        </HStack>
+
+        <Line
+          child={
+            data?.map((d, i) => {
+              if (type.toLowerCase() == InfoTypes.voice)
+                return (
+                  <SlideFade
+                    in={true}
+                    offsetX={"50px"}
+                    transition={{ enter: { delay: i * 0.3, duration: 0.3 } }}
+                  >
+                    <VoiceLine data={d} key={i} play={play} />
+                  </SlideFade>
+                );
+              if (type.toLowerCase() == InfoTypes.text)
+                return (
+                  <SlideFade
+                    in={true}
+                    offsetX={"50px"}
+                    transition={{ enter: { delay: i * 0.3, duration: 0.3 } }}
+                  >
+                    <TextLine data={d} key={i} />
+                  </SlideFade>
+                );
+            }) ?? <></>
+          }
+          filter={additionInfoTags}
+          limit={5}
+          page={page}
+          type={type}
+          value={value}
+          length={dataCount}
+          changePage={(value) => setPage(value)}
+          changeType={(value) => {
+            setType(value);
+            setPage(0);
+            setAudio(undefined);
+            setTitle(undefined);
+          }}
+          changeSub={() => {}}
+        />
+        {audio != undefined && (
+          <VStack
+            w={"full"}
+            pos={"fixed"}
+            bottom={0}
+            left={0}
+            right={0}
+            bg={"white"}
+            py={6}
+          >
+            <Heading variant={"miniTitle"} color={"text"} mb={4}>
+              {title}
+            </Heading>
+            <audio controls autoPlay src={`${api}${audio}`} className="audio" />
+          </VStack>
+        )}
+      </VStackContainer>
+    </div>
   );
 }

@@ -16,6 +16,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { api } from "@/values/values";
+import { MetaOg } from "@/components/meta/home";
 
 const WorkPage = () => {
   const params = useSearchParams();
@@ -76,54 +77,65 @@ const WorkPage = () => {
   }, [params]);
 
   return (
-    <VStackContainer>
-      <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
-        <LinkTitle
-          title={work}
-          value={value}
-          detail={selected ? selected.title : ""}
-          current={selected == null ? 1 : 2}
-        />
-      </HStack>
-      <Line
-        child={
-          selected != null ? (
-            <LineWidgetDetail
-              type={"work"}
-              text={selected.text}
-              title={selected.title}
-              img={selected.img}
-              id={selected._id}
-              semiTitle={selected.semiTitle}
-              date={selected.postDate ?? selected.createdAt}
-            />
-          ) : (
-            data?.map((d, i) => {
-              return (
-                <LineWidget
-                  img={d.img ?? ""}
-                  id={d._id}
-                  text={d.text}
-                  semiTitle={d.semiTitle}
-                  title={d.title}
-                  key={i}
-                  type="work"
-                />
-              );
-            }) ?? <></>
-          )
+    <div>
+      <MetaOg
+        title={
+          selected?.title ??
+          filterName(params.get("name") ?? "", workTags) ??
+          "Хийгдсэн ажил"
         }
-        filter={workTags}
-        limit={5}
-        page={page}
-        type={type}
-        value={value}
-        length={selected ? 1 : dataCount}
-        changePage={(value) => setPage(value)}
-        changeType={(value) => {}}
-        changeSub={() => {}}
+        bg={selected?.img ? `${api}${selected?.img}` : undefined}
+        description={selected?.text ?? "Хийгдсэн ажил"}
       />
-    </VStackContainer>
+      <VStackContainer>
+        <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
+          <LinkTitle
+            title={work}
+            value={value}
+            detail={selected ? selected.title : ""}
+            current={selected == null ? 1 : 2}
+          />
+        </HStack>
+        <Line
+          child={
+            selected != null ? (
+              <LineWidgetDetail
+                type={"work"}
+                text={selected.text}
+                title={selected.title}
+                img={selected.img}
+                id={selected._id}
+                semiTitle={selected.semiTitle}
+                date={selected.postDate ?? selected.createdAt}
+              />
+            ) : (
+              data?.map((d, i) => {
+                return (
+                  <LineWidget
+                    img={d.img ?? ""}
+                    id={d._id}
+                    text={d.text}
+                    semiTitle={d.semiTitle}
+                    title={d.title}
+                    key={i}
+                    type="work"
+                  />
+                );
+              }) ?? <></>
+            )
+          }
+          filter={workTags}
+          limit={5}
+          page={page}
+          type={type}
+          value={value}
+          length={selected ? 1 : dataCount}
+          changePage={(value) => setPage(value)}
+          changeType={(value) => {}}
+          changeSub={() => {}}
+        />
+      </VStackContainer>
+    </div>
   );
 };
 export default WorkPage;
