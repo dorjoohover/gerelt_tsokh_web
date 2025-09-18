@@ -10,7 +10,7 @@ import { article } from "@/global/string";
 import { articleTags } from "@/values/tags";
 import { Article } from "@/model/article.model";
 import { HStack } from "@chakra-ui/react";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { api } from "@/values/values";
@@ -63,7 +63,7 @@ const ArticlePage = () => {
       getData(params.get("name") as ArticleTypes);
     }
   }, [params]);
-
+  const pathname = usePathname();
   return (
     <div>
       {" "}
