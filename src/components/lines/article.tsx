@@ -90,7 +90,9 @@ export const LineWidget: FC<LineWidgetType> = ({
           maxW={{ md: "35vw", base: "auto" }}
           noOfLines={{ md: 3, base: 4 }}
           dangerouslySetInnerHTML={{
-            __html: text?.replaceAll('"', "") ?? "",
+            __html: text?.replaceAll('"', "")
+                              .replace(/<iframe.*?<\/iframe>/g, "")
+                              .replace(/<video.*?<\/video>/g, "") ?? "",
           }}
         ></Box>
         <Link href={`/${type}?id=${id}`}>

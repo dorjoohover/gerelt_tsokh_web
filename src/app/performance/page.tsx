@@ -109,7 +109,11 @@ const PerformancePage = () => {
                       mb={{ md: 0, base: 4 }}
                       noOfLines={{ md: 3, base: 4 }}
                       dangerouslySetInnerHTML={{
-                        __html: d?.text?.replaceAll('"', "") ?? "",
+                        __html:
+                          d?.text
+                            ?.replaceAll('"', "")
+                            .replace(/<iframe.*?<\/iframe>/g, "")
+                            .replace(/<video.*?<\/video>/g, "") ?? "",
                       }}
                     ></Box>
                     <Button

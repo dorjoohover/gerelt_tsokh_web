@@ -354,7 +354,11 @@ export const HomePage = () => {
                           mb={{ md: 0, base: 4 }}
                           noOfLines={{ md: 3, base: 4 }}
                           dangerouslySetInnerHTML={{
-                            __html: article?.text?.replaceAll('"', "") ?? "",
+                            __html:
+                              article?.text
+                                ?.replaceAll('"', "")
+                                .replace(/<iframe.*?<\/iframe>/g, "")
+                                .replace(/<video.*?<\/video>/g, "") ?? "",
                           }}
                         ></Box>
                         <HStack w={"full"} justifyContent={"space-between"}>
