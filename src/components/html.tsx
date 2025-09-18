@@ -1,23 +1,19 @@
 import { Box, Image } from "@chakra-ui/react";
 import parse, { domToReact } from "html-react-parser";
 
-interface RichContentProps {
-  text?: string;
-}
-
-export default function RichContent({ text }: RichContentProps) {
+export default function RichContent({ text }: { text?: string }) {
   if (!text) return null;
 
-  const clean = text.replaceAll('"', ""); // Хэрэв шаардлагатай бол sanitize
-  console.log(text);
   return (
     <Box mb={4}>
       {parse(text, {
         replace: (domNode: any) => {
+          // Image
           if (domNode.name === "img" && domNode.attribs?.src) {
             return <Image src={domNode.attribs.src} maxW="100%" mb={4} />;
           }
 
+          // Video tag
           if (domNode.name === "video") {
             const src =
               domNode.attribs?.src || domNode.children?.[0]?.attribs?.src;
@@ -29,6 +25,7 @@ export default function RichContent({ text }: RichContentProps) {
             );
           }
 
+          // iframe
           if (domNode.name === "iframe" && domNode.attribs?.src) {
             return (
               <Box
@@ -37,6 +34,21 @@ export default function RichContent({ text }: RichContentProps) {
                 width="100%"
                 minH="400px"
                 mb={4}
+                allowFullScreen
+              />
+            );
+          }
+
+          // oembed → iframe хөрвүүлэх
+          if (domNode.name === "oembed" && domNode.attribs?.url) {
+            return (
+              <Box
+                as="iframe"
+                src={domNode.attribs.url}
+                width="100%"
+                minH="400px"
+                mb={4}
+                border="none"
                 allowFullScreen
               />
             );

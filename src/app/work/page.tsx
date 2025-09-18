@@ -52,7 +52,6 @@ const WorkPage = () => {
       let name: any = params.get("name") as keyof typeof WorkTypes;
       setType(name ?? WorkTypes.research);
       setValue(filterName(name, workTags));
-      console.log(name);
       getData(name);
     } else {
       getData(params.get("name") as WorkTypes);

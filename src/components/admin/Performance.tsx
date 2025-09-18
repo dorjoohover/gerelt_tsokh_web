@@ -332,8 +332,6 @@ export default function AdminPerformance() {
                 {detail.type != MedicalTypes.SETUP && (
                   <Button
                     onClick={() => {
-                      console.log("click");
-                      console.log(values);
                       if (view == 1) {
                         if (!values.includes(value) && value != "") {
                           setValues((prev) => [...prev, value]);
