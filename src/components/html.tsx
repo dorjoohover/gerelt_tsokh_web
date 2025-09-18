@@ -1,20 +1,21 @@
 import { Box, Image } from "@chakra-ui/react";
 import parse, { domToReact } from "html-react-parser";
 
-interface Props {
+interface RichContentProps {
   text?: string;
 }
 
-export default function RichContent({ text }: Props) {
+export default function RichContent({ text }: RichContentProps) {
   if (!text) return null;
 
-  const clean = text.replaceAll('"', "");
+  const clean = text.replaceAll('"', ""); // Хэрэв шаардлагатай бол sanitize
 
   return (
-    <Box mb={{ md: 0, base: 4 }}>
+    <Box mb={{ base: 4, md: 0 }}>
       {parse(clean, {
         replace: (domNode: any) => {
-          if (domNode.name === "img") {
+          // Image tag
+          if (domNode.name === "img" && domNode.attribs?.src) {
             return (
               <Image
                 src={domNode.attribs.src}
@@ -25,23 +26,31 @@ export default function RichContent({ text }: Props) {
               />
             );
           }
+
+          // Video tag
           if (domNode.name === "video") {
+            // Хэрэв src нь video tag дотор биш бол child <source> ашиглана
+            const src = domNode.attribs?.src || domNode.children?.[0]?.attribs?.src;
+            if (!src) return null;
             return (
-              <video controls style={{ maxWidth: "100%", borderRadius: "8px" }}>
-                {domToReact(domNode.children)}
-              </video>
+              <Box as="video" controls borderRadius="md" maxW="100%" mb={4}>
+                <source src={src} type="video/mp4" />
+                Таны browser видео тоглуулах боломжгүй байна.
+              </Box>
             );
           }
-          if (domNode.name === "iframe") {
+
+          // iframe (Youtube, FB embed гэх мэт)
+          if (domNode.name === "iframe" && domNode.attribs?.src) {
             return (
-              <iframe
+              <Box
+                as="iframe"
                 src={domNode.attribs.src}
-                style={{
-                  width: "100%",
-                  minHeight: "400px",
-                  borderRadius: "8px",
-                  border: "none",
-                }}
+                width="100%"
+                minH="400px"
+                borderRadius="md"
+                border="none"
+                mb={4}
                 allowFullScreen
               />
             );
