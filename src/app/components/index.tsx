@@ -34,7 +34,6 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { Article } from "@/model/article.model";
 import { dateFormater } from "@/global/functions";
-import RichContent from "@/components/html";
 
 export const HomePage = () => {
   const [slider, setSlider] = useState<Slider | null>(null);
@@ -354,9 +353,10 @@ export const HomePage = () => {
                         <Box
                           mb={{ md: 0, base: 4 }}
                           noOfLines={{ md: 3, base: 4 }}
-                        >
-                          <RichContent text={article.text} />
-                        </Box>
+                          dangerouslySetInnerHTML={{
+                            __html: article?.text?.replaceAll('"', "") ?? "",
+                          }}
+                        ></Box>
                         <HStack w={"full"} justifyContent={"space-between"}>
                           <Link href={`/article?id=${article._id}`}>
                             <Text>{more}</Text>

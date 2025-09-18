@@ -125,9 +125,10 @@ const TopicPage = () => {
                       <Box
                         mb={{ md: 0, base: 4 }}
                         noOfLines={{ md: 3, base: 4 }}
-                      >
-                        <RichContent text={d.text} />
-                      </Box>
+                        dangerouslySetInnerHTML={{
+                          __html: d?.text?.replaceAll('"', "") ?? "",
+                        }}
+                      ></Box>
 
                       <Button
                         onClick={() => {

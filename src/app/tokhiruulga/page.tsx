@@ -337,9 +337,13 @@ const TokhiruulgaPage = () => {
                     {v.title}
                   </Heading>
 
-                  <Box mb={{ md: 0, base: 4 }} noOfLines={{ md: 3, base: 4 }}>
-                    <RichContent text={d.text} />
-                  </Box>
+                  <Box
+                    mb={{ md: 0, base: 4 }}
+                    noOfLines={{ md: 3, base: 4 }}
+                    dangerouslySetInnerHTML={{
+                      __html: d?.text?.replaceAll('"', "") ?? "",
+                    }}
+                  ></Box>
                   <Link href={`/${type}?id=${v._id}`}>
                     <Text textDecor={"underline"}>{more}</Text>
                   </Link>

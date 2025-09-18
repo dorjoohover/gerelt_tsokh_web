@@ -67,6 +67,7 @@ export const TextLine: FC<InfoType> = ({ data }) => {
         mb={{ md: 0, base: 4 }}
         // noOfLines={{ md: 3, base: 4 }}
       >
+        {" "}
         <RichContent text={data.text} />
       </Box>
       {/* <Text
@@ -147,6 +148,7 @@ export const VoiceLine = ({
           w={"full"}
           // noOfLines={{ md: 3, base: 4 }}
         >
+          {" "}
           <RichContent text={data.text} />
         </Box>
         {/* <Text mb={{ md: 0, base: 4 }}>{data.text}</Text> */}

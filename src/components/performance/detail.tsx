@@ -135,9 +135,12 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
                 {data.setup != undefined &&
                   data.setup.length > 0 &&
                   data.setup?.[0] != null && (
-                    <Box mb={{ md: 0, base: 4 }}>
-                      <RichContent text={data?.setup?.[0]} />
-                    </Box>
+                    <Box
+                      mb={{ md: 0, base: 4 }}
+                      dangerouslySetInnerHTML={{
+                        __html: data?.setup?.[0].replaceAll('"', "") ?? "",
+                      }}
+                    ></Box>
                   )}
               </VStack>
             ),
@@ -209,6 +212,7 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
               navigation
               pagination={{ clickable: true }}
               scrollbar={{ draggable: true }}
+              onSlideChange={() => console.log("slide change")}
             >
               {img?.map((image, i) => {
                 return (

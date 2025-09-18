@@ -32,6 +32,7 @@ export default function RichContent({ text }: { text?: string }) {
                 as="iframe"
                 src={domNode.attribs.src}
                 width="100%"
+                minW={"400px"}
                 minH="400px"
                 mb={4}
                 allowFullScreen
@@ -46,6 +47,7 @@ export default function RichContent({ text }: { text?: string }) {
                 as="iframe"
                 src={domNode.attribs.url}
                 width="100%"
+                minW={"400px"}
                 minH="400px"
                 mb={4}
                 border="none"

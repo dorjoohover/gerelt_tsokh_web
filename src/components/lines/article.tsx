@@ -89,9 +89,10 @@ export const LineWidget: FC<LineWidgetType> = ({
           mb={{ md: 0, base: 4 }}
           maxW={{ md: "35vw", base: "auto" }}
           noOfLines={{ md: 3, base: 4 }}
-        >
-          <RichContent text={text} />
-        </Box>
+          dangerouslySetInnerHTML={{
+            __html: text?.replaceAll('"', "") ?? "",
+          }}
+        ></Box>
         <Link href={`/${type}?id=${id}`}>
           <Text textDecor={"underline"}>{more}</Text>
         </Link>
