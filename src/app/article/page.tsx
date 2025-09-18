@@ -75,7 +75,7 @@ const ArticlePage = () => {
         }
         bg={selected?.img ? `${api}${selected?.img}` : undefined}
         description={selected?.text ?? "Нийтлэл"}
-      />{" "}
+      />
       <VStackContainer>
         <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
           <LinkTitle

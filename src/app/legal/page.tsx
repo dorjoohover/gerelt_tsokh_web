@@ -17,6 +17,7 @@ import LegalDetailWidget from "@/components/legal/detail";
 import { api } from "@/values/values";
 import axios from "axios";
 import { getCookie } from "cookies-next";
+import { MetaOg } from "@/components/meta/home";
 
 const LegalPage = () => {
   const params = useSearchParams();
@@ -66,58 +67,68 @@ const LegalPage = () => {
 
   const router = useRouter();
   return (
-    <VStackContainer>
-      <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
-        <LinkTitle
-          title={legalInfo}
-          special={tokhiruulga}
-          value={legalInfo}
-          name={selected ? selected.title : ""}
-          current={selected == null ? 2 : 3}
-          detail={value}
-        />
-      </HStack>
-      <Line
-        child={
-          selected != null ? (
-            <LegalDetailWidget data={selected} />
-          ) : (
-            <VStack w={"full"} alignItems={"start"} gap={4}>
-              {data?.map((d, i) => {
-                return (
-                  <VStack w={"full"} alignItems={"start"} key={i} gap={4}>
-                    <Button
-                      height={"auto"}
-                      onClick={() => {
-                        getDataById(d._id);
-                        router.push(`/legal?id=${d._id}`);
-                      }}
-                      _hover={{ bg: "none" }}
-                      bg={"none"}
-                      p={0}
-                    >
-                      <Text textDecor={"underline"} textAlign={"start"}>
-                        {" "}
-                        {d.title}
-                      </Text>
-                    </Button>
-                  </VStack>
-                );
-              })}
-            </VStack>
-          )
+    <div>
+      <MetaOg
+        title={
+          selected?.title ??
+          filterName(params.get("name") ?? "", tokhiruulgaTags[5].sub!) ??
+          "Хуулийн мэдээллийн булан"
         }
-        filter={tokhiruulgaTags[5].sub!}
-        limit={dataCount}
-        page={page}
-        type={type}
-        value={value}
-        length={selected ? 1 : dataCount}
-        changePage={(value) => setPage(value)}
-        changeType={(value) => {}}
-        changeSub={() => {}}
+        description={selected?.text ?? "Хуулийн мэдээллийн булан"}
       />
-    </VStackContainer>
+      <VStackContainer>
+        <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
+          <LinkTitle
+            title={legalInfo}
+            special={tokhiruulga}
+            value={legalInfo}
+            name={selected ? selected.title : ""}
+            current={selected == null ? 2 : 3}
+            detail={value}
+          />
+        </HStack>
+        <Line
+          child={
+            selected != null ? (
+              <LegalDetailWidget data={selected} />
+            ) : (
+              <VStack w={"full"} alignItems={"start"} gap={4}>
+                {data?.map((d, i) => {
+                  return (
+                    <VStack w={"full"} alignItems={"start"} key={i} gap={4}>
+                      <Button
+                        height={"auto"}
+                        onClick={() => {
+                          getDataById(d._id);
+                          router.push(`/legal?id=${d._id}`);
+                        }}
+                        _hover={{ bg: "none" }}
+                        bg={"none"}
+                        p={0}
+                      >
+                        <Text textDecor={"underline"} textAlign={"start"}>
+                          {" "}
+                          {d.title}
+                        </Text>
+                      </Button>
+                    </VStack>
+                  );
+                })}
+              </VStack>
+            )
+          }
+          filter={tokhiruulgaTags[5].sub!}
+          limit={dataCount}
+          page={page}
+          type={type}
+          value={value}
+          length={selected ? 1 : dataCount}
+          changePage={(value) => setPage(value)}
+          changeType={(value) => {}}
+          changeSub={() => {}}
+        />
+      </VStackContainer>
+    </div>
   );
 };
 export default LegalPage;

@@ -19,6 +19,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { api } from "@/values/values";
 import RichContent from "@/components/html";
+import { MetaOg } from "@/components/meta/home";
 
 const PerformancePage = () => {
   const params = useSearchParams();
@@ -75,68 +76,85 @@ const PerformancePage = () => {
   }, [params]);
 
   return (
-    <VStackContainer>
-      <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
-        <LinkTitle
-          title={performance}
-          special={tokhiruulga}
-          value={performance}
-          name={selected ? selected.title : ""}
-          current={selected == null ? 2 : 3}
-          detail={value}
-        />
-      </HStack>
-      <Line
-        child={
-          selected != null ? (
-            <PerformanceDetailWidget data={selected} />
-          ) : (
-            <VStack w={"full"} alignItems={"start"} gap={{ lg: 78, base: 10 }}>
-              {data?.map((d, i) => {
-                return (
-                  <VStack w={"full"} alignItems={"start"} key={i}>
-                    <Heading
-                      fontSize={{
-                        md: "22px",
-                        base: "16px",
-                      }}
-                      variant={"title"}
-                      color={"text"}
-                    >
-                      {d.title}
-                    </Heading>
-
-                    <Box mb={{ md: 0, base: 4 }} noOfLines={{ md: 3, base: 4 }}>
-                      <RichContent text={d.text} />
-                    </Box>
-                    <Button
-                      onClick={() => {
-                        getDataById(d._id);
-                        router.push(`/performance?id=${d._id}`);
-                      }}
-                      _hover={{ bg: "none" }}
-                      bg={"none"}
-                      p={0}
-                    >
-                      <Text textDecor={"underline"}>{more}</Text>
-                    </Button>
-                  </VStack>
-                );
-              })}
-            </VStack>
-          )
+    <div>
+      <MetaOg
+        title={
+          selected?.title ??
+          filterName(params.get("name") ?? "", tokhiruulgaTags[3].sub!) ??
+          "Үйлдэл гүйцэтгэх чадвар алдалт"
         }
-        filter={tokhiruulgaTags[3].sub!}
-        limit={10}
-        page={page}
-        type={type}
-        value={value}
-        length={selected ? 1 : dataCount}
-        changePage={(value) => setPage(value)}
-        changeType={(value) => {}}
-        changeSub={() => {}}
+        description={selected?.text ?? "Үйлдэл гүйцэтгэх чадвар алдалт"}
       />
-    </VStackContainer>
+      <VStackContainer>
+        <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
+          <LinkTitle
+            title={performance}
+            special={tokhiruulga}
+            value={performance}
+            name={selected ? selected.title : ""}
+            current={selected == null ? 2 : 3}
+            detail={value}
+          />
+        </HStack>
+        <Line
+          child={
+            selected != null ? (
+              <PerformanceDetailWidget data={selected} />
+            ) : (
+              <VStack
+                w={"full"}
+                alignItems={"start"}
+                gap={{ lg: 78, base: 10 }}
+              >
+                {data?.map((d, i) => {
+                  return (
+                    <VStack w={"full"} alignItems={"start"} key={i}>
+                      <Heading
+                        fontSize={{
+                          md: "22px",
+                          base: "16px",
+                        }}
+                        variant={"title"}
+                        color={"text"}
+                      >
+                        {d.title}
+                      </Heading>
+
+                      <Box
+                        mb={{ md: 0, base: 4 }}
+                        noOfLines={{ md: 3, base: 4 }}
+                      >
+                        <RichContent text={d.text} />
+                      </Box>
+                      <Button
+                        onClick={() => {
+                          getDataById(d._id);
+                          router.push(`/performance?id=${d._id}`);
+                        }}
+                        _hover={{ bg: "none" }}
+                        bg={"none"}
+                        p={0}
+                      >
+                        <Text textDecor={"underline"}>{more}</Text>
+                      </Button>
+                    </VStack>
+                  );
+                })}
+              </VStack>
+            )
+          }
+          filter={tokhiruulgaTags[3].sub!}
+          limit={10}
+          page={page}
+          type={type}
+          value={value}
+          length={selected ? 1 : dataCount}
+          changePage={(value) => setPage(value)}
+          changeType={(value) => {}}
+          changeSub={() => {}}
+        />
+      </VStackContainer>
+    </div>
   );
 };
 export default PerformancePage;

@@ -19,6 +19,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import RichContent from "@/components/html";
+import { MetaOg } from "@/components/meta/home";
 const TopicPage = () => {
   const params = useSearchParams();
   const [page, setPage] = useState(0);
@@ -77,69 +78,86 @@ const TopicPage = () => {
   }, [params]);
   const router = useRouter();
   return (
-    <VStackContainer>
-      <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
-        <LinkTitle
-          title={hotTopics}
-          special={tokhiruulga}
-          value={hotTopics}
-          name={selected ? selected.title : ""}
-          current={selected == null ? 2 : 3}
-          detail={value}
-        />
-      </HStack>
-      <Line
-        child={
-          selected != null ? (
-            <TopicDetailWidget data={selected} />
-          ) : (
-            <VStack w={"full"} alignItems={"start"} gap={{ lg: 78, base: 10 }}>
-              {data?.map((d, i) => {
-                return (
-                  <VStack w={"full"} alignItems={"start"} key={i}>
-                    <Heading
-                      fontSize={{
-                        md: "22px",
-                        base: "16px",
-                      }}
-                      variant={"title"}
-                      color={"text"}
-                    >
-                      {d.title}
-                    </Heading>
-
-                    <Box mb={{ md: 0, base: 4 }} noOfLines={{ md: 3, base: 4 }}>
-                      <RichContent text={d.text} />
-                    </Box>
-
-                    <Button
-                      onClick={() => {
-                        getDataById(d._id);
-                        router.push(`/topic?id=${d._id}`);
-                      }}
-                      _hover={{ bg: "none" }}
-                      bg={"none"}
-                      p={0}
-                    >
-                      <Text textDecor={"underline"}>{more}</Text>
-                    </Button>
-                  </VStack>
-                );
-              })}
-            </VStack>
-          )
+    <div>
+      <MetaOg
+        title={
+          selected?.title ??
+          filterName(params.get("name") ?? "", tokhiruulgaTags[4].sub!) ??
+          "Халуун сэдвүүд"
         }
-        filter={tokhiruulgaTags[4].sub!}
-        limit={10}
-        page={page}
-        type={type}
-        value={value}
-        length={selected ? 1 : dataCount}
-        changePage={(value) => setPage(value)}
-        changeType={(value) => {}}
-        changeSub={() => {}}
+        description={selected?.text ?? "Халуун сэдвүүд"}
       />
-    </VStackContainer>
+      <VStackContainer>
+        <HStack w={"full"} display={{ lg: "flex", base: "none" }}>
+          <LinkTitle
+            title={hotTopics}
+            special={tokhiruulga}
+            value={hotTopics}
+            name={selected ? selected.title : ""}
+            current={selected == null ? 2 : 3}
+            detail={value}
+          />
+        </HStack>
+        <Line
+          child={
+            selected != null ? (
+              <TopicDetailWidget data={selected} />
+            ) : (
+              <VStack
+                w={"full"}
+                alignItems={"start"}
+                gap={{ lg: 78, base: 10 }}
+              >
+                {data?.map((d, i) => {
+                  return (
+                    <VStack w={"full"} alignItems={"start"} key={i}>
+                      <Heading
+                        fontSize={{
+                          md: "22px",
+                          base: "16px",
+                        }}
+                        variant={"title"}
+                        color={"text"}
+                      >
+                        {d.title}
+                      </Heading>
+
+                      <Box
+                        mb={{ md: 0, base: 4 }}
+                        noOfLines={{ md: 3, base: 4 }}
+                      >
+                        <RichContent text={d.text} />
+                      </Box>
+
+                      <Button
+                        onClick={() => {
+                          getDataById(d._id);
+                          router.push(`/topic?id=${d._id}`);
+                        }}
+                        _hover={{ bg: "none" }}
+                        bg={"none"}
+                        p={0}
+                      >
+                        <Text textDecor={"underline"}>{more}</Text>
+                      </Button>
+                    </VStack>
+                  );
+                })}
+              </VStack>
+            )
+          }
+          filter={tokhiruulgaTags[4].sub!}
+          limit={10}
+          page={page}
+          type={type}
+          value={value}
+          length={selected ? 1 : dataCount}
+          changePage={(value) => setPage(value)}
+          changeType={(value) => {}}
+          changeSub={() => {}}
+        />
+      </VStackContainer>
+    </div>
   );
 };
 export default TopicPage;

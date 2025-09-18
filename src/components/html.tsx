@@ -30,7 +30,8 @@ export default function RichContent({ text }: RichContentProps) {
           // Video tag
           if (domNode.name === "video") {
             // Хэрэв src нь video tag дотор биш бол child <source> ашиглана
-            const src = domNode.attribs?.src || domNode.children?.[0]?.attribs?.src;
+            const src =
+              domNode.attribs?.src || domNode.children?.[0]?.attribs?.src;
             if (!src) return null;
             return (
               <Box as="video" controls borderRadius="md" maxW="100%" mb={4}>

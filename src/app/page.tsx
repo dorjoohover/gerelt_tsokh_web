@@ -5,7 +5,7 @@ import { MetaOg } from "@/components/meta/home";
 export default function Home() {
   return (
     <>
-   
+      <MetaOg />
       <HomePage />
     </>
   );

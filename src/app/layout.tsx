@@ -29,7 +29,6 @@ export default function RootLayout({
         <title>{findTitle(pathname)}</title>
       </head>
       <body>
-        <MetaOg title={findTitle(pathname)} />
         <ChakraProvider theme={theme}>
           <Fonts />
           {!pathname.includes("admin") && (
