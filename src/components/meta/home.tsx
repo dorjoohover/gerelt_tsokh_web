@@ -20,7 +20,7 @@ export const MetaOg = ({
         property="og:description"
         content={description ?? "Гэрэлт Цох Байшин ТББ"}
       />
-      <meta property="og:image" content={bg ?? "/assets/bg.jpg"} />
+      <meta property="og:image" content={bg ?? "/assets/bg.png"} />
       <meta property="og:image:width" content={width ?? "1200"} />
       <meta property="og:image:height" content={height ?? "630"} />
       <meta property="og:url" content={url ?? "http://tokhiruulga.mn"} />
