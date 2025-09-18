@@ -8,17 +8,7 @@ const Page = () => {
   return (
     <div>
       {" "}
-      <MetaOg
-        title={
-          filterName(
-            window.location.href.includes("info")
-              ? ArticleTypes.info
-              : ArticleTypes.article ?? "",
-            articleTags
-          ) ?? "Нийтлэл"
-        }
-        description={"Нийтлэл"}
-      />
+      <MetaOg title={"Нийтлэл"} description={"Нийтлэл"} />
       <ArticlePage />
     </div>
   );
