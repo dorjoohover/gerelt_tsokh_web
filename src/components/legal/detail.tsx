@@ -13,6 +13,7 @@ import { LegalModel } from "@/model/legal.model";
 import axios from "axios";
 import { api } from "@/values/values";
 import { getCookie } from "cookies-next";
+import RichContent from "../html";
 
 const LegalDetailWidget = ({ data }: { data: LegalModel }) => {
   const toast = useToast();
@@ -45,11 +46,9 @@ const LegalDetailWidget = ({ data }: { data: LegalModel }) => {
       )}
 
       {data.text && (
-        <Box
-          dangerouslySetInnerHTML={{
-            __html: data?.text.replaceAll('"', "") ?? "",
-          }}
-        />
+        <Box>
+          <RichContent text={data.text} />
+        </Box>
       )}
 
       {/* {data.details.map((detail, index) => {

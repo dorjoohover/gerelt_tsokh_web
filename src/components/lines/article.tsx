@@ -18,6 +18,7 @@ import axios from "axios";
 import { getCookie } from "cookies-next";
 import Link from "next/link";
 import { FC } from "react";
+import RichContent from "../html";
 
 type LineWidgetType = {
   img: string;
@@ -88,10 +89,9 @@ export const LineWidget: FC<LineWidgetType> = ({
           mb={{ md: 0, base: 4 }}
           maxW={{ md: "35vw", base: "auto" }}
           noOfLines={{ md: 3, base: 4 }}
-          dangerouslySetInnerHTML={{
-            __html: text?.replaceAll('"', "") ?? "",
-          }}
-        ></Box>
+        >
+          <RichContent text={text} />
+        </Box>
         <Link href={`/${type}?id=${id}`}>
           <Text textDecor={"underline"}>{more}</Text>
         </Link>
@@ -143,12 +143,9 @@ export const LineWidgetDetail: FC<LineWidgetDetailType> = ({
         />
       )}
       <VStack w={"full"} alignItems={"start"}>
-        <Box
-          mb={{ md: 0, base: 4 }}
-          dangerouslySetInnerHTML={{
-            __html: text?.replaceAll('"', "") ?? "",
-          }}
-        ></Box>
+        <Box mb={{ md: 0, base: 4 }}>
+          <RichContent text={text} />
+        </Box>
       </VStack>
       <HStack w={"full"}>
         <Text variant={"normal"} fontWeight={"bold"}>

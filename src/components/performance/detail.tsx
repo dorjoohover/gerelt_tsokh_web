@@ -36,6 +36,7 @@ import Slider from "react-slick";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper/modules";
+import RichContent from "../html";
 type AccordianWidgetType = {
   fun: PerformanceFunction;
   length: number;
@@ -117,12 +118,9 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
       </Heading>
 
       <VStack w={"full"} alignItems={"start"}>
-        <Box
-          mb={{ md: 0, base: 4 }}
-          dangerouslySetInnerHTML={{
-            __html: data?.text?.replaceAll('"', "") ?? "",
-          }}
-        ></Box>
+        <Box mb={{ md: 0, base: 4 }}>
+          <RichContent text={data.text} />
+        </Box>
       </VStack>
 
       <CustomAccordian
@@ -137,12 +135,9 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
                 {data.setup != undefined &&
                   data.setup.length > 0 &&
                   data.setup?.[0] != null && (
-                    <Box
-                      mb={{ md: 0, base: 4 }}
-                      dangerouslySetInnerHTML={{
-                        __html: data?.setup?.[0].replaceAll('"', "") ?? "",
-                      }}
-                    ></Box>
+                    <Box mb={{ md: 0, base: 4 }}>
+                      <RichContent text={data?.setup?.[0]} />
+                    </Box>
                   )}
               </VStack>
             ),

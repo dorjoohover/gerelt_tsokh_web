@@ -18,6 +18,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { api } from "@/values/values";
+import RichContent from "@/components/html";
 
 const PerformancePage = () => {
   const params = useSearchParams();
@@ -105,13 +106,9 @@ const PerformancePage = () => {
                       {d.title}
                     </Heading>
 
-                    <Box
-                      mb={{ md: 0, base: 4 }}
-                      noOfLines={{ md: 3, base: 4 }}
-                      dangerouslySetInnerHTML={{
-                        __html: d?.text?.replaceAll('"', "") ?? "",
-                      }}
-                    ></Box>
+                    <Box mb={{ md: 0, base: 4 }} noOfLines={{ md: 3, base: 4 }}>
+                      <RichContent text={d.text} />
+                    </Box>
                     <Button
                       onClick={() => {
                         getDataById(d._id);

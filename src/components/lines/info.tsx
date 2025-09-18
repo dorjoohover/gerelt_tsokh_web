@@ -17,6 +17,7 @@ import { getCookie } from "cookies-next";
 import Link from "next/link";
 import { FC } from "react";
 import { FaPlay } from "react-icons/fa";
+import RichContent from "../html";
 type InfoType = {
   data: Info;
 };
@@ -60,14 +61,14 @@ export const TextLine: FC<InfoType> = ({ data }) => {
           display={{ md: "inline-block", base: "none" }}
         >{`${data.date} | ${data.duration} мин`}</Text>
       </HStack> */}
+
       <Box
         w={"full"}
         mb={{ md: 0, base: 4 }}
         // noOfLines={{ md: 3, base: 4 }}
-        dangerouslySetInnerHTML={{
-          __html: data?.text?.replaceAll('"', "") ?? "",
-        }}
-      ></Box>
+      >
+        <RichContent text={data.text} />
+      </Box>
       {/* <Text
         variant={"normal"}
         display={{ base: "inline-block", md: "none" }}
@@ -145,10 +146,9 @@ export const VoiceLine = ({
           mb={{ md: 0, base: 4 }}
           w={"full"}
           // noOfLines={{ md: 3, base: 4 }}
-          dangerouslySetInnerHTML={{
-            __html: data?.text?.replaceAll('"', "") ?? "",
-          }}
-        ></Box>
+        >
+          <RichContent text={data.text} />
+        </Box>
         {/* <Text mb={{ md: 0, base: 4 }}>{data.text}</Text> */}
         {/* <Text
           variant={"normal"}

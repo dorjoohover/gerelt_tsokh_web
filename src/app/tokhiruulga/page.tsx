@@ -50,6 +50,7 @@ import { feedback, more, send, tokhiruulga } from "@/global/string";
 import RadioBox from "@/components/radiobox";
 import { FaPlay } from "react-icons/fa";
 import { MetaOg } from "@/components/meta/home";
+import RichContent from "@/components/html";
 
 type FeedbackType = {
   number: number;
@@ -306,13 +307,10 @@ const TokhiruulgaPage = () => {
                     {v.title}
                   </Heading>
 
-                  <Box
-                    mb={{ md: 0, base: 4 }}
-                    noOfLines={{ md: 3, base: 4 }}
-                    dangerouslySetInnerHTML={{
-                      __html: d?.text?.replaceAll('"', "") ?? "",
-                    }}
-                  ></Box>
+                  <Box mb={{ md: 0, base: 4 }} noOfLines={{ md: 3, base: 4 }}>
+                    {" "}
+                    <RichContent text={d.text} />
+                  </Box>
                   <Link href={`/${type}?id=${v._id}`}>
                     <Text textDecor={"underline"}>{more}</Text>
                   </Link>
@@ -339,13 +337,9 @@ const TokhiruulgaPage = () => {
                     {v.title}
                   </Heading>
 
-                  <Box
-                    mb={{ md: 0, base: 4 }}
-                    noOfLines={{ md: 3, base: 4 }}
-                    dangerouslySetInnerHTML={{
-                      __html: d?.text?.replaceAll('"', "") ?? "",
-                    }}
-                  ></Box>
+                  <Box mb={{ md: 0, base: 4 }} noOfLines={{ md: 3, base: 4 }}>
+                    <RichContent text={d.text} />
+                  </Box>
                   <Link href={`/${type}?id=${v._id}`}>
                     <Text textDecor={"underline"}>{more}</Text>
                   </Link>

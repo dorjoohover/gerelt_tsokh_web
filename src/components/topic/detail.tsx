@@ -18,6 +18,7 @@ import { TopicModel } from "@/model/topic.model";
 import { getCookie } from "cookies-next";
 import axios from "axios";
 import { api } from "@/values/values";
+import RichContent from "../html";
 
 const TopicDetailWidget = ({ data }: { data: TopicModel }) => {
   const toast = useToast();
@@ -49,12 +50,12 @@ const TopicDetailWidget = ({ data }: { data: TopicModel }) => {
         {data.title}
       </Heading>
 
-      <Box
-        dangerouslySetInnerHTML={{
-          __html: data?.text?.replaceAll('"', "") ?? "",
-        }}
-      ></Box>
-      {token && token != '' && data._id != "" && <Button onClick={deleteTopic}>Устгах</Button>}
+      <Box>
+        <RichContent text={data.text} />
+      </Box>
+      {token && token != "" && data._id != "" && (
+        <Button onClick={deleteTopic}>Устгах</Button>
+      )}
     </VStack>
   );
 };
