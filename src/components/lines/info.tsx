@@ -66,9 +66,11 @@ export const TextLine: FC<InfoType> = ({ data }) => {
         w={"full"}
         mb={{ md: 0, base: 4 }}
         // noOfLines={{ md: 3, base: 4 }}
+        dangerouslySetInnerHTML={{
+          __html: data.text?.replaceAll('"', "") ?? "",
+        }}
       >
         {" "}
-        <RichContent text={data.text} />
       </Box>
       {/* <Text
         variant={"normal"}
@@ -147,10 +149,10 @@ export const VoiceLine = ({
           mb={{ md: 0, base: 4 }}
           w={"full"}
           // noOfLines={{ md: 3, base: 4 }}
-        >
-          {" "}
-          <RichContent text={data.text} />
-        </Box>
+          dangerouslySetInnerHTML={{
+            __html: data.text?.replaceAll('"', "") ?? "",
+          }}
+        ></Box>
         {/* <Text mb={{ md: 0, base: 4 }}>{data.text}</Text> */}
         {/* <Text
           variant={"normal"}

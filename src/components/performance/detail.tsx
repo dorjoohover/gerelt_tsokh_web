@@ -118,9 +118,12 @@ const PerformanceDetailWidget = ({ data }: { data: PerformanceModel }) => {
       </Heading>
 
       <VStack w={"full"} alignItems={"start"}>
-        <Box mb={{ md: 0, base: 4 }}>
-          <RichContent text={data.text} />
-        </Box>
+        <Box
+          mb={{ md: 0, base: 4 }}
+          dangerouslySetInnerHTML={{
+            __html: data.text?.replaceAll('"', "") ?? "",
+          }}
+        ></Box>
       </VStack>
 
       <CustomAccordian

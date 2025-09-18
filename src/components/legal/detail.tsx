@@ -46,9 +46,11 @@ const LegalDetailWidget = ({ data }: { data: LegalModel }) => {
       )}
 
       {data.text && (
-        <Box>
-          <RichContent text={data.text} />
-        </Box>
+        <Box
+          dangerouslySetInnerHTML={{
+            __html: data.text?.replaceAll('"', "") ?? "",
+          }}
+        ></Box>
       )}
 
       {/* {data.details.map((detail, index) => {

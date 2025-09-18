@@ -50,9 +50,11 @@ const TopicDetailWidget = ({ data }: { data: TopicModel }) => {
         {data.title}
       </Heading>
 
-      <Box>
-        <RichContent text={data.text} />
-      </Box>
+      <Box
+        dangerouslySetInnerHTML={{
+          __html: data.text?.replaceAll('"', "") ?? "",
+        }}
+      ></Box>
       {token && token != "" && data._id != "" && (
         <Button onClick={deleteTopic}>Устгах</Button>
       )}

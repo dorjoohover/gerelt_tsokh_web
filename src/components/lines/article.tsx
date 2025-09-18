@@ -144,9 +144,12 @@ export const LineWidgetDetail: FC<LineWidgetDetailType> = ({
         />
       )}
       <VStack w={"full"} alignItems={"start"}>
-        <Box mb={{ md: 0, base: 4 }}>
-          <RichContent text={text} />
-        </Box>
+        <Box
+          mb={{ md: 0, base: 4 }}
+          dangerouslySetInnerHTML={{
+            __html: text?.replaceAll('"', "") ?? "",
+          }}
+        ></Box>
       </VStack>
       <HStack w={"full"}>
         <Text variant={"normal"} fontWeight={"bold"}>

@@ -32,7 +32,7 @@ import {
 export default function About() {
   return (
     <div>
-      <MetaOg title={"БИДНИЙ ТУХАЙ"} description={visionValue} />
+      <MetaOg title={"БИДНИЙ ТУХАЙ"} description={visionValue} url="/about"/>
       <VStackContainer gap={{ md: 12, base: 9 }}>
         <Heading
           variant={"title"}
