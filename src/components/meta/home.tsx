@@ -1,5 +1,3 @@
-import { usePathname } from "next/navigation";
-
 export const MetaOg = ({
   bg,
   title,
@@ -15,7 +13,11 @@ export const MetaOg = ({
   height?: string;
   url?: string;
 }) => {
-  const pathname = usePathname()
+  const pathname =
+    typeof window !== "undefined"
+      ? window.location.href
+      : "http://tokhiruulga.mn";
+
   return (
     <>
       <meta property="og:title" content={title ?? "Tokhiruulga.mn"} />
@@ -23,14 +25,15 @@ export const MetaOg = ({
         property="og:description"
         content={description ?? "Гэрэлт Цох Байшин ТББ"}
       />
-
       <meta
         property="og:image"
-        content={"http://tokhiruulga.mn/assets/bg.png"}
+        content={url ?? "http://tokhiruulga.mn/assets/bg.png"}
       />
       <meta property="og:image:width" content={width ?? "1200"} />
       <meta property="og:image:height" content={height ?? "630"} />
-      <meta property="og:url" content={pathname ?? "http://tokhiruulga.mn"} />
+      <meta property="og:url" content={pathname} />
+      <meta property="og:type" content="website" />
+      <meta property="og:locale" content="mn_MN" />
     </>
   );
 };
