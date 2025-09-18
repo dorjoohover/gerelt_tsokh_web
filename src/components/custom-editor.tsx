@@ -1,4 +1,4 @@
-"use client";;
+"use client";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -20,6 +20,9 @@ const editorConfiguration = {
     "|",
     "mediaEmbed",
   ],
+  mediaEmbed: {
+    previewsInData: true,
+  },
 };
 
 type EditorType = {
