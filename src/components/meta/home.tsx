@@ -13,6 +13,7 @@ export const MetaOg = ({
   height?: string;
   url?: string;
 }) => {
+  console.log(bg);
   return (
     <>
       <meta property="og:title" content={title ?? "Tokhiruulga.mn"} />
@@ -20,7 +21,11 @@ export const MetaOg = ({
         property="og:description"
         content={description ?? "Гэрэлт Цох Байшин ТББ"}
       />
-      <meta property="og:image" content={bg ?? "http://tokhiruulga.mn/assets/bg.png"} />
+
+      <meta
+        property="og:image"
+        content={bg ?? "http://tokhiruulga.mn/assets/bg.png"}
+      />
       <meta property="og:image:width" content={width ?? "1200"} />
       <meta property="og:image:height" content={height ?? "630"} />
       <meta property="og:url" content={url ?? "http://tokhiruulga.mn"} />
