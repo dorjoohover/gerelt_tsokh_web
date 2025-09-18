@@ -8,7 +8,7 @@ const Page = () => {
   return (
     <div>
       {" "}
-      <MetaOg title={"Нийтлэл"} description={"Нийтлэл"} />
+      <MetaOg title={"Нийтлэл"} description={"Нийтлэл"} url="/article" />
       <ArticlePage />
     </div>
   );
